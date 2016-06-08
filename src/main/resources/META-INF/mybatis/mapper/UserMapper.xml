@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.github.liuxboy.harbour.simulation.dao.mapper.UserMapper">
+    <sql id="selectColumns">
+		select id,
+		    create_user as createUser,
+			create_time as createTime,
+			modify_time as modifyTime,
+			user_name as userName,
+			password as passWord,
+			user_fullname as userFullName,
+			email as email,
+			user_category as userCategory
+		from user
+	</sql>
+
+
+    <insert id="insert" parameterType="com.github.liuxboy.harbour.simulation.dao.entity.UserEntity">
+        <selectKey resultType="Long" order="AFTER" keyProperty="id">
+            select last_insert_id() as id
+        </selectKey>
+        insert into sys_user (
+        user_name,
+        user_category,
+        password,
+        user_fullname,
+        email,
+        create_user,
+        create_time,
+        modify_time
+        ) values (
+        #{userName},
+        #{userCategory},
+        #{passWord},
+        #{userFullName},
+        #{email},
+        #{createUser},
+        now(),
+        now()
+        )
+    </insert>
+
+    <select id="list" resultType="com.github.liuxboy.harbour.simulation.dao.entity.UserEntity">
+        <include refid="selectColumns"/>
+        order by create_time desc;
+    </select>
+
+    <select id="queryByParam" parameterType="map" resultType="com.github.liuxboy.harbour.simulation.dao.entity.UserEntity">
+        <include refid="selectColumns"/>
+       <where>
+           1=1
+           <if test="#{userName != null}">
+              and user_name = #{userName}
+           </if>
+           <if test="#{userFullName != null}">
+              and user_fullname = #{userFullName}
+           </if>
+           <if test="#{userCategory != null}">
+               and user_category = #{userCategory}
+           </if>
+       </where>
+
+        order by create_time desc;
+    </select>
+
+    <select id="queryByUserName" parameterType="java.util.Map" resultType="com.github.liuxboy.harbour.simulation.dao.entity.UserEntity">
+        <include refid="selectColumns"/>
+        <where>
+            1=1
+            <if test="#{userName != null}">
+                and user_name=#{userName}
+            </if>
+        </where>
+
+        order by create_time desc;
+    </select>
+
+    <select id="queryByUserNameAndPassWord" parameterType="java.util.Map" resultType="com.github.liuxboy.harbour.simulation.dao.entity.UserEntity">
+        <include refid="selectColumns"/>
+       <where>
+           1=1
+           <if test="#{userName != null}">
+              and user_name=#{userName}
+           </if>
+           <if test="#{passWord != null}">
+              and password =#{passWord}
+           </if>
+       </where>
+
+        order by create_time desc;
+    </select>
+
+    <update id="updateUser" parameterType="com.github.liuxboy.harbour.simulation.dao.entity.UserEntity">
+        update sys_user set user_name=#{userName},
+                            user_fullname=#{userFullName},
+                            user_category=#{userCategory},
+                            email=#{email},
+                            <if test="#{passWord != null and passWord != ''}">
+                                password=#{passWord},
+                            </if>
+                            modify_time=now()
+        where id=#{id}
+    </update>
+
+    <delete id="delete" parameterType="long" >
+        delete from  sys_user where  id=#{id}
+    </delete>
+
+    <select id="get" parameterType="long" resultType="com.github.liuxboy.harbour.simulation.dao.entity.UserEntity">
+        <include refid="selectColumns"/>
+        where id = #{id}
+    </select>
+
+</mapper>
