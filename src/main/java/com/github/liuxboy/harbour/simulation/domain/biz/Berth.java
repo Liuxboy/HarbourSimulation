@@ -1,6 +1,7 @@
 package com.github.liuxboy.harbour.simulation.domain.biz;
 
 import com.github.liuxboy.harbour.simulation.common.constant.ShipEnum;
+import org.springframework.stereotype.Component;
 
 /**
  * <p>Title: Berth</p>
@@ -12,6 +13,7 @@ import com.github.liuxboy.harbour.simulation.common.constant.ShipEnum;
  * @author wyliuchundong
  * @version 1.0
  */
+@Component
 public class Berth {
     //编号
     private int number;

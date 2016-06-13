@@ -1,10 +1,6 @@
 package com.github.liuxboy.harbour.simulation.controller;
 
-import com.github.liuxboy.harbour.simulation.domain.biz.Anchorage;
-import com.github.liuxboy.harbour.simulation.domain.biz.Channel;
-import com.github.liuxboy.harbour.simulation.domain.biz.Point;
-import com.github.liuxboy.harbour.simulation.domain.biz.SimulationTime;
-import com.sun.javafx.collections.MappingChange;
+import com.github.liuxboy.harbour.simulation.domain.biz.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -72,7 +68,21 @@ public class HarborCtrl {
         System.out.println("深水航道左下角：" + deepChannel.getLowerLeftCorner());
         System.out.println("深水航道右上角：" + deepChannel.getUpperRightCorner());
         System.out.println("仿真时间设置：" + simulationTime);
-
+        Result totalResult = new Result();
+        //仿真步骤
+        int steps = (int) simulationTime.getSimulationTimeOut() / simulationTime.getSimulationTimeStep();
+        for (int i = 0; i < steps; i++) {
+            //TODO 在这里完成各种参数的计算
+        }
+        totalResult.setAvgWaitChannelTime("");
+        totalResult.setAvgWaitBerthTime("");
+        totalResult.setAvgInHarborTime("");
+        totalResult.setAvgOnBerthTime("");
+        totalResult.setAwtAstIndex("");
+        totalResult.setBerthUtilizationRatio("");
+        Map configMap =(HashMap) httpSession.getAttribute(httpSession.getId());
+        configMap.put("result", totalResult);
+        httpSession.setAttribute(httpSession.getId(), configMap);
         System.out.println("session中保存参数：" + httpSession.getAttribute(httpSession.getId()));
         return "start";
     }
