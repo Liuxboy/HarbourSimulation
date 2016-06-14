@@ -12,5 +12,5 @@ package com.github.liuxboy.harbour.simulation.service;
  * @version 1.0
  */
 public interface HarbourSimulationService {
-    public void possion1();
+    
 }

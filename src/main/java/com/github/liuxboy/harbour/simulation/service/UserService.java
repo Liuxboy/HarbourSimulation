@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by wywangzhenlong on 14-4-14.
+ * Created by liuchundong on 2016-06-08 16:30:17
  */
 public interface UserService {
     int insert(UserEntity entity);

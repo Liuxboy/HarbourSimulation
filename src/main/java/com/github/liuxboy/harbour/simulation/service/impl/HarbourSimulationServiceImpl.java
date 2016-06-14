@@ -16,8 +16,5 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class HarbourSimulationServiceImpl implements HarbourSimulationService {
-    @Override
-    public void possion1() {
 
-    }
 }

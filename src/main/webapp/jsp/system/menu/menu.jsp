@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%String root = request.getContextPath();%>
 <!--菜单-->
 <div class="accordion" fillSpace="sidebar">
     <div class="accordionHeader">
@@ -12,21 +12,7 @@
             <!-- 三级目录 -->
             <li><a>参数配置</a>
                 <ul>
-                    <li><a href="/harbour/config" target="navTab" rel="trade_list" title="icon配置">交易统计</a>
-                    </li>
-                </ul>
-            </li>
-
-            <li><a>订阅管理</a>
-                <ul>
-                    <li><a href="/harbour/subscribe/list" target="navTab" rel="subscribe_list" title="banner配置">订阅统计</a>
-                    </li>
-                </ul>
-            </li>
-
-            <li><a>关注管理</a>
-                <ul>
-                    <li><a href="/harbour/follow/list" target="navTab" rel="banner_list" title="banner配置">关注统计</a>
+                    <li><a href="<%=root %>/harbour/config" target="navTab" rel="config" title="仿真参数设置">仿真参数设置</a>
                     </li>
                 </ul>
             </li>
