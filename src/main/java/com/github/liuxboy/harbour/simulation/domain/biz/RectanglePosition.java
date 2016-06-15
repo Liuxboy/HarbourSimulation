@@ -12,31 +12,31 @@ package com.github.liuxboy.harbour.simulation.domain.biz;
  */
 public class RectanglePosition {
     //左下角坐标
-    private Point LowerLeftCorner;
+    private Point lowerLeftCorner;
     //右上角坐标
-    private Point UpperRightCorner;
+    private Point upperRightCorner;
 
     public Point getLowerLeftCorner() {
-        return LowerLeftCorner;
+        return lowerLeftCorner;
     }
 
     public void setLowerLeftCorner(Point lowerLeftCorner) {
-        LowerLeftCorner = lowerLeftCorner;
+        this.lowerLeftCorner = lowerLeftCorner;
     }
 
     public Point getUpperRightCorner() {
-        return UpperRightCorner;
+        return upperRightCorner;
     }
 
     public void setUpperRightCorner(Point upperRightCorner) {
-        UpperRightCorner = upperRightCorner;
+        this.upperRightCorner = upperRightCorner;
     }
 
     @Override
     public String toString() {
         return "RectanglePosition{" +
-                "LowerLeftCorner=" + LowerLeftCorner +
-                ", UpperRightCorner=" + UpperRightCorner +
+                "lowerLeftCorner=" + lowerLeftCorner +
+                ", upperRightCorner=" + upperRightCorner +
                 '}';
     }
 }

@@ -15,6 +15,8 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class Channel extends RectanglePosition {
+    //编号
+    private int id = 1;
     //宽度
     private int width;
     //长度
@@ -25,6 +27,14 @@ public class Channel extends RectanglePosition {
     private float limitedSpeed;
     //通航模式
     private PassEnum passEnum;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getWidth() {
         return width;
@@ -69,6 +79,7 @@ public class Channel extends RectanglePosition {
     @Override
     public String toString() {
         final StringBuilder stbd = new StringBuilder("Channel{");
+        stbd.append("\"id\":").append(id);
         stbd.append("\"width\":").append(width);
         stbd.append(",\"length\":").append(length);
         stbd.append(",\"depth\":").append(depth);
