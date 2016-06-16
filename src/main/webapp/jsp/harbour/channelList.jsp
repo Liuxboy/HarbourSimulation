@@ -3,14 +3,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form" %>
 <%String root = request.getContextPath();%>
-<form id="pagerForm" onsubmit="return navTabSearch(this);" method="POST" action="<%=root %>/harbour/channelList">
+<form id="pagerForm" onsubmit="return navTabSearch(this);" method="POST" action="<%=root %>/harbour/channel/channelList">
     <input type="hidden" name="pageNum" value="1"/>
     <input type="hidden" name="pageSize" value="10"/>
 </form>
 <div class="pageContent j-resizeGrid">
     <div class="panelBar">
         <ul class="toolBar">
-            <li><a class="add" href="<%=root %>/harbour/toAddChannel"
+            <li><a class="add" href="<%=root %>/harbour/channel/toAddChannel"
                    target="dialog" mask="true" rel="customer_add" resizable="false"
                    maxable="false" minable="false" title="添加航道信息" height="400"
                    width="800"> <span>添加航道信息</span>
@@ -19,30 +19,12 @@
     </div>
     <div class="pageHeader">
         <form onsubmit="return navTabSearch(this);" method="POST"
-              action="<%=root %>/harbour/channelList">
+              action="<%=root %>/harbour/channel/channelList">
             <div class="searchBar">
                 <table class="searchContent">
                     <tr>
-                        <td>航道编号：<input type="text" id="number" name="number"
+                        <td>航道编号：<input type="text" id="id" name="id"
                                         value="${berth.length}" maxlength="50"/>
-                        </td>
-                        <td>航道长度：<input type="text" id="length" name="length"
-                                        value="${berth.length}" maxlength="50"/>
-                        </td>
-                        <td>航道宽度：<input type="text" id="width" name="width"
-                                        value="${berth.width}" maxlength="50"/>
-                        </td>
-                        <td>航道水深：<input type="text" id="depth" name="depth"
-                                        value="${berth.depth}" maxlength="50"/>
-                        </td>
-                        <td>航道左下坐标：<input type="text" id="lowerLeftCorner" name="lowerLeftCorner"
-                                          value="${berth.lowerLeftCorner}" maxlength="50"/>
-                        </td>
-                        <td>航道右上坐标：<input type="text" id="upperRightCorner" name="upperRightCorner"
-                                          value="${berth.upperRightCorner}" maxlength="50"/>
-                        </td>
-                        <td>通航模式：<input type="text" id="passEnum" name="passEnum"
-                                        value="${berth.number}" maxlength="50"/>
                         </td>
                     </tr>
                     <tr>
@@ -65,6 +47,7 @@
             <th>航道长度</th>
             <th>航道宽度</th>
             <th>航道水深</th>
+            <th>航道限速</th>
             <th>航道左下坐标</th>
             <th>航道右上坐标</th>
             <th>通航模式</th>
@@ -72,19 +55,25 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${channelList}" var="channel">
+        <c:forEach items="${channelList}" var="item" varStatus="status">
             <tr>
-                <td>${channel.id}</td>
-                <td>${channel.followingNo}</td>
-                <td>${channel.fansNo}</td>
-                <td>${channel.subscribedFansNo}</td>
-                <td>${channel.subscribeNo}</td>
-                <td><a href="<%=root %>/harbour/toUpdate?id=${channel.id}"
-                       target="dialog" mask="true" rel="channel_update" title="航道信息"
-                       height="400" width="800" class="btnEdit">更新</a>
-                </td>
+                <td>${status.index + 1}</td>
+                <td>${item.id}</td>
+                <td>${item.length}</td>
+                <td>${item.width}</td>
+                <td>${item.depth}</td>
+                <td>${item.limitedSpeed}</td>
+                <td>(${item.lowerLeftCorner.x},${item.lowerLeftCorner.y})</td>
+                <td>(${item.upperRightCorner.x},${item.upperRightCorner.y})</td>
+                <td>${item.passEnum.typeCode}</td>
                 <td>
-                    <a href="<%=root %>/harbour/channel/delete?id=${channel.id}" class="btnDel" title="确定要删除么"
+                    <a href="<%=root %>/harbour/berth/showDetail/${item.id}"
+                       target="dialog" mask="true" rel="channel_show"
+                       title="查看详情" height="400" width="500" class="btnView">查看详情</a>
+                    <a href="<%=root %>/harbour/channel/toUpdate?id=${item.id}"
+                       target="dialog" mask="true" rel="channel_update" title="更新航道"
+                       height="400" width="800" class="btnEdit">更新</a>
+                    <a href="<%=root %>/harbour/channel/delete?id=${item.id}" class="btnDel" title="确定要删除么"
                        target="ajaxTodo">删除</a>
                 </td>
             </tr>

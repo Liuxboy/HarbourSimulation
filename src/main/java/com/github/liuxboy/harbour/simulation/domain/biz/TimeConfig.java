@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  * @version 1.0
  */
 @Component
-public class SimulationTime {
+public class TimeConfig {
     //仿真时间总长，单位s
     private long simulationTimeOut = 60*60;
     //仿真时间步长，单位s

@@ -14,5 +14,23 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class Anchorage extends RectanglePosition {
+    //编号
+    private int id;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder stbd = new StringBuilder("Anchorage{");
+        stbd.append("\"id\":").append(id);
+        stbd.append('}');
+        stbd.append(super.toString());
+        return stbd.toString();
+    }
 }

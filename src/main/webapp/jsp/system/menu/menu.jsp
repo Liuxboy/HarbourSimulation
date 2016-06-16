@@ -28,11 +28,11 @@
                     </li>
                 </ul>
                 <ul>
-                    <li><a href="<%=root %>/harbour/simulationList" target="navTab" rel="simulationList" title="时间设置">时间设置</a>
+                    <li><a href="<%=root %>/harbour/timeConfig" target="navTab" rel="timeConfig" title="时间设置">时间设置</a>
                     </li>
                 </ul>
                 <ul>
-                    <li><a href="<%=root %>/harbour/resultList" target="navTab" rel="resultList" title="仿真结果">仿真结果</a>
+                    <li><a href="<%=root %>/harbour/result" target="navTab" rel="result" title="仿真结果">仿真结果</a>
                     </li>
                 </ul>
             </li>

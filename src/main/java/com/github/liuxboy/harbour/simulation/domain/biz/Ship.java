@@ -15,6 +15,8 @@ import com.github.liuxboy.harbour.simulation.common.constant.TonnerEnum;
  * @version 1.0
  */
 public class Ship {
+    //编号
+    private int id = 1;
     //种类
     private ShipEnum shipEnum;
     //长度
@@ -35,6 +37,16 @@ public class Ship {
     private PriorityEnum priorityEnum;
     //坐标
     private Point point;
+    //数量
+    private int numbers;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public TonnerEnum getTonnerEnum() {
         return tonnerEnum;
@@ -116,9 +128,18 @@ public class Ship {
         this.point = point;
     }
 
+    public int getNumbers() {
+        return numbers;
+    }
+
+    public void setNumbers(int numbers) {
+        this.numbers = numbers;
+    }
+
     @Override
     public String toString() {
         final StringBuilder stbd = new StringBuilder("Ship{");
+        stbd.append("\"id\":").append(id);
         stbd.append("\"shipEnum\":").append(shipEnum);
         stbd.append("\"tonnerEnum\":").append(tonnerEnum);
         stbd.append(",\"length\":").append(length);
@@ -129,6 +150,7 @@ public class Ship {
         stbd.append(",\"priorityEnum\":").append(priorityEnum);
         stbd.append(",\"workHour\":").append(workHour);
         stbd.append(",\"point\":").append(point);
+        stbd.append(",\"numbers\":").append(numbers);
         stbd.append('}');
         stbd.append(super.toString());
         return stbd.toString();

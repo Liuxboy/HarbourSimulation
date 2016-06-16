@@ -3,41 +3,35 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form" %>
 <%String root = request.getContextPath();%>
-<form id="pagerForm" onsubmit="return navTabSearch(this);" method="POST" action="<%=root %>/harbour/anchorage/anchorageList">
+<form id="pagerForm" onsubmit="return navTabSearch(this);" method="POST" action="<%=root %>/harbour/result/resultList">
     <input type="hidden" name="pageNum" value="1"/>
     <input type="hidden" name="pageSize" value="10"/>
 </form>
 <div class="pageContent j-resizeGrid">
-    <div class="panelBar">
-        <ul class="toolBar">
-            <li><a class="add" href="<%=root %>/harbour/anchorage/toAddAnchorage"
-                   target="dialog" mask="true" rel="customer_add" resizable="false"
-                   maxable="false" minable="false" title="添加锚地" height="400"
-                   width="800"> <span>添加锚地</span>
-            </a></li>
-        </ul>
-    </div>
     <table class="table" width="100%" layoutH="135">
         <thead>
         <tr>
             <th>序号</th>
-            <th>左下角坐标</th>
-            <th>右上角坐标</th>
+            <th>平均在港时间</th>
+            <th>平均等待航道时间</th>
+            <th>平均等泊时间</th>
+            <th>平均在泊时间</th>
+            <th>AWT/AST</th>
+            <th>泊位利用率</th>
             <th>操作</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${anchorageList}" var="item" varStatus="status">
+        <c:forEach items="${resultList}" var="item" varStatus="status">
             <tr>
                 <td>${status.index + 1}</td>
-                <td>${item.lowerLeftCorner}</td>
-                <td>${item.upperRightCorner}</td>
+                <td>${item.id}</td>
+                <td>${item.followingNo}</td>
+                <td>${item.fansNo}</td>
+                <td>${item.subscribedFansNo}</td>
+                <td>${item.subscribeNo}</td>
                 <td>
-                    <a href="<%=root %>/harbour/anchorage/showDetail/${item.id}"
-                       target="dialog" mask="true" rel="showAnchorage"
-                       title="查看详情" height="400" width="500" class="btnView">查看详情</a>
-                <td>
-                    <a href="<%=root %>/harbour/anchorage/delete?id=${item.id}" class="btnDel" title="确定要删除么"
+                    <a href="<%=root %>/harbour/result/delete/?id=${item.id}" class="btnDel" title="确定要删除么"
                        target="ajaxTodo">删除</a>
                 </td>
             </tr>

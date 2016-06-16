@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Berth {
     //编号
-    private int number;
+    private int id = 1;
     //泊位类型，对应的船泊类型
     private ShipEnum shipEnum;
     //泊位吨级
@@ -30,12 +30,12 @@ public class Berth {
     //坐标
     private Point point;
 
-    public int getNumber() {
-        return number;
+    public int getId() {
+        return id;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public ShipEnum getShipEnum() {
@@ -89,7 +89,7 @@ public class Berth {
     @Override
     public String toString() {
         final StringBuilder stbd = new StringBuilder("Berth{");
-        stbd.append("\"number\":").append(number);
+        stbd.append("\"id\":").append(id);
         stbd.append(",\"shipEnum\":").append(shipEnum);
         stbd.append(",\"tonner\":").append(tonner);
         stbd.append(",\"depth\":").append(depth);
