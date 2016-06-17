@@ -26,8 +26,6 @@
                         <td>船舶类型：<input type="text" id="shipEnum" name="shipEnum"
                                         value="${ship.shipEnum.typeCode}" maxlength="50"/>
                         </td>
-                    </tr>
-                    <tr>
                         <td>
                             <div class="buttonActive">
                                 <div class="buttonContent">
@@ -40,7 +38,7 @@
             </div>
         </form>
     </div>
-    <table class="table" width="100%" layoutH="135" varStatus="status">
+    <table class="table" width="100%" layoutH="120%">
         <thead>
         <tr>
             <th>序号</th>

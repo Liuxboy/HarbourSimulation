@@ -21,9 +21,9 @@ public class ResultCtrl {
     @Resource
     HttpServletRequest httpServletRequest;
 
-    @RequestMapping(value = "/resultList")
+    @RequestMapping(value = "/result")
     public String berthList() {
 
-        return "/harbour/resultList";
+        return "/harbour/result";
     }
 }

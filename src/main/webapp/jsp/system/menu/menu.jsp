@@ -2,9 +2,6 @@
 <%String root = request.getContextPath();%>
 <!--菜单-->
 <div class="accordion" fillSpace="sidebar">
-    <div class="accordionHeader">
-        <h2><span>Folder</span>运营管理</h2>
-    </div>
     <!-- 一级目录 -->
     <div class="accordionContent">
         <!-- 二级目录 -->
@@ -12,23 +9,29 @@
             <!-- 三级目录 -->
             <li><a>参数配置</a>
                 <ul>
-                    <li><a href="<%=root %>/harbour/channelList" target="navTab" rel="channelList" title="航道设置">航道设置</a>
+                    <li><a href="<%=root %>/harbour/channel/channelList" target="navTab" rel="channel" title="航道设置">航道设置</a>
                     </li>
                 </ul>
                 <ul>
-                    <li><a href="<%=root %>/harbour/berthList" target="navTab" rel="berthList" title="码头设置">码头设置</a>
+                    <li><a href="<%=root %>/harbour/berth/berthList" target="navTab" rel="berth" title="泊位设置">泊位设置</a>
                     </li>
                 </ul>
                 <ul>
-                    <li><a href="<%=root %>/harbour/anchorageList" target="navTab" rel="anchorageList" title="锚地设置">码头设置</a>
+                    <li><a href="<%=root %>/harbour/anchorage/anchorageList" target="navTab" rel="anchorage" title="锚地设置">锚地设置</a>
                     </li>
                 </ul>
                 <ul>
-                    <li><a href="<%=root %>/harbour/shipList" target="navTab" rel="berthList" title="船舶设置">船舶设置</a>
+                    <li><a href="<%=root %>/harbour/ship/shipList" target="navTab" rel="ship" title="船舶设置">船舶设置</a>
                     </li>
                 </ul>
                 <ul>
-                    <li><a href="<%=root %>/harbour/timeConfig" target="navTab" rel="timeConfig" title="时间设置">时间设置</a>
+                    <li><a href="<%=root %>/harbour/time" target="navTab" rel="time" title="时间设置">时间设置</a>
+                    </li>
+                </ul>
+            </li>
+            <li><a>显示模块</a>
+                <ul>
+                    <li><a href="<%=root %>/harbour/simulation" target="navTab" rel="simulation" title="仿真显示">仿真显示</a>
                     </li>
                 </ul>
                 <ul>

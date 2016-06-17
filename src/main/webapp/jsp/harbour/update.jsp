@@ -5,8 +5,6 @@
 <head>
     <script src="<%=root %>/js/jquery.form.js" type="text/javascript"></script>
     <script src="<%=root %>/js/ajaxfileupload.js" type="text/javascript"></script>
-
-
 </head>
 <div class="pageContent">
    <form action="<%=root %>/manage/customer/update" method="post" onsubmit="return validateCallback(this,dialogAjaxDone);">

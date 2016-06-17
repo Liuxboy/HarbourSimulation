@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
  * @version 1.0
  */
 @Controller
+@RequestMapping(value = "/berth")
 public class BerthCtrl {
     @Resource
     HttpServletRequest httpServletRequest;

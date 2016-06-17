@@ -19,7 +19,7 @@
     </div>
     <div class="pageHeader">
         <form onsubmit="return navTabSearch(this);" method="POST"
-              action="<%=root %>/harbour/">
+              action="<%=root %>/harbour/berth/berthList">
             <div class="searchBar">
                 <table class="searchContent">
                     <tr>
@@ -29,8 +29,6 @@
                         <td>泊位类型：<input type="text" id="mobile" name="mobile"
                                         value="${berth.width}" maxlength="50"/>
                         </td>
-                    </tr>
-                    <tr>
                         <td>
                             <div class="buttonActive">
                                 <div class="buttonContent">
@@ -43,7 +41,7 @@
             </div>
         </form>
     </div>
-    <table class="table" width="100%" layoutH="135" varStatus="status">
+    <table class="table" width="100%" layoutH="120">
         <thead>
         <tr>
             <th>序号</th>

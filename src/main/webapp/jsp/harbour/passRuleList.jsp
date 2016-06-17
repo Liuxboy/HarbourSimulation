@@ -26,8 +26,6 @@
                         <td>规则编号：<input type="text" id="length" name="nickName"
                                         value="${berth.length}" maxlength="50"/>
                         </td>
-                    </tr>
-                    <tr>
                         <td>
                             <div class="buttonActive">
                                 <div class="buttonContent">
@@ -40,7 +38,7 @@
             </div>
         </form>
     </div>
-    <table class="table" width="100%" layoutH="135" varStatus="status">
+    <table class="table" width="100%" layoutH="95%">
         <thead>
         <tr>
             <th>序号</th>
@@ -68,21 +66,5 @@
         </c:forEach>
         </tbody>
     </table>
-    <!--分页页面组件 -->
-    <div class="panelBar">
-        <div class="pages">
-            <span>每页</span> <select class="combox" name="numPerPage"
-                                    onchange="navTabPageBreak({numPerPage:this.value})">
-            <option value="20" ${pageParam.pageSize eq 20 ? 'selected':''}>20</option>
-            <option value="50" ${pageParam.pageSize eq 50 ? 'selected':''}>50</option>
-            <option value="100" ${pageParam.pageSize eq 100 ? 'selected':''}>100</option>
-            <option value="200" ${pageParam.pageSize eq 200 ? 'selected':''}>200</option>
-        </select> <span>满足条件的记录总数: ${pageParam.totalCount}</span>
-        </div>
-        <div class="pagination" targetType="navTab"
-             totalCount="${pageParam.totalCount}"
-             numPerPage="${pageParam.pageSize}" pageNumShown="10"
-             currentPage="${pageParam.pageNum}"></div>
-    </div>
 </div>
 

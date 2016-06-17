@@ -24,6 +24,7 @@ import java.util.Map;
  * @version 1.0
  */
 @Controller
+@RequestMapping(value = "/channel")
 public class HarbourCtrl {
     private Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired

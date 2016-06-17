@@ -1,7 +1,5 @@
 package com.github.liuxboy.harbour.simulation.domain.biz;
 
-import org.springframework.stereotype.Component;
-
 /**
  * <p>Title: Berth</p>
  * <p>Copyright: Copyright(c)2016</p>
@@ -12,7 +10,6 @@ import org.springframework.stereotype.Component;
  * @author wyliuchundong
  * @version 1.0
  */
-@Component
 public class Anchorage extends RectanglePosition {
     //编号
     private int id;
