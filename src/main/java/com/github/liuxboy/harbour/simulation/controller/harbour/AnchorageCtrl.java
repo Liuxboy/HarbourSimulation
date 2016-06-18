@@ -1,12 +1,15 @@
 package com.github.liuxboy.harbour.simulation.controller.harbour;
 
+import com.github.liuxboy.harbour.simulation.common.util.AjaxResultUtil;
 import com.github.liuxboy.harbour.simulation.domain.biz.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,9 +28,12 @@ import java.util.List;
 public class AnchorageCtrl {
     @Resource
     HttpServletRequest httpServletRequest;
+    @Resource
+    HttpSession httpSession;
 
     @RequestMapping(value = "/anchorageList")
     public String berthList() {
+        httpServletRequest.setAttribute("anchorageList", httpSession.getAttribute("anchorageList"));
         return "/harbour/anchorageList";
     }
 
@@ -37,6 +43,7 @@ public class AnchorageCtrl {
     }
 
     @RequestMapping(value = "/doAdd")
+    @ResponseBody
     public String berthList(@RequestParam(value="lx") double lx,
                             @RequestParam(value="ly") double ly,
                             @RequestParam(value="ux") double ux,
@@ -46,9 +53,10 @@ public class AnchorageCtrl {
         Point pointR = new Point(ux, uy);
         anchorage.setLowerLeftCorner(pointL);
         anchorage.setUpperRightCorner(pointR);
-        List<Anchorage> anchorageList = new ArrayList<Anchorage>();
+        Object obj = httpSession.getAttribute("anchorageList");
+        List<Anchorage> anchorageList = obj != null ? (List) obj : new ArrayList<Anchorage>();
         anchorageList.add(anchorage);
-        httpServletRequest.setAttribute("anchorageList", anchorageList);
-        return "/harbour/anchorageList";
+        httpSession.setAttribute("anchorageList", anchorageList);
+        return AjaxResultUtil.success();
     }
 }

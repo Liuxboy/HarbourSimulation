@@ -28,7 +28,7 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${timeConfigList}" var="item" varStatus="status">
+        <c:forEach items="${timeList}" var="item" varStatus="status">
             <tr>
                 <td>${status.index + 1}</td>
                 <td>${item.simulationTimeOut}</td>

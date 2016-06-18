@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
  * @author wyliuchundong
  * @version 1.0
  */
-@Component
 public class Berth {
     //编号
     private int id = 1;

@@ -5,6 +5,8 @@ import com.github.liuxboy.harbour.simulation.service.HarbourSimulationService;
 import org.apache.avalon.framework.service.ServiceException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.SynchronousQueue;
 
@@ -71,7 +73,8 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
     }
 
     @Override
-    public Result simulation() throws ServiceException {
+    public List<Result> simulation() throws ServiceException {
+        List<Result> resultList = new ArrayList<Result>();
         Result result = new Result();
         result.setAvgInHarborTime("");
         result.setAvgOnBerthTime("");
@@ -79,7 +82,8 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
         result.setAvgWaitChannelTime("");
         result.setAwtAstIndex("");
         result.setBerthUtilizationRatio("");
-        return result;
+        resultList.add(result);
+        return resultList;
     }
 
     public static void main(String[] args) {

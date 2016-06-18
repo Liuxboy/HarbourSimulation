@@ -31,14 +31,13 @@
         <tbody>
         <c:forEach items="${anchorageList}" var="item" varStatus="status">
             <tr>
-                <td>${1}</td>
+                <td>${status.index + 1}</td>
                 <td>(${item.lowerLeftCorner.x},${item.lowerLeftCorner.y})</td>
                 <td>(${item.upperRightCorner.x},${item.upperRightCorner.y})</td>
                 <td>
                     <a href="<%=root %>/harbour/anchorage/showDetail?id=${item.id}"
                        target="dialog" mask="true" rel="showAnchorage"
                        title="查看详情" height="400" width="500" class="btnView">查看详情</a>
-                <td>
                     <a href="<%=root %>/harbour/anchorage/delete?id=${item.id}" class="btnDel" title="确定要删除么"
                        target="ajaxTodo">删除</a>
                 </td>

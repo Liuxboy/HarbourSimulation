@@ -9,6 +9,10 @@
             <!-- 三级目录 -->
             <li><a>参数配置</a>
                 <ul>
+                    <li><a href="<%=root %>/harbour/anchorage/anchorageList" target="navTab" rel="anchorage" title="锚地设置">锚地设置</a>
+                    </li>
+                </ul>
+                <ul>
                     <li><a href="<%=root %>/harbour/channel/channelList" target="navTab" rel="channel" title="航道设置">航道设置</a>
                     </li>
                 </ul>
@@ -17,11 +21,11 @@
                     </li>
                 </ul>
                 <ul>
-                    <li><a href="<%=root %>/harbour/anchorage/anchorageList" target="navTab" rel="anchorage" title="锚地设置">锚地设置</a>
+                    <li><a href="<%=root %>/harbour/ship/shipList" target="navTab" rel="ship" title="船舶设置">船舶设置</a>
                     </li>
                 </ul>
                 <ul>
-                    <li><a href="<%=root %>/harbour/ship/shipList" target="navTab" rel="ship" title="船舶设置">船舶设置</a>
+                    <li><a href="<%=root %>/harbour/travel/condition" target="navTab" rel="travel" title="交通管制">交通管制</a>
                     </li>
                 </ul>
                 <ul>

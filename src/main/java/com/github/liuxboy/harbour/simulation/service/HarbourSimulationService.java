@@ -4,6 +4,8 @@ package com.github.liuxboy.harbour.simulation.service;
 import com.github.liuxboy.harbour.simulation.domain.biz.Result;
 import org.apache.avalon.framework.service.ServiceException;
 
+import java.util.List;
+
 /**
  * <p>Title: HarbourSimulationService</p>
  * <p>Copyright: Copyright(c)2016</p>
@@ -20,5 +22,5 @@ public interface HarbourSimulationService {
      * @return
      * @throws ServiceException
      */
-    public Result simulation() throws ServiceException;
+    public List<Result> simulation() throws ServiceException;
 }

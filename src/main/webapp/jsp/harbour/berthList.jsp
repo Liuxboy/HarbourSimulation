@@ -12,8 +12,8 @@
         <ul class="toolBar">
             <li><a class="add" href="<%=root %>/harbour/berth/toAddBerth"
                    target="dialog" mask="true" rel="customer_add" resizable="false"
-                   maxable="false" minable="false" title="添加泊位" height="400"
-                   width="800"> <span>添加泊位</span>
+                   maxable="false" minable="false" title="添加泊位" height="200"
+                   width="400"> <span>添加泊位</span>
             </a></li>
         </ul>
     </div>
