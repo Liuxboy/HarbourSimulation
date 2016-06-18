@@ -1,10 +1,18 @@
 package com.github.liuxboy.harbour.simulation.controller.harbour;
 
+import com.github.liuxboy.harbour.simulation.common.util.Logger;
+import com.github.liuxboy.harbour.simulation.common.util.LoggerFactory;
+import com.github.liuxboy.harbour.simulation.domain.biz.Result;
+import com.github.liuxboy.harbour.simulation.service.HarbourSimulationService;
+import org.apache.avalon.framework.service.ServiceException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * <p>Title: SimulationCtrl</p>
@@ -17,12 +25,33 @@ import javax.servlet.http.HttpServletRequest;
  * @version 1.0
  */
 @Controller
+@RequestMapping(value = "/simulation")
 public class SimulationCtrl {
+    private Logger logger = LoggerFactory.getLogger(getClass());
     @Resource
     HttpServletRequest httpServletRequest;
+    @Resource
+    HttpSession httpSession;
+    @Resource
+    private HarbourSimulationService harbourSimulationService;
 
-    @RequestMapping(value = "/simulation")
-    public String berthList() {
+    @RequestMapping(value = "/toList")
+    public String simulation() {
+        httpServletRequest.setAttribute("shipList", httpSession.getAttribute("shipList"));
+        return "/harbour/simulation";
+    }
+
+    @RequestMapping(value = "/start")
+    @ResponseBody
+    public String start() {
+        try {
+            List<Result> resultList = harbourSimulationService.simulation();
+            httpServletRequest.setAttribute("resultList", resultList);
+            httpServletRequest.setAttribute("flag", 1);
+            logger.info("resultList:", resultList);
+        } catch (ServiceException e) {
+            e.printStackTrace();
+        }
         return "/harbour/simulation";
     }
 }
