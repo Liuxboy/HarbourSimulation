@@ -3,14 +3,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form" %>
 <%String root = request.getContextPath();%>
-<form id="pagerForm" onsubmit="return navTabSearch(this);" method="POST" action="<%=root %>/harbour/channel/channelList">
+<form id="pagerForm" onsubmit="return navTabSearch(this);" method="POST" action="<%=root %>/harbour/channel/toList">
     <input type="hidden" name="pageNum" value="1"/>
     <input type="hidden" name="pageSize" value="10"/>
 </form>
 <div class="pageContent j-resizeGrid">
     <div class="panelBar">
         <ul class="toolBar">
-            <li><a class="add" href="<%=root %>/harbour/channel/toAddChannel"
+            <li><a class="add" href="<%=root %>/harbour/channel/toAdd"
                    target="dialog" mask="true" rel="customer_add" resizable="false"
                    maxable="false" minable="false" title="添加航道信息" height="400"
                    width="800"> <span>添加航道信息</span>
@@ -19,7 +19,7 @@
     </div>
     <div class="pageHeader">
         <form onsubmit="return navTabSearch(this);" method="POST"
-              action="<%=root %>/harbour/channel/channelList">
+              action="<%=root %>/harbour/channel/toList">
             <div class="searchBar">
                 <table class="searchContent">
                     <tr>

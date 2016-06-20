@@ -31,20 +31,20 @@ public class AnchorageCtrl {
     @Resource
     HttpSession httpSession;
 
-    @RequestMapping(value = "/anchorageList")
-    public String berthList() {
+    @RequestMapping(value = "/toList")
+    public String toList() {
         httpServletRequest.setAttribute("anchorageList", httpSession.getAttribute("anchorageList"));
         return "/harbour/anchorageList";
     }
 
-    @RequestMapping(value = "/toAddAnchorage")
-    public String toAddAnchorage() {
+    @RequestMapping(value = "/toAdd")
+    public String toAdd() {
         return "/harbour/anchorageAdd";
     }
 
     @RequestMapping(value = "/doAdd")
     @ResponseBody
-    public String berthList(@RequestParam(value="lx") double lx,
+    public String doAdd(@RequestParam(value="lx") double lx,
                             @RequestParam(value="ly") double ly,
                             @RequestParam(value="ux") double ux,
                             @RequestParam(value="uy") double uy) {

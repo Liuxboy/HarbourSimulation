@@ -36,7 +36,7 @@ public class SimulationCtrl {
     private HarbourSimulationService harbourSimulationService;
 
     @RequestMapping(value = "/toList")
-    public String simulation() {
+    public String toList() {
         httpServletRequest.setAttribute("shipList", httpSession.getAttribute("shipList"));
         return "/harbour/simulation";
     }

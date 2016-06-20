@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form" %>
 <%String root = request.getContextPath();%>
-<form id="pagerForm" onsubmit="return navTabSearch(this);" method="POST" action="<%=root %>/harbour/time/toList">
+<form id="pagerForm" onsubmit="return navTabSearch(this);" method="POST" action="<%=root %>/harbour/traffic/toList">
     <input type="hidden" name="pageNum" value="1"/>
     <input type="hidden" name="pageSize" value="10"/>
 </form>
@@ -11,7 +11,7 @@
     <div class="panelBar">
         <ul class="toolBar">
             <li>
-                <a class="add" href="<%=root %>/harbour/time/toAdd"
+                <a class="add" href="<%=root %>/harbour/traffic/toAdd"
                    target="dialog" mask="true" rel="time_add" resizable="false"
                    maxable="false" minable="false" title="添加仿真时间" height="400"
                    width="800"> <span>添加仿真时间</span>
@@ -34,7 +34,7 @@
                 <td>${item.simulationTimeOut}</td>
                 <td>${item.simulationTimeStep}</td>
                 <td>
-                    <a href="<%=root %>/harbour/time/delete?id=${item.id}" class="btnDel" title="确定要删除么"
+                    <a href="<%=root %>/harbour/traffic/delete?id=${item.id}" class="btnDel" title="确定要删除么"
                        target="ajaxTodo">删除</a>
                 </td>
             </tr>

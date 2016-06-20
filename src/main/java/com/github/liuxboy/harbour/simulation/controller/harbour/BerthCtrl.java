@@ -35,20 +35,20 @@ public class BerthCtrl {
     @Resource
     HttpSession httpSession;
 
-    @RequestMapping(value = "/berthList")
-    public String berthList() {
+    @RequestMapping(value = "/toList")
+    public String toList() {
         httpServletRequest.setAttribute("berthList", httpSession.getAttribute("berthList"));
         return "/harbour/berthList";
     }
 
-    @RequestMapping(value = "/toAddBerth")
-    public String toAddAnchorage() {
+    @RequestMapping(value = "/toAdd")
+    public String toAdd() {
         return "/harbour/berthAdd";
     }
 
     @RequestMapping(value = "/doAdd")
     @ResponseBody
-    public String berthList(@RequestBody Berth berth,
+    public String doAdd(@RequestBody Berth berth,
                             @RequestParam(value="x") double x,
                             @RequestParam(value="y") double y) {
         Point point = new Point(x, y);

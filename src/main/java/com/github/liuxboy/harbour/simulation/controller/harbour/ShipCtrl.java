@@ -34,20 +34,20 @@ public class ShipCtrl {
     @Resource
     HttpSession httpSession;
 
-    @RequestMapping(value = "/shipList")
-    public String berthList() {
+    @RequestMapping(value = "/toList")
+    public String toList() {
         httpServletRequest.setAttribute("shipList", httpSession.getAttribute("shipList"));
         return "/harbour/shipList";
     }
 
-    @RequestMapping(value = "/toAddShip")
-    public String toAddAnchorage() {
+    @RequestMapping(value = "/toAdd")
+    public String toAdd() {
         return "/harbour/shipAdd";
     }
 
     @RequestMapping(value = "/doAdd")
     @ResponseBody
-    public String berthList(@RequestBody Ship ship,
+    public String doAdd(@RequestBody Ship ship,
                             @RequestParam(value="x") double x,
                             @RequestParam(value="y") double y) {
         Object obj = httpSession.getAttribute("shipList");

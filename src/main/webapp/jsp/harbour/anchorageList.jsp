@@ -4,14 +4,14 @@
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form" %>
 <%String root = request.getContextPath();%>
 <form id="pagerForm" onsubmit="return navTabSearch(this);" method="POST"
-      action="<%=root %>/harbour/anchorage/anchorageList">
+      action="<%=root %>/harbour/anchorage/toList">
     <input type="hidden" name="pageNum" value="1"/>
     <input type="hidden" name="pageSize" value="10"/>
 </form>
 <div class="pageContent j-resizeGrid">
     <div class="panelBar">
         <ul class="toolBar">
-            <li><a class="add" href="<%=root %>/harbour/anchorage/toAddAnchorage"
+            <li><a class="add" href="<%=root %>/harbour/anchorage/toList"
                    target="dialog" mask="true" rel="anchorage_add" resizable="false"
                    maxable="false" minable="false" title="添加锚地" height="200"
                    width="400"> <span>添加锚地</span>
@@ -38,8 +38,6 @@
                     <a href="<%=root %>/harbour/anchorage/showDetail?id=${item.id}"
                        target="dialog" mask="true" rel="showAnchorage"
                        title="查看详情" height="400" width="500" class="btnView">查看详情</a>
-                    <a href="<%=root %>/harbour/anchorage/delete?id=${item.id}" class="btnDel" title="确定要删除么"
-                       target="ajaxTodo">删除</a>
                 </td>
             </tr>
         </c:forEach>
