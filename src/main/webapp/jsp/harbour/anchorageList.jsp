@@ -11,7 +11,7 @@
 <div class="pageContent j-resizeGrid">
     <div class="panelBar">
         <ul class="toolBar">
-            <li><a class="add" href="<%=root %>/harbour/anchorage/toList"
+            <li><a class="add" href="<%=root %>/harbour/anchorage/toAdd"
                    target="dialog" mask="true" rel="anchorage_add" resizable="false"
                    maxable="false" minable="false" title="添加锚地" height="200"
                    width="400"> <span>添加锚地</span>
@@ -35,9 +35,9 @@
                 <td>(${item.lowerLeftCorner.x},${item.lowerLeftCorner.y})</td>
                 <td>(${item.upperRightCorner.x},${item.upperRightCorner.y})</td>
                 <td>
-                    <a href="<%=root %>/harbour/anchorage/showDetail?id=${item.id}"
+                    <a href="<%=root %>/harbour/anchorage/showDetail/${item.id}"
                        target="dialog" mask="true" rel="showAnchorage"
-                       title="查看详情" height="400" width="500" class="btnView">查看详情</a>
+                       title="查看详情" height="200" width="400" class="btnEdit">查看详情</a>
                 </td>
             </tr>
         </c:forEach>

@@ -3,6 +3,8 @@ package com.github.liuxboy.harbour.simulation.controller.harbour;
 import com.github.liuxboy.harbour.simulation.common.util.AjaxResultUtil;
 import com.github.liuxboy.harbour.simulation.domain.biz.*;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -45,9 +47,9 @@ public class AnchorageCtrl {
     @RequestMapping(value = "/doAdd")
     @ResponseBody
     public String doAdd(@RequestParam(value="lx") double lx,
-                            @RequestParam(value="ly") double ly,
-                            @RequestParam(value="ux") double ux,
-                            @RequestParam(value="uy") double uy) {
+                        @RequestParam(value="ly") double ly,
+                        @RequestParam(value="ux") double ux,
+                        @RequestParam(value="uy") double uy) {
         Anchorage anchorage = new Anchorage();
         Point pointL = new Point(lx, ly);
         Point pointR = new Point(ux, uy);
@@ -55,7 +57,40 @@ public class AnchorageCtrl {
         anchorage.setUpperRightCorner(pointR);
         Object obj = httpSession.getAttribute("anchorageList");
         List<Anchorage> anchorageList = obj != null ? (List) obj : new ArrayList<Anchorage>();
+        anchorage.setId(anchorageList.size());
         anchorageList.add(anchorage);
+        httpSession.setAttribute("anchorageList", anchorageList);
+        return AjaxResultUtil.success();
+    }
+
+    @RequestMapping(value = "/showDetail/{id}")
+    public String toAdd(@PathVariable("id") Integer id) {
+        Object obj = httpSession.getAttribute("anchorageList");
+        List<Anchorage> anchorageList = obj != null ? (List) obj : new ArrayList<Anchorage>();
+        Anchorage anchorage = new Anchorage();
+        if (id != null && !CollectionUtils.isEmpty(anchorageList)) {
+            anchorage = anchorageList.get(id);
+        }
+        httpServletRequest.setAttribute("anchorage", anchorage);
+        return "/harbour/anchorageDetail";
+    }
+
+    @RequestMapping(value = "/doUpdate")
+    @ResponseBody
+    public String doAdd(@RequestParam(value="lx") double lx,
+                        @RequestParam(value="ly") double ly,
+                        @RequestParam(value="ux") double ux,
+                        @RequestParam(value="uy") double uy,
+                        @RequestParam(value="id") int id) {
+        Anchorage anchorage = new Anchorage();
+        Point pointL = new Point(lx, ly);
+        Point pointR = new Point(ux, uy);
+        anchorage.setLowerLeftCorner(pointL);
+        anchorage.setUpperRightCorner(pointR);
+        anchorage.setId(id);
+        Object obj = httpSession.getAttribute("anchorageList");
+        List<Anchorage> anchorageList = obj != null ? (List) obj : new ArrayList<Anchorage>();
+        anchorageList.set(anchorage.getId(), anchorage);
         httpSession.setAttribute("anchorageList", anchorageList);
         return AjaxResultUtil.success();
     }

@@ -49,12 +49,13 @@ public class BerthCtrl {
     @RequestMapping(value = "/doAdd")
     @ResponseBody
     public String doAdd(@RequestBody Berth berth,
-                            @RequestParam(value="x") double x,
-                            @RequestParam(value="y") double y) {
+                        @RequestParam(value="x") double x,
+                        @RequestParam(value="y") double y) {
         Point point = new Point(x, y);
         berth.setPoint(point);
         Object obj = httpSession.getAttribute("berthList");
         List<Berth> berthList = obj != null ? (List) obj : new ArrayList<Berth>();
+        berth.setId(berthList.size());
         berthList.add(berth);
         httpSession.setAttribute("berthList", berthList);
         return AjaxResultUtil.success();

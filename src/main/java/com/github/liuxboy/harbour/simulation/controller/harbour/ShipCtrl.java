@@ -2,13 +2,12 @@ package com.github.liuxboy.harbour.simulation.controller.harbour;
 
 import com.github.liuxboy.harbour.simulation.common.util.AjaxResultUtil;
 import com.github.liuxboy.harbour.simulation.domain.biz.Berth;
+import com.github.liuxboy.harbour.simulation.domain.biz.Channel;
 import com.github.liuxboy.harbour.simulation.domain.biz.Point;
 import com.github.liuxboy.harbour.simulation.domain.biz.Ship;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -52,7 +51,29 @@ public class ShipCtrl {
                             @RequestParam(value="y") double y) {
         Object obj = httpSession.getAttribute("shipList");
         List<Ship> shipList = obj != null ? (List) obj : new ArrayList<Ship>();
+        ship.setId(shipList.size());
         shipList.add(ship);
+        httpSession.setAttribute("shipList", shipList);
+        return AjaxResultUtil.success();
+    }
+
+    @RequestMapping(value = "/showDetail/{id}")
+    public String showDetail(@PathVariable("id") Integer id) {
+        Object obj = httpSession.getAttribute("shipList");
+        List<Ship> shipList = obj != null ? (List) obj : new ArrayList<Ship>();
+        Ship ship = new Ship();
+        if (id != null && !CollectionUtils.isEmpty(shipList)) {
+            ship = shipList.get(id);
+        }
+        httpServletRequest.setAttribute("ship", ship);
+        return "/harbour/shipUpdate";
+    }
+
+    @RequestMapping(value = "/doUpdate")
+    public String doUpdate(@RequestBody Ship ship) {
+        Object obj = httpSession.getAttribute("shipList");
+        List<Ship> shipList = obj != null ? (List) obj : new ArrayList<Ship>();
+        shipList.set(ship.getId(), ship);
         httpSession.setAttribute("shipList", shipList);
         return AjaxResultUtil.success();
     }
