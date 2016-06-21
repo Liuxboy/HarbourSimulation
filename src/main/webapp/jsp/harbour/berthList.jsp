@@ -23,11 +23,8 @@
             <div class="searchBar">
                 <table class="searchContent">
                     <tr>
-                        <td>泊位编号：<input type="text" id="length" name="nickName"
-                                        value="${berth.length}" maxlength="50"/>
-                        </td>
-                        <td>泊位类型：<input type="text" id="mobile" name="mobile"
-                                        value="${berth.width}" maxlength="50"/>
+                        <td>
+                            泊位类型：<input type="text" id="mobile" name="mobile" maxlength="50"/>
                         </td>
                         <td>
                             <div class="buttonActive">
@@ -71,9 +68,6 @@
                     <a href="<%=root %>/harbour/berth/showDetail/${item.id}"
                        target="dialog" mask="true" rel="showAnchorage"
                        title="查看详情" height="400" width="500" class="btnView">查看详情</a>
-                    <a  href="<%=root %>/harbour/berth/forUpdate?id=${item.id}"
-                        target="dialog" mask="true" rel="customer_update" title="更新泊位信息"
-                        height="400" width="800" class="btnEdit">更新</a></td>
                     <a href="<%=root %>/harbour/berth/delete/?id=${item.id}" class="btnDel" title="确定要删除么"
                         target="ajaxTodo">删除</a>
                 </td>

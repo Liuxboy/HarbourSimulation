@@ -14,26 +14,31 @@
                 <input name="id" type="hidden" class="required" maxlength="50"
                        value="${channel.id}"/>
             </p>
+            <div class="divider"/>
             <p>
                 <label>宽度:</label>
                 <input name="followingNo" type="text" class="required" maxlength="20"
                        value="${channel.width}"/>
             </p>
+            <div class="divider"/>
             <p>
                 <label>长度:</label>
                 <input name="fansNo" type="text" class="required" maxlength="20"
                        value="${channel.length}"/>
             </p>
+            <div class="divider"/>
             <p>
                 <label>深度:</label>
                 <input name="subscribedFansNo" type="text" class="required" maxlength="20"
                        value="${channel.depth}"/>
             </p>
+            <div class="divider"/>
             <p>
                 <label>限速</label>
                 <input name="subscribeNo" type="text" class="required" maxlength="20"
                        value="${channel.limitedSpeed}"/>
             </p>
+            <div class="divider"/>
             <p>
                 <label>通航模式</label>
                 <select id="passEnum" name="passEnum" type="text" readonly="readonly" class="required"

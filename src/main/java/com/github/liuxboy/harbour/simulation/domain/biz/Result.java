@@ -91,7 +91,7 @@ public class Result implements Serializable {
 
     @Override
     public String toString() {
-        return "Result{" +
+        return "ResultCtrl{" +
                 "avgInHarborTime='" + avgInHarborTime + '\'' +
                 ", avgWaitChannelTime='" + avgWaitChannelTime + '\'' +
                 ", avgInHarborTime='" + avgInHarborTime + '\'' +

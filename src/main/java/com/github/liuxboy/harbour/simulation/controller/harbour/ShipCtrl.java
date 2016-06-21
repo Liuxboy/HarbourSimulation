@@ -1,9 +1,6 @@
 package com.github.liuxboy.harbour.simulation.controller.harbour;
 
 import com.github.liuxboy.harbour.simulation.common.util.AjaxResultUtil;
-import com.github.liuxboy.harbour.simulation.domain.biz.Berth;
-import com.github.liuxboy.harbour.simulation.domain.biz.Channel;
-import com.github.liuxboy.harbour.simulation.domain.biz.Point;
 import com.github.liuxboy.harbour.simulation.domain.biz.Ship;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
@@ -47,8 +44,8 @@ public class ShipCtrl {
     @RequestMapping(value = "/doAdd")
     @ResponseBody
     public String doAdd(@RequestBody Ship ship,
-                            @RequestParam(value="x") double x,
-                            @RequestParam(value="y") double y) {
+                        @RequestParam(value = "x") double x,
+                        @RequestParam(value = "y") double y) {
         Object obj = httpSession.getAttribute("shipList");
         List<Ship> shipList = obj != null ? (List) obj : new ArrayList<Ship>();
         ship.setId(shipList.size());

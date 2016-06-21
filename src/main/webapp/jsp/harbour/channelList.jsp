@@ -13,30 +13,9 @@
             <li><a class="add" href="<%=root %>/harbour/channel/toAdd"
                    target="dialog" mask="true" rel="customer_add" resizable="false"
                    maxable="false" minable="false" title="添加航道信息" height="400"
-                   width="800"> <span>添加航道信息</span>
+                   width="500"> <span>添加航道信息</span>
             </a></li>
         </ul>
-    </div>
-    <div class="pageHeader">
-        <form onsubmit="return navTabSearch(this);" method="POST"
-              action="<%=root %>/harbour/channel/toList">
-            <div class="searchBar">
-                <table class="searchContent">
-                    <tr>
-                        <td>航道编号：<input type="text" id="id" name="id"
-                                        value="${berth.length}" maxlength="50"/>
-                        </td>
-                        <td>
-                            <div class="buttonActive">
-                                <div class="buttonContent">
-                                    <button type="submit">查询</button>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </form>
     </div>
     <table class="table" width="100%" layoutH="120">
         <thead>
