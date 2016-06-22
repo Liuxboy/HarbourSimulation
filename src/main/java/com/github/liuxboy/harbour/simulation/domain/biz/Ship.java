@@ -26,17 +26,21 @@ public class Ship {
     //吃水深度
     private int depth;
     //航速
-    private float speed;
-    //到达时间
-    private String arrivalTime;
-    //在泊位作业时长
-    private float workHour;
+    private double speed;
+    //到达分布，泊松分布平均lambda
+    private double lambda;
+    //靠泊分布，对数正态分布，参数mu
+    private double mu;
+    //靠泊分布，对数正态分布，参数sigma
+    private double sigma;
     //吨级
     private TonnerEnum tonnerEnum;
     //进港优先级
     private PriorityEnum priorityEnum;
-    //坐标
-    private Point point;
+    //坐标x
+    private double x;
+    //坐标y
+    private double y;
     //数量
     private int numbers;
 
@@ -88,20 +92,12 @@ public class Ship {
         this.depth = depth;
     }
 
-    public float getSpeed() {
+    public double getSpeed() {
         return speed;
     }
 
     public void setSpeed(float speed) {
         this.speed = speed;
-    }
-
-    public String getArrivalTime() {
-        return arrivalTime;
-    }
-
-    public void setArrivalTime(String arrivalTime) {
-        this.arrivalTime = arrivalTime;
     }
 
     public PriorityEnum getPriorityEnum() {
@@ -112,20 +108,20 @@ public class Ship {
         this.priorityEnum = priorityEnum;
     }
 
-    public float getWorkHour() {
-        return workHour;
+    public double getX() {
+        return x;
     }
 
-    public void setWorkHour(float workHour) {
-        this.workHour = workHour;
+    public void setX(double x) {
+        this.x = x;
     }
 
-    public Point getPoint() {
-        return point;
+    public double getY() {
+        return y;
     }
 
-    public void setPoint(Point point) {
-        this.point = point;
+    public void setY(double y) {
+        this.y = y;
     }
 
     public int getNumbers() {
@@ -136,20 +132,50 @@ public class Ship {
         this.numbers = numbers;
     }
 
+    public void setSpeed(double speed) {
+        this.speed = speed;
+    }
+
+    public double getLambda() {
+        return lambda;
+    }
+
+    public void setLambda(double lambda) {
+        this.lambda = lambda;
+    }
+
+    public double getMu() {
+        return mu;
+    }
+
+    public void setMu(double mu) {
+        this.mu = mu;
+    }
+
+    public double getSigma() {
+        return sigma;
+    }
+
+    public void setSigma(double sigma) {
+        this.sigma = sigma;
+    }
+
     @Override
     public String toString() {
         final StringBuilder stbd = new StringBuilder("Ship{");
         stbd.append("\"id\":").append(id);
-        stbd.append("\"shipEnum\":").append(shipEnum);
-        stbd.append("\"tonnerEnum\":").append(tonnerEnum);
+        stbd.append(",\"shipEnum\":").append(shipEnum);
         stbd.append(",\"length\":").append(length);
         stbd.append(",\"width\":").append(width);
         stbd.append(",\"depth\":").append(depth);
         stbd.append(",\"speed\":").append(speed);
-        stbd.append(",\"arrivalTime\":\"").append(arrivalTime).append('\"');
+        stbd.append(",\"lambda\":").append(lambda);
+        stbd.append(",\"mu\":").append(mu);
+        stbd.append(",\"sigma\":").append(sigma);
+        stbd.append(",\"tonnerEnum\":").append(tonnerEnum);
         stbd.append(",\"priorityEnum\":").append(priorityEnum);
-        stbd.append(",\"workHour\":").append(workHour);
-        stbd.append(",\"point\":").append(point);
+        stbd.append(",\"x\":").append(x);
+        stbd.append(",\"y\":").append(y);
         stbd.append(",\"numbers\":").append(numbers);
         stbd.append('}');
         stbd.append(super.toString());

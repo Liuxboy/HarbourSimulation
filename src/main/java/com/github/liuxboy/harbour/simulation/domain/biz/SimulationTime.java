@@ -10,7 +10,7 @@ package com.github.liuxboy.harbour.simulation.domain.biz;
  * @author wyliuchundong
  * @version 1.0
  */
-public class TimeConfig {
+public class SimulationTime {
     //仿真时间总长，单位s
     private long simulationTimeOut = 60*60;
     //仿真时间步长，单位s

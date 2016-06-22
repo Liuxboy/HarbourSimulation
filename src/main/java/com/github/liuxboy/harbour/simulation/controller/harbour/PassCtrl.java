@@ -27,7 +27,7 @@ public class PassCtrl {
 
     @RequestMapping(value = "/toList")
     public String toList() {
-        httpServletRequest.setAttribute("result", httpSession.getAttribute("channelList"));
-        return "/harbour/pass";
+        httpServletRequest.setAttribute("passList", httpSession.getAttribute("passList"));
+        return "/harbour/passList";
     }
 }

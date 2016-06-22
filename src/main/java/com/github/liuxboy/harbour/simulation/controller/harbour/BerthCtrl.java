@@ -1,15 +1,9 @@
 package com.github.liuxboy.harbour.simulation.controller.harbour;
 
 import com.github.liuxboy.harbour.simulation.common.util.AjaxResultUtil;
-import com.github.liuxboy.harbour.simulation.domain.biz.Anchorage;
 import com.github.liuxboy.harbour.simulation.domain.biz.Berth;
-import com.github.liuxboy.harbour.simulation.domain.biz.Point;
-import org.dom4j.swing.BranchTreeNode;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -48,11 +42,7 @@ public class BerthCtrl {
 
     @RequestMapping(value = "/doAdd")
     @ResponseBody
-    public String doAdd(@RequestBody Berth berth,
-                        @RequestParam(value="x") double x,
-                        @RequestParam(value="y") double y) {
-        Point point = new Point(x, y);
-        berth.setPoint(point);
+    public String doAdd(@ModelAttribute("berth") Berth berth) {
         Object obj = httpSession.getAttribute("berthList");
         List<Berth> berthList = obj != null ? (List) obj : new ArrayList<Berth>();
         berth.setId(berthList.size());

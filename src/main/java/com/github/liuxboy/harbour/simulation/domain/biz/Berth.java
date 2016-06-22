@@ -26,8 +26,10 @@ public class Berth {
     private int length;
     //泊位宽度
     private int width;
-    //坐标
-    private Point point;
+    //坐标x
+    private double x;
+    //坐标y
+    private double y;
 
     public int getId() {
         return id;
@@ -77,12 +79,20 @@ public class Berth {
         this.width = width;
     }
 
-    public Point getPoint() {
-        return point;
+    public double getX() {
+        return x;
     }
 
-    public void setPoint(Point point) {
-        this.point = point;
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public void setY(double y) {
+        this.y = y;
     }
 
     @Override
@@ -94,7 +104,8 @@ public class Berth {
         stbd.append(",\"depth\":").append(depth);
         stbd.append(",\"length\":").append(length);
         stbd.append(",\"width\":").append(width);
-        stbd.append(",\"point\":").append(point);
+        stbd.append(",\"x\":").append(x);
+        stbd.append(",\"y\":").append(y);
         stbd.append('}');
         stbd.append(super.toString());
         return stbd.toString();

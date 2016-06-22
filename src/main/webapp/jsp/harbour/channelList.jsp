@@ -40,8 +40,8 @@
                 <td>${item.width}</td>
                 <td>${item.depth}</td>
                 <td>${item.limitedSpeed}</td>
-                <td>(${item.lowerLeftCorner.x},${item.lowerLeftCorner.y})</td>
-                <td>(${item.upperRightCorner.x},${item.upperRightCorner.y})</td>
+                <td>(${item.lx},${item.ly})</td>
+                <td>(${item.ux},${item.uy})</td>
                 <td>${item.passEnum.typeCode}</td>
                 <td>
                     <a href="<%=root %>/harbour/berth/showDetail/${item.id}"

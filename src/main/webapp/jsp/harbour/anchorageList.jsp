@@ -23,6 +23,7 @@
         <thead>
         <tr>
             <th>序号</th>
+            <th>锚地类型</th>
             <th>左下角坐标</th>
             <th>右上角坐标</th>
             <th>操作</th>
@@ -32,8 +33,9 @@
         <c:forEach items="${anchorageList}" var="item" varStatus="status">
             <tr>
                 <td>${status.index + 1}</td>
-                <td>(${item.lowerLeftCorner.x},${item.lowerLeftCorner.y})</td>
-                <td>(${item.upperRightCorner.x},${item.upperRightCorner.y})</td>
+                <td>${item.anchorageEnum.name}</td>
+                <td>(${item.lx},${item.ly})</td>
+                <td>(${item.uy},${item.uy})</td>
                 <td>
                     <a href="<%=root %>/harbour/anchorage/showDetail/${item.id}"
                        target="dialog" mask="true" rel="showAnchorage"

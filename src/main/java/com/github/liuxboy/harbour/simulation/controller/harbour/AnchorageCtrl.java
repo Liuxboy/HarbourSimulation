@@ -4,10 +4,7 @@ import com.github.liuxboy.harbour.simulation.common.util.AjaxResultUtil;
 import com.github.liuxboy.harbour.simulation.domain.biz.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -46,15 +43,7 @@ public class AnchorageCtrl {
 
     @RequestMapping(value = "/doAdd")
     @ResponseBody
-    public String doAdd(@RequestParam(value="lx") double lx,
-                        @RequestParam(value="ly") double ly,
-                        @RequestParam(value="ux") double ux,
-                        @RequestParam(value="uy") double uy) {
-        Anchorage anchorage = new Anchorage();
-        Point pointL = new Point(lx, ly);
-        Point pointR = new Point(ux, uy);
-        anchorage.setLowerLeftCorner(pointL);
-        anchorage.setUpperRightCorner(pointR);
+    public String doAdd(@ModelAttribute("anchorage") Anchorage anchorage) {
         Object obj = httpSession.getAttribute("anchorageList");
         List<Anchorage> anchorageList = obj != null ? (List) obj : new ArrayList<Anchorage>();
         anchorage.setId(anchorageList.size());
@@ -77,17 +66,7 @@ public class AnchorageCtrl {
 
     @RequestMapping(value = "/doUpdate")
     @ResponseBody
-    public String doAdd(@RequestParam(value="lx") double lx,
-                        @RequestParam(value="ly") double ly,
-                        @RequestParam(value="ux") double ux,
-                        @RequestParam(value="uy") double uy,
-                        @RequestParam(value="id") int id) {
-        Anchorage anchorage = new Anchorage();
-        Point pointL = new Point(lx, ly);
-        Point pointR = new Point(ux, uy);
-        anchorage.setLowerLeftCorner(pointL);
-        anchorage.setUpperRightCorner(pointR);
-        anchorage.setId(id);
+    public String doUpdate(@ModelAttribute("anchorage") Anchorage anchorage) {
         Object obj = httpSession.getAttribute("anchorageList");
         List<Anchorage> anchorageList = obj != null ? (List) obj : new ArrayList<Anchorage>();
         anchorageList.set(anchorage.getId(), anchorage);

@@ -31,11 +31,11 @@
             <div class="divider"/>
             <p>
                 <label>通航模式</label>
-                <select id="passEnum" name="passEnum" type="text" readonly="readonly" class="required"
+                <%--<select id="passEnum" name="passEnum" type="text" readonly="readonly" class="required"
                         maxlength="20">
                     <option value="OneWay" <c:if test="${channel.passEnum.typeCode == 0}">selected</c:if>>单向</option>
                     <option value="BothWay" <c:if test="${channel.passEnum.typeCode == 1}">selected</c:if>>双向</option>
-                </select>
+                </select>--%>
             </p>
             <div class="divider"/>
             <p>

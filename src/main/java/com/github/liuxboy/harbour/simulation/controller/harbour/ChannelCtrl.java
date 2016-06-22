@@ -3,14 +3,10 @@ package com.github.liuxboy.harbour.simulation.controller.harbour;
 import com.github.liuxboy.harbour.simulation.common.util.AjaxResultUtil;
 import com.github.liuxboy.harbour.simulation.common.util.Logger;
 import com.github.liuxboy.harbour.simulation.common.util.LoggerFactory;
-import com.github.liuxboy.harbour.simulation.domain.biz.Anchorage;
 import com.github.liuxboy.harbour.simulation.domain.biz.Channel;
-import com.github.liuxboy.harbour.simulation.domain.biz.TimeConfig;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -49,7 +45,8 @@ public class ChannelCtrl {
     }
 
     @RequestMapping(value = "/doAdd")
-    public String doAdd(@RequestBody Channel channel) {
+    @ResponseBody
+    public String doAdd(@ModelAttribute("channel") Channel channel) {
         Object obj = httpSession.getAttribute("channelList");
         List<Channel> channelList = obj != null ? (List) obj : new ArrayList<Channel>();
         channel.setId(channelList.size());
@@ -71,7 +68,7 @@ public class ChannelCtrl {
     }
 
     @RequestMapping(value = "/doUpdate")
-    public String doUpdate(@RequestBody Channel channel) {
+    public String doUpdate(@ModelAttribute("channel") Channel channel) {
         Object obj = httpSession.getAttribute("channelList");
         List<Channel> channelList = obj != null ? (List) obj : new ArrayList<Channel>();
         channelList.set(channel.getId(), channel);

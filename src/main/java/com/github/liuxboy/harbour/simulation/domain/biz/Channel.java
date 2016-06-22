@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  * @version 1.0
  */
 @Component
-public class Channel extends RectanglePosition {
+public class Channel {
     //编号
     private int id = 1;
     //宽度
@@ -25,6 +25,14 @@ public class Channel extends RectanglePosition {
     private int depth;
     //限速
     private float limitedSpeed;
+    //左下角坐标x
+    private double lx;
+    //左下角坐标y
+    private double ly;
+    //右上角坐标x
+    private double ux;
+    //右上角坐标y
+    private double uy;
     //通航模式
     private PassDirectEnum passEnum;
 
@@ -76,14 +84,50 @@ public class Channel extends RectanglePosition {
         this.passEnum = passEnum;
     }
 
+    public double getLx() {
+        return lx;
+    }
+
+    public void setLx(double lx) {
+        this.lx = lx;
+    }
+
+    public double getLy() {
+        return ly;
+    }
+
+    public void setLy(double ly) {
+        this.ly = ly;
+    }
+
+    public double getUx() {
+        return ux;
+    }
+
+    public void setUx(double ux) {
+        this.ux = ux;
+    }
+
+    public double getUy() {
+        return uy;
+    }
+
+    public void setUy(double uy) {
+        this.uy = uy;
+    }
+
     @Override
     public String toString() {
         final StringBuilder stbd = new StringBuilder("Channel{");
         stbd.append("\"id\":").append(id);
-        stbd.append("\"width\":").append(width);
+        stbd.append(",\"width\":").append(width);
         stbd.append(",\"length\":").append(length);
         stbd.append(",\"depth\":").append(depth);
         stbd.append(",\"limitedSpeed\":").append(limitedSpeed);
+        stbd.append(",\"lx\":").append(lx);
+        stbd.append(",\"ly\":").append(ly);
+        stbd.append(",\"ux\":").append(ux);
+        stbd.append(",\"uy\":").append(uy);
         stbd.append(",\"passEnum\":").append(passEnum);
         stbd.append('}');
         stbd.append(super.toString());

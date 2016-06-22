@@ -5,24 +5,21 @@ package com.github.liuxboy.harbour.simulation.common.constant;
  * <p>Copyright: Copyright(c)2016</p>
  * <p>Company: JD.JR </p>
  * <p>Time: 2016/6/4 12:23</p>
- * <p>Description: 船舶种类 </p>
+ * <p>Description: 锚地种类 </p>
  *
  * @author wyliuchundong
  * @version 1.0
  */
-public enum ShipEnum {
-    Crude_Oil(0, "原油"),
-    Coal(1, "煤炭"),
-    Iron_Ore(2, "铁矿石"),
-    Container_Ship(3, "集装箱船"),
-    Chemical_Oil(4, "化工油品"),
-    Break_Bulk_Ship(5, "散杂船");
+public enum AnchorageEnum {
+    North(0, "北锚地"),
+    South(1, "南锚地"),
+    Ore(2, "矿石锚地");
     private int typeCode;
-    private String nameCN;
+    private String name;
 
-    ShipEnum(int typeCode, String nameCN) {
+    AnchorageEnum(int typeCode, String name) {
         this.typeCode = typeCode;
-        this.nameCN = nameCN;
+        this.name = name;
     }
 
     public int getTypeCode() {
@@ -33,19 +30,18 @@ public enum ShipEnum {
         this.typeCode = typeCode;
     }
 
-    public String getNameCN() {
-        return nameCN;
+    public String getName() {
+        return name;
     }
 
-    public void setNameCN(String nameCN) {
-        this.nameCN = nameCN;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public String toString() {
         final StringBuilder stbd = new StringBuilder("ShipEnum{");
         stbd.append("\"typeCode\":\"").append(typeCode).append('\"');
-        stbd.append("\"nameCN\":\"").append(nameCN).append('\"');
         stbd.append('}');
         stbd.append(super.toString());
         return stbd.toString();
