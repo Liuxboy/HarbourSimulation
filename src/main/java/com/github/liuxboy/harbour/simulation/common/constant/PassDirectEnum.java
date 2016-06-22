@@ -1,7 +1,7 @@
 package com.github.liuxboy.harbour.simulation.common.constant;
 
 /**
- * <p>Title: PassEnum</p>
+ * <p>Title: PassDirectEnum</p>
  * <p>Copyright: Copyright(c)2016</p>
  * <p>Company: JD.JR </p>
  * <p>Time: 2016/6/4 12:14</p>
@@ -10,7 +10,7 @@ package com.github.liuxboy.harbour.simulation.common.constant;
  * @author wyliuchundong
  * @version 1.0
  */
-public enum PassEnum {
+public enum PassDirectEnum {
     OneWay(0, "单向"),
     BothWay(1, "双向");
     private int typeCode;
@@ -32,14 +32,14 @@ public enum PassEnum {
         this.pattern = pattern;
     }
 
-    PassEnum(int typeCode, String pattern) {
+    PassDirectEnum(int typeCode, String pattern) {
         this.typeCode = typeCode;
         this.pattern = pattern;
     }
 
     @Override
     public String toString() {
-        final StringBuilder stbd = new StringBuilder("PassEnum{");
+        final StringBuilder stbd = new StringBuilder("PassDirectEnum{");
         stbd.append("\"typeCode\":\"").append(typeCode).append('\"');
         stbd.append("\"pattern\":\"").append(pattern).append('\"');
         stbd.append('}');

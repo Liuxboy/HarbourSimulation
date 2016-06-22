@@ -78,8 +78,8 @@
     <!--分页页面组件 -->
     <div class="panelBar">
         <div class="pages">
-            <span>每页</span> <select class="combox" name="numPerPage"
-                                    onchange="navTabPageBreak({numPerPage:this.value})">
+            <span>每页</span>
+            <select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
             <option value="20" ${pageParam.pageSize eq 20 ? 'selected':''}>20</option>
             <option value="50" ${pageParam.pageSize eq 50 ? 'selected':''}>50</option>
             <option value="100" ${pageParam.pageSize eq 100 ? 'selected':''}>100</option>
@@ -88,7 +88,8 @@
         </div>
         <div class="pagination" targetType="navTab"
              totalCount="${pageParam.totalCount}"
-             numPerPage="${pageParam.pageSize}" pageNumShown="10"
+             numPerPage="${pageParam.pageSize}"
+             pageNumShown="10"
              currentPage="${pageParam.pageNum}"></div>
     </div>
 </div>

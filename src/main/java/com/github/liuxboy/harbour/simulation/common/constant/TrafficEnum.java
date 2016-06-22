@@ -1,12 +1,21 @@
 package com.github.liuxboy.harbour.simulation.common.constant;
 
 /**
- * Created by jixing on 2016/6/13.
+ * <p>Title: TonnerEnum</p>
+ * <p>Copyright: Copyright(c)2016</p>
+ * <p>Company: JD.JR </p>
+ * <p>Time: 2016/6/5 17:31</p>
+ * <p>Description: 交通管制 </p>
+ *
+ * @author wyliuchundong
+ * @version 1.0
  */
 public enum TrafficEnum {
-    PROHIBIT_ANCHOR(0, "禁止停靠"),
-    PROHIBIT_CONTRARY_TRAVEL(1, "不允许对向行船"),
-    PROHIBIT_SAME_TRAVEL(2, "不允许同向行船");
+    CS_PROHIBIT_ANCHOR(0, "集装箱船靠泊管制"),
+    BBS_PROHIBIT_ANCHOR(1, "散杂货船靠泊管制"),
+    DANGER_PROHIBIT_ANCHOR(2, "危险品船靠泊管制"),
+    PROHIBIT_BOTH_TRAVEL(3, "航行管制"),
+    PROHIBIT_CONTRARY_TRAVEL(4, "单向航行管制");
 
     private int typeCode;
     private String desc;

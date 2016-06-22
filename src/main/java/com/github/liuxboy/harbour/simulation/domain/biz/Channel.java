@@ -1,6 +1,6 @@
 package com.github.liuxboy.harbour.simulation.domain.biz;
 
-import com.github.liuxboy.harbour.simulation.common.constant.PassEnum;
+import com.github.liuxboy.harbour.simulation.common.constant.PassDirectEnum;
 import org.springframework.stereotype.Component;
 
 /**
@@ -26,7 +26,7 @@ public class Channel extends RectanglePosition {
     //限速
     private float limitedSpeed;
     //通航模式
-    private PassEnum passEnum;
+    private PassDirectEnum passEnum;
 
     public int getId() {
         return id;
@@ -68,11 +68,11 @@ public class Channel extends RectanglePosition {
         this.limitedSpeed = limitedSpeed;
     }
 
-    public PassEnum getPassEnum() {
+    public PassDirectEnum getPassEnum() {
         return passEnum;
     }
 
-    public void setPassEnum(PassEnum passEnum) {
+    public void setPassEnum(PassDirectEnum passEnum) {
         this.passEnum = passEnum;
     }
 

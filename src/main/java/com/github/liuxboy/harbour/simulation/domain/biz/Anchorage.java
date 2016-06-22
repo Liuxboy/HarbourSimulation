@@ -13,6 +13,16 @@ package com.github.liuxboy.harbour.simulation.domain.biz;
 public class Anchorage extends RectanglePosition {
     //编号
     private int id;
+    //类型
+    private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public int getId() {
         return id;

@@ -11,11 +11,11 @@ package com.github.liuxboy.harbour.simulation.common.constant;
  * @version 1.0
  */
 public enum ShipEnum {
-    VLCC(0, "油轮","Very Large Crude Carrier"),
-    LPG(1, "液化石油气船", "Liquefied Petroleum Gas"),
-    LNG(2, "液化天然气船", "Liquefied Natural Gas"),
-    CS(3, "集装箱船"," Container Ship"),
-    CC(4, "化学品船", "Chemical Carrier"),
+    Crude_oil(0, "原油","Very Large Crude Carrier"),
+    Coal(1, "煤炭", "Liquefied Petroleum Gas"),
+    LNG(2, "铁矿石", "Liquefied Natural Gas"),
+    Iron_Ore(3, "集装箱船"," Container Ship"),
+    CC(4, "化工油品", "Chemical Carrier"),
     BBS(5, "散杂船", "Break Bulk Ship");
     private int typeCode;
     private String nameCN;
