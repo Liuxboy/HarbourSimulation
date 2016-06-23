@@ -1,6 +1,5 @@
 package com.github.liuxboy.harbour.simulation.common.util;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
 import java.util.HashMap;
@@ -21,7 +20,7 @@ public class AjaxResultUtil {
     public static String success() {
         Map<String, String> resultMap = new HashMap<String, String>();
         resultMap.put("statusCode", "200");
-        resultMap.put("message", "操作失败");
+        resultMap.put("message", "Success");
         resultMap.put("callbackType", "closeCurrent");
         return JSONObject.toJSONString(resultMap);
     }
@@ -29,7 +28,7 @@ public class AjaxResultUtil {
     public static String fail() {
         Map<String, String> resultMap = new HashMap<String, String>();
         resultMap.put("statusCode", "300");
-        resultMap.put("message", "操作失败");
+        resultMap.put("message", "Fail");
         resultMap.put("callbackType", "closeCurrent");
         return JSONObject.toJSONString(resultMap);
     }

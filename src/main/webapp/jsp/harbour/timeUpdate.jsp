@@ -7,32 +7,34 @@
     <script src="<%=root %>/js/ajaxfileupload.js" type="text/javascript"></script>
 </head>
 <div class="pageContent">
-   <form action="<%=root %>/manage/customer/update" method="post" onsubmit="return validateCallback(this,dialogAjaxDone);">
+    <form action="<%=root %>/harbour/time/doUpdate" method="post"
+          onsubmit="return validateCallback(this,dialogAjaxDone);">
         <div class="pageFormContent" layoutH="56">
+            <input name="id" type="hidden" class="required" maxlength="50" style="width:180px"
+                   value="${time.id}"/>
             <p>
-                <label>会员id:</label>${customer.id}
-                <input name="id" type="hidden" class="required" maxlength="50" style="width:180px"
-                       value="${customer.id}"/>
+                <label>仿真时间总长</label>
+                <input name="simulationTimeOut" type="text" class="required digits" maxlength="10"
+                    value="${simulationTime.simulationTimeOut}"/>
+                <select id="timeOutUnit" name="timeUnit" type="text" readonly="readonly" class="required"
+                        maxlength="20">
+                    <option value="YER" <c:if test="${simulationTime.timeOutUnit.time == 31536000}">selected</c:if> >年</option>
+                    <option value="MON" <c:if test="${simulationTime.timeOutUnit.time == 2592000}">selected</c:if> >月</option>
+                    <option value="WEK" <c:if test="${simulationTime.timeOutUnit.time == 604800}">selected</c:if> >周</option>
+                    <option value="DAY" <c:if test="${simulationTime.timeOutUnit.time == 86400}">selected</c:if> >日</option>
+                </select>
             </p>
+            <div class="divider"/>
             <p>
-                <label>关注数:</label>
-                <input name="followingNo" type="text" class="required digits" maxlength="20" style="width:180px"
-                       value="${customer.followingNo}"/>
-            </p>
-            <p>
-                <label>粉丝数:</label>
-                <input name="fansNo" type="text" class="required digits" maxlength="20" style="width:180px"
-                       value="${customer.fansNo}"/>
-            </p>
-            <p>
-                <label>被订阅数:</label>
-                <input name="subscribedFansNo" type="text" class="required digits" maxlength="20" style="width:180px"
-                       value="${customer.subscribedFansNo}"/>
-            </p>
-
-            <p>
-                <label>订阅数</label>
-                <input name="subscribeNo" type="text" class="required digits" maxlength="20" value="${customer.subscribeNo}"/>
+                <label>仿真时间步长</label>
+                <input name="simulationTimeStep" type="text" class="required digits" maxlength="10"
+                       value="${simulationTime.simulationTimeStep}"/>
+                <select id="timeStepUnit" name="timeUnit" type="text" readonly="readonly" class="required"
+                        maxlength="20">
+                    <option value="HOR" <c:if test="${simulationTime.timeOutUnit.time == 3600}">selected</c:if> >时</option>
+                    <option value="MIN" <c:if test="${simulationTime.timeOutUnit.time == 60}">selected</c:if> >分</option>
+                    <option value="SEC" <c:if test="${simulationTime.timeOutUnit.time == 1}">selected</c:if> >秒</option>
+                </select>
             </p>
         </div>
         <div class="formBar">

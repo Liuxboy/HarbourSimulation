@@ -37,6 +37,8 @@ public class Ship {
     private TonnerEnum tonnerEnum;
     //进港优先级
     private PriorityEnum priorityEnum;
+    //安全距离
+    private double safeDistance;
     //坐标x
     private double x;
     //坐标y
@@ -158,6 +160,14 @@ public class Ship {
 
     public void setSigma(double sigma) {
         this.sigma = sigma;
+    }
+
+    public double getSafeDistance() {
+        return safeDistance;
+    }
+
+    public void setSafeDistance(double safeDistance) {
+        this.safeDistance = safeDistance;
     }
 
     @Override

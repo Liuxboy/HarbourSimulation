@@ -1,5 +1,6 @@
 package com.github.liuxboy.harbour.simulation.controller.harbour;
 
+import com.alibaba.fastjson.JSONObject;
 import com.github.liuxboy.harbour.simulation.common.util.AjaxResultUtil;
 import com.github.liuxboy.harbour.simulation.domain.biz.*;
 import org.springframework.stereotype.Controller;
@@ -10,7 +11,9 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>Title: AnchorageCtrl</p>
@@ -71,6 +74,18 @@ public class AnchorageCtrl {
         List<Anchorage> anchorageList = obj != null ? (List) obj : new ArrayList<Anchorage>();
         anchorageList.set(anchorage.getId(), anchorage);
         httpSession.setAttribute("anchorageList", anchorageList);
+        return AjaxResultUtil.success();
+    }
+
+    @RequestMapping(value = "/delete/{id}")
+    @ResponseBody
+    public String delete(@PathVariable("id") int id) {
+        Object obj = httpSession.getAttribute("anchorageList");
+        List<Anchorage> anchorageList = obj != null ? (List) obj : new ArrayList<Anchorage>();
+        if (!CollectionUtils.isEmpty(anchorageList)) {
+            anchorageList.remove(id);
+        }
+        httpServletRequest.setAttribute("anchorageList", anchorageList);
         return AjaxResultUtil.success();
     }
 }

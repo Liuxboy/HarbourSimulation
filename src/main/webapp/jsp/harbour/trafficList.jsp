@@ -14,7 +14,7 @@
                 <a class="add" href="<%=root %>/harbour/traffic/toAdd"
                    target="dialog" mask="true" rel="time_add" resizable="false"
                    maxable="false" minable="false" title="添加仿真时间" height="400"
-                   width="800"> <span>添加仿真时间</span>
+                   width="600"> <span>添加仿真时间</span>
                 </a>
             </li>
         </ul>
@@ -23,17 +23,21 @@
         <thead>
         <tr>
             <th>序号</th>
-            <th>时间总长</th>
-            <th>时间步长</th>
+            <th>管制类型</th>
+            <th>管制时长</th>
+            <th>操作</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${timeList}" var="item" varStatus="status">
+        <c:forEach items="${trafficList}" var="item" varStatus="status">
             <tr>
                 <td>${status.index + 1}</td>
-                <td>${item.simulationTimeOut}</td>
-                <td>${item.simulationTimeStep}</td>
+                <td>${item.trafficEnum.desc}</td>
+                <td>${item.trafficDuration}</td>
                 <td>
+                    <a href="<%=root %>/harbour/traffic/showDetail/${item.id}"
+                       target="dialog" mask="true" rel="traffic_update" title="查看详情"
+                       height="500" width="600" class="btnEdit">查看详情</a>
                     <a href="<%=root %>/harbour/traffic/delete?id=${item.id}" class="btnDel" title="确定要删除么"
                        target="ajaxTodo">删除</a>
                 </td>

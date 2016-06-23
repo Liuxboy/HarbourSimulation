@@ -7,35 +7,32 @@
     <script src="<%=root %>/js/ajaxfileupload.js" type="text/javascript"></script>
 </head>
 <div class="pageContent">
-   <form action="<%=root %>/harbour/channel/doUpdate" method="post" onsubmit="return validateCallback(this,dialogAjaxDone);">
+    <form action="<%=root %>/harbour/channel/doUpdate" method="post"
+          onsubmit="return validateCallback(this,dialogAjaxDone);">
         <div class="pageFormContent" layoutH="56">
-            <p>
-                <label>编号:</label>
-                <input name="id" type="hidden" class="required" maxlength="50"
-                       value="${channel.id}"/>
-            </p>
-            <div class="divider"/>
+            <input name="id" type="hidden" class="required" maxlength="50"
+                   value="${channel.id}"/>
             <p>
                 <label>宽度:</label>
-                <input name="followingNo" type="text" class="required" maxlength="20"
+                <input name="width" type="text" class="required" maxlength="20"
                        value="${channel.width}"/>
             </p>
             <div class="divider"/>
             <p>
                 <label>长度:</label>
-                <input name="fansNo" type="text" class="required" maxlength="20"
+                <input name="length" type="text" class="required" maxlength="20"
                        value="${channel.length}"/>
             </p>
             <div class="divider"/>
             <p>
                 <label>深度:</label>
-                <input name="subscribedFansNo" type="text" class="required" maxlength="20"
+                <input name="depth" type="text" class="required" maxlength="20"
                        value="${channel.depth}"/>
             </p>
             <div class="divider"/>
             <p>
                 <label>限速</label>
-                <input name="subscribeNo" type="text" class="required" maxlength="20"
+                <input name="limitedSpeed" type="text" class="required" maxlength="20"
                        value="${channel.limitedSpeed}"/>
             </p>
             <div class="divider"/>
@@ -46,6 +43,22 @@
                     <option value="OneWay" <c:if test="${channel.passEnum.typeCode == 0}">selected</c:if>>单向</option>
                     <option value="BothWay" <c:if test="${channel.passEnum.typeCode == 1}">selected</c:if>>双向</option>
                 </select>
+            </p>
+            <div class="divider"/>
+            <p>
+                <label>左下角坐标(x,y)</label>
+                <input name="lx" style="width: 30px" type="text" class="required" maxlength="10"
+                       value="${channel.lx}"/>
+                <input name="ly" style="width: 30px" type="text" class="required" maxlength="10"
+                       value="${channel.ly}"/>
+            </p>
+            <div class="divider"/>
+            <p>
+                <label>右上角坐标(x,y)</label>
+                <input name="ux" style="width: 30px" type="text" class="required" maxlength="10"
+                       value="${channel.ux}"/>
+                <input name="uy" style="width: 30px" type="text" class="required" maxlength="10"
+                       value="${channel.uy}"/>
             </p>
         </div>
         <div class="formBar">

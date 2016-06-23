@@ -11,33 +11,33 @@
                 <label>泊位类型</label>
                 <select id="shipEnum" name="shipEnum" type="text" readonly="readonly" class="required"
                         maxlength="20">
-                    <option value="VLCC">油轮</option>
-                    <option value="LPG">液化石油气船</option>
-                    <option value="LNG">液化天然气船</option>
-                    <option value="CS">集装箱船</option>
-                    <option value="CC">化学品船</option>
-                    <option value="BBS">散杂船</option>
+                    <option value="Crude_Oil">原油</option>
+                    <option value="Coal">煤炭</option>
+                    <option value="Iron_Ore">铁矿石</option>
+                    <option value="Container_Ship">集装箱船</option>
+                    <option value="Chemical_Oil">化工油品</option>
+                    <option value="Break_Bulk_Ship">散杂船</option>
                 </select>
             </p>
             <div class="divider"/>
             <p>
                 <label>吨位</label>
-                <input name="tonner" style="width: 30px" type="text" class="required digits" maxlength="10"/>
+                <input name="tonner" type="text" class="required digits" maxlength="10"/>
             </p>
             <div class="divider"/>
             <p>
                 <label>深度</label>
-                <input name="depth" style="width: 30px" type="text" class="required digits" maxlength="10"/>
+                <input name="depth" type="text" class="required digits" maxlength="10"/>
             </p>
             <div class="divider"/>
             <p>
                 <label>长度</label>
-                <input name="length" style="width: 30px" type="text" class="required digits" maxlength="10"/>
+                <input name="length" type="text" class="required digits" maxlength="10"/>
             </p>
             <div class="divider"/>
             <p>
                 <label>宽度</label>
-                <input name="width" style="width: 30px" type="text" class="required digits" maxlength="10"/>
+                <input name="width" type="text" class="required digits" maxlength="10"/>
             </p>
             <div class="divider"/>
             <p>

@@ -13,8 +13,8 @@
         <ul class="toolBar">
             <li><a class="add" href="<%=root %>/harbour/anchorage/toAdd"
                    target="dialog" mask="true" rel="anchorage_add" resizable="false"
-                   maxable="false" minable="false" title="添加锚地" height="200"
-                   width="400"> <span>添加锚地</span>
+                   maxable="false" minable="false" title="添加锚地" height="400"
+                   width="600"> <span>添加锚地</span>
                 </a>
             </li>
         </ul>
@@ -39,7 +39,10 @@
                 <td>
                     <a href="<%=root %>/harbour/anchorage/showDetail/${item.id}"
                        target="dialog" mask="true" rel="showAnchorage"
-                       title="查看详情" height="200" width="400" class="btnEdit">查看详情</a>
+                       title="查看详情" height="400" width="600" class="btnEdit">查看详情</a>
+                    <a href="<%=root %>/harbour/anchorage/delete/${item.id}"
+                       class="btnDel" title="确定要删除么"
+                       target="ajaxTodo">删除</a>
                 </td>
             </tr>
         </c:forEach>

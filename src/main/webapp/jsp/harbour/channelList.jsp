@@ -11,15 +11,16 @@
     <div class="panelBar">
         <ul class="toolBar">
             <li><a class="add" href="<%=root %>/harbour/channel/toAdd"
-                   target="dialog" mask="true" rel="customer_add" resizable="false"
+                   target="dialog" mask="true" rel="channel_add" resizable="false"
                    maxable="false" minable="false" title="添加航道信息" height="400"
-                   width="500"> <span>添加航道信息</span>
+                   width="600"> <span>添加航道信息</span>
             </a></li>
         </ul>
     </div>
-    <table class="table" width="100%" layoutH="120">
+    <table class="table" width="100%" layoutH="85%">
         <thead>
         <tr>
+            <th>序号</th>
             <th>航道航道编号</th>
             <th>航道长度</th>
             <th>航道宽度</th>
@@ -42,15 +43,13 @@
                 <td>${item.limitedSpeed}</td>
                 <td>(${item.lx},${item.ly})</td>
                 <td>(${item.ux},${item.uy})</td>
-                <td>${item.passEnum.typeCode}</td>
+                <td>${item.passEnum.pattern}</td>
                 <td>
-                    <a href="<%=root %>/harbour/berth/showDetail/${item.id}"
+                    <a href="<%=root %>/harbour/channel/showDetail/${item.id}"
                        target="dialog" mask="true" rel="channel_show"
-                       title="查看详情" height="400" width="500" class="btnView">查看详情</a>
-                    <a href="<%=root %>/harbour/channel/toUpdate?id=${item.id}"
-                       target="dialog" mask="true" rel="channel_update" title="更新航道"
-                       height="400" width="800" class="btnEdit">更新</a>
-                    <a href="<%=root %>/harbour/channel/delete?id=${item.id}" class="btnDel" title="确定要删除么"
+                       title="查看详情" height="400" width="500" class="btnEdit">查看详情</a>
+                    <a href="<%=root %>/harbour/channel/delete?id=${item.id}"
+                       class="btnDel" title="确定要删除么"
                        target="ajaxTodo">删除</a>
                 </td>
             </tr>

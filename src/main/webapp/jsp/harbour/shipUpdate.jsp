@@ -12,14 +12,14 @@
        <div class="pageFormContent" layoutH="56">
             <p>
                 <label>船舶类型</label>
-                < id="shipEnum" name="shipEnum" type="text" readonly="readonly" class="required"
+                <select id="shipEnum" name="shipEnum" type="text" readonly="readonly" class="required"
                         maxlength="20">
-                    <option value="VLCC" <c:if test="${ship.shipEnum.typeCode == 0}">selected</c:if> >油轮</option>
-                    <option value="LPG" <c:if test="${ship.shipEnum.typeCode == 1}">selected</c:if> >液化石油气船</option>
-                    <option value="LNG" <c:if test="${ship.shipEnum.typeCode == 2}">selected</c:if> >液化天然气船</option>
-                    <option value="CS" <c:if test="${ship.shipEnum.typeCode == 3}">selected</c:if> >集装箱船</option>
-                    <option value="CC" <c:if test="${ship.shipEnum.typeCode == 4}">selected</c:if> >化学品船</option>
-                    <option value="BBS" <c:if test="${ship.shipEnum.typeCode == 50}">selected</c:if> >散杂船</option>
+                    <option value="Crude_Oil" <c:if test="${ship.shipEnum.typeCode == 0}">selected</c:if> >原油</option>
+                    <option value="Coal" <c:if test="${ship.shipEnum.typeCode == 1}">selected</c:if> >煤炭</option>
+                    <option value="Iron_Ore" <c:if test="${ship.shipEnum.typeCode == 2}">selected</c:if> >铁矿石</option>
+                    <option value="Container_Ship" <c:if test="${ship.shipEnum.typeCode == 3}">selected</c:if> >集装箱船</option>
+                    <option value="Chemical_Oil" <c:if test="${ship.shipEnum.typeCode == 4}">selected</c:if> >化工油品</option>
+                    <option value="Break_Bulk_Ship" <c:if test="${ship.shipEnum.typeCode == 50}">selected</c:if> >散杂船</option>
                 </select>
             </p>
             <div class="divider"/>
@@ -38,40 +38,57 @@
                 <label>优化级</label>
                 <select id="priorityEnum" name="priorityEnum" type="text" readonly="readonly" class="required"
                         maxlength="20">
-                    <option value="HIGH" <c:if test="${ship.priorityEnum.typeCode == 0}">selected</c:if>>高</option>
-                    <option value="NORMAL" <c:if test="${ship.priorityEnum.typeCode == 1}">selected</c:if>>中</option>
-                    <option value="LOW" <c:if test="${ship.priorityEnum.typeCode == 2}">selected</c:if>>低</option>
+                    <option value="HIGH" <c:if test="${ship.priorityEnum.priority == 0}">selected</c:if>>高</option>
+                    <option value="NORMAL" <c:if test="${ship.priorityEnum.priority == 1}">selected</c:if>>中</option>
+                    <option value="LOW" <c:if test="${ship.priorityEnum.priority == 2}">selected</c:if>>低</option>
                 </select>
             </p>
             <div class="divider"/>
             <p>
                 <label>深度</label>
-                <input name="depth" style="width: 30px" value="${ship.depth}"
-                       type="text" class="required digits" maxlength="10"/>
+                <input name="depth" value="${ship.depth}"
+                       type="text" class="required" maxlength="10"/>
             </p>
             <div class="divider"/>
             <p>
                 <label>长度</label>
-                <input name="length" style="width: 30px" value="${ship.length}"
-                       type="text" class="required digits" maxlength="10"/>
+                <input name="length" value="${ship.length}"
+                       type="text" class="required" maxlength="10"/>
             </p>
             <div class="divider"/>
             <p>
                 <label>宽度</label>
-                <input name="width" style="width: 30px" value="${ship.width}"
-                       type="text" class="required digits" maxlength="10"/>
+                <input name="width" value="${ship.width}"
+                       type="text" class="required" maxlength="10"/>
             </p>
             <div class="divider"/>
             <p>
                 <label>速度</label>
-                <input name="speed" style="width: 30px" value="${ship.speed}"
-                       type="text" class="required digits" maxlength="10"/>
+                <input name="speed" value="${ship.speed}"
+                       type="text" class="required" maxlength="10"/>
+            </p>
+            <div class="divider"/>
+            <p>
+                <label>数量</label>
+                <input name="number" value="${ship.speed}"
+                       type="text" class="required" maxlength="10"/>
             </p>
             <div class="divider"/>
             <p>
                 <label>到达时间分布</label>
-                <input name="" style="width: 30px" type="text" class="required digits" maxlength="10"/>
+                <input name="lambda" style="width: 30px" type="text" class="required" maxlength="10"
+                       value="${ship.lambda}"/>
+                (泊松分布)
             </p>
+           <div class="divider"/>
+           <p>
+               <label>靠泊分布(mu, sigma)</label>
+               <input name="mu" style="width: 30px" type="text" class="required" maxlength="10"
+                      value="${ship.mu}"/>
+               <input name="sigma" style="width: 30px" type="text" class="required" maxlength="10"
+                      value="${ship.sigma}"/>
+               (对数正态分布)
+           </p>
         </div>
         <div class="formBar">
             <ul>

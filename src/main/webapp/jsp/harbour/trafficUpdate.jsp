@@ -7,32 +7,28 @@
     <script src="<%=root %>/js/ajaxfileupload.js" type="text/javascript"></script>
 </head>
 <div class="pageContent">
-   <form action="<%=root %>/manage/customer/update" method="post" onsubmit="return validateCallback(this,dialogAjaxDone);">
+   <form action="<%=root %>/harbour/traffic/doUpdate" method="post"
+         onsubmit="return validateCallback(this,dialogAjaxDone);">
         <div class="pageFormContent" layoutH="56">
+            <input name="id" type="hidden" class="required" maxlength="50" style="width:180px"
+                       value="${traffic.id}"/>
             <p>
-                <label>会员id:</label>${customer.id}
-                <input name="id" type="hidden" class="required" maxlength="50" style="width:180px"
-                       value="${customer.id}"/>
+                <label>管制类型</label>
+                <select id="trafficEnum" name="trafficEnum" type="text" readonly="readonly" class="required"
+                        maxlength="20">
+                    <option value="CS_PROHIBIT_ANCHOR" <c:if test="${traffic.trafficEnum.typeCode == 0}">selected</c:if> >集装箱船靠泊管制</option>
+                    <option value="BBS_PROHIBIT_ANCHOR" <c:if test="${traffic.trafficEnum.typeCode == 1}">selected</c:if> >散杂货船靠泊管制</option>
+                    <option value="DANGER_PROHIBIT_ANCHOR" <c:if test="${traffic.trafficEnum.typeCode == 2}">selected</c:if> >危险品船靠泊管制</option>
+                    <option value="PROHIBIT_BOTH_TRAVEL" <c:if test="${traffic.trafficEnum.typeCode == 3}">selected</c:if> >航行管制</option>
+                    <option value="PROHIBIT_CONTRARY_TRAVEL" <c:if test="${traffic.trafficEnum.typeCode == 4}">selected</c:if> >单向航行管制</option>
+                </select>
             </p>
+            <div class="divider"/>
             <p>
-                <label>关注数:</label>
-                <input name="followingNo" type="text" class="required digits" maxlength="20" style="width:180px"
-                       value="${customer.followingNo}"/>
-            </p>
-            <p>
-                <label>粉丝数:</label>
-                <input name="fansNo" type="text" class="required digits" maxlength="20" style="width:180px"
-                       value="${customer.fansNo}"/>
-            </p>
-            <p>
-                <label>被订阅数:</label>
-                <input name="subscribedFansNo" type="text" class="required digits" maxlength="20" style="width:180px"
-                       value="${customer.subscribedFansNo}"/>
-            </p>
-
-            <p>
-                <label>订阅数</label>
-                <input name="subscribeNo" type="text" class="required digits" maxlength="20" value="${customer.subscribeNo}"/>
+                <label>管制时长</label>
+                <input name="trafficDuration" type="text" class="required digits" maxlength="10"
+                    value="${traffic.trafficDuration}"/>
+                (单位：s)
             </p>
         </div>
         <div class="formBar">

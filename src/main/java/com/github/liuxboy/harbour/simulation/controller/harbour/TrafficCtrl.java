@@ -3,11 +3,10 @@ package com.github.liuxboy.harbour.simulation.controller.harbour;
 import com.github.liuxboy.harbour.simulation.common.constant.TrafficEnum;
 import com.github.liuxboy.harbour.simulation.common.util.AjaxResultUtil;
 import com.github.liuxboy.harbour.simulation.domain.biz.Ship;
+import com.github.liuxboy.harbour.simulation.domain.biz.Traffic;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -46,11 +45,45 @@ public class TrafficCtrl {
 
     @RequestMapping(value = "/doAdd")
     @ResponseBody
-    public String doAdd(@RequestBody TrafficEnum trafficEnum) {
+    public String doAdd(@ModelAttribute("traffic") Traffic traffic) {
         Object obj = httpSession.getAttribute("trafficList");
-        List<TrafficEnum> trafficList = obj != null ? (List) obj : new ArrayList<Ship>();
-        trafficList.add(trafficEnum);
+        List<Traffic> trafficList = obj != null ? (List) obj : new ArrayList<Traffic>();
+        trafficList.add(traffic);
         httpSession.setAttribute("trafficList", trafficList);
+        return AjaxResultUtil.success();
+    }
+
+    @RequestMapping(value = "/showDetail/{id}")
+    public String showDetail(@PathVariable("id") int id) {
+        Object obj = httpSession.getAttribute("trafficList");
+        List<Traffic> trafficList = obj != null ? (List) obj : new ArrayList<Traffic>();
+        Traffic traffic = new Traffic();
+        if (!CollectionUtils.isEmpty(trafficList)) {
+            traffic = trafficList.get(id);
+        }
+        httpServletRequest.setAttribute("traffic", traffic);
+        return "/harbour/trafficUpdate";
+    }
+
+    @RequestMapping(value = "/doUpdate")
+    @ResponseBody
+    public String doUpdate(@ModelAttribute("traffic") Traffic traffic) {
+        Object obj = httpSession.getAttribute("trafficList");
+        List<Traffic> trafficList = obj != null ? (List) obj : new ArrayList<Traffic>();
+        trafficList.set(traffic.getId(), traffic);
+        httpSession.setAttribute("trafficList", trafficList);
+        return AjaxResultUtil.success();
+    }
+
+    @RequestMapping(value = "/delete/{id}")
+    @ResponseBody
+    public String delete(@PathVariable("id") int id) {
+        Object obj = httpSession.getAttribute("trafficList");
+        List<Traffic> trafficList = obj != null ? (List) obj : new ArrayList<Traffic>();
+        if (!CollectionUtils.isEmpty(trafficList)) {
+            trafficList.remove(id);
+        }
+        httpServletRequest.setAttribute("trafficList", trafficList);
         return AjaxResultUtil.success();
     }
 }

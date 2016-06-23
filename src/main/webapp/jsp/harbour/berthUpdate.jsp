@@ -10,29 +10,48 @@
    <form action="<%=root %>/manage/customer/update" method="post" onsubmit="return validateCallback(this,dialogAjaxDone);">
         <div class="pageFormContent" layoutH="56">
             <p>
-                <label>会员id:</label>${customer.id}
-                <input name="id" type="hidden" class="required" maxlength="50" style="width:180px"
-                       value="${customer.id}"/>
+                <label>泊位类型</label>
+                <select id="shipEnum" name="shipEnum" type="text" readonly="readonly" class="required"
+                        maxlength="20">
+                    <option value="Crude_Oil" <c:if test="${berth.shipEnum.typeCode == 0}">selected</c:if> >原油</option>
+                    <option value="Coal" <c:if test="${berth.shipEnum.typeCode == 1}">selected</c:if> >煤炭</option>
+                    <option value="Iron_Ore" <c:if test="${berth.shipEnum.typeCode == 2}">selected</c:if> >铁矿石</option>
+                    <option value="Container_Ship" <c:if test="${berth.shipEnum.typeCode == 3}">selected</c:if> >集装箱船</option>
+                    <option value="Chemical_Oil" <c:if test="${berth.shipEnum.typeCode == 4}">selected</c:if> >化工油品</option>
+                    <option value="Break_Bulk_Ship" <c:if test="${berth.shipEnum.typeCode == 5}">selected</c:if> >散杂船</option>
+                </select>
             </p>
+            <div class="divider"/>
             <p>
-                <label>关注数:</label>
-                <input name="followingNo" type="text" class="required digits" maxlength="20" style="width:180px"
-                       value="${customer.followingNo}"/>
+                <label>吨位</label>
+                <input name="tonner" type="text" class="required digits" maxlength="10"
+                       value="${berth.tonner}"/>
             </p>
+            <div class="divider"/>
             <p>
-                <label>粉丝数:</label>
-                <input name="fansNo" type="text" class="required digits" maxlength="20" style="width:180px"
-                       value="${customer.fansNo}"/>
+                <label>深度</label>
+                <input name="depth" type="text" class="required digits" maxlength="10"
+                       value="${berth.depth}"/>
             </p>
+            <div class="divider"/>
             <p>
-                <label>被订阅数:</label>
-                <input name="subscribedFansNo" type="text" class="required digits" maxlength="20" style="width:180px"
-                       value="${customer.subscribedFansNo}"/>
+                <label>长度</label>
+                <input name="length" type="text" class="required digits" maxlength="10"
+                       value="${berth.length}"/>
             </p>
-
+            <div class="divider"/>
             <p>
-                <label>订阅数</label>
-                <input name="subscribeNo" type="text" class="required digits" maxlength="20" value="${customer.subscribeNo}"/>
+                <label>宽度</label>
+                <input name="width" type="text" class="required digits" maxlength="10"
+                       value="${berth.width}"/>
+            </p>
+            <div class="divider"/>
+            <p>
+                <label>泊位中心坐标(x,y)</label>
+                <input name="x" style="width: 30px" type="text" class="required digits" maxlength="10"
+                       value="${berth.x}"/>
+                <input name="y" style="width: 30px" type="text" class="required digits" maxlength="10"
+                       value="${berth.y}"/>
             </p>
         </div>
         <div class="formBar">

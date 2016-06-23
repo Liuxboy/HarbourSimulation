@@ -8,6 +8,16 @@
           onsubmit="return validateCallback(this , dialogAjaxDone);">
         <div class="pageFormContent" layoutH="56">
             <p>
+                <label>锚地</label>
+                <select id="anchorageEnum" name="anchorageEnum" type="text" readonly="readonly" class="required"
+                        maxlength="20">
+                    <option value="North">北锚地</option>
+                    <option value="South">南锚地</option>
+                    <option value="Ore">矿石锚地</option>
+                </select>
+            </p>
+            <div class="divider"/>
+            <p>
                 <label>左下角坐标(x,y)</label>
                 <input name="lx" style="width: 30px" type="text" class="required digits" maxlength="10"/>
                 <input name="ly" style="width: 30px" type="text" class="required digits" maxlength="10"/>

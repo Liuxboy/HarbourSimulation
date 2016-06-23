@@ -14,7 +14,7 @@
                 <a class="add" href="<%=root %>/harbour/time/toAdd"
                    target="dialog" mask="true" rel="time_add" resizable="false"
                    maxable="false" minable="false" title="添加仿真时间" height="400"
-                   width="800"> <span>添加仿真时间</span>
+                   width="600"> <span>添加仿真时间</span>
                 </a>
             </li>
         </ul>

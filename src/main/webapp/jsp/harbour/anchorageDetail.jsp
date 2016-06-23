@@ -11,19 +11,29 @@
         <div class="pageFormContent" layoutH="56">
             <input type="hidden" id="id" name="id" value="${id}">
             <p>
+                <label>锚地</label>
+                <select id="anchorageEnum" name="anchorageEnum" type="text" readonly="readonly" class="required"
+                        maxlength="20">
+                    <option value="North" <c:if test="${anchorage.anchorageEnum.typeCode == 0}">selected</c:if> >北锚地</option>
+                    <option value="South" <c:if test="${anchorage.anchorageEnum.typeCode == 1}">selected</c:if> >南锚地</option>
+                    <option value="Ore" <c:if test="${anchorage.anchorageEnum.typeCode == 2}">selected</c:if> >矿石锚地</option>
+                </select>
+            </p>
+            <div class="divider"/>
+            <p>
                 <label>左下角坐标(x,y):</label>
                 <input name="lx" type="text" class="required" maxlength="50" style="width:30px"
-                       value="${anchorage.lowerLeftCorner.x}"/>
+                       value="${anchorage.lx}"/>
                 <input name="ly" type="text" class="required" maxlength="50" style="width:30px"
-                       value="${anchorage.lowerLeftCorner.y}"/>
+                       value="${anchorage.ly}"/>
             </p>
             <div class="divider"/>
             <p>
                 <label>右下角坐标(x,y):</label>
                 <input name="ux" type="text" class="required" maxlength="50" style="width:30px"
-                       value="${anchorage.upperRightCorner.x}"/>
+                       value="${anchorage.ux}"/>
                 <input name="uy" type="text" class="required" maxlength="50" style="width:30px"
-                       value="${anchorage.upperRightCorner.y}"/>
+                       value="${anchorage.uy}"/>
             </p>
         </div>
         <div class="formBar">

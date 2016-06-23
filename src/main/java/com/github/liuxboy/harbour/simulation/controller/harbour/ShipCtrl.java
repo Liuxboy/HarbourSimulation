@@ -1,6 +1,7 @@
 package com.github.liuxboy.harbour.simulation.controller.harbour;
 
 import com.github.liuxboy.harbour.simulation.common.util.AjaxResultUtil;
+import com.github.liuxboy.harbour.simulation.domain.biz.Berth;
 import com.github.liuxboy.harbour.simulation.domain.biz.Ship;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
@@ -43,9 +44,7 @@ public class ShipCtrl {
 
     @RequestMapping(value = "/doAdd")
     @ResponseBody
-    public String doAdd(@RequestBody Ship ship,
-                        @RequestParam(value = "x") double x,
-                        @RequestParam(value = "y") double y) {
+    public String doAdd(@ModelAttribute("ship") Ship ship) {
         Object obj = httpSession.getAttribute("shipList");
         List<Ship> shipList = obj != null ? (List) obj : new ArrayList<Ship>();
         ship.setId(shipList.size());
@@ -55,11 +54,11 @@ public class ShipCtrl {
     }
 
     @RequestMapping(value = "/showDetail/{id}")
-    public String showDetail(@PathVariable("id") Integer id) {
+    public String showDetail(@PathVariable("id") int id) {
         Object obj = httpSession.getAttribute("shipList");
         List<Ship> shipList = obj != null ? (List) obj : new ArrayList<Ship>();
         Ship ship = new Ship();
-        if (id != null && !CollectionUtils.isEmpty(shipList)) {
+        if (!CollectionUtils.isEmpty(shipList)) {
             ship = shipList.get(id);
         }
         httpServletRequest.setAttribute("ship", ship);
@@ -67,11 +66,24 @@ public class ShipCtrl {
     }
 
     @RequestMapping(value = "/doUpdate")
-    public String doUpdate(@RequestBody Ship ship) {
+    @ResponseBody
+    public String doUpdate(@ModelAttribute("ship") Ship ship) {
         Object obj = httpSession.getAttribute("shipList");
         List<Ship> shipList = obj != null ? (List) obj : new ArrayList<Ship>();
         shipList.set(ship.getId(), ship);
         httpSession.setAttribute("shipList", shipList);
+        return AjaxResultUtil.success();
+    }
+
+    @RequestMapping(value = "/delete/{id}")
+    @ResponseBody
+    public String delete(@PathVariable("id") int id) {
+        Object obj = httpSession.getAttribute("shipList");
+        List<Ship> shipList = obj != null ? (List) obj : new ArrayList<Ship>();
+        if (!CollectionUtils.isEmpty(shipList)) {
+            shipList.remove(id);
+        }
+        httpServletRequest.setAttribute("shipList", shipList);
         return AjaxResultUtil.success();
     }
 }

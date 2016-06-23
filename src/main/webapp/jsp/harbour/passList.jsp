@@ -17,27 +17,6 @@
             </a></li>
         </ul>
     </div>
-    <div class="pageHeader">
-        <form onsubmit="return navTabSearch(this);" method="POST"
-              action="<%=root %>/harbour/pass/passRuleList">
-            <div class="searchBar">
-                <table class="searchContent">
-                    <tr>
-                        <td>规则编号：<input type="text" id="length" name="nickName"
-                                        value="${berth.length}" maxlength="50"/>
-                        </td>
-                        <td>
-                            <div class="buttonActive">
-                                <div class="buttonContent">
-                                    <button type="submit">查询</button>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </form>
-    </div>
     <table class="table" width="100%" layoutH="95%">
         <thead>
         <tr>

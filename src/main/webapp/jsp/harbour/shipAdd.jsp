@@ -4,19 +4,19 @@
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form" %>
 <%String root = request.getContextPath();%>
 <div class="pageContent">
-    <form action="<%=root %>/harbour/berth/doAdd" method="post"
+    <form action="<%=root %>/harbour/ship/doAdd" method="post"
           onsubmit="return validateCallback(this , dialogAjaxDone);">
         <div class="pageFormContent" layoutH="56">
             <p>
                 <label>船舶类型</label>
                 <select id="shipEnum" name="shipEnum" type="text" readonly="readonly" class="required"
                         maxlength="20">
-                    <option value="VLCC">油轮</option>
-                    <option value="LPG">液化石油气船</option>
-                    <option value="LNG">液化天然气船</option>
-                    <option value="CS">集装箱船</option>
-                    <option value="CC">化学品船</option>
-                    <option value="BBS">散杂船</option>
+                    <option value="Crude_Oil">原油</option>
+                    <option value="Coal">煤炭</option>
+                    <option value="Iron_Ore">铁矿石</option>
+                    <option value="Container_Ship">集装箱船</option>
+                    <option value="Chemical_Oil">化工油品</option>
+                    <option value="Break_Bulk_Ship">散杂船</option>
                 </select>
             </p>
             <div class="divider"/>
@@ -24,10 +24,10 @@
                 <label>吨位</label>
                 <select id="tonnerEnum" name="tonnerEnum" type="text" readonly="readonly" class="required"
                         maxlength="20">
-                    <option value="OneTon">1吨</option>
-                    <option value="TwoTon">2吨</option>
-                    <option value="FiveTon">5吨</option>
-                    <option value="TenTon">10吨</option>
+                    <option value="OneTon">1万吨</option>
+                    <option value="TwoTon">2万吨</option>
+                    <option value="FiveTon">5万吨</option>
+                    <option value="TenTon">10万吨</option>
                 </select>
             </p>
             <div class="divider"/>
@@ -43,27 +43,40 @@
             <div class="divider"/>
             <p>
                 <label>深度</label>
-                <input name="depth" style="width: 30px" type="text" class="required digits" maxlength="10"/>
+                <input name="depth" type="text" class="required" maxlength="10"/>
             </p>
             <div class="divider"/>
             <p>
                 <label>长度</label>
-                <input name="length" style="width: 30px" type="text" class="required digits" maxlength="10"/>
+                <input name="length" type="text" class="required" maxlength="10"/>
             </p>
             <div class="divider"/>
             <p>
                 <label>宽度</label>
-                <input name="width" style="width: 30px" type="text" class="required digits" maxlength="10"/>
+                <input name="width" type="text" class="required" maxlength="10"/>
             </p>
             <div class="divider"/>
             <p>
                 <label>速度</label>
-                <input name="speed" style="width: 30px" type="text" class="required digits" maxlength="10"/>
+                <input name="speed" type="text" class="required" maxlength="10"/>
             </p>
             <div class="divider"/>
             <p>
-                <label>到达时间分布</label>
-                <input name="" style="width: 30px" type="text" class="required digits" maxlength="10"/>
+                <label>数量</label>
+                <input name="speed" type="text" class="required" maxlength="10"/>
+            </p>
+            <div class="divider"/>
+            <p>
+                <label>到达分布(lambda)</label>
+                <input name="lambda" style="width: 30px" type="text" class="required" maxlength="10"/>
+                (泊松分布)
+            </p>
+            <div class="divider"/>
+            <p>
+                <label>靠泊分布(mu, sigma)</label>
+                <input name="mu" style="width: 30px" type="text" class="required" maxlength="10"/>
+                <input name="sigma" style="width: 30px" type="text" class="required" maxlength="10"/>
+                (对数正态分布)
             </p>
         </div>
         <div class="formBar">

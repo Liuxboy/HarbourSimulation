@@ -4,24 +4,24 @@
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form" %>
 <%String root = request.getContextPath();%>
 <div class="pageContent">
-    <form action="<%=root %>/harbour/time/doAdd" method="post"
+    <form action="<%=root %>/harbour/traffic/doAdd" method="post"
           onsubmit="return validateCallback(this , dialogAjaxDone);">
         <div class="pageFormContent" layoutH="56">
             <p>
-                <label>仿真时间总长</label>
-                <input name="simulationTimeOut" type="text" class="required digits" maxlength="10"/>
-                <select id="timeOutUnit" name="timeUnit" type="text" readonly="readonly" class="required"
+                <label>管制类型</label>
+                <select id="trafficEnum" name="trafficEnum" type="text" readonly="readonly" class="required"
                         maxlength="20">
-                    <option value="86400">天</option>
-                    <option value="604800">周</option>
-                    <option value="2592000">月</option>
-                    <option value="31536000">年</option>
+                    <option value="CS_PROHIBIT_ANCHOR">集装箱船靠泊管制</option>
+                    <option value="BBS_PROHIBIT_ANCHOR">散杂货船靠泊管制</option>
+                    <option value="DANGER_PROHIBIT_ANCHOR">危险品船靠泊管制</option>
+                    <option value="PROHIBIT_BOTH_TRAVEL">航行管制</option>
+                    <option value="PROHIBIT_CONTRARY_TRAVEL">单向航行管制</option>
                 </select>
             </p>
             <div class="divider"/>
             <p>
-                <label>仿真时间步长</label>
-                <input name="simulationTimeStep" type="text" class="required digits" maxlength="10"/>
+                <label>管制时长</label>
+                <input name="trafficDuration" type="text" class="required digits" maxlength="10"/>
                 <select id="timeStepUnit" name="timeUnit" type="text" readonly="readonly" class="required"
                         maxlength="20">
                     <option value="1">秒</option>

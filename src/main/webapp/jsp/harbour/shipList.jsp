@@ -12,33 +12,12 @@
         <ul class="toolBar">
             <li><a class="add" href="<%=root %>/harbour/ship/toAdd"
                    target="dialog" mask="true" rel="ship_add" resizable="false"
-                   maxable="false" minable="false" title="添加船舶" height="400"
-                   width="800"> <span>添加船舶</span>
+                   maxable="false" minable="false" title="添加船舶" height="500"
+                   width="600"> <span>添加船舶</span>
             </a></li>
         </ul>
     </div>
-    <div class="pageHeader">
-        <form onsubmit="return navTabSearch(this);" method="POST"
-              action="<%=root %>/harbour/ship/toList">
-            <div class="searchBar">
-                <table class="searchContent">
-                    <tr>
-                        <td>船舶类型：<input type="text" id="shipEnum" name="shipEnum"
-                                        value="${ship.shipEnum.typeCode}" maxlength="50"/>
-                        </td>
-                        <td>
-                            <div class="buttonActive">
-                                <div class="buttonContent">
-                                    <button type="submit">查询</button>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </form>
-    </div>
-    <table class="table" width="100%" layoutH="120%">
+    <table class="table" width="100%" layoutH="85%">
         <thead>
         <tr>
             <th>序号</th>
@@ -48,10 +27,16 @@
             <th>船舶深度</th>
             <th>船舶吨位</th>
             <th>船舶数量</th>
+            <th>船舶速度</th>
+            <th>船舶优先级</th>
+            <th>安全距离</th>
+            <th>到达分布(泊松分布)</th>
+            <th>靠泊分布(对态正态分布)</th>
+            <th>操作</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${shipLists}" var="item" varStatus="status">
+        <c:forEach items="${shipList}" var="item" varStatus="status">
             <tr>
                 <td>${status.index + 1}</td>
                 <td>${item.shipEnum.nameCN}</td>
@@ -60,34 +45,21 @@
                 <td>${item.depth}</td>
                 <td>${item.tonnerEnum.tonner}</td>
                 <td>${item.numbers}</td>
+                <td>${item.speed}</td>
                 <td>${item.priorityEnum.desc}</td>
+                <td>${item.safeDistance}</td>
+                <td>(lambda=${item.lambda})</td>
+                <td>(mu=${item.mu}, sigma=${item.sigma})</td>
                 <td>
-                    <a  href="<%=root %>/harbour/ship/forUpdate?id=${item.id}"
-                        target="dialog" mask="true" rel="ship_update" title="船舶信息"
-                        height="400" width="800" class="btnEdit">更新</a>
-                </td>
-                    <a href="<%=root %>/harbour/ship/delete?id=${item.id}" class="btnDel" title="确定要删除么"
-                       target="ajaxTodo">删除</a>
+                    <a href="<%=root %>/harbour/ship/showDetail/${item.id}"
+                       target="dialog" mask="true" rel="ship_update" title="查看详情"
+                       height="500" width="600" class="btnEdit">查看详情</a>
+                    <a href="<%=root %>/harbour/ship/delete/${item.id}"
+                       class="btnDel" title="确定要删除么" target="ajaxTodo">删除</a>
                 </td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
-    <!--分页页面组件 -->
-    <div class="panelBar">
-        <div class="pages">
-            <span>每页</span> <select class="combox" name="numPerPage"
-                                    onchange="navTabPageBreak({numPerPage:this.value})">
-            <option value="20" ${pageParam.pageSize eq 20 ? 'selected':''}>20</option>
-            <option value="50" ${pageParam.pageSize eq 50 ? 'selected':''}>50</option>
-            <option value="100" ${pageParam.pageSize eq 100 ? 'selected':''}>100</option>
-            <option value="200" ${pageParam.pageSize eq 200 ? 'selected':''}>200</option>
-        </select> <span>满足条件的记录总数: ${pageParam.totalCount}</span>
-        </div>
-        <div class="pagination" targetType="navTab"
-             totalCount="${pageParam.totalCount}"
-             numPerPage="${pageParam.pageSize}" pageNumShown="10"
-             currentPage="${pageParam.pageNum}"></div>
-    </div>
 </div>
 

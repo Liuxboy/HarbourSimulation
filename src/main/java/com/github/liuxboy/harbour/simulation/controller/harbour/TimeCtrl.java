@@ -2,10 +2,10 @@ package com.github.liuxboy.harbour.simulation.controller.harbour;
 
 import com.github.liuxboy.harbour.simulation.common.util.AjaxResultUtil;
 import com.github.liuxboy.harbour.simulation.domain.biz.SimulationTime;
+import com.github.liuxboy.harbour.simulation.domain.biz.Traffic;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -44,11 +44,45 @@ public class TimeCtrl {
 
     @RequestMapping(value = "/doAdd")
     @ResponseBody
-    public String doAdd(@RequestBody SimulationTime timeConfig) {
+    public String doAdd(@ModelAttribute("simulationTime") SimulationTime simulationTime) {
         Object obj = httpSession.getAttribute("timeList");
         List<SimulationTime> timeList = obj != null ? (List) obj : new ArrayList<SimulationTime>();
-        timeList.add(timeConfig);
+        timeList.add(simulationTime);
         httpSession.setAttribute("timeList", timeList);
+        return AjaxResultUtil.success();
+    }
+
+    @RequestMapping(value = "/showDetail/{id}")
+    public String showDetail(@PathVariable("id") int id) {
+        Object obj = httpSession.getAttribute("timeList");
+        List<SimulationTime> timeList = obj != null ? (List) obj : new ArrayList<SimulationTime>();
+        SimulationTime simulationTime = new SimulationTime();
+        if (!CollectionUtils.isEmpty(timeList)) {
+            simulationTime = timeList.get(id);
+        }
+        httpServletRequest.setAttribute("simulationTime", simulationTime);
+        return "/harbour/timeUpdate";
+    }
+
+    @RequestMapping(value = "/doUpdate")
+    @ResponseBody
+    public String doUpdate(@ModelAttribute("simulationTime") SimulationTime simulationTime) {
+        Object obj = httpSession.getAttribute("timeList");
+        List<SimulationTime> timeList = obj != null ? (List) obj : new ArrayList<SimulationTime>();
+        timeList.set(simulationTime.getId(), simulationTime);
+        httpSession.setAttribute("timeList", timeList);
+        return AjaxResultUtil.success();
+    }
+
+    @RequestMapping(value = "/delete/{id}")
+    @ResponseBody
+    public String delete(@PathVariable("id") int id) {
+        Object obj = httpSession.getAttribute("timeList");
+        List<SimulationTime> timeList = obj != null ? (List) obj : new ArrayList<SimulationTime>();
+        if (!CollectionUtils.isEmpty(timeList)) {
+            timeList.remove(id);
+        }
+        httpServletRequest.setAttribute("timeList", timeList);
         return AjaxResultUtil.success();
     }
 }

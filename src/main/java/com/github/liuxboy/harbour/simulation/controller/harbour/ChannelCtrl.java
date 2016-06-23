@@ -68,6 +68,7 @@ public class ChannelCtrl {
     }
 
     @RequestMapping(value = "/doUpdate")
+    @ResponseBody
     public String doUpdate(@ModelAttribute("channel") Channel channel) {
         Object obj = httpSession.getAttribute("channelList");
         List<Channel> channelList = obj != null ? (List) obj : new ArrayList<Channel>();

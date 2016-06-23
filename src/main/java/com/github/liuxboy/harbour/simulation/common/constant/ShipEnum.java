@@ -20,6 +20,9 @@ public enum ShipEnum {
     private int typeCode;
     private String nameCN;
 
+    ShipEnum() {
+    }
+
     ShipEnum(int typeCode, String nameCN) {
         this.typeCode = typeCode;
         this.nameCN = nameCN;
