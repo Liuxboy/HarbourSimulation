@@ -1,8 +1,9 @@
 package com.github.liuxboy.harbour.simulation.controller.harbour;
 
 import com.github.liuxboy.harbour.simulation.common.util.AjaxResultUtil;
-import com.github.liuxboy.harbour.simulation.domain.biz.Anchorage;
+import com.github.liuxboy.harbour.simulation.domain.PageParam;
 import com.github.liuxboy.harbour.simulation.domain.biz.Berth;
+import com.github.liuxboy.harbour.simulation.service.InitialService;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -33,10 +34,18 @@ public class BerthCtrl {
     HttpServletRequest httpServletRequest;
     @Resource
     HttpSession httpSession;
+    @Resource
+    InitialService initialService;
 
     @RequestMapping(value = "/toList")
-    public String toList() {
-        httpServletRequest.setAttribute("berthList", httpSession.getAttribute("berthList"));
+    public String toList(@ModelAttribute("pageParam") PageParam pageParam) {
+        List<Berth> initialServiceBerthList = initialService.getBerthList();
+        pageParam.setTotalCount(initialServiceBerthList.size());
+        int beginIndex = (pageParam.getPageNum() - 1) * pageParam.getPageSize();
+        int endIndex = pageParam.getPageNum() * pageParam.getPageSize();
+        endIndex = endIndex <= pageParam.getTotalCount() ? endIndex : pageParam.getTotalCount();
+        httpSession.setAttribute("pageParam", pageParam);
+        httpSession.setAttribute("berthList", initialServiceBerthList.subList(beginIndex, endIndex - 1));
         return "/harbour/berthList";
     }
 
@@ -58,8 +67,7 @@ public class BerthCtrl {
 
     @RequestMapping(value = "/showDetail/{id}")
     public String toAdd(@PathVariable("id") int id) {
-        Object obj = httpSession.getAttribute("berthList");
-        List<Berth> berthList = obj != null ? (List) obj : new ArrayList<Berth>();
+        List<Berth> berthList = initialService.getBerthList();
         Berth berth = new Berth();
         if (!CollectionUtils.isEmpty(berthList)) {
             berth = berthList.get(id);
@@ -71,8 +79,7 @@ public class BerthCtrl {
     @RequestMapping(value = "/doUpdate")
     @ResponseBody
     public String doUpdate(@ModelAttribute("berth") Berth berth) {
-        Object obj = httpSession.getAttribute("berthList");
-        List<Berth> berthList = obj != null ? (List) obj : new ArrayList<Berth>();
+        List<Berth> berthList = initialService.getBerthList();
         berthList.set(berth.getId(), berth);
         httpSession.setAttribute("berthList", berthList);
         return AjaxResultUtil.success();
@@ -81,8 +88,7 @@ public class BerthCtrl {
     @RequestMapping(value = "/delete/{id}")
     @ResponseBody
     public String delete(@PathVariable("id") int id) {
-        Object obj = httpSession.getAttribute("berthList");
-        List<Berth> berthList = obj != null ? (List) obj : new ArrayList<Berth>();
+        List<Berth> berthList = initialService.getBerthList();
         if (!CollectionUtils.isEmpty(berthList)) {
             berthList.remove(id);
         }

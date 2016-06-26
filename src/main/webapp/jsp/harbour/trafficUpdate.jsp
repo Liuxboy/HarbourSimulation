@@ -7,28 +7,68 @@
     <script src="<%=root %>/js/ajaxfileupload.js" type="text/javascript"></script>
 </head>
 <div class="pageContent">
-   <form action="<%=root %>/harbour/traffic/doUpdate" method="post"
-         onsubmit="return validateCallback(this,dialogAjaxDone);">
+    <form action="<%=root %>/harbour/traffic/doUpdate" method="post"
+          onsubmit="return validateCallback(this,dialogAjaxDone);">
         <div class="pageFormContent" layoutH="56">
             <input name="id" type="hidden" class="required" maxlength="50" style="width:180px"
-                       value="${traffic.id}"/>
+                   value="${traffic.id}"/>
             <p>
                 <label>管制类型</label>
                 <select id="trafficEnum" name="trafficEnum" type="text" readonly="readonly" class="required"
                         maxlength="20">
-                    <option value="CS_PROHIBIT_ANCHOR" <c:if test="${traffic.trafficEnum.typeCode == 0}">selected</c:if> >集装箱船靠泊管制</option>
-                    <option value="BBS_PROHIBIT_ANCHOR" <c:if test="${traffic.trafficEnum.typeCode == 1}">selected</c:if> >散杂货船靠泊管制</option>
-                    <option value="DANGER_PROHIBIT_ANCHOR" <c:if test="${traffic.trafficEnum.typeCode == 2}">selected</c:if> >危险品船靠泊管制</option>
-                    <option value="PROHIBIT_BOTH_TRAVEL" <c:if test="${traffic.trafficEnum.typeCode == 3}">selected</c:if> >航行管制</option>
-                    <option value="PROHIBIT_CONTRARY_TRAVEL" <c:if test="${traffic.trafficEnum.typeCode == 4}">selected</c:if> >单向航行管制</option>
+                    <option value="CS_PROHIBIT_ANCHOR"
+                            <c:if test="${traffic.trafficEnum.typeCode == 0}">selected</c:if> >集装箱船靠泊管制
+                    </option>
+                    <option value="BBS_PROHIBIT_ANCHOR"
+                            <c:if test="${traffic.trafficEnum.typeCode == 1}">selected</c:if> >散杂货船靠泊管制
+                    </option>
+                    <option value="DANGER_PROHIBIT_ANCHOR"
+                            <c:if test="${traffic.trafficEnum.typeCode == 2}">selected</c:if> >危险品船靠泊管制
+                    </option>
+                    <option value="PROHIBIT_BOTH_TRAVEL"
+                            <c:if test="${traffic.trafficEnum.typeCode == 3}">selected</c:if> >航行管制
+                    </option>
+                    <option value="PROHIBIT_CONTRARY_TRAVEL"
+                            <c:if test="${traffic.trafficEnum.typeCode == 4}">selected</c:if> >单向航行管制
+                    </option>
                 </select>
+            </p>
+            <div class="divider"/>
+            <p>
+                <label>管制次数</label>
+                <input name="trafficDuration" type="text" class="required digits" maxlength="10"
+                       value="${traffic.trafficTimes}"/>
             </p>
             <div class="divider"/>
             <p>
                 <label>管制时长</label>
                 <input name="trafficDuration" type="text" class="required digits" maxlength="10"
-                    value="${traffic.trafficDuration}"/>
-                (单位：s)
+                       value="${traffic.trafficTimes}"/>
+                <select id="timeEnum" name="timeEnum" type="text" readonly="readonly" class="required"
+                        maxlength="20">
+                    <option value="SEC"
+                            <c:if test="${traffic.timeEnum.unit eq '秒'}">selected</c:if> >秒
+                    </option>
+                    <option value="MIN"
+                            <c:if test="${traffic.timeEnum.unit eq '分'}">selected</c:if> >分
+                    </option>
+                    <option value="HOR"
+                            <c:if test="${traffic.timeEnum.unit eq '时'}">selected</c:if> >时
+                    </option>
+                </select>
+            </p>
+            <div class="divider"/>
+            <p>
+                <label>是否生效</label>
+                <select id="status" name="status" type="text" readonly="readonly" class="required"
+                        maxlength="20">
+                    <option value=0
+                            <c:if test="${status==0}">selected</c:if> >无效
+                    </option>
+                    <option value=1
+                            <c:if test="${status==1}">selected</c:if> >生效
+                    </option>
+                </select>
             </p>
         </div>
         <div class="formBar">

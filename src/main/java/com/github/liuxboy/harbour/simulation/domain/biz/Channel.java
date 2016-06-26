@@ -17,22 +17,16 @@ import org.springframework.stereotype.Component;
 public class Channel {
     //编号
     private int id = 1;
+    //航道名
+    private String name;
     //宽度
-    private int width;
+    private double width;
     //长度
-    private int length;
+    private double length;
     //深度
-    private int depth;
+    private double depth;
     //限速
-    private float limitedSpeed;
-    //左下角坐标x
-    private double lx;
-    //左下角坐标y
-    private double ly;
-    //右上角坐标x
-    private double ux;
-    //右上角坐标y
-    private double uy;
+    private double limitedSpeed;
     //通航模式
     private PassDirectEnum passEnum;
 
@@ -44,35 +38,43 @@ public class Channel {
         this.id = id;
     }
 
-    public int getWidth() {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getWidth() {
         return width;
     }
 
-    public void setWidth(int width) {
+    public void setWidth(double width) {
         this.width = width;
     }
 
-    public int getLength() {
+    public double getLength() {
         return length;
     }
 
-    public void setLength(int length) {
+    public void setLength(double length) {
         this.length = length;
     }
 
-    public int getDepth() {
+    public double getDepth() {
         return depth;
     }
 
-    public void setDepth(int depth) {
+    public void setDepth(double depth) {
         this.depth = depth;
     }
 
-    public float getLimitedSpeed() {
+    public double getLimitedSpeed() {
         return limitedSpeed;
     }
 
-    public void setLimitedSpeed(float limitedSpeed) {
+    public void setLimitedSpeed(double limitedSpeed) {
         this.limitedSpeed = limitedSpeed;
     }
 
@@ -84,50 +86,15 @@ public class Channel {
         this.passEnum = passEnum;
     }
 
-    public double getLx() {
-        return lx;
-    }
-
-    public void setLx(double lx) {
-        this.lx = lx;
-    }
-
-    public double getLy() {
-        return ly;
-    }
-
-    public void setLy(double ly) {
-        this.ly = ly;
-    }
-
-    public double getUx() {
-        return ux;
-    }
-
-    public void setUx(double ux) {
-        this.ux = ux;
-    }
-
-    public double getUy() {
-        return uy;
-    }
-
-    public void setUy(double uy) {
-        this.uy = uy;
-    }
-
     @Override
     public String toString() {
         final StringBuilder stbd = new StringBuilder("Channel{");
         stbd.append("\"id\":").append(id);
+        stbd.append(",\"name\":").append(name);
         stbd.append(",\"width\":").append(width);
         stbd.append(",\"length\":").append(length);
         stbd.append(",\"depth\":").append(depth);
         stbd.append(",\"limitedSpeed\":").append(limitedSpeed);
-        stbd.append(",\"lx\":").append(lx);
-        stbd.append(",\"ly\":").append(ly);
-        stbd.append(",\"ux\":").append(ux);
-        stbd.append(",\"uy\":").append(uy);
         stbd.append(",\"passEnum\":").append(passEnum);
         stbd.append('}');
         stbd.append(super.toString());

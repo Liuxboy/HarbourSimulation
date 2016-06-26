@@ -8,6 +8,11 @@
           onsubmit="return validateCallback(this , dialogAjaxDone);">
         <div class="pageFormContent" layoutH="56">
             <p>
+                <label>航道名:</label>
+                <input name="name" type="text" class="required" maxlength="20"/>
+            </p>
+            <div class="divider"/>
+            <p>
                 <label>宽度:</label>
                 <input name="width" type="text" class="required" maxlength="20"/>
             </p>
@@ -36,17 +41,6 @@
                 </select>
             </p>
             <div class="divider"/>
-            <p>
-                <label>左下角坐标(x,y)</label>
-                <input name="lx" style="width: 30px" type="text" class="required digits" maxlength="10"/>
-                <input name="ly" style="width: 30px" type="text" class="required digits" maxlength="10"/>
-            </p>
-            <div class="divider"/>
-            <p>
-                <label>右上角坐标(x,y)</label>
-                <input name="ux" style="width: 30px" type="text" class="required digits" maxlength="10"/>
-                <input name="uy" style="width: 30px" type="text" class="required digits" maxlength="10"/>
-            </p>
         </div>
         <div class="formBar">
             <ul>

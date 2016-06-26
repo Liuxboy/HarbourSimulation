@@ -7,8 +7,16 @@
     <script src="<%=root %>/js/ajaxfileupload.js" type="text/javascript"></script>
 </head>
 <div class="pageContent">
-   <form action="<%=root %>/manage/customer/update" method="post" onsubmit="return validateCallback(this,dialogAjaxDone);">
+   <form action="<%=root %>/harbour/berth/doUpdate" method="post"
+         onsubmit="return validateCallback(this,dialogAjaxDone);">
         <div class="pageFormContent" layoutH="56">
+            <input type="hidden" id="id" name="id" value="${berth.id}">
+            <div class="divider"/>
+            <p>
+                <label>名称</label>
+                <input name="name" type="text" class="required" maxlength="10"
+                       value="${berth.name}"/>
+            </p>
             <p>
                 <label>泊位类型</label>
                 <select id="shipEnum" name="shipEnum" type="text" readonly="readonly" class="required"
@@ -24,34 +32,20 @@
             <div class="divider"/>
             <p>
                 <label>吨位</label>
-                <input name="tonner" type="text" class="required digits" maxlength="10"
+                <input name="tonner" type="text" class="required" maxlength="10"
                        value="${berth.tonner}"/>
             </p>
             <div class="divider"/>
             <p>
                 <label>深度</label>
-                <input name="depth" type="text" class="required digits" maxlength="10"
+                <input name="depth" type="text" class="required" maxlength="10"
                        value="${berth.depth}"/>
             </p>
             <div class="divider"/>
             <p>
                 <label>长度</label>
-                <input name="length" type="text" class="required digits" maxlength="10"
+                <input name="length" type="text" class="required" maxlength="10"
                        value="${berth.length}"/>
-            </p>
-            <div class="divider"/>
-            <p>
-                <label>宽度</label>
-                <input name="width" type="text" class="required digits" maxlength="10"
-                       value="${berth.width}"/>
-            </p>
-            <div class="divider"/>
-            <p>
-                <label>泊位中心坐标(x,y)</label>
-                <input name="x" style="width: 30px" type="text" class="required digits" maxlength="10"
-                       value="${berth.x}"/>
-                <input name="y" style="width: 30px" type="text" class="required digits" maxlength="10"
-                       value="${berth.y}"/>
             </p>
         </div>
         <div class="formBar">

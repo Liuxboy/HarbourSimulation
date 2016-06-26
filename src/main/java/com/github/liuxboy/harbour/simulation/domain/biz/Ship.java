@@ -39,9 +39,9 @@ public class Ship {
     private PriorityEnum priorityEnum;
     //安全距离
     private double safeDistance;
-    //坐标x
+    //坐标纬度
     private double x;
-    //坐标y
+    //坐标经度
     private double y;
     //数量
     private int numbers;

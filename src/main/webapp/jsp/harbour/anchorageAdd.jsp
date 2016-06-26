@@ -14,19 +14,32 @@
                     <option value="North">北锚地</option>
                     <option value="South">南锚地</option>
                     <option value="Ore">矿石锚地</option>
+                    <option value="Oil">油轮锚地</option>
                 </select>
             </p>
             <div class="divider"/>
-            <p>
-                <label>左下角坐标(x,y)</label>
-                <input name="lx" style="width: 30px" type="text" class="required digits" maxlength="10"/>
-                <input name="ly" style="width: 30px" type="text" class="required digits" maxlength="10"/>
+            <p class="nowrap">
+                <label>坐标1经纬度</label>
+               <input name="point1X" type="text" class="required" maxlength="10"/>
+               <input name="point1X" type="text" class="required" maxlength="10"/>
             </p>
             <div class="divider"/>
-            <p>
-                <label>右上角坐标(x,y)</label>
-                <input name="ux" style="width: 30px" type="text" class="required digits" maxlength="10"/>
-                <input name="uy" style="width: 30px" type="text" class="required digits" maxlength="10"/>
+            <p class="nowrap">
+                <label>坐标2经纬度</label>
+                <input name="point2X" type="text" class="required" maxlength="10"/>
+                <input name="point2Y" type="text" class="required" maxlength="10"/>
+            </p>
+            <div class="divider"/>
+            <p class="nowrap">
+                <label>坐标3经纬度</label>
+                <input name="point3X" type="text" class="required" maxlength="10"/>
+                <input name="point3Y" type="text" class="required" maxlength="10"/>
+            </p>
+            <div class="divider"/>
+            <p class="nowrap">
+                <label>坐标4经纬度</label>
+                <input name="point4X" type="text" class="required" maxlength="10"/>
+                <input name="point4Y" type="text" class="required" maxlength="10"/>
             </p>
         </div>
         <div class="formBar">

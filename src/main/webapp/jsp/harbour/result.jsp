@@ -3,10 +3,27 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form" %>
 <%String root = request.getContextPath();%>
-<form id="pagerForm" onsubmit="return navTabSearch(this);" method="POST" action="<%=root %>/harbour/simulation/toList">
-    <input type="hidden" name="pageNum" value="1"/>
-    <input type="hidden" name="pageSize" value="10"/>
-</form>
+<div class="pageHeader">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);"
+          method="POST" action="<%=root %>/harbour/result/toList">
+        <input type="hidden" name="pageNum" value="1"/>
+        <input type="hidden" name="pageSize" value="10"/>
+        <input type="hidden" name="flag" value="start"/>
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td>
+                        <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button type="submit">开始仿真</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
 <div class="pageContent j-resizeGrid">
     <table class="table" width="100%" layoutH="60%">
         <thead>

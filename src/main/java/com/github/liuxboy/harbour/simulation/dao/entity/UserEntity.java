@@ -14,6 +14,14 @@ public class UserEntity implements Serializable {
     private Date createTime;
     private Date modifyTime;
 
+    public UserEntity() {
+    }
+
+    public UserEntity(String userName, String passWord) {
+        this.userName = userName;
+        this.passWord = passWord;
+    }
+
     public Long getId() {
         return id;
     }
@@ -84,5 +92,17 @@ public class UserEntity implements Serializable {
 
     public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UserEntity that = (UserEntity) o;
+
+        if (!userName.equals(that.userName)) return false;
+        return passWord.equals(that.passWord);
+
     }
 }

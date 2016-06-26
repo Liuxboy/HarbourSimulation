@@ -17,14 +17,22 @@ public class Anchorage {
     private int id = 1;
     //类型
     private AnchorageEnum anchorageEnum;
-    //左下角x
-    private double lx;
-    //左下角y
-    private double ly;
-    //右上角x
-    private double ux;
-    //右上角y
-    private double uy;
+    //坐标1纬度
+    private double point1X;
+    //坐标1经度
+    private double point1Y;
+    //坐标2纬度
+    private double point2X;
+    //坐标2经度
+    private double point2Y;
+    //坐标3纬度
+    private double point3X;
+    //坐标3经度
+    private double point3Y;
+    //坐标4纬度
+    private double point4X;
+    //坐标4经度
+    private double point4Y;
 
     public AnchorageEnum getAnchorageEnum() {
         return anchorageEnum;
@@ -42,36 +50,68 @@ public class Anchorage {
         this.id = id;
     }
 
-    public double getLx() {
-        return lx;
+    public double getPoint1X() {
+        return point1X;
     }
 
-    public void setLx(double lx) {
-        this.lx = lx;
+    public void setPoint1X(double point1X) {
+        this.point1X = point1X;
     }
 
-    public double getLy() {
-        return ly;
+    public double getPoint1Y() {
+        return point1Y;
     }
 
-    public void setLy(double ly) {
-        this.ly = ly;
+    public void setPoint1Y(double point1Y) {
+        this.point1Y = point1Y;
     }
 
-    public double getUx() {
-        return ux;
+    public double getPoint2X() {
+        return point2X;
     }
 
-    public void setUx(double ux) {
-        this.ux = ux;
+    public void setPoint2X(double point2X) {
+        this.point2X = point2X;
     }
 
-    public double getUy() {
-        return uy;
+    public double getPoint2Y() {
+        return point2Y;
     }
 
-    public void setUy(double uy) {
-        this.uy = uy;
+    public void setPoint2Y(double point2Y) {
+        this.point2Y = point2Y;
+    }
+
+    public double getPoint3X() {
+        return point3X;
+    }
+
+    public void setPoint3X(double point3X) {
+        this.point3X = point3X;
+    }
+
+    public double getPoint3Y() {
+        return point3Y;
+    }
+
+    public void setPoint3Y(double point3Y) {
+        this.point3Y = point3Y;
+    }
+
+    public double getPoint4X() {
+        return point4X;
+    }
+
+    public void setPoint4X(double point4X) {
+        this.point4X = point4X;
+    }
+
+    public double getPoint4Y() {
+        return point4Y;
+    }
+
+    public void setPoint4Y(double point4Y) {
+        this.point4Y = point4Y;
     }
 
     @Override
@@ -79,10 +119,14 @@ public class Anchorage {
         final StringBuilder stbd = new StringBuilder("Anchorage{");
         stbd.append("\"id\":").append(id);
         stbd.append(",\"anchorageEnum\":").append(anchorageEnum);
-        stbd.append(",\"lx\":").append(lx);
-        stbd.append(",\"ly\":").append(ly);
-        stbd.append(",\"ux\":").append(ux);
-        stbd.append(",\"uy\":").append(uy);
+        stbd.append(",\"point1X\":").append(point1X);
+        stbd.append(",\"point1Y\":").append(point1Y);
+        stbd.append(",\"point2X\":").append(point2X);
+        stbd.append(",\"point2Y\":").append(point2Y);
+        stbd.append(",\"point3X\":").append(point3X);
+        stbd.append(",\"point3Y\":").append(point3Y);
+        stbd.append(",\"point4X\":").append(point4X);
+        stbd.append(",\"point4Y\":").append(point4Y);
         stbd.append('}');
         stbd.append(super.toString());
         return stbd.toString();

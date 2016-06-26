@@ -13,7 +13,8 @@ package com.github.liuxboy.harbour.simulation.common.constant;
 public enum AnchorageEnum {
     North(0, "北锚地"),
     South(1, "南锚地"),
-    Ore(2, "矿石锚地");
+    Ore(2, "矿石锚地"),
+    Oil(3, "油轮锚地");
     private int typeCode;
     private String name;
 
@@ -40,8 +41,9 @@ public enum AnchorageEnum {
 
     @Override
     public String toString() {
-        final StringBuilder stbd = new StringBuilder("ShipEnum{");
-        stbd.append("\"typeCode\":\"").append(typeCode).append('\"');
+        final StringBuilder stbd = new StringBuilder("AnchorageEnum{");
+        stbd.append("\"typeCode\":").append(typeCode);
+        stbd.append(",\"name\":\"").append(name).append('\"');
         stbd.append('}');
         stbd.append(super.toString());
         return stbd.toString();

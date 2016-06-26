@@ -4,9 +4,13 @@ import com.github.liuxboy.harbour.simulation.common.util.AjaxResultUtil;
 import com.github.liuxboy.harbour.simulation.common.util.Logger;
 import com.github.liuxboy.harbour.simulation.common.util.LoggerFactory;
 import com.github.liuxboy.harbour.simulation.domain.biz.Channel;
+import com.github.liuxboy.harbour.simulation.service.InitialService;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -32,10 +36,17 @@ public class ChannelCtrl {
     HttpServletRequest httpServletRequest;
     @Resource
     HttpSession httpSession;
+    @Resource
+    InitialService initialService;
 
     @RequestMapping(value = "/toList")
     public String toList() {
-        httpServletRequest.setAttribute("channelList", httpSession.getAttribute("channelList"));
+        Object obj = httpSession.getAttribute("channelList");
+        List<Channel> channelList = obj != null ? (List) obj : new ArrayList<Channel>();
+        if (CollectionUtils.isEmpty(channelList)) {
+            channelList = initialService.getChannelList();
+        }
+        httpSession.setAttribute("channelList", channelList);
         return "/harbour/channelList";
     }
 
@@ -56,11 +67,11 @@ public class ChannelCtrl {
     }
 
     @RequestMapping(value = "/showDetail/{id}")
-    public String showDetail(@PathVariable("id") Integer id) {
+    public String showDetail(@PathVariable("id") int id) {
         Object obj = httpSession.getAttribute("channelList");
         List<Channel> channelList = obj != null ? (List) obj : new ArrayList<Channel>();
         Channel channel = new Channel();
-        if (id != null && !CollectionUtils.isEmpty(channelList)) {
+        if (!CollectionUtils.isEmpty(channelList)) {
             channel = channelList.get(id);
         }
         httpServletRequest.setAttribute("channel", channel);

@@ -12,8 +12,8 @@ package com.github.liuxboy.harbour.simulation.common.constant;
  */
 public enum ShipEnum {
     Crude_Oil(0, "原油"),
-    Coal(1, "煤炭"),
-    Iron_Ore(2, "铁矿石"),
+    Iron_Ore(1, "铁矿石"),
+    Coal(2, "煤炭"),
     Container_Ship(3, "集装箱船"),
     Chemical_Oil(4, "化工油品"),
     Break_Bulk_Ship(5, "散杂船");

@@ -1,7 +1,6 @@
 package com.github.liuxboy.harbour.simulation.domain.biz;
 
 import com.github.liuxboy.harbour.simulation.common.constant.ShipEnum;
-import org.springframework.stereotype.Component;
 
 /**
  * <p>Title: Berth</p>
@@ -16,20 +15,16 @@ import org.springframework.stereotype.Component;
 public class Berth {
     //编号
     private int id = 1;
+    //泊位名称
+    private String name;
     //泊位类型，对应的船泊类型
     private ShipEnum shipEnum;
     //泊位吨级
-    private int tonner;
+    private double tonner;
     //泊位水深
-    private int depth;
+    private double depth;
     //泊位长度
-    private int length;
-    //泊位宽度
-    private int width;
-    //坐标x
-    private double x;
-    //坐标y
-    private double y;
+    private double length;
 
     public int getId() {
         return id;
@@ -37,6 +32,14 @@ public class Berth {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public ShipEnum getShipEnum() {
@@ -47,65 +50,39 @@ public class Berth {
         this.shipEnum = shipEnum;
     }
 
-    public int getTonner() {
+    public double getTonner() {
         return tonner;
     }
 
-    public void setTonner(int tonner) {
+    public void setTonner(double tonner) {
         this.tonner = tonner;
     }
 
-    public int getDepth() {
+    public double getDepth() {
         return depth;
     }
 
-    public void setDepth(int depth) {
+    public void setDepth(double depth) {
         this.depth = depth;
     }
 
-    public int getLength() {
+    public double getLength() {
         return length;
     }
 
-    public void setLength(int length) {
+    public void setLength(double length) {
         this.length = length;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public double getX() {
-        return x;
-    }
-
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public void setY(double y) {
-        this.y = y;
     }
 
     @Override
     public String toString() {
         final StringBuilder stbd = new StringBuilder("Berth{");
         stbd.append("\"id\":").append(id);
+        stbd.append(",\"name\":").append(name);
         stbd.append(",\"shipEnum\":").append(shipEnum);
         stbd.append(",\"tonner\":").append(tonner);
         stbd.append(",\"depth\":").append(depth);
         stbd.append(",\"length\":").append(length);
-        stbd.append(",\"width\":").append(width);
-        stbd.append(",\"x\":").append(x);
-        stbd.append(",\"y\":").append(y);
         stbd.append('}');
         stbd.append(super.toString());
         return stbd.toString();

@@ -7,6 +7,11 @@
     <form action="<%=root %>/harbour/berth/doAdd" method="post"
           onsubmit="return validateCallback(this , dialogAjaxDone);">
         <div class="pageFormContent" layoutH="56">
+            <div class="divider"/>
+            <p>
+                <label>名称</label>
+                <input name="name" type="text" class="required digits" maxlength="10"/>
+            </p>
             <p>
                 <label>泊位类型</label>
                 <select id="shipEnum" name="shipEnum" type="text" readonly="readonly" class="required"
@@ -38,12 +43,6 @@
             <p>
                 <label>宽度</label>
                 <input name="width" type="text" class="required digits" maxlength="10"/>
-            </p>
-            <div class="divider"/>
-            <p>
-                <label>泊位中心坐标(x,y)</label>
-                <input name="x" style="width: 30px" type="text" class="required digits" maxlength="10"/>
-                <input name="y" style="width: 30px" type="text" class="required digits" maxlength="10"/>
             </p>
         </div>
         <div class="formBar">

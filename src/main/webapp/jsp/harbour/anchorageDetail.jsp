@@ -9,7 +9,7 @@
 <div class="pageContent">
    <form action="<%=root %>/harbour/anchorage/doUpdate" method="post" onsubmit="return validateCallback(this,dialogAjaxDone);">
         <div class="pageFormContent" layoutH="56">
-            <input type="hidden" id="id" name="id" value="${id}">
+            <input type="hidden" id="id" name="id" value="${anchorage.id}">
             <p>
                 <label>锚地</label>
                 <select id="anchorageEnum" name="anchorageEnum" type="text" readonly="readonly" class="required"
@@ -17,23 +17,32 @@
                     <option value="North" <c:if test="${anchorage.anchorageEnum.typeCode == 0}">selected</c:if> >北锚地</option>
                     <option value="South" <c:if test="${anchorage.anchorageEnum.typeCode == 1}">selected</c:if> >南锚地</option>
                     <option value="Ore" <c:if test="${anchorage.anchorageEnum.typeCode == 2}">selected</c:if> >矿石锚地</option>
+                    <option value="Oil" <c:if test="${anchorage.anchorageEnum.typeCode == 3}">selected</c:if> >油轮锚地</option>
                 </select>
             </p>
             <div class="divider"/>
-            <p>
-                <label>左下角坐标(x,y):</label>
-                <input name="lx" type="text" class="required" maxlength="50" style="width:30px"
-                       value="${anchorage.lx}"/>
-                <input name="ly" type="text" class="required" maxlength="50" style="width:30px"
-                       value="${anchorage.ly}"/>
+            <p class="nowrap">
+                <label>坐标1经纬度</label>
+                <input name="point1X" type="text" maxlength="10" value="${anchorage.point1X}"/>
+                <input name="point1Y" type="text" maxlength="10" value="${anchorage.point1Y}"/>
             </p>
             <div class="divider"/>
-            <p>
-                <label>右下角坐标(x,y):</label>
-                <input name="ux" type="text" class="required" maxlength="50" style="width:30px"
-                       value="${anchorage.ux}"/>
-                <input name="uy" type="text" class="required" maxlength="50" style="width:30px"
-                       value="${anchorage.uy}"/>
+            <p class="nowrap">
+                <label>坐标2经纬度</label>
+                <input name="point2X" type="text" maxlength="10" value="${anchorage.point2X}"/>
+                <input name="point2Y" type="text" maxlength="10" value="${anchorage.point2Y}"/>
+            </p>
+            <div class="divider"/>
+            <p class="nowrap">
+                <label>坐标3经纬度</label>
+                <input name="point3X" type="text" maxlength="10" value="${anchorage.point3X}"/>
+                <input name="point3Y" type="text" maxlength="10" value="${anchorage.point3Y}"/>
+            </p>
+            <div class="divider"/>
+            <p class="nowrap">
+                <label>坐标4经纬度</label>
+                <input name="point4X" type="text" maxlength="10" value="${anchorage.point4X}"/>
+                <input name="point4Y" type="text" maxlength="10" value="${anchorage.point4Y}"/>
             </p>
         </div>
         <div class="formBar">

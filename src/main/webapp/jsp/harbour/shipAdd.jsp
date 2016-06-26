@@ -12,8 +12,8 @@
                 <select id="shipEnum" name="shipEnum" type="text" readonly="readonly" class="required"
                         maxlength="20">
                     <option value="Crude_Oil">原油</option>
-                    <option value="Coal">煤炭</option>
                     <option value="Iron_Ore">铁矿石</option>
+                    <option value="Coal">煤炭</option>
                     <option value="Container_Ship">集装箱船</option>
                     <option value="Chemical_Oil">化工油品</option>
                     <option value="Break_Bulk_Ship">散杂船</option>

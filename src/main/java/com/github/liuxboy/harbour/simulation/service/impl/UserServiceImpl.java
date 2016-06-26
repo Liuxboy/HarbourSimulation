@@ -8,9 +8,7 @@ import com.github.liuxboy.harbour.simulation.dao.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -28,11 +26,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserEntity login(UserEntity entity) {
-        Map<String, String> param = new HashMap<String, String>();
+        /*Map<String, String> param = new HashMap<String, String>();
         param.put("userName", entity.getUserName());
         //param.put("passWord", ENCODEUtil.md5(entity.getPassWord()));
         param.put("passWord", entity.getPassWord());
-        return userMapper.queryByUserNameAndPassWord(param);
+        return userMapper.queryByUserNameAndPassWord(param);*/
+        Map<String, UserEntity> hashMap = new HashMap<String, UserEntity>();
+        hashMap.put("liuchundong", new UserEntity("liuchundong", "123456"));
+        hashMap.put("lulili", new UserEntity("lulili", "123456"));
+        return hashMap.containsValue(entity) ? entity : null;
     }
 
     @Override

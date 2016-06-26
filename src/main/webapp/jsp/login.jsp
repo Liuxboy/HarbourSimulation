@@ -49,17 +49,17 @@
                 </div>
             </form>
         </div>
-        <div class="login_banner"><img src="../css/themes/default/images/login_banner.png"/></div>
+        <div class="login_banner"><img src="../css/themes/default/images/login_banner.jpg"/></div>
         <div class="login_main">
             <ul class="helpList">
                 <li><a href="#">忘记密码怎么办？</a></li>
                 <li><a href="#">为什么登录失败？</a></li>
             </ul>
-            <div class="login_inner">
+            <%--<div class="login_inner">
                 <p>XXXXXX</p>
                 <p>XXXXXX</p>
                 <p>XXXXXX</p>
-            </div>
+            </div>--%>
         </div>
     </div>
     <div id="login_footer">

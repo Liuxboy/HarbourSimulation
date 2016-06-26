@@ -20,13 +20,27 @@
             </p>
             <div class="divider"/>
             <p>
+                <label>管制次数</label>
+                <input name="trafficDuration" type="text" class="required digits" maxlength="10"/>
+            </p>
+            <div class="divider"/>
+            <p>
                 <label>管制时长</label>
                 <input name="trafficDuration" type="text" class="required digits" maxlength="10"/>
-                <select id="timeStepUnit" name="timeUnit" type="text" readonly="readonly" class="required"
+                <select id="timeEnum" name="timeEnum" type="text" readonly="readonly" class="required"
                         maxlength="20">
-                    <option value="1">秒</option>
-                    <option value="60">分</option>
-                    <option value="3600">时</option>
+                    <option value="SEC">秒</option>
+                    <option value="MIN">分</option>
+                    <option value="HOR">时</option>
+                </select>
+            </p>
+            <div class="divider"/>
+            <p>
+                <label>是否生效</label>
+                <select id="status" name="status" type="text" readonly="readonly" class="required"
+                        maxlength="20">
+                    <option value=0>无效</option>
+                    <option value=1>生效</option>
                 </select>
             </p>
         </div>

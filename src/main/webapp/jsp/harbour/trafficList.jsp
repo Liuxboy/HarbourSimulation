@@ -13,8 +13,8 @@
             <li>
                 <a class="add" href="<%=root %>/harbour/traffic/toAdd"
                    target="dialog" mask="true" rel="time_add" resizable="false"
-                   maxable="false" minable="false" title="添加仿真时间" height="400"
-                   width="600"> <span>添加仿真时间</span>
+                   maxable="false" minable="false" title="添加交通管制" height="400"
+                   width="600"> <span>添加交通管制</span>
                 </a>
             </li>
         </ul>
@@ -24,7 +24,9 @@
         <tr>
             <th>序号</th>
             <th>管制类型</th>
+            <th>管制次数</th>
             <th>管制时长</th>
+            <th>是否生效</th>
             <th>操作</th>
         </tr>
         </thead>
@@ -33,7 +35,12 @@
             <tr>
                 <td>${status.index + 1}</td>
                 <td>${item.trafficEnum.desc}</td>
+                <td>${item.trafficTimes}</td>
                 <td>${item.trafficDuration}</td>
+                <td>
+                    <c:if test="${item.status == 0}">无效</c:if>
+                    <c:if test="${item.status == 1}">生效</c:if>
+                </td>
                 <td>
                     <a href="<%=root %>/harbour/traffic/showDetail/${item.id}"
                        target="dialog" mask="true" rel="traffic_update" title="查看详情"

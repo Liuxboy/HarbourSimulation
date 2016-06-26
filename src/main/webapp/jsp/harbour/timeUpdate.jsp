@@ -16,12 +16,12 @@
                 <label>仿真时间总长</label>
                 <input name="simulationTimeOut" type="text" class="required digits" maxlength="10"
                     value="${simulationTime.simulationTimeOut}"/>
-                <select id="timeOutUnit" name="timeUnit" type="text" readonly="readonly" class="required"
+                <select id="timeOutUnit" name="timeOutUnit" type="text" readonly="readonly" class="required"
                         maxlength="20">
-                    <option value="YER" <c:if test="${simulationTime.timeOutUnit.time == 31536000}">selected</c:if> >年</option>
-                    <option value="MON" <c:if test="${simulationTime.timeOutUnit.time == 2592000}">selected</c:if> >月</option>
-                    <option value="WEK" <c:if test="${simulationTime.timeOutUnit.time == 604800}">selected</c:if> >周</option>
-                    <option value="DAY" <c:if test="${simulationTime.timeOutUnit.time == 86400}">selected</c:if> >日</option>
+                    <option value="YER" <c:if test="${simulationTime.timeOutUnit.unit eq '年'}">selected</c:if> >年</option>
+                    <option value="MON" <c:if test="${simulationTime.timeOutUnit.unit eq '月'}">selected</c:if> >月</option>
+                    <option value="WEK" <c:if test="${simulationTime.timeOutUnit.unit eq '周'}">selected</c:if> >周</option>
+                    <option value="DAY" <c:if test="${simulationTime.timeOutUnit.unit eq '日'}">selected</c:if> >日</option>
                 </select>
             </p>
             <div class="divider"/>
@@ -29,11 +29,11 @@
                 <label>仿真时间步长</label>
                 <input name="simulationTimeStep" type="text" class="required digits" maxlength="10"
                        value="${simulationTime.simulationTimeStep}"/>
-                <select id="timeStepUnit" name="timeUnit" type="text" readonly="readonly" class="required"
+                <select id="timeStepUnit" name="timeStepUnit" type="text" readonly="readonly" class="required"
                         maxlength="20">
-                    <option value="HOR" <c:if test="${simulationTime.timeOutUnit.time == 3600}">selected</c:if> >时</option>
-                    <option value="MIN" <c:if test="${simulationTime.timeOutUnit.time == 60}">selected</c:if> >分</option>
-                    <option value="SEC" <c:if test="${simulationTime.timeOutUnit.time == 1}">selected</c:if> >秒</option>
+                    <option value="HOR" <c:if test="${simulationTime.timeOutUnit.unit eq '时'}">selected</c:if> >时</option>
+                    <option value="MIN" <c:if test="${simulationTime.timeOutUnit.unit eq '分'}">selected</c:if> >分</option>
+                    <option value="SEC" <c:if test="${simulationTime.timeOutUnit.unit eq '秒'}">selected</c:if> >秒</option>
                 </select>
             </p>
         </div>

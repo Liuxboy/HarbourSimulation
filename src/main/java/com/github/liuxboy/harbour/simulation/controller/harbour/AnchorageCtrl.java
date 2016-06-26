@@ -1,8 +1,8 @@
 package com.github.liuxboy.harbour.simulation.controller.harbour;
 
-import com.alibaba.fastjson.JSONObject;
 import com.github.liuxboy.harbour.simulation.common.util.AjaxResultUtil;
 import com.github.liuxboy.harbour.simulation.domain.biz.*;
+import com.github.liuxboy.harbour.simulation.service.InitialService;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
@@ -11,9 +11,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * <p>Title: AnchorageCtrl</p>
@@ -32,10 +30,17 @@ public class AnchorageCtrl {
     HttpServletRequest httpServletRequest;
     @Resource
     HttpSession httpSession;
+    @Resource
+    InitialService initialService;
 
     @RequestMapping(value = "/toList")
     public String toList() {
-        httpServletRequest.setAttribute("anchorageList", httpSession.getAttribute("anchorageList"));
+        Object obj = httpSession.getAttribute("anchorageList");
+        List<Anchorage> anchorageList = obj != null ? (List) obj : new ArrayList<Anchorage>();
+        if(CollectionUtils.isEmpty(anchorageList)) {
+            anchorageList = initialService.getAnchorageList();
+        }
+        httpSession.setAttribute("anchorageList", anchorageList);
         return "/harbour/anchorageList";
     }
 
@@ -47,11 +52,11 @@ public class AnchorageCtrl {
     @RequestMapping(value = "/doAdd")
     @ResponseBody
     public String doAdd(@ModelAttribute("anchorage") Anchorage anchorage) {
-        Object obj = httpSession.getAttribute("anchorageList");
+        Object obj = httpServletRequest.getAttribute("anchorageList");
         List<Anchorage> anchorageList = obj != null ? (List) obj : new ArrayList<Anchorage>();
         anchorage.setId(anchorageList.size());
         anchorageList.add(anchorage);
-        httpSession.setAttribute("anchorageList", anchorageList);
+        httpServletRequest.setAttribute("anchorageList", anchorageList);
         return AjaxResultUtil.success();
     }
 
@@ -63,24 +68,24 @@ public class AnchorageCtrl {
         if (id != null && !CollectionUtils.isEmpty(anchorageList)) {
             anchorage = anchorageList.get(id);
         }
-        httpServletRequest.setAttribute("anchorage", anchorage);
+        httpSession.setAttribute("anchorage", anchorage);
         return "/harbour/anchorageDetail";
     }
 
     @RequestMapping(value = "/doUpdate")
     @ResponseBody
     public String doUpdate(@ModelAttribute("anchorage") Anchorage anchorage) {
-        Object obj = httpSession.getAttribute("anchorageList");
+        Object obj = httpServletRequest.getAttribute("anchorageList");
         List<Anchorage> anchorageList = obj != null ? (List) obj : new ArrayList<Anchorage>();
         anchorageList.set(anchorage.getId(), anchorage);
-        httpSession.setAttribute("anchorageList", anchorageList);
+        httpServletRequest.setAttribute("anchorageList", anchorageList);
         return AjaxResultUtil.success();
     }
 
     @RequestMapping(value = "/delete/{id}")
     @ResponseBody
     public String delete(@PathVariable("id") int id) {
-        Object obj = httpSession.getAttribute("anchorageList");
+        Object obj = httpServletRequest.getAttribute("anchorageList");
         List<Anchorage> anchorageList = obj != null ? (List) obj : new ArrayList<Anchorage>();
         if (!CollectionUtils.isEmpty(anchorageList)) {
             anchorageList.remove(id);

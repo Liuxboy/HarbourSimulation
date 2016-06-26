@@ -23,9 +23,11 @@
         <thead>
         <tr>
             <th>序号</th>
-            <th>锚地类型</th>
-            <th>左下角坐标</th>
-            <th>右上角坐标</th>
+            <th>锚地名称</th>
+            <th>坐标1经纬度</th>
+            <th>坐标2经纬度</th>
+            <th>坐标3经纬度</th>
+            <th>坐标4经纬度</th>
             <th>操作</th>
         </tr>
         </thead>
@@ -34,8 +36,10 @@
             <tr>
                 <td>${status.index + 1}</td>
                 <td>${item.anchorageEnum.name}</td>
-                <td>(${item.lx},${item.ly})</td>
-                <td>(${item.uy},${item.uy})</td>
+                <td>(${item.point1X},${item.point1Y})</td>
+                <td>(${item.point2X},${item.point2Y})</td>
+                <td>(${item.point3X},${item.point3Y})</td>
+                <td>(${item.point4X},${item.point4Y})</td>
                 <td>
                     <a href="<%=root %>/harbour/anchorage/showDetail/${item.id}"
                        target="dialog" mask="true" rel="showAnchorage"

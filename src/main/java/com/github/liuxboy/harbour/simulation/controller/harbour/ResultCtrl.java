@@ -2,10 +2,12 @@ package com.github.liuxboy.harbour.simulation.controller.harbour;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.concurrent.TimeUnit;
 
 /**
  * <p>Title: ResultCtrl</p>
@@ -26,8 +28,15 @@ public class ResultCtrl {
     HttpSession httpSession;
 
     @RequestMapping(value = "/toList")
-    public String toList() {
+    public String toList(@RequestParam(value = "flag", required = false)String flag) {
         httpServletRequest.setAttribute("result", httpSession.getAttribute("channelList"));
+        if ("start".equals(flag)) {
+            try {
+                Thread.sleep(5000L);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
         return "/harbour/result";
     }
 }

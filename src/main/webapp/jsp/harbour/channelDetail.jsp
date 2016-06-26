@@ -13,6 +13,12 @@
             <input name="id" type="hidden" class="required" maxlength="50"
                    value="${channel.id}"/>
             <p>
+                <label>航道名:</label>
+                <input name="name" type="text" class="required" maxlength="20"
+                       value="${channel.name}"/>
+            </p>
+            <div class="divider"/>
+            <p>
                 <label>宽度:</label>
                 <input name="width" type="text" class="required" maxlength="20"
                        value="${channel.width}"/>
@@ -45,21 +51,6 @@
                 </select>
             </p>
             <div class="divider"/>
-            <p>
-                <label>左下角坐标(x,y)</label>
-                <input name="lx" style="width: 30px" type="text" class="required" maxlength="10"
-                       value="${channel.lx}"/>
-                <input name="ly" style="width: 30px" type="text" class="required" maxlength="10"
-                       value="${channel.ly}"/>
-            </p>
-            <div class="divider"/>
-            <p>
-                <label>右上角坐标(x,y)</label>
-                <input name="ux" style="width: 30px" type="text" class="required" maxlength="10"
-                       value="${channel.ux}"/>
-                <input name="uy" style="width: 30px" type="text" class="required" maxlength="10"
-                       value="${channel.uy}"/>
-            </p>
         </div>
         <div class="formBar">
             <ul>
