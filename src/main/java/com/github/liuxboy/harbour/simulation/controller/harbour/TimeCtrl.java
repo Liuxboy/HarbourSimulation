@@ -55,6 +55,7 @@ public class TimeCtrl {
     public String doAdd(@ModelAttribute("simulationTime") SimulationTime simulationTime) {
         Object obj = httpSession.getAttribute("timeList");
         List<SimulationTime> timeList = obj != null ? (List) obj : new ArrayList<SimulationTime>();
+        simulationTime.setId(timeList.size());
         timeList.add(simulationTime);
         httpSession.setAttribute("timeList", timeList);
         return AjaxResultUtil.success();
@@ -90,7 +91,7 @@ public class TimeCtrl {
         if (!CollectionUtils.isEmpty(timeList)) {
             timeList.remove(id);
         }
-        httpServletRequest.setAttribute("timeList", timeList);
+        httpSession.setAttribute("timeList", timeList);
         return AjaxResultUtil.success();
     }
 }

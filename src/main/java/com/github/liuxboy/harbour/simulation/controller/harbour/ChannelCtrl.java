@@ -3,6 +3,7 @@ package com.github.liuxboy.harbour.simulation.controller.harbour;
 import com.github.liuxboy.harbour.simulation.common.util.AjaxResultUtil;
 import com.github.liuxboy.harbour.simulation.common.util.Logger;
 import com.github.liuxboy.harbour.simulation.common.util.LoggerFactory;
+import com.github.liuxboy.harbour.simulation.domain.biz.Anchorage;
 import com.github.liuxboy.harbour.simulation.domain.biz.Channel;
 import com.github.liuxboy.harbour.simulation.service.InitialService;
 import org.springframework.stereotype.Controller;
@@ -85,6 +86,18 @@ public class ChannelCtrl {
         List<Channel> channelList = obj != null ? (List) obj : new ArrayList<Channel>();
         channelList.set(channel.getId(), channel);
         httpSession.setAttribute("channelList", channelList);
+        return AjaxResultUtil.success();
+    }
+
+    @RequestMapping(value = "/delete/{id}")
+    @ResponseBody
+    public String delete(@PathVariable("id") int id) {
+        Object obj = httpSession.getAttribute("channelList");
+        List<Channel> channelList = obj != null ? (List) obj : new ArrayList<Channel>();
+        if (!CollectionUtils.isEmpty(channelList)) {
+            channelList.remove(id);
+        }
+        httpSession.setAttribute("anchorageList", channelList);
         return AjaxResultUtil.success();
     }
 }

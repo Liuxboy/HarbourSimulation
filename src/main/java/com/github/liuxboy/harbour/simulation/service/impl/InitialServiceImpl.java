@@ -436,9 +436,9 @@ public class InitialServiceImpl implements InitialService {
         List<SimulationTime> timeList = new ArrayList<SimulationTime>();
         SimulationTime simulationTime = new SimulationTime();
         simulationTime.setId(0);
-        simulationTime.setSimulationTimeOut(1);
+        simulationTime.setTimeOut(1);
         simulationTime.setTimeOutUnit(TimeEnum.YER);
-        simulationTime.setSimulationTimeStep(1);
+        simulationTime.setTimeStep(1);
         simulationTime.setTimeStepUnit(TimeEnum.SEC);
         timeList.add(simulationTime);
         return timeList;

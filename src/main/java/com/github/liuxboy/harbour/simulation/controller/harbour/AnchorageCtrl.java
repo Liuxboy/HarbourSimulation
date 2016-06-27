@@ -52,11 +52,11 @@ public class AnchorageCtrl {
     @RequestMapping(value = "/doAdd")
     @ResponseBody
     public String doAdd(@ModelAttribute("anchorage") Anchorage anchorage) {
-        Object obj = httpServletRequest.getAttribute("anchorageList");
+        Object obj = httpSession.getAttribute("anchorageList");
         List<Anchorage> anchorageList = obj != null ? (List) obj : new ArrayList<Anchorage>();
         anchorage.setId(anchorageList.size());
         anchorageList.add(anchorage);
-        httpServletRequest.setAttribute("anchorageList", anchorageList);
+        httpSession.setAttribute("anchorageList", anchorageList);
         return AjaxResultUtil.success();
     }
 
@@ -68,29 +68,29 @@ public class AnchorageCtrl {
         if (id != null && !CollectionUtils.isEmpty(anchorageList)) {
             anchorage = anchorageList.get(id);
         }
-        httpSession.setAttribute("anchorage", anchorage);
+        httpServletRequest.setAttribute("anchorage", anchorage);
         return "/harbour/anchorageDetail";
     }
 
     @RequestMapping(value = "/doUpdate")
     @ResponseBody
     public String doUpdate(@ModelAttribute("anchorage") Anchorage anchorage) {
-        Object obj = httpServletRequest.getAttribute("anchorageList");
+        Object obj = httpSession.getAttribute("anchorageList");
         List<Anchorage> anchorageList = obj != null ? (List) obj : new ArrayList<Anchorage>();
         anchorageList.set(anchorage.getId(), anchorage);
-        httpServletRequest.setAttribute("anchorageList", anchorageList);
+        httpSession.setAttribute("anchorageList", anchorageList);
         return AjaxResultUtil.success();
     }
 
     @RequestMapping(value = "/delete/{id}")
     @ResponseBody
     public String delete(@PathVariable("id") int id) {
-        Object obj = httpServletRequest.getAttribute("anchorageList");
+        Object obj = httpSession.getAttribute("anchorageList");
         List<Anchorage> anchorageList = obj != null ? (List) obj : new ArrayList<Anchorage>();
         if (!CollectionUtils.isEmpty(anchorageList)) {
             anchorageList.remove(id);
         }
-        httpServletRequest.setAttribute("anchorageList", anchorageList);
+        httpSession.setAttribute("anchorageList", anchorageList);
         return AjaxResultUtil.success();
     }
 }

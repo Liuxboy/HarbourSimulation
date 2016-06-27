@@ -19,7 +19,7 @@ import java.util.List;
  * <p>Copyright: Copyright(c)2016</p>
  * <p>Company: JD.JR </p>
  * <p>Time: 2016/6/17 14:52</p>
- * <p>Description: 描述 </p>
+ * <p>Description: 仿真描述 </p>
  *
  * @author wyliuchundong
  * @version 1.0

@@ -45,7 +45,7 @@
                     <a href="<%=root %>/harbour/traffic/showDetail/${item.id}"
                        target="dialog" mask="true" rel="traffic_update" title="查看详情"
                        height="500" width="600" class="btnEdit">查看详情</a>
-                    <a href="<%=root %>/harbour/traffic/delete?id=${item.id}" class="btnDel" title="确定要删除么"
+                    <a href="<%=root %>/harbour/traffic/delete/${item.id}" class="btnDel" title="确定要删除么"
                        target="ajaxTodo">删除</a>
                 </td>
             </tr>

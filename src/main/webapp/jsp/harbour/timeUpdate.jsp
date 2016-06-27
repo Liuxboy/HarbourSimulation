@@ -11,11 +11,11 @@
           onsubmit="return validateCallback(this,dialogAjaxDone);">
         <div class="pageFormContent" layoutH="56">
             <input name="id" type="hidden" class="required" maxlength="50" style="width:180px"
-                   value="${time.id}"/>
+                   value="${simulationTime.id}"/>
             <p>
                 <label>仿真时间总长</label>
-                <input name="simulationTimeOut" type="text" class="required digits" maxlength="10"
-                    value="${simulationTime.simulationTimeOut}"/>
+                <input name="timeOut" type="text" class="required" maxlength="10"
+                    value="${simulationTime.timeOut}"/>
                 <select id="timeOutUnit" name="timeOutUnit" type="text" readonly="readonly" class="required"
                         maxlength="20">
                     <option value="YER" <c:if test="${simulationTime.timeOutUnit.unit eq '年'}">selected</c:if> >年</option>
@@ -27,8 +27,8 @@
             <div class="divider"/>
             <p>
                 <label>仿真时间步长</label>
-                <input name="simulationTimeStep" type="text" class="required digits" maxlength="10"
-                       value="${simulationTime.simulationTimeStep}"/>
+                <input name="timeStep" type="text" class="required" maxlength="10"
+                       value="${simulationTime.timeStep}"/>
                 <select id="timeStepUnit" name="timeStepUnit" type="text" readonly="readonly" class="required"
                         maxlength="20">
                     <option value="HOR" <c:if test="${simulationTime.timeStepUnit.unit eq '时'}">selected</c:if> >时</option>

@@ -57,6 +57,7 @@ public class TrafficCtrl {
     public String doAdd(@ModelAttribute("traffic") Traffic traffic) {
         Object obj = httpSession.getAttribute("trafficList");
         List<Traffic> trafficList = obj != null ? (List) obj : new ArrayList<Traffic>();
+        traffic.setId(trafficList.size());
         trafficList.add(traffic);
         httpSession.setAttribute("trafficList", trafficList);
         return AjaxResultUtil.success();

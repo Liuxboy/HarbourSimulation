@@ -99,7 +99,7 @@ public class BerthCtrl {
         if (!CollectionUtils.isEmpty(allBerthList)) {
             allBerthList.remove(id);
         }
-        httpServletRequest.setAttribute("allBerthList", allBerthList);
+        httpSession.setAttribute("allBerthList", allBerthList);
         return AjaxResultUtil.success();
     }
 

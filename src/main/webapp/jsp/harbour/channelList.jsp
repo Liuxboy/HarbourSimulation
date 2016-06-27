@@ -45,7 +45,7 @@
                     <a href="<%=root %>/harbour/channel/showDetail/${item.id}"
                        target="dialog" mask="true" rel="channel_show"
                        title="查看详情" height="400" width="500" class="btnEdit">查看详情</a>
-                    <a href="<%=root %>/harbour/channel/delete?id=${item.id}"
+                    <a href="<%=root %>/harbour/channel/delete/${item.id}"
                        class="btnDel" title="确定要删除么"
                        target="ajaxTodo">删除</a>
                 </td>

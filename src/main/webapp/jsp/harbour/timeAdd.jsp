@@ -9,24 +9,24 @@
         <div class="pageFormContent" layoutH="56">
             <p>
                 <label>仿真时间总长</label>
-                <input name="simulationTimeOut" type="text" class="required digits" maxlength="10"/>
-                <select id="timeOutUnit" name="timeUnit" type="text" readonly="readonly" class="required"
+                <input name="timeOut" type="text" class="required" maxlength="10"/>
+                <select id="timeOutUnit" name="timeOutUnit" type="text" readonly="readonly" class="required"
                         maxlength="20">
-                    <option value="86400">天</option>
-                    <option value="604800">周</option>
-                    <option value="2592000">月</option>
-                    <option value="31536000">年</option>
+                    <option value="DAY">天</option>
+                    <option value="WEK">周</option>
+                    <option value="MON">月</option>
+                    <option value="YER">年</option>
                 </select>
             </p>
             <div class="divider"/>
             <p>
                 <label>仿真时间步长</label>
-                <input name="simulationTimeStep" type="text" class="required digits" maxlength="10"/>
-                <select id="timeStepUnit" name="timeUnit" type="text" readonly="readonly" class="required"
+                <input name="timeStep" type="text" class="required" maxlength="10"/>
+                <select id="timeStepUnit" name="timeStepUnit" type="text" readonly="readonly" class="required"
                         maxlength="20">
-                    <option value="1">秒</option>
-                    <option value="60">分</option>
-                    <option value="3600">时</option>
+                    <option value="SEC">秒</option>
+                    <option value="MIN">分</option>
+                    <option value="HOR">时</option>
                 </select>
             </p>
         </div>
