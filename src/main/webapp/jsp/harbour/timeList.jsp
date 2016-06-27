@@ -25,16 +25,21 @@
             <th>序号</th>
             <th>时间总长</th>
             <th>时间步长</th>
+            <th>操作</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${timeList}" var="item" varStatus="status">
             <tr>
                 <td>${status.index + 1}</td>
-                <td>${item.simulationTimeOut}</td>
-                <td>${item.simulationTimeStep}</td>
+                <td>${item.simulationTimeOut}${item.timeOutUnit.unit}</td>
+                <td>${item.simulationTimeStep}${item.timeStepUnit.unit}</td>
                 <td>
-                    <a href="<%=root %>/harbour/time/delete?id=${item.id}" class="btnDel" title="确定要删除么"
+                    <a href="<%=root %>/harbour/time/showDetail/${item.id}"
+                       target="dialog" mask="true" rel="traffic_update" title="查看详情"
+                       height="500" width="600" class="btnEdit">查看详情</a>
+                    <a href="<%=root %>/harbour/time/delete?id=${item.id}"
+                       class="btnDel" title="确定要删除么"
                        target="ajaxTodo">删除</a>
                 </td>
             </tr>

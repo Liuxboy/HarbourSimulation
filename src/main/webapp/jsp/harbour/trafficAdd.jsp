@@ -32,13 +32,16 @@
                     <option value="SEC">秒</option>
                     <option value="MIN">分</option>
                     <option value="HOR">时</option>
+                    <option value="DAY">天</option>
+                    <option value="WEK">周</option>
+                    <option value="MON">月</option>
+                    <option value="YER">年</option>
                 </select>
             </p>
             <div class="divider"/>
             <p>
                 <label>是否生效</label>
-                <select id="status" name="status" type="text" readonly="readonly" class="required"
-                        maxlength="20">
+                <select id="status" name="status" type="text" class="required" maxlength="20">
                     <option value=0>无效</option>
                     <option value=1>生效</option>
                 </select>

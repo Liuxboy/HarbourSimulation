@@ -31,9 +31,9 @@
                        value="${simulationTime.simulationTimeStep}"/>
                 <select id="timeStepUnit" name="timeStepUnit" type="text" readonly="readonly" class="required"
                         maxlength="20">
-                    <option value="HOR" <c:if test="${simulationTime.timeOutUnit.unit eq '时'}">selected</c:if> >时</option>
-                    <option value="MIN" <c:if test="${simulationTime.timeOutUnit.unit eq '分'}">selected</c:if> >分</option>
-                    <option value="SEC" <c:if test="${simulationTime.timeOutUnit.unit eq '秒'}">selected</c:if> >秒</option>
+                    <option value="HOR" <c:if test="${simulationTime.timeStepUnit.unit eq '时'}">selected</c:if> >时</option>
+                    <option value="MIN" <c:if test="${simulationTime.timeStepUnit.unit eq '分'}">selected</c:if> >分</option>
+                    <option value="SEC" <c:if test="${simulationTime.timeStepUnit.unit eq '秒'}">selected</c:if> >秒</option>
                 </select>
             </p>
         </div>

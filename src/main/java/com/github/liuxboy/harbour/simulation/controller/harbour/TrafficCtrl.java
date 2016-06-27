@@ -2,8 +2,10 @@ package com.github.liuxboy.harbour.simulation.controller.harbour;
 
 import com.github.liuxboy.harbour.simulation.common.constant.TrafficEnum;
 import com.github.liuxboy.harbour.simulation.common.util.AjaxResultUtil;
+import com.github.liuxboy.harbour.simulation.domain.biz.Channel;
 import com.github.liuxboy.harbour.simulation.domain.biz.Ship;
 import com.github.liuxboy.harbour.simulation.domain.biz.Traffic;
+import com.github.liuxboy.harbour.simulation.service.InitialService;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
@@ -31,10 +33,17 @@ public class TrafficCtrl {
     HttpServletRequest httpServletRequest;
     @Resource
     HttpSession httpSession;
+    @Resource
+    InitialService initialService;
 
     @RequestMapping(value = "/toList")
     public String toList() {
-        httpServletRequest.setAttribute("trafficList", httpSession.getAttribute("trafficList"));
+        Object obj = httpSession.getAttribute("trafficList");
+        List<Traffic> trafficList = obj != null ? (List) obj : new ArrayList<Traffic>();
+        if (CollectionUtils.isEmpty(trafficList)) {
+            trafficList = initialService.getTrafficList();
+        }
+        httpSession.setAttribute("trafficList", trafficList);
         return "/harbour/trafficList";
     }
 

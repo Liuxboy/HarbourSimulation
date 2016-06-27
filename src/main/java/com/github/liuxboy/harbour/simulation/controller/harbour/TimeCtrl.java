@@ -3,6 +3,7 @@ package com.github.liuxboy.harbour.simulation.controller.harbour;
 import com.github.liuxboy.harbour.simulation.common.util.AjaxResultUtil;
 import com.github.liuxboy.harbour.simulation.domain.biz.SimulationTime;
 import com.github.liuxboy.harbour.simulation.domain.biz.Traffic;
+import com.github.liuxboy.harbour.simulation.service.InitialService;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
@@ -30,10 +31,17 @@ public class TimeCtrl {
     HttpServletRequest httpServletRequest;
     @Resource
     HttpSession httpSession;
+    @Resource
+    InitialService initialService;
 
     @RequestMapping(value = "/toList")
     public String toList() {
-        httpServletRequest.setAttribute("timeList", httpSession.getAttribute("timeList"));
+        Object obj = httpSession.getAttribute("timeList");
+        List<SimulationTime> timeList = obj != null ? (List) obj : new ArrayList<SimulationTime>();
+        if (CollectionUtils.isEmpty(timeList)) {
+            timeList = initialService.getTimeList();
+        }
+        httpSession.setAttribute("timeList", timeList);
         return "/harbour/timeList";
     }
 

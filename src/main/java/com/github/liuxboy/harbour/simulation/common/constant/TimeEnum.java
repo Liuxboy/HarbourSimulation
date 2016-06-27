@@ -11,7 +11,7 @@ package com.github.liuxboy.harbour.simulation.common.constant;
  * @version 1.0
  */
 public enum TimeEnum {
-    YEA(31536000, "年"),
+    YER(31536000, "年"),
     MON(2592000, "月"),
     WEK(604800, "周"),
     DAY(86400, "天"),

@@ -39,13 +39,17 @@ public class BerthCtrl {
 
     @RequestMapping(value = "/toList")
     public String toList(@ModelAttribute("pageParam") PageParam pageParam) {
-        List<Berth> initialServiceBerthList = initialService.getBerthList();
-        pageParam.setTotalCount(initialServiceBerthList.size());
+        List<Berth> allBerthList = getAllBerthList();
+        if (CollectionUtils.isEmpty(allBerthList)) {
+            allBerthList = initialService.getBerthList();
+            initialList(allBerthList);
+        }
+        pageParam.setTotalCount(allBerthList.size());
         int beginIndex = (pageParam.getPageNum() - 1) * pageParam.getPageSize();
         int endIndex = pageParam.getPageNum() * pageParam.getPageSize();
         endIndex = endIndex <= pageParam.getTotalCount() ? endIndex : pageParam.getTotalCount();
         httpSession.setAttribute("pageParam", pageParam);
-        httpSession.setAttribute("berthList", initialServiceBerthList.subList(beginIndex, endIndex - 1));
+        httpSession.setAttribute("berthList", allBerthList.subList(beginIndex, endIndex));
         return "/harbour/berthList";
     }
 
@@ -56,21 +60,22 @@ public class BerthCtrl {
 
     @RequestMapping(value = "/doAdd")
     @ResponseBody
-    public String doAdd(@ModelAttribute("berth") Berth berth) {
-        Object obj = httpSession.getAttribute("berthList");
-        List<Berth> berthList = obj != null ? (List) obj : new ArrayList<Berth>();
-        berth.setId(berthList.size());
-        berthList.add(berth);
-        httpSession.setAttribute("berthList", berthList);
+    public String doAdd(@ModelAttribute("berth") Berth berth,
+                        @ModelAttribute("pageParam") PageParam pageParam) {
+        List<Berth> allBerthList = getAllBerthList();
+        berth.setId(allBerthList.size());
+        allBerthList.add(berth);
+        httpSession.setAttribute("pageParam", pageParam);
+        httpSession.setAttribute("allBerthList", allBerthList);
         return AjaxResultUtil.success();
     }
 
     @RequestMapping(value = "/showDetail/{id}")
     public String toAdd(@PathVariable("id") int id) {
-        List<Berth> berthList = initialService.getBerthList();
+        List<Berth> allBerthList = getAllBerthList();
         Berth berth = new Berth();
-        if (!CollectionUtils.isEmpty(berthList)) {
-            berth = berthList.get(id);
+        if (!CollectionUtils.isEmpty(allBerthList)) {
+            berth = allBerthList.get(id);
         }
         httpServletRequest.setAttribute("berth", berth);
         return "/harbour/berthUpdate";
@@ -78,21 +83,34 @@ public class BerthCtrl {
 
     @RequestMapping(value = "/doUpdate")
     @ResponseBody
-    public String doUpdate(@ModelAttribute("berth") Berth berth) {
-        List<Berth> berthList = initialService.getBerthList();
-        berthList.set(berth.getId(), berth);
-        httpSession.setAttribute("berthList", berthList);
+    public String doUpdate(@ModelAttribute("berth") Berth berth,
+                           @ModelAttribute("pageParam") PageParam pageParam) {
+        List<Berth> allBerthList = getAllBerthList();
+        allBerthList.set(berth.getId(), berth);
+        httpSession.setAttribute("allBerthList", allBerthList);
+        httpSession.setAttribute("pageParam", pageParam);
         return AjaxResultUtil.success();
     }
 
     @RequestMapping(value = "/delete/{id}")
     @ResponseBody
     public String delete(@PathVariable("id") int id) {
-        List<Berth> berthList = initialService.getBerthList();
-        if (!CollectionUtils.isEmpty(berthList)) {
-            berthList.remove(id);
+        List<Berth> allBerthList = getAllBerthList();
+        if (!CollectionUtils.isEmpty(allBerthList)) {
+            allBerthList.remove(id);
         }
-        httpServletRequest.setAttribute("berthList", berthList);
+        httpServletRequest.setAttribute("allBerthList", allBerthList);
         return AjaxResultUtil.success();
+    }
+
+    private void initialList(List<Berth> allBerthList) {
+        if (!CollectionUtils.isEmpty(allBerthList)) {
+            httpSession.setAttribute("allBerthList", allBerthList);
+        }
+    }
+
+    private List<Berth> getAllBerthList() {
+        Object obj = httpSession.getAttribute("allBerthList");
+        return obj != null ? (List) obj : new ArrayList<Berth>();
     }
 }

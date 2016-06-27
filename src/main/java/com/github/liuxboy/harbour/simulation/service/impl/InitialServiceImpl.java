@@ -1,12 +1,9 @@
 package com.github.liuxboy.harbour.simulation.service.impl;
 
-import com.github.liuxboy.harbour.simulation.common.constant.AnchorageEnum;
-import com.github.liuxboy.harbour.simulation.common.constant.PassDirectEnum;
-import com.github.liuxboy.harbour.simulation.common.constant.ShipEnum;
-import com.github.liuxboy.harbour.simulation.domain.biz.Anchorage;
-import com.github.liuxboy.harbour.simulation.domain.biz.Berth;
-import com.github.liuxboy.harbour.simulation.domain.biz.Channel;
+import com.github.liuxboy.harbour.simulation.common.constant.*;
+import com.github.liuxboy.harbour.simulation.domain.biz.*;
 import com.github.liuxboy.harbour.simulation.service.InitialService;
+import org.omg.CORBA.TIMEOUT;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -376,5 +373,74 @@ public class InitialServiceImpl implements InitialService {
         }
         berthList.add(berth);
         return berthList;
+    }
+
+    @Override
+    public List<Traffic> getTrafficList() {
+        List<Traffic> trafficList = new ArrayList<Traffic>();
+        Traffic traffic = new Traffic();
+        {
+            traffic.setId(0);
+            traffic.setStatus(0);
+            traffic.setTrafficEnum(TrafficEnum.CS_PROHIBIT_ANCHOR);
+            traffic.setTrafficDuration(1);
+            traffic.setTrafficTimes(1);
+            traffic.setTimeEnum(TimeEnum.DAY);
+        }
+        trafficList.add(traffic);
+        traffic = new Traffic();
+        {
+            traffic.setId(1);
+            traffic.setStatus(0);
+            traffic.setTrafficEnum(TrafficEnum.BBS_PROHIBIT_ANCHOR);
+            traffic.setTrafficDuration(1);
+            traffic.setTrafficTimes(1);
+            traffic.setTimeEnum(TimeEnum.DAY);
+        }
+        trafficList.add(traffic);
+        traffic = new Traffic();
+        {
+            traffic.setId(2);
+            traffic.setStatus(0);
+            traffic.setTrafficEnum(TrafficEnum.DANGER_PROHIBIT_ANCHOR);
+            traffic.setTrafficDuration(1);
+            traffic.setTrafficTimes(1);
+            traffic.setTimeEnum(TimeEnum.DAY);
+        }
+        trafficList.add(traffic);
+        traffic = new Traffic();
+        {
+            traffic.setId(3);
+            traffic.setStatus(0);
+            traffic.setTrafficEnum(TrafficEnum.PROHIBIT_BOTH_TRAVEL);
+            traffic.setTrafficDuration(1);
+            traffic.setTrafficTimes(1);
+            traffic.setTimeEnum(TimeEnum.DAY);
+        }
+        trafficList.add(traffic);
+        traffic = new Traffic();
+        {
+            traffic.setId(4);
+            traffic.setStatus(0);
+            traffic.setTrafficEnum(TrafficEnum.PROHIBIT_CONTRARY_TRAVEL);
+            traffic.setTrafficDuration(1);
+            traffic.setTrafficTimes(1);
+            traffic.setTimeEnum(TimeEnum.DAY);
+        }
+        trafficList.add(traffic);
+        return trafficList;
+    }
+
+    @Override
+    public List<SimulationTime> getTimeList() {
+        List<SimulationTime> timeList = new ArrayList<SimulationTime>();
+        SimulationTime simulationTime = new SimulationTime();
+        simulationTime.setId(0);
+        simulationTime.setSimulationTimeOut(1);
+        simulationTime.setTimeOutUnit(TimeEnum.YER);
+        simulationTime.setSimulationTimeStep(1);
+        simulationTime.setTimeStepUnit(TimeEnum.SEC);
+        timeList.add(simulationTime);
+        return timeList;
     }
 }

@@ -36,10 +36,10 @@
                 <td>${status.index + 1}</td>
                 <td>${item.trafficEnum.desc}</td>
                 <td>${item.trafficTimes}</td>
-                <td>${item.trafficDuration}</td>
+                <td>${item.trafficDuration}${item.timeEnum.unit}</td>
                 <td>
                     <c:if test="${item.status == 0}">无效</c:if>
-                    <c:if test="${item.status == 1}">生效</c:if>
+                    <c:if test="${item.status == 1}">有效</c:if>
                 </td>
                 <td>
                     <a href="<%=root %>/harbour/traffic/showDetail/${item.id}"

@@ -1,8 +1,6 @@
 package com.github.liuxboy.harbour.simulation.service;
 
-import com.github.liuxboy.harbour.simulation.domain.biz.Anchorage;
-import com.github.liuxboy.harbour.simulation.domain.biz.Berth;
-import com.github.liuxboy.harbour.simulation.domain.biz.Channel;
+import com.github.liuxboy.harbour.simulation.domain.biz.*;
 
 import java.util.List;
 
@@ -22,4 +20,8 @@ public interface InitialService {
     public List<Channel> getChannelList();
 
     public List<Berth> getBerthList();
+
+    public List<Traffic> getTrafficList();
+
+    public List<SimulationTime> getTimeList();
 }

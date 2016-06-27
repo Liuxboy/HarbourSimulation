@@ -10,8 +10,7 @@
     <form action="<%=root %>/harbour/traffic/doUpdate" method="post"
           onsubmit="return validateCallback(this,dialogAjaxDone);">
         <div class="pageFormContent" layoutH="56">
-            <input name="id" type="hidden" class="required" maxlength="50" style="width:180px"
-                   value="${traffic.id}"/>
+            <input name="id" type="hidden" class="required" value="${traffic.id}"/>
             <p>
                 <label>管制类型</label>
                 <select id="trafficEnum" name="trafficEnum" type="text" readonly="readonly" class="required"
@@ -36,15 +35,15 @@
             <div class="divider"/>
             <p>
                 <label>管制次数</label>
-                <input name="trafficDuration" type="text" class="required digits" maxlength="10"
+                <input name="trafficTimes" type="text" class="required" maxlength="10"
                        value="${traffic.trafficTimes}"/>
             </p>
             <div class="divider"/>
             <p>
                 <label>管制时长</label>
-                <input name="trafficDuration" type="text" class="required digits" maxlength="10"
-                       value="${traffic.trafficTimes}"/>
-                <select id="timeEnum" name="timeEnum" type="text" readonly="readonly" class="required"
+                <input name="trafficDuration" type="text" class="required" maxlength="10"
+                       value="${traffic.trafficDuration}"/>
+                <select id="timeStepUnit" name="timeStepUnit" type="text" readonly="readonly" class="required"
                         maxlength="20">
                     <option value="SEC"
                             <c:if test="${traffic.timeEnum.unit eq '秒'}">selected</c:if> >秒
@@ -55,6 +54,18 @@
                     <option value="HOR"
                             <c:if test="${traffic.timeEnum.unit eq '时'}">selected</c:if> >时
                     </option>
+                    <option value="DAY"
+                            <c:if test="${traffic.timeEnum.unit eq '天'}">selected</c:if> >天
+                    </option>
+                    <option value="WEK"
+                            <c:if test="${traffic.timeEnum.unit eq '周'}">selected</c:if> >周
+                    </option>
+                    <option value="MON"
+                            <c:if test="${traffic.timeEnum.unit eq '月'}">selected</c:if> >月
+                    </option>
+                    <option value="YER"
+                            <c:if test="${traffic.timeEnum.unit eq '年'}">selected</c:if> >年
+                    </option>
                 </select>
             </p>
             <div class="divider"/>
@@ -63,10 +74,10 @@
                 <select id="status" name="status" type="text" readonly="readonly" class="required"
                         maxlength="20">
                     <option value=0
-                            <c:if test="${status==0}">selected</c:if> >无效
+                            <c:if test="${traffic.status==0}">selected</c:if> >无效
                     </option>
                     <option value=1
-                            <c:if test="${status==1}">selected</c:if> >生效
+                            <c:if test="${traffic.status==1}">selected</c:if> >生效
                     </option>
                 </select>
             </p>
