@@ -2,7 +2,7 @@ package com.github.liuxboy.harbour.simulation.controller.harbour;
 
 import com.github.liuxboy.harbour.simulation.common.util.Logger;
 import com.github.liuxboy.harbour.simulation.common.util.LoggerFactory;
-import com.github.liuxboy.harbour.simulation.domain.biz.Result;
+import com.github.liuxboy.harbour.simulation.domain.biz.*;
 import com.github.liuxboy.harbour.simulation.service.HarbourSimulationService;
 import org.apache.avalon.framework.service.ServiceException;
 import org.springframework.stereotype.Controller;
@@ -44,8 +44,14 @@ public class SimulationCtrl {
     @RequestMapping(value = "/start")
     @ResponseBody
     public String start() {
+        List<Anchorage> anchorageList =(List) httpSession.getAttribute("anchorageList");
+        List<Channel> channelList =(List) httpSession.getAttribute("channelList");
+        List<Berth> berthList =(List) httpSession.getAttribute("berthList");
+        List<Ship> shipList =(List) httpSession.getAttribute("shipList");
+        List<Traffic> trafficList =(List) httpSession.getAttribute("trafficList");
+        List<SimulationTime> timeList =(List) httpSession.getAttribute("timeList");
         try {
-            List<Result> resultList = harbourSimulationService.simulation();
+            List<Result> resultList = harbourSimulationService.simulation(anchorageList, channelList, berthList, shipList, trafficList, timeList);
             httpServletRequest.setAttribute("resultList", resultList);
             httpServletRequest.setAttribute("flag", 1);
             logger.info("resultList:", resultList);

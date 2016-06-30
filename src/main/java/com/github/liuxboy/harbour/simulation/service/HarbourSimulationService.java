@@ -1,7 +1,7 @@
 package com.github.liuxboy.harbour.simulation.service;
 
 
-import com.github.liuxboy.harbour.simulation.domain.biz.Result;
+import com.github.liuxboy.harbour.simulation.domain.biz.*;
 import org.apache.avalon.framework.service.ServiceException;
 
 import java.util.List;
@@ -22,5 +22,6 @@ public interface HarbourSimulationService {
      * @return
      * @throws ServiceException
      */
-    public List<Result> simulation() throws ServiceException;
+    public List<Result> simulation(List<Anchorage> anchorageList, List<Channel> channelList, List<Berth> berthList,
+                      List<Ship> shipList, List<Traffic> trafficList, List<SimulationTime> timeList) throws ServiceException;
 }

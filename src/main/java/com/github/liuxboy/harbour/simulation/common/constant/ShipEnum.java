@@ -11,21 +11,20 @@ package com.github.liuxboy.harbour.simulation.common.constant;
  * @version 1.0
  */
 public enum ShipEnum {
-    Crude_Oil(0, "原油"),
-    Iron_Ore(1, "铁矿石"),
-    Coal(2, "煤炭"),
-    Container_Ship(3, "集装箱船"),
-    Chemical_Oil(4, "化工油品"),
-    Break_Bulk_Ship(5, "散杂船");
-    private int typeCode;
-    private String nameCN;
+    Crude_Oil(0, "原油", 0.0472),
+    Iron_Ore(1, "铁矿石", 0.0766),
+    Coal(2, "煤炭", 0.0291),
+    Container_Ship(3, "集装箱船", 0.7525),
+    Chemical_Oil(4, "化工油品", 0.0745),
+    Break_Bulk_Ship(5, "散杂船", 0.203);
+    private int typeCode;       //编号
+    private String nameCN;      //名称
+    private double proportion;  //每天到达所占比例
 
-    ShipEnum() {
-    }
-
-    ShipEnum(int typeCode, String nameCN) {
+    ShipEnum(int typeCode, String nameCN, double proportion) {
         this.typeCode = typeCode;
         this.nameCN = nameCN;
+        this.proportion = proportion;
     }
 
     public int getTypeCode() {
@@ -44,11 +43,20 @@ public enum ShipEnum {
         this.nameCN = nameCN;
     }
 
+    public double getProportion() {
+        return proportion;
+    }
+
+    public void setProportion(double proportion) {
+        this.proportion = proportion;
+    }
+
     @Override
     public String toString() {
         final StringBuilder stbd = new StringBuilder("ShipEnum{");
         stbd.append("\"typeCode\":\"").append(typeCode).append('\"');
         stbd.append("\"nameCN\":\"").append(nameCN).append('\"');
+        stbd.append("\"proportion\":\"").append(proportion).append('\"');
         stbd.append('}');
         stbd.append(super.toString());
         return stbd.toString();

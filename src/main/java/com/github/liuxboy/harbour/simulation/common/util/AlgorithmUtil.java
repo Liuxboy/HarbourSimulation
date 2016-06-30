@@ -17,7 +17,35 @@ import java.math.BigDecimal;
  * @version 1.0
  */
 public class AlgorithmUtil {
-    //泊松分布
+    /**
+     * http://smilejay.com/2013/05/possion-number-in-c-language/
+     */
+    public static void possion1() {
+        int num = 1000; //产生随机数的个数
+        int lamda = 20; //lamda值
+        for (int i = 0; i < num; i++) {
+            BigDecimal p0 = new BigDecimal(Math.exp(-lamda));
+            int k = 0;
+            while (true) {
+                double randValue = Math.random();
+                if (p0.doubleValue() > randValue)
+                    break;
+                else {
+                    p0 = p0.multiply(new BigDecimal(1.0 * lamda / (k + 1)));
+                    k++;
+                    //System.out.println(randValue);
+                }
+                if (k >= 3 * lamda)//防止找不到的情况
+                {
+                    k = 0;
+                    p0 = new BigDecimal(Math.exp(-lamda));
+                }
+                //System.out.println("--------------");
+            }
+            System.out.println(i + " : " + k);
+        }
+    }
+
     public static int possionSample(double mean) {
         PoissonDistribution poissonDistribution = new PoissonDistribution(20.0d);
         return poissonDistribution.sample();

@@ -24,4 +24,6 @@ public interface InitialService {
     public List<Traffic> getTrafficList();
 
     public List<SimulationTime> getTimeList();
+
+    public List<Ship> getShipList();
 }

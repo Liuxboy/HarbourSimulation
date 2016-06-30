@@ -1,14 +1,20 @@
 package com.github.liuxboy.harbour.simulation.service.impl;
 
-import com.github.liuxboy.harbour.simulation.domain.biz.Result;
+import com.github.liuxboy.harbour.simulation.common.constant.BigDecimalUtil;
+import com.github.liuxboy.harbour.simulation.common.util.AlgorithmUtil;
+import com.github.liuxboy.harbour.simulation.domain.biz.*;
 import com.github.liuxboy.harbour.simulation.service.HarbourSimulationService;
 import org.apache.avalon.framework.service.ServiceException;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.SynchronousQueue;
+
+import static com.github.liuxboy.harbour.simulation.common.util.AlgorithmUtil.possionSamples;
 
 
 /**
@@ -73,19 +79,37 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
     }
 
     @Override
-    public List<Result> simulation() throws ServiceException {
+    public List<Result> simulation(List<Anchorage> anchorageList, List<Channel> channelList, List<Berth> berthList,
+                                   List<Ship> shipList, List<Traffic> trafficList, List<SimulationTime> timeList) throws ServiceException {
         List<Result> resultList = new ArrayList<Result>();
+
+        SimulationTime simulationTime = new SimulationTime();
+        if (!CollectionUtils.isEmpty(timeList))
+            simulationTime = timeList.get(0);
+        long simulationSteps = simulationTime.getTimeOut() * simulationTime.getTimeOutUnit().getTime()
+                / simulationTime.getTimeStep() * simulationTime.getTimeStepUnit().getTime();
+        for (long i = 0; i <  simulationSteps; i++) {
+
+        }
+        //总的
+        long totalInHarbourHours = 0;
+        long totalShip = 0;
         Result result = new Result();
-        result.setAvgInHarborTime("");
-        result.setAvgOnBerthTime("");
-        result.setAvgWaitBerthTime("");
-        result.setAvgWaitChannelTime("");
+        result.setAvgInHarbourTime(BigDecimalUtil.divide(new BigDecimal(totalInHarbourHours), new BigDecimal(totalShip)).toString());  //是指船舶从进港时起到出港时止的平均每艘船在港的停泊时间
+
+        result.setAvgWaitChannelTime("");   //表示船舶在锚地等待进入航道的时间
+
+        result.setAvgOnBerthTime("");       //船舶平均在泊时间，单位：小时
+        result.setAvgWaitBerthTime("");     //船舶平均等泊时间，单位：小时
         result.setAwtAstIndex("");
-        result.setBerthUtilizationRatio("");
+        result.setBerthUtilizationRatio("");//泊位利用率，百分数%
         resultList.add(result);
         return resultList;
     }
 
+    private int genShips(){
+        int[]  AlgorithmUtil.possionSamples(36, 365);
+    }
     public static void main(String[] args) {
         BlockingQueue<String> queue = new SynchronousQueue<String>();
         new ProducerThread(queue).start();  //启动生产者线程

@@ -2,7 +2,9 @@ package com.github.liuxboy.harbour.simulation.controller.harbour;
 
 import com.github.liuxboy.harbour.simulation.common.util.AjaxResultUtil;
 import com.github.liuxboy.harbour.simulation.domain.biz.Berth;
+import com.github.liuxboy.harbour.simulation.domain.biz.Channel;
 import com.github.liuxboy.harbour.simulation.domain.biz.Ship;
+import com.github.liuxboy.harbour.simulation.service.InitialService;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
@@ -30,10 +32,17 @@ public class ShipCtrl {
     HttpServletRequest httpServletRequest;
     @Resource
     HttpSession httpSession;
+    @Resource
+    InitialService initialService;
 
     @RequestMapping(value = "/toList")
     public String toList() {
-        httpServletRequest.setAttribute("shipList", httpSession.getAttribute("shipList"));
+        Object obj = httpSession.getAttribute("shipList");
+        List<Ship> shipList = obj != null ? (List) obj : new ArrayList<Ship>();
+        if (CollectionUtils.isEmpty(shipList)) {
+            shipList = initialService.getShipList();
+        }
+        httpSession.setAttribute("shipList", shipList);
         return "/harbour/shipList";
     }
 
@@ -83,7 +92,7 @@ public class ShipCtrl {
         if (!CollectionUtils.isEmpty(shipList)) {
             shipList.remove(id);
         }
-        httpServletRequest.setAttribute("shipList", shipList);
+        httpSession.setAttribute("shipList", shipList);
         return AjaxResultUtil.success();
     }
 }

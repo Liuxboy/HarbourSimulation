@@ -19,7 +19,7 @@ public class Result implements Serializable {
     //船舶类型
     private ShipEnum shipEnum;
     //船舶平均在港时间，单位：小时
-    private String avgInHarborTime;
+    private String avgInHarbourTime;
     //船舶平均等待航道时间，单位：小时
     private String avgWaitChannelTime;
     //船舶平均等泊时间，单位：小时
@@ -41,12 +41,12 @@ public class Result implements Serializable {
         this.shipEnum = shipEnum;
     }
 
-    public String getAvgInHarborTime() {
-        return avgInHarborTime;
+    public String getAvgInHarbourTime() {
+        return avgInHarbourTime;
     }
 
-    public void setAvgInHarborTime(String avgInHarborTime) {
-        this.avgInHarborTime = avgInHarborTime;
+    public void setAvgInHarbourTime(String avgInHarbourTime) {
+        this.avgInHarbourTime = avgInHarbourTime;
     }
 
     public String getAvgWaitChannelTime() {
@@ -91,13 +91,16 @@ public class Result implements Serializable {
 
     @Override
     public String toString() {
-        return "ResultCtrl{" +
-                "avgInHarborTime='" + avgInHarborTime + '\'' +
-                ", avgWaitChannelTime='" + avgWaitChannelTime + '\'' +
-                ", avgInHarborTime='" + avgInHarborTime + '\'' +
-                ", avgOnBerthTime='" + avgOnBerthTime + '\'' +
-                ", awtAstIndex='" + awtAstIndex + '\'' +
-                ", berthUtilizationRatio='" + berthUtilizationRatio + '\'' +
-                '}';
+        final StringBuilder stbd = new StringBuilder("Result{");
+        stbd.append("\"shipEnum\":").append(shipEnum);
+        stbd.append(",\"avgInHarbourTime\":\"").append(avgInHarbourTime).append('\"');
+        stbd.append(",\"avgWaitChannelTime\":\"").append(avgWaitChannelTime).append('\"');
+        stbd.append(",\"avgWaitBerthTime\":\"").append(avgWaitBerthTime).append('\"');
+        stbd.append(",\"avgOnBerthTime\":\"").append(avgOnBerthTime).append('\"');
+        stbd.append(",\"awtAstIndex\":\"").append(awtAstIndex).append('\"');
+        stbd.append(",\"berthUtilizationRatio\":\"").append(berthUtilizationRatio).append('\"');
+        stbd.append('}');
+        stbd.append(super.toString());
+        return stbd.toString();
     }
 }

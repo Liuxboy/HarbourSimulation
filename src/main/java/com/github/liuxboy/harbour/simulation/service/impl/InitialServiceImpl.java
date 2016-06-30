@@ -6,6 +6,7 @@ import com.github.liuxboy.harbour.simulation.service.InitialService;
 import org.omg.CORBA.TIMEOUT;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -439,8 +440,116 @@ public class InitialServiceImpl implements InitialService {
         simulationTime.setTimeOut(1);
         simulationTime.setTimeOutUnit(TimeEnum.YER);
         simulationTime.setTimeStep(1);
-        simulationTime.setTimeStepUnit(TimeEnum.SEC);
+        simulationTime.setTimeStepUnit(TimeEnum.MIN);
         timeList.add(simulationTime);
         return timeList;
+    }
+
+    @Override
+    public List<Ship> getShipList() {
+        List<Ship> shipList = new ArrayList<Ship>();
+        Ship ship = new Ship();
+        {
+            ship.setId(0);
+            ship.setShipEnum(ShipEnum.Crude_Oil);  //原油
+            ship.setDepth(10);
+            ship.setLength(311.8);
+            ship.setNumbers(618);
+            //默认仿真是长是1年，仿真步骤是1秒
+            ship.setLambda(BigDecimalUtil.divide(new BigDecimal(311.8), new BigDecimal(365 * 24 * 3600)).doubleValue());
+            ship.setMu(4.18);
+            ship.setSigma(0.58);
+            ship.setPriorityEnum(PriorityEnum.LOW);
+            ship.setTonner(26.6);
+            ship.setSpeed(1.852);       //km/h
+            ship.setSafeDistance(BigDecimalUtil.decimal2Double(311.8 * 6)); //m
+        }
+        shipList.add(ship);
+        ship = new Ship();
+        {
+            ship.setId(1);
+            ship.setShipEnum(ShipEnum.Iron_Ore);  //铁矿石
+            ship.setDepth(10);
+            ship.setLength(279.4);
+            ship.setNumbers(1002);
+            //默认仿真是长是1年，仿真步骤是1秒
+            ship.setLambda(BigDecimalUtil.divide(new BigDecimal(1002), new BigDecimal(365 * 24 * 60)).doubleValue());
+            ship.setMu(3.55);
+            ship.setSigma(0.82);
+            ship.setPriorityEnum(PriorityEnum.NORMAL);
+            ship.setTonner(1.67);
+            ship.setSpeed(1.852);       //km/h
+            ship.setSafeDistance(BigDecimalUtil.decimal2Double(279.4 * 6)); //m
+        }
+        shipList.add(ship);
+        ship = new Ship();
+        {
+            ship.setId(2);
+            ship.setShipEnum(ShipEnum.Coal);  //煤炭
+            ship.setDepth(10);
+            ship.setLength(216.3);
+            ship.setNumbers(380);
+            //默认仿真是长是1年，仿真步骤是1秒
+            ship.setLambda(BigDecimalUtil.divide(new BigDecimal(380), new BigDecimal(365 * 24 * 60)).doubleValue());
+            ship.setMu(3.89);
+            ship.setSigma(0.67);
+            ship.setPriorityEnum(PriorityEnum.NORMAL);
+            ship.setTonner(6.78);
+            ship.setSpeed(1.852);       //km/h
+            ship.setSafeDistance(BigDecimalUtil.decimal2Double(216.3 * 5)); //m
+        }
+        shipList.add(ship);
+        ship = new Ship();
+        {
+            ship.setId(3);
+            ship.setShipEnum(ShipEnum.Container_Ship);  //集装箱
+            ship.setDepth(10);
+            ship.setLength(259.4);
+            ship.setNumbers(9840);
+            //默认仿真是长是1年，仿真步骤是1秒
+            ship.setLambda(BigDecimalUtil.divide(new BigDecimal(9840), new BigDecimal(365 * 24 * 60)).doubleValue());
+            ship.setMu(2.45);
+            ship.setSigma(0.49);
+            ship.setPriorityEnum(PriorityEnum.LOW);
+            ship.setTonner(6.62);
+            ship.setSpeed(1.852);       //km/h
+            ship.setSafeDistance(BigDecimalUtil.decimal2Double(259.4 * 6)); //m
+        }
+        shipList.add(ship);
+        ship = new Ship();
+        {
+            ship.setId(0);
+            ship.setShipEnum(ShipEnum.Chemical_Oil);  //化工油品
+            ship.setDepth(10);
+            ship.setLength(176.2);
+            ship.setNumbers(974);
+            //默认仿真是长是1年，仿真步骤是1秒
+            ship.setLambda(BigDecimalUtil.divide(new BigDecimal(974), new BigDecimal(365 * 24 * 3600)).doubleValue());
+            ship.setMu(3.48);
+            ship.setSigma(0.57);
+            ship.setPriorityEnum(PriorityEnum.LOW);
+            ship.setTonner(3.74);
+            ship.setSpeed(1.852);       //km/h
+            ship.setSafeDistance(BigDecimalUtil.decimal2Double(176.2 * 6)); //m
+        }
+        shipList.add(ship);
+        ship = new Ship();
+        {
+            ship.setId(5);
+            ship.setShipEnum(ShipEnum.Break_Bulk_Ship);  //散杂货
+            ship.setDepth(10);
+            ship.setLength(208.1);
+            ship.setNumbers(266);
+            //默认仿真是长是1年，仿真步骤是1秒
+            ship.setLambda(BigDecimalUtil.divide(new BigDecimal(266), new BigDecimal(365 * 24 * 3600)).doubleValue());
+            ship.setMu(3.65);
+            ship.setSigma(0.76);
+            ship.setPriorityEnum(PriorityEnum.LOW);
+            ship.setTonner(6.71);
+            ship.setSpeed(1.852);       //km/h
+            ship.setSafeDistance(BigDecimalUtil.decimal2Double(208.1 * 6)); //m
+        }
+        shipList.add(ship);
+        return shipList;
     }
 }

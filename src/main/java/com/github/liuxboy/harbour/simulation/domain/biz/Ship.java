@@ -2,7 +2,6 @@ package com.github.liuxboy.harbour.simulation.domain.biz;
 
 import com.github.liuxboy.harbour.simulation.common.constant.PriorityEnum;
 import com.github.liuxboy.harbour.simulation.common.constant.ShipEnum;
-import com.github.liuxboy.harbour.simulation.common.constant.TonnerEnum;
 
 /**
  * <p>Title: Ship</p>
@@ -20,11 +19,11 @@ public class Ship {
     //种类
     private ShipEnum shipEnum;
     //长度
-    private int length;
+    private double length;
     //宽度
-    private int width;
+    private double width;
     //吃水深度
-    private int depth;
+    private double depth;
     //航速
     private double speed;
     //到达分布，泊松分布平均lambda
@@ -34,7 +33,7 @@ public class Ship {
     //靠泊分布，对数正态分布，参数sigma
     private double sigma;
     //吨级
-    private TonnerEnum tonnerEnum;
+    private double tonner;
     //进港优先级
     private PriorityEnum priorityEnum;
     //安全距离
@@ -54,12 +53,16 @@ public class Ship {
         this.id = id;
     }
 
-    public TonnerEnum getTonnerEnum() {
-        return tonnerEnum;
+    public double getSpeed() {
+        return speed;
     }
 
-    public void setTonnerEnum(TonnerEnum tonnerEnum) {
-        this.tonnerEnum = tonnerEnum;
+    public double getTonner() {
+        return tonner;
+    }
+
+    public void setTonner(double tonner) {
+        this.tonner = tonner;
     }
 
     public ShipEnum getShipEnum() {
@@ -70,36 +73,28 @@ public class Ship {
         this.shipEnum = shipEnum;
     }
 
-    public int getLength() {
+    public double getLength() {
         return length;
     }
 
-    public void setLength(int length) {
+    public void setLength(double length) {
         this.length = length;
     }
 
-    public int getWidth() {
+    public double getWidth() {
         return width;
     }
 
-    public void setWidth(int width) {
+    public void setWidth(double width) {
         this.width = width;
     }
 
-    public int getDepth() {
+    public double getDepth() {
         return depth;
     }
 
-    public void setDepth(int depth) {
+    public void setDepth(double depth) {
         this.depth = depth;
-    }
-
-    public double getSpeed() {
-        return speed;
-    }
-
-    public void setSpeed(float speed) {
-        this.speed = speed;
     }
 
     public PriorityEnum getPriorityEnum() {
@@ -182,7 +177,7 @@ public class Ship {
         stbd.append(",\"lambda\":").append(lambda);
         stbd.append(",\"mu\":").append(mu);
         stbd.append(",\"sigma\":").append(sigma);
-        stbd.append(",\"tonnerEnum\":").append(tonnerEnum);
+        stbd.append(",\"tonner\":").append(tonner);
         stbd.append(",\"priorityEnum\":").append(priorityEnum);
         stbd.append(",\"x\":").append(x);
         stbd.append(",\"y\":").append(y);
