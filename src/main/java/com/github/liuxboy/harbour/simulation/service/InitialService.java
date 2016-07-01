@@ -1,5 +1,6 @@
 package com.github.liuxboy.harbour.simulation.service;
 
+import com.github.liuxboy.harbour.simulation.common.constant.PassRuleEnum;
 import com.github.liuxboy.harbour.simulation.domain.biz.*;
 
 import java.util.List;
@@ -26,4 +27,6 @@ public interface InitialService {
     public List<SimulationTime> getTimeList();
 
     public List<Ship> getShipList();
+
+    public List<PassRule> passRuleList();
 }

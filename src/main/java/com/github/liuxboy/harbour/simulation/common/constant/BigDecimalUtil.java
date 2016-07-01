@@ -25,7 +25,18 @@ public class BigDecimalUtil {
         }
         return dividend.divide(divisor, 2, BigDecimal.ROUND_HALF_DOWN);
     }
-
+    /**
+     * 两个BigDecimal相除，四舍五入保留4位小数
+     * @param dividend
+     * @param divisor
+     * @return
+     */
+    public static BigDecimal divide4(BigDecimal dividend, BigDecimal divisor) {
+        if (dividend == null || divisor == null) {
+            return null;
+        }
+        return dividend.divide(divisor, 4, BigDecimal.ROUND_HALF_DOWN);
+    }
     /**
      * 将一个BigDecimal数以四舍五入的方式保留2位，然后转换成String
      *

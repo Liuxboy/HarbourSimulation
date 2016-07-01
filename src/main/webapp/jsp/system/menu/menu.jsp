@@ -32,10 +32,10 @@
                     <li><a href="<%=root %>/harbour/time/toList" target="navTab" rel="time" title="时间设置">时间设置</a>
                     </li>
                 </ul>
-                <%--<ul>
+                <ul>
                     <li><a href="<%=root %>/harbour/pass/toList" target="navTab" rel="pass" title="通航规则">通航规则</a>
                     </li>
-                </ul>--%>
+                </ul>
             </li>
             <li><a>显示模块</a>
                 <ul>

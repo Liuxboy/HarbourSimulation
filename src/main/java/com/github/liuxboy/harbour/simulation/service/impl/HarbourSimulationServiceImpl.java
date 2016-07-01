@@ -12,9 +12,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.SynchronousQueue;
-
-import static com.github.liuxboy.harbour.simulation.common.util.AlgorithmUtil.possionSamples;
 
 
 /**
@@ -37,17 +34,19 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
         private BlockingQueue<String> queue;
         //产品编号
         int i = 0;
+
         public ProducerThread(BlockingQueue<String> queue) {
             this.queue = queue;
         }
+
         @Override
         public void run() {
             //生产产品，推向队列
-            for (; ;) {
+            for (; ; ) {
                 String task = "产品" + (++i);
                 try {
                     queue.put(task);
-                    System.out.println(Thread.currentThread()+"生产了:"+task);
+                    System.out.println(Thread.currentThread() + "生产了:" + task);
                     sleep(3000);
                 } catch (InterruptedException e) {
                     //TODO
@@ -61,16 +60,18 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
      */
     public static class ConsumerThread extends Thread {
         private BlockingQueue<String> queue;
+
         public ConsumerThread(BlockingQueue<String> queue) {
             this.queue = queue;
         }
+
         @Override
         public void run() {
             String task = null;
             //消费产品
             try {
                 while ((task = queue.take()) != null) {
-                    System.out.println(Thread.currentThread()+"消费了:" + task);
+                    System.out.println(Thread.currentThread() + "消费了:" + task);
                 }
             } catch (InterruptedException e) {
                 //TODO
@@ -88,7 +89,7 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
             simulationTime = timeList.get(0);
         long simulationSteps = simulationTime.getTimeOut() * simulationTime.getTimeOutUnit().getTime()
                 / simulationTime.getTimeStep() * simulationTime.getTimeStepUnit().getTime();
-        for (long i = 0; i <  simulationSteps; i++) {
+        for (long i = 0; i < simulationSteps; i++) {
 
         }
         //总的
@@ -106,23 +107,48 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
         resultList.add(result);
         return resultList;
     }
+
     //船泊总数量
-    private int[] genShips(){
-        //每天產生船的數組
-        int[]  simulationShips = AlgorithmUtil.possionSamples(36, 365);
-        return simulationShips;
+    private static List<Ship> genShips() {
+        int totalShips = 0;
+        List<Ship> shipList = new ArrayList<Ship>();
+        Ship ship;
+        //每天产生船的数组
+        int[] simulationShips = AlgorithmUtil.possionSamples(36, 365);
+        //365天，每天按泊松分布产生这么多条船
+        for (int i = 0; i < simulationShips.length; i++) {
+            //每天船只属性赋值
+            for (int j = 0; j < simulationShips[i]; j++) {
+                ship = new Ship();
+                ship.setId(totalShips);
+                ship.setTonner();
+                ship.setShipEnum();
+                ship.setDepth();
+                ship.setLambda();
+                ship.setLength();
+                ship.setSafeDistance();
+                ship.setNumbers();
+                ship.setPriorityEnum();
+                ship.setSpeed();
+                ship.setNumbers();
+                shipList.add(ship);
+                totalShips++;
+            }
+        }
+        return shipList;
     }
 
     //船泊长度分布
-    private double[] getWidth(int num){
-        num *
-        return AlgorithmUtil.normalSamples();
+    private static double[] getWidth(int num) {
+        return AlgorithmUtil.normalSamples(175, 4, num);
+
     }
 
-
     public static void main(String[] args) {
-        BlockingQueue<String> queue = new SynchronousQueue<String>();
+        /*BlockingQueue<String> queue = new SynchronousQueue<String>();
         new ProducerThread(queue).start();  //启动生产者线程
-        new ConsumerThread(queue).start();  //启动消费者线程
+        new ConsumerThread(queue).start();  //启动消费者线程*/
+        System.out.println(genShips());
+        getWidth(100);
     }
 }

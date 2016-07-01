@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>港口模拟|管理后台</title>
+    <title>宁波-舟山核心港区仿真模拟系统</title>
     <link href="../image/favicon.ico" rel="shortcut icon">
     <link href="../css/themes/css/login.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -49,7 +49,7 @@
                 </div>
             </form>
         </div>
-        <div class="login_banner"><img src="../css/themes/default/images/login_banner.jpg"/></div>
+        <div class="login_banner"><img src="../css/themes/default/images/login2.png"/></div>
         <div class="login_main">
             <ul class="helpList">
                 <li><a href="#">忘记密码怎么办？</a></li>

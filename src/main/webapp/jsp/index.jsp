@@ -1,11 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="/common/taglibs.jsp"%>
+<%@ include file="/common/taglibs.jsp" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>港口模拟|管理后台</title>
+    <title>宁波-舟山核心港区仿真模拟系统</title>
     <link href="../image/favicon.ico" rel="shortcut icon">
     <link href="../css/themes/default/style.css" rel="stylesheet" type="text/css" media="screen"/>
     <link href="../css/themes/css/core.css" rel="stylesheet" type="text/css" media="screen"/>
@@ -43,9 +43,14 @@
     <script type="text/javascript">
         $(function () {
             DWZ.init("/css/themes/dwz.frag.xml", {
-                loginUrl:"/harbour/login",	// 跳到登录页面
+                loginUrl: "/harbour/login",	// 跳到登录页面
                 statusCode: {ok: 200, error: 300, timeout: 301}, //【可选】
-                pageInfo: {pageNum: "pageNum", numPerPage: "numPerPage", orderField: "orderField", orderDirection: "orderDirection"}, //【可选】
+                pageInfo: {
+                    pageNum: "pageNum",
+                    numPerPage: "numPerPage",
+                    orderField: "orderField",
+                    orderDirection: "orderDirection"
+                }, //【可选】
                 keys: {statusCode: "statusCode", message: "message"}, //【可选】
                 debug: false,	// 调试模式 【true|false】
                 callback: function () {
@@ -54,10 +59,10 @@
                 }
             });
         });
-        function logOutConfirmMsg(url){
+        function logOutConfirmMsg(url) {
             alertMsg.confirm("确定退出吗?", {
-                okCall: function(){
-                    window.location.href=url;
+                okCall: function () {
+                    window.location.href = url;
                 }
             });
         }
@@ -70,17 +75,17 @@
         <div class="headerNav">
             <a class="logo" href="https://github.com/Liuxboy" target="_blank">标志</a>
             <ul class="nav">
-                <li>您好,${user.userName}</li>
+                <li><span style="color: #FF0000">您好,${user.userName}</span></li>
                 <li>
                     <a href="javascript:;" onclick="logOutConfirmMsg('/harbour/exit')">退出</a>
                 </li>
             </ul>
             <ul class="themeList" id="themeList">
                 <li theme="azure">
-                    <div class="selected">天蓝</div>
+                    <div>天蓝</div>
                 </li>
                 <li theme="default">
-                    <div>蓝色</div>
+                    <div class="selected">蓝色</div>
                 </li>
                 <li theme="green">
                     <div>绿色</div>
@@ -107,8 +112,8 @@
         </div>
 
         <div id="sidebar">
-            <div class="toggleCollapse"><h2>港口模拟-管理后台</h2>
-                <div>内容</div>
+            <div class="toggleCollapse"><h2>宁波-舟山核心港区仿真模拟系统</h2>
+
             </div>
             <!--引入menu-->
             <c:import url="system/menu/menu.jsp"/>
@@ -121,7 +126,7 @@
                 <div class="tabsPageHeaderContent"><!-- 显示左右控制时添加 class="tabsPageHeaderMargin" -->
                     <ul class="navTab-tab">
                         <li tabid="main" class="main"><a href="javascript:;"><span><span
-                                class="home_icon">我的主页</span></span></a></li>
+                                class="home_icon">宁波-舟山核心港区仿真模拟系统</span></span></a></li>
                     </ul>
                 </div>
                 <div class="tabsLeft">left</div>
@@ -131,16 +136,15 @@
                 <div class="tabsMore">more</div>
             </div>
             <ul class="tabsMoreList">
-                <li><a href="javascript:;">我的主页</a></li>
+                <li><a href="javascript:;">宁波-舟山核心港区仿真模拟系统</a></li>
             </ul>
 
             <div class="navTab-panel tabsPageContent layoutBox">
                 <div class="page unitBox">
                     <div class="accountInfo">
-                        <p><span>港口模拟-管理后台</span></p>
+                        <p><span>宁波-舟山核心港区仿真模拟系统</span></p>
                     </div>
                     <div class="pageFormContent" layoutH="80" style="margin-right:230px">
-                        内容
                     </div>
                 </div>
 
@@ -150,6 +154,7 @@
 
 </div>
 
-<div id="footer">Copyright &copy; 2016 <a href="https://github.com/Liuxboy/" target="_blank">&nbsp;https://github.com/Liuxboy&nbsp;</a></div>
+<div id="footer">Copyright &copy; 2016 <a href="https://github.com/Liuxboy/" target="_blank">&nbsp;https://github.com/Liuxboy&nbsp;</a>
+</div>
 </body>
 </html>

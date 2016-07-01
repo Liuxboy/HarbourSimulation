@@ -8,7 +8,7 @@
     <input type="hidden" name="pageSize" value="10"/>
 </form>
 <div class="pageContent j-resizeGrid">
-    <div class="panelBar">
+    <%--<div class="panelBar">
         <ul class="toolBar">
             <li><a class="add" href="<%=root %>/harbour/pass/toAddPassRule"
                    target="dialog" mask="true" rel="customer_add" resizable="false"
@@ -16,31 +16,19 @@
                    width="800"> <span>添加通航规则</span>
             </a></li>
         </ul>
-    </div>
+    </div>--%>
     <table class="table" width="100%" layoutH="95%">
         <thead>
         <tr>
             <th>序号</th>
             <th>规则内容</th>
-            <th>操作</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${passRuleList}" var="item" varStatus="status">
             <tr>
-                <td>${status.index + 1}</td>
                 <td>${item.id}</td>
-                <td>${item.conent}</td>
-                <td>
-                    <a href="<%=root %>/harbour/pass/showDetail/${item.id}"
-                       target="dialog" mask="true" rel="channel_show"
-                       title="查看详情" height="400" width="500" class="btnView">查看详情</a>
-                    <a href="<%=root %>/harbour/pass/toUpdate?id=${item.id}"
-                       target="dialog" mask="true" rel="channel_update" title="更新航道"
-                       height="400" width="800" class="btnEdit">更新</a>
-                    <a href="<%=root %>/harbour/pass/delete?id=${item.id}" class="btnDel" title="确定要删除么"
-                       target="ajaxTodo">删除</a>
-                </td>
+                <td>${item.passRuleEnum.desc}</td>
             </tr>
         </c:forEach>
         </tbody>

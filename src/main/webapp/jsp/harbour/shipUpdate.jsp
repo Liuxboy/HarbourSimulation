@@ -25,13 +25,8 @@
             <div class="divider"/>
             <p>
                 <label>吨位</label>
-                <select id="tonnerEnum" name="tonnerEnum" type="text" readonly="readonly" class="required"
-                        maxlength="20">
-                    <option value="OneTon" <c:if test="${ship.tonnerEnum.typeCode == 0}">selected</c:if> >1吨</option>
-                    <option value="TwoTon" <c:if test="${ship.tonnerEnum.typeCode == 1}">selected</c:if> >2吨</option>
-                    <option value="FiveTon" <c:if test="${ship.tonnerEnum.typeCode == 2}">selected</c:if> >5吨</option>
-                    <option value="TenTon" <c:if test="${ship.tonnerEnum.typeCode == 3}">selected</c:if> >10吨</option>
-                </select>
+                <input name="tonner" value="${ship.tonner}"
+                       type="text" class="required" maxlength="10"/>
             </p>
             <div class="divider"/>
             <p>
