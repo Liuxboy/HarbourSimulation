@@ -106,10 +106,20 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
         resultList.add(result);
         return resultList;
     }
-
-    private int genShips(){
-        int[]  AlgorithmUtil.possionSamples(36, 365);
+    //船泊总数量
+    private int[] genShips(){
+        //每天產生船的數組
+        int[]  simulationShips = AlgorithmUtil.possionSamples(36, 365);
+        return simulationShips;
     }
+
+    //船泊长度分布
+    private double[] getWidth(int num){
+        num *
+        return AlgorithmUtil.normalSamples();
+    }
+
+
     public static void main(String[] args) {
         BlockingQueue<String> queue = new SynchronousQueue<String>();
         new ProducerThread(queue).start();  //启动生产者线程

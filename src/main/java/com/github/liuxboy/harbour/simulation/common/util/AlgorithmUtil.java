@@ -45,22 +45,22 @@ public class AlgorithmUtil {
             System.out.println(i + " : " + k);
         }
     }
-
-    public static int possionSample(double mean) {
-        PoissonDistribution poissonDistribution = new PoissonDistribution(20.0d);
+    //泊松分布，λ为平均值
+    public static int possionSample(double λ) {
+        PoissonDistribution poissonDistribution = new PoissonDistribution(λ);
         return poissonDistribution.sample();
     }
-    public static int[] possionSamples(double mean, int num) {
-        PoissonDistribution poissonDistribution = new PoissonDistribution(20.0d);
-        return poissonDistribution.sample(num);
+    public static int[] possionSamples(double λ, int n) {
+        PoissonDistribution poissonDistribution = new PoissonDistribution(λ);
+        return poissonDistribution.sample(n);
     }
-    //正态分布
-    public static double normalSample(double mean, double division) {
-        NormalDistribution normalDistribution = new NormalDistribution(mean, division);
+    //正态分布，μ为平均值(mean)，σ为标准差-sd(standard deviation)
+    public static double normalSample(double μ, double σ) {
+        NormalDistribution normalDistribution = new NormalDistribution(μ, σ);
         return normalDistribution.sample();
     }
-    public static double[] normalSamples(double mean, double division, int num) {
-        NormalDistribution normalDistribution = new NormalDistribution(mean, division);
+    public static double[] normalSamples(double μ, double σ, int num) {
+        NormalDistribution normalDistribution = new NormalDistribution(μ, σ);
         return normalDistribution.sample(num);
     }
     //对数正态分布
