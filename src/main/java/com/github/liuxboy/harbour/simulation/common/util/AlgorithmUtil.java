@@ -46,11 +46,11 @@ public class AlgorithmUtil {
         }
     }
     //泊松分布，λ为平均值
-    public static int possionSample(double λ) {
+    public static int poissonSample(double λ) {
         PoissonDistribution poissonDistribution = new PoissonDistribution(λ);
         return poissonDistribution.sample();
     }
-    public static int[] possionSamples(double λ, int n) {
+    public static int[] poissonSamples(double λ, int n) {
         PoissonDistribution poissonDistribution = new PoissonDistribution(λ);
         return poissonDistribution.sample(n);
     }
@@ -75,7 +75,7 @@ public class AlgorithmUtil {
     }
 
     public static void main(String[] args) {
-        //possion1();
+        //poisson1();
         PoissonDistribution poissonDistribution = new PoissonDistribution(20.0d);
         int[] k = poissonDistribution.sample(1000);
         for (int i : k) {

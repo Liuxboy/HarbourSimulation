@@ -82,10 +82,10 @@
             </ul>
             <ul class="themeList" id="themeList">
                 <li theme="azure">
-                    <div>天蓝</div>
+                    <div class="selected">天蓝</div>
                 </li>
                 <li theme="default">
-                    <div class="selected">蓝色</div>
+                    <div>蓝色</div>
                 </li>
                 <li theme="green">
                     <div>绿色</div>

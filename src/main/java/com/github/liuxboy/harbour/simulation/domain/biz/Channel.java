@@ -3,6 +3,9 @@ package com.github.liuxboy.harbour.simulation.domain.biz;
 import com.github.liuxboy.harbour.simulation.common.constant.PassDirectEnum;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * <p>Title: Channel</p>
  * <p>Copyright: Copyright(c)2016</p>
@@ -15,6 +18,8 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class Channel {
+    //錨地船舶列表
+    private List<Ship> shipList = new ArrayList<Ship>();
     //编号
     private int id = 1;
     //航道名

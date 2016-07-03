@@ -5,17 +5,19 @@ import com.github.liuxboy.harbour.simulation.common.constant.ShipEnum;
 import java.io.Serializable;
 
 /**
- * <p>Title: Berth</p>
+ * <p>Title: Result</p>
  * <p>Copyright: Copyright(c)2016</p>
  * <p>Company: JD.JR </p>
  * <p>Time: 2016/6/14 0:07</p>
- * <p>Description: 描述 </p>
+ * <p>Description: 最終結果 </p>
  *
  * @author wyliuchundong
  * @version 1.0
  */
 public class Result implements Serializable {
     private static final long serialVersionUID = -7093442578170950522L;
+    //船數量
+    private int number;
     //船舶类型
     private ShipEnum shipEnum;
     //船舶平均在港时间，单位：小时
@@ -32,6 +34,14 @@ public class Result implements Serializable {
     private String awtAstIndex;
     //泊位利用率，百分数%
     private String berthUtilizationRatio;
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
 
     public ShipEnum getShipEnum() {
         return shipEnum;
@@ -93,6 +103,7 @@ public class Result implements Serializable {
     public String toString() {
         final StringBuilder stbd = new StringBuilder("Result{");
         stbd.append("\"shipEnum\":").append(shipEnum);
+        stbd.append(",\"number\":\"").append(number).append('\"');
         stbd.append(",\"avgInHarbourTime\":\"").append(avgInHarbourTime).append('\"');
         stbd.append(",\"avgWaitChannelTime\":\"").append(avgWaitChannelTime).append('\"');
         stbd.append(",\"avgWaitBerthTime\":\"").append(avgWaitBerthTime).append('\"');

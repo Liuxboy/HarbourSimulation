@@ -2,8 +2,11 @@ package com.github.liuxboy.harbour.simulation.domain.biz;
 
 import com.github.liuxboy.harbour.simulation.common.constant.AnchorageEnum;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * <p>Title: Berth</p>
+ * <p>Title: Anchorage</p>
  * <p>Copyright: Copyright(c)2016</p>
  * <p>Company: JD.JR </p>
  * <p>Time: 2016/6/4 12:04</p>
@@ -13,6 +16,8 @@ import com.github.liuxboy.harbour.simulation.common.constant.AnchorageEnum;
  * @version 1.0
  */
 public class Anchorage {
+    //錨地船舶列表
+    private List<Ship> shipList = new ArrayList<Ship>();
     //编号
     private int id = 1;
     //类型
@@ -33,6 +38,14 @@ public class Anchorage {
     private double point4X;
     //坐标4经度
     private double point4Y;
+
+    public List<Ship> getShipList() {
+        return shipList;
+    }
+
+    public void setShipList(List<Ship> shipList) {
+        this.shipList = shipList;
+    }
 
     public AnchorageEnum getAnchorageEnum() {
         return anchorageEnum;

@@ -44,6 +44,8 @@ public class Ship {
     private double y;
     //数量
     private int numbers;
+    //船舶在港時間節點
+    private TimeNode timeNode;
 
     public int getId() {
         return id;
@@ -165,6 +167,14 @@ public class Ship {
         this.safeDistance = safeDistance;
     }
 
+    public TimeNode getTimeNode() {
+        return timeNode;
+    }
+
+    public void setTimeNode(TimeNode timeNode) {
+        this.timeNode = timeNode;
+    }
+
     @Override
     public String toString() {
         final StringBuilder stbd = new StringBuilder("Ship{");
@@ -179,9 +189,10 @@ public class Ship {
         stbd.append(",\"sigma\":").append(sigma);
         stbd.append(",\"tonner\":").append(tonner);
         stbd.append(",\"priorityEnum\":").append(priorityEnum);
-        stbd.append(",\"x\":").append(x);
-        stbd.append(",\"y\":").append(y);
         stbd.append(",\"numbers\":").append(numbers);
+        stbd.append(",\"timeNode\":").append(timeNode);
+        stbd.append(",\"y\":").append(y);
+        stbd.append(",\"x\":").append(x);
         stbd.append('}');
         stbd.append(super.toString());
         return stbd.toString();

@@ -3,7 +3,7 @@ package com.github.liuxboy.harbour.simulation.domain.biz;
 import com.github.liuxboy.harbour.simulation.common.constant.TimeEnum;
 
 /**
- * <p>Title: Berth</p>
+ * <p>Title: Simulation</p>
  * <p>Copyright: Copyright(c)2016</p>
  * <p>Company: JD.JR </p>
  * <p>Time: 2016/6/13 22:47</p>

@@ -13,6 +13,8 @@ import com.github.liuxboy.harbour.simulation.common.constant.ShipEnum;
  * @version 1.0
  */
 public class Berth {
+    //在泊船只
+    private Ship ship;
     //编号
     private int id = 1;
     //泊位名称
@@ -25,6 +27,14 @@ public class Berth {
     private double depth;
     //泊位长度
     private double length;
+
+    public Ship getShip() {
+        return ship;
+    }
+
+    public void setShip(Ship ship) {
+        this.ship = ship;
+    }
 
     public int getId() {
         return id;
