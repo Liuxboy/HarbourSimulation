@@ -19,6 +19,8 @@ public class TimeNode {
     private int onBerthTime;
     //在泊作业时间
     private int workTime;
+    //离开港口时间
+    private int leaveTime;
 
     public int getArriveTime() {
         return arriveTime;
@@ -52,6 +54,15 @@ public class TimeNode {
         this.workTime = workTime;
     }
 
+    public int getLeaveTime() {
+        return leaveTime;
+    }
+
+    public void setLeaveTime(int leaveTime) {
+        this.leaveTime = leaveTime;
+    }
+
+
     @Override
     public String toString() {
         return "TimeNode{" +
@@ -59,6 +70,7 @@ public class TimeNode {
                 ", startInChannelTime=" + startInChannelTime +
                 ", onBerthTime=" + onBerthTime +
                 ", workTime=" + workTime +
+                ", leaveTime=" + leaveTime +
                 '}';
     }
 }

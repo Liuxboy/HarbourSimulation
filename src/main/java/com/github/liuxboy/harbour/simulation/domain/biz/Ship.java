@@ -44,7 +44,7 @@ public class Ship {
     private double y;
     //数量
     private int numbers;
-    //船舶在港時間節點
+    //船舶在港时间点
     private TimeNode timeNode;
 
     public int getId() {

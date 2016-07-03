@@ -20,8 +20,10 @@ public class Traffic {
     private TrafficEnum trafficEnum;
     //管制次数
     private long trafficTimes;
+    //管制开始时间
+
     //管制时长
-    private long trafficDuration;
+    private double trafficDuration;
     //管制时长--单位s
     private TimeEnum timeEnum;
     //1-有效，0-无效
@@ -43,11 +45,11 @@ public class Traffic {
         this.trafficEnum = trafficEnum;
     }
 
-    public long getTrafficDuration() {
+    public double getTrafficDuration() {
         return trafficDuration;
     }
 
-    public void setTrafficDuration(long trafficDuration) {
+    public void setTrafficDuration(double trafficDuration) {
         this.trafficDuration = trafficDuration;
     }
 

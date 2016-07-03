@@ -90,7 +90,7 @@ public class InitialServiceImpl implements InitialService {
         {
             channel = new Channel();
             channel.setId(0);
-            channel.setName("深水航道");
+            channel.setName("深水航槽");
             channel.setDepth(25.7);     //m
             channel.setLength(14.85);   //km
             channel.setWidth(0.39);     //km
@@ -123,6 +123,7 @@ public class InitialServiceImpl implements InitialService {
             berth.setName("镇海2#泊位");
             berth.setShipEnum(ShipEnum.Break_Bulk_Ship);
             berth.setTonner(20000); //吨
+            berth.setToAnchorageTime(4.47);
             berthList.add(berth);
         }
         {
@@ -133,6 +134,7 @@ public class InitialServiceImpl implements InitialService {
             berth.setName("镇海3#泊位");
             berth.setShipEnum(ShipEnum.Break_Bulk_Ship);
             berth.setTonner(20000); //吨
+            berth.setToAnchorageTime(4.45);
             berthList.add(berth);
         }
         {
@@ -143,6 +145,7 @@ public class InitialServiceImpl implements InitialService {
             berth.setName("镇海4#泊位");
             berth.setShipEnum(ShipEnum.Break_Bulk_Ship);
             berth.setTonner(20000); //吨
+            berth.setToAnchorageTime(4.43);
             berthList.add(berth);
         }
         {
@@ -153,6 +156,7 @@ public class InitialServiceImpl implements InitialService {
             berth.setName("镇海5#泊位");
             berth.setShipEnum(ShipEnum.Break_Bulk_Ship);
             berth.setTonner(10000); //吨
+            berth.setToAnchorageTime(4.42);
             berthList.add(berth);
         }
         {
@@ -163,6 +167,7 @@ public class InitialServiceImpl implements InitialService {
             berth.setName("镇海6#泊位");
             berth.setShipEnum(ShipEnum.Break_Bulk_Ship);
             berth.setTonner(10000); //吨
+            berth.setToAnchorageTime(4.40);
             berthList.add(berth);
         }
         {
@@ -173,6 +178,7 @@ public class InitialServiceImpl implements InitialService {
             berth.setName("镇海7#泊位");
             berth.setShipEnum(ShipEnum.Container_Ship);
             berth.setTonner(10000); //吨
+            berth.setToAnchorageTime(4.38);
             berthList.add(berth);
         }
         {
@@ -183,6 +189,7 @@ public class InitialServiceImpl implements InitialService {
             berth.setName("镇海8#泊位");
             berth.setShipEnum(ShipEnum.Container_Ship);
             berth.setTonner(10000); //吨
+            berth.setToAnchorageTime(4.37);
             berthList.add(berth);
         }
         {
@@ -193,6 +200,7 @@ public class InitialServiceImpl implements InitialService {
             berth.setName("镇海9#泊位");
             berth.setShipEnum(ShipEnum.Container_Ship);
             berth.setTonner(20000); //吨
+            berth.setToAnchorageTime(4.35);
             berthList.add(berth);
         }
         {
@@ -203,6 +211,7 @@ public class InitialServiceImpl implements InitialService {
             berth.setName("镇海10#泊位");
             berth.setShipEnum(ShipEnum.Container_Ship);
             berth.setTonner(10000); //吨
+            berth.setToAnchorageTime(4.33);
             berthList.add(berth);
         }
         {
@@ -213,6 +222,7 @@ public class InitialServiceImpl implements InitialService {
             berth.setName("镇海21#泊位");
             berth.setShipEnum(ShipEnum.Break_Bulk_Ship);
             berth.setTonner(50000); //吨
+            berth.setToAnchorageTime(4.32);
             berthList.add(berth);
         }
         {
@@ -223,6 +233,7 @@ public class InitialServiceImpl implements InitialService {
             berth.setName("镇海22#泊位");
             berth.setShipEnum(ShipEnum.Break_Bulk_Ship);
             berth.setTonner(50000); //吨
+            berth.setToAnchorageTime(4.30);
             berthList.add(berth);
         }
         {
@@ -233,6 +244,7 @@ public class InitialServiceImpl implements InitialService {
             berth.setName("镇海16#泊位");
             berth.setShipEnum(ShipEnum.Chemical_Oil);
             berth.setTonner(10000); //吨
+            berth.setToAnchorageTime(4.28);
             berthList.add(berth);
         }
         {
@@ -243,6 +255,7 @@ public class InitialServiceImpl implements InitialService {
             berth.setName("镇海17#泊位");
             berth.setShipEnum(ShipEnum.Chemical_Oil);
             berth.setTonner(50000); //吨
+            berth.setToAnchorageTime(4.27);
             berthList.add(berth);
         }
         {
@@ -253,6 +266,7 @@ public class InitialServiceImpl implements InitialService {
             berth.setName("镇海18#泊位");
             berth.setShipEnum(ShipEnum.Chemical_Oil);
             berth.setTonner(50000); //吨
+            berth.setToAnchorageTime(4.25);
             berthList.add(berth);
         }
         {
@@ -263,86 +277,95 @@ public class InitialServiceImpl implements InitialService {
             berth.setName("镇海19#泊位");
             berth.setShipEnum(ShipEnum.Chemical_Oil);
             berth.setTonner(50000); //吨
+            berth.setToAnchorageTime(4.23);
             berthList.add(berth);
         }
         {
             berth = new Berth();
             berth.setId(15);
-            berth.setLength(345);   //m
-            berth.setDepth(-14.5);  //m
-            berth.setName("镇海19#泊位");
-            berth.setShipEnum(ShipEnum.Chemical_Oil);
-            berth.setTonner(50000); //吨
-            berthList.add(berth);
-        }
-        {
-            berth = new Berth();
-            berth.setId(16);
             berth.setLength(200);   //m
             berth.setDepth(-12.5);  //m
             berth.setName("镇海20#泊位");
             berth.setShipEnum(ShipEnum.Chemical_Oil);
             berth.setTonner(20000); //吨
+            berth.setToAnchorageTime(4.22);
             berthList.add(berth);
         }
         {
             berth = new Berth();
-            berth.setId(17);
+            berth.setId(16);
             berth.setLength(340);   //m
             berth.setDepth(-12.5);  //m
             berth.setName("青峙1#泊位");
             berth.setShipEnum(ShipEnum.Chemical_Oil);
             berth.setTonner(40000); //吨
+            berth.setToAnchorageTime(3.83);
             berthList.add(berth);
         }
         {
             berth = new Berth();
-            berth.setId(18);
+            berth.setId(17);
             berth.setLength(325);   //m
             berth.setDepth(-13.5);  //m
             berth.setName("青峙2#泊位");
             berth.setShipEnum(ShipEnum.Chemical_Oil);
             berth.setTonner(50000); //吨
+            berth.setToAnchorageTime(3.83);
             berthList.add(berth);
         }
         {
             berth = new Berth();
-            berth.setId(19);
+            berth.setId(18);
             berth.setLength(260);   //m
             berth.setDepth(-13.5);  //m
             berth.setName("杨公山石化码头");
             berth.setShipEnum(ShipEnum.Chemical_Oil);
             berth.setTonner(50000); //吨
+            berth.setToAnchorageTime(3.67);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(19);
+            berth.setLength(229);   //m
+            berth.setDepth(-9.5);   //m
+            berth.setName("算山7#泊位");
+            berth.setShipEnum(ShipEnum.Crude_Oil);
+            berth.setTonner(10000); //吨
+            berth.setToAnchorageTime(3.58);
             berthList.add(berth);
         }
         {
             berth = new Berth();
             berth.setId(20);
-            berth.setLength(510);   //m
-            berth.setDepth(-23.8);   //m
-            berth.setName("原油1#泊位");
+            berth.setLength(400);   //m
+            berth.setDepth(-14);    //m
+            berth.setName("算山6#泊位");
             berth.setShipEnum(ShipEnum.Crude_Oil);
             berth.setTonner(300000); //吨
+            berth.setToAnchorageTime(3.58);
             berthList.add(berth);
         }
         {
             berth = new Berth();
             berth.setId(21);
-            berth.setLength(608);   //m
-            berth.setDepth(-23.8);   //m
-            berth.setName("原油2#泊位");
+            berth.setLength(510);     //m
+            berth.setDepth(-23.8);    //m
+            berth.setName("算山2#泊位");
             berth.setShipEnum(ShipEnum.Crude_Oil);
             berth.setTonner(300000); //吨
+            berth.setToAnchorageTime(4.00);
             berthList.add(berth);
         }
         {
             berth = new Berth();
             berth.setId(22);
-            berth.setLength(229);   //m
-            berth.setDepth(-9.5);    //m
-            berth.setName("原油6#泊位");
+            berth.setLength(608);     //m
+            berth.setDepth(-23.8);    //m
+            berth.setName("算山1#泊位");
             berth.setShipEnum(ShipEnum.Crude_Oil);
-            berth.setTonner(10000); //吨
+            berth.setTonner(300000); //吨
+            berth.setToAnchorageTime(4.00);
             berthList.add(berth);
         }
         {
@@ -350,9 +373,10 @@ public class InitialServiceImpl implements InitialService {
             berth.setId(23);
             berth.setLength(274);     //m
             berth.setDepth(-13.5);    //m
-            berth.setName("北仑电厂1#泊位");
+            berth.setName("北电3#泊位");
             berth.setShipEnum(ShipEnum.Coal);
             berth.setTonner(50000); //吨
+            berth.setToAnchorageTime(3.50);
             berthList.add(berth);
         }
         {
@@ -360,19 +384,813 @@ public class InitialServiceImpl implements InitialService {
             berth.setId(24);
             berth.setLength(256);     //m
             berth.setDepth(-13.5);    //m
-            berth.setName("北仑电厂2#泊位");
+            berth.setName("北电2#泊位");
             berth.setShipEnum(ShipEnum.Coal);
             berth.setTonner(50000); //吨
+            berth.setToAnchorageTime(3.50);
             berthList.add(berth);
         }
         {
             berth = new Berth();
             berth.setId(25);
             berth.setLength(260);     //m
-            berth.setDepth(-13.5);    //m
-            berth.setName("北仑电厂3#泊位");
+            berth.setDepth(-15);    //m
+            berth.setName("北电1#泊位");
             berth.setShipEnum(ShipEnum.Coal);
             berth.setTonner(100000); //吨
+            berth.setToAnchorageTime(3.50);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(26);
+            berth.setLength(300);     //m
+            berth.setDepth(-15);    //m
+            berth.setName("北二集司1#泊位");
+            berth.setShipEnum(ShipEnum.Container_Ship);
+            berth.setTonner(100000); //吨
+            berth.setToAnchorageTime(3.08);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(27);
+            berth.setLength(275);     //m
+            berth.setDepth(-15);      //m
+            berth.setName("北二集司2#泊位");
+            berth.setShipEnum(ShipEnum.Container_Ship);
+            berth.setTonner(100000); //吨
+            berth.setToAnchorageTime(3.08);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(28);
+            berth.setLength(345);     //m
+            berth.setDepth(-15);      //m
+            berth.setName("北二集司3#泊位");
+            berth.setShipEnum(ShipEnum.Container_Ship);
+            berth.setTonner(100000); //吨
+            berth.setToAnchorageTime(3.08);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(29);
+            berth.setLength(250);     //m
+            berth.setDepth(-13.5);      //m
+            berth.setName("金光#泊位");
+            berth.setShipEnum(ShipEnum.Break_Bulk_Ship);
+            berth.setTonner(50000); //吨
+            berth.setToAnchorageTime(3.00);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(30);
+            berth.setLength(250);     //m
+            berth.setDepth(-13.5);      //m
+            berth.setName("正大码头#泊位");
+            berth.setShipEnum(ShipEnum.Container_Ship);
+            berth.setTonner(50000); //吨
+            berth.setToAnchorageTime(2.96);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(31);
+            berth.setLength(204);     //m
+            berth.setDepth(-13.5);      //m
+            berth.setName("北仑国际集装箱3#泊位");
+            berth.setShipEnum(ShipEnum.Container_Ship);
+            berth.setTonner(100000); //吨
+            berth.setToAnchorageTime(2.58);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(32);
+            berth.setLength(232);     //m
+            berth.setDepth(-13.5);      //m
+            berth.setName("北仑国际集装箱4#泊位");
+            berth.setShipEnum(ShipEnum.Container_Ship);
+            berth.setTonner(100000); //吨
+            berth.setToAnchorageTime(2.58);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(33);
+            berth.setLength(232);     //m
+            berth.setDepth(-13.5);    //m
+            berth.setName("北仑国际集装箱5#泊位");
+            berth.setShipEnum(ShipEnum.Container_Ship);
+            berth.setTonner(100000); //吨
+            berth.setToAnchorageTime(2.58);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(34);
+            berth.setLength(232);     //m
+            berth.setDepth(-13.5);    //m
+            berth.setName("北仑国际集装箱6#泊位");
+            berth.setShipEnum(ShipEnum.Container_Ship);
+            berth.setTonner(100000); //吨
+            berth.setToAnchorageTime(2.58);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(35);
+            berth.setLength(250);     //m
+            berth.setDepth(-14);      //m
+            berth.setName("北二司1#泊位");
+            berth.setShipEnum(ShipEnum.Iron_Ore);
+            berth.setTonner(50000); //吨
+            berth.setToAnchorageTime(2.67);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(36);
+            berth.setLength(264);     //m
+            berth.setDepth(-14);      //m
+            berth.setName("北二司2#泊位");
+            berth.setShipEnum(ShipEnum.Iron_Ore);
+            berth.setTonner(50000); //吨
+            berth.setToAnchorageTime(2.67);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(37);
+            berth.setLength(168);     //m
+            berth.setDepth(-13.5);    //m
+            berth.setName("北二司3#泊位");
+            berth.setShipEnum(ShipEnum.Iron_Ore);
+            berth.setTonner(7000); //吨
+            berth.setToAnchorageTime(3.08);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(38);
+            berth.setLength(262);     //m
+            berth.setDepth(-13.5);    //m
+            berth.setName("北二司4#泊位");
+            berth.setShipEnum(ShipEnum.Iron_Ore);
+            berth.setTonner(30000);   //吨
+            berth.setToAnchorageTime(3.08);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(39);
+            berth.setLength(344);     //m
+            berth.setDepth(-13.5);    //m
+            berth.setName("北二司6#泊位");
+            berth.setShipEnum(ShipEnum.Iron_Ore);
+            berth.setTonner(50000);   //吨
+            berth.setToAnchorageTime(2.50);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(40);
+            berth.setLength(351);     //m
+            berth.setDepth(-20);    //m
+            berth.setName("北司1#泊位");
+            berth.setShipEnum(ShipEnum.Iron_Ore);
+            berth.setTonner(150000);   //吨
+            berth.setToAnchorageTime(3.25);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(41);
+            berth.setLength(422);     //m
+            berth.setDepth(-22);    //m
+            berth.setName("北司2#泊位");
+            berth.setShipEnum(ShipEnum.Iron_Ore);
+            berth.setTonner(200000);   //吨
+            berth.setToAnchorageTime(3.25);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(42);
+            berth.setLength(250);     //m
+            berth.setDepth(-13.5);    //m
+            berth.setName("北司3#泊位");
+            berth.setShipEnum(ShipEnum.Iron_Ore);
+            berth.setTonner(50000);   //吨
+            berth.setToAnchorageTime(3.17);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(43);
+            berth.setLength(250);     //m
+            berth.setDepth(-13.5);    //m
+            berth.setName("北司4#泊位");
+            berth.setShipEnum(ShipEnum.Iron_Ore);
+            berth.setTonner(50000);   //吨
+            berth.setToAnchorageTime(3.17);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(44);
+            berth.setLength(150);     //m
+            berth.setDepth(-11);     //m
+            berth.setName("北司5#泊位");
+            berth.setShipEnum(ShipEnum.Iron_Ore);
+            berth.setTonner(25000);   //吨
+            berth.setToAnchorageTime(3.17);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(45);
+            berth.setLength(260);     //m
+            berth.setDepth(-13.5);    //m
+            berth.setName("北司6#泊位");
+            berth.setShipEnum(ShipEnum.Iron_Ore);
+            berth.setTonner(50000);   //吨
+            berth.setToAnchorageTime(3.17);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(46);
+            berth.setLength(310);     //m
+            berth.setDepth(-15.8);    //m
+            berth.setName("台塑1-1#泊位");
+            berth.setShipEnum(ShipEnum.Chemical_Oil);
+            berth.setTonner(50000);   //吨
+            berth.setToAnchorageTime(2.83);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(47);
+            berth.setLength(310);     //m
+            berth.setDepth(-14);    //m
+            berth.setName("台塑1-2#泊位");
+            berth.setShipEnum(ShipEnum.Chemical_Oil);
+            berth.setTonner(30000);   //吨
+            berth.setToAnchorageTime(2.83);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(48);
+            berth.setLength(300);     //m
+            berth.setDepth(-15.8);    //m
+            berth.setName("台塑2-1#泊位");
+            berth.setShipEnum(ShipEnum.Chemical_Oil);
+            berth.setTonner(50000);   //吨
+            berth.setToAnchorageTime(2.92);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(49);
+            berth.setLength(300);     //m
+            berth.setDepth(-14);      //m
+            berth.setName("台塑2-2#泊位");
+            berth.setShipEnum(ShipEnum.Chemical_Oil);
+            berth.setTonner(30000);   //吨
+            berth.setToAnchorageTime(2.92);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(50);
+            berth.setLength(240);     //m
+            berth.setDepth(-14);      //m
+            berth.setName("台塑多用途1#泊位");
+            berth.setShipEnum(ShipEnum.Chemical_Oil);
+            berth.setTonner(20000);   //吨
+            berth.setToAnchorageTime(3.0);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(51);
+            berth.setLength(240);     //m
+            berth.setDepth(-14);      //m
+            berth.setName("台塑多用途2#泊位");
+            berth.setShipEnum(ShipEnum.Chemical_Oil);
+            berth.setTonner(20000);   //吨
+            berth.setToAnchorageTime(3.0);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(52);
+            berth.setLength(270);     //m
+            berth.setDepth(-14);      //m
+            berth.setName("台塑多用途3#泊位");
+            berth.setShipEnum(ShipEnum.Chemical_Oil);
+            berth.setTonner(35000);   //吨
+            berth.setToAnchorageTime(3.0);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(53);
+            berth.setLength(240);     //m
+            berth.setDepth(-12.5);      //m
+            berth.setName("信业码头1#泊位");
+            berth.setShipEnum(ShipEnum.Container_Ship);
+            berth.setTonner(20000);   //吨
+            berth.setToAnchorageTime(2.50);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(54);
+            berth.setLength(240);     //m
+            berth.setDepth(-12.5);      //m
+            berth.setName("信业码头2#泊位");
+            berth.setShipEnum(ShipEnum.Container_Ship);
+            berth.setTonner(20000);   //吨
+            berth.setToAnchorageTime(2.50);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(55);
+            berth.setLength(0);     //m
+            berth.setDepth(0);      //m
+            berth.setName("大榭兴发#泊位");
+            berth.setShipEnum(ShipEnum.Chemical_Oil);
+            berth.setTonner(0);   //吨
+            berth.setToAnchorageTime(2.50);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(56);
+            berth.setLength(0);     //m
+            berth.setDepth(0);      //m
+            berth.setName("大榭永信#泊位");
+            berth.setShipEnum(ShipEnum.Chemical_Oil);
+            berth.setTonner(0);   //吨
+            berth.setToAnchorageTime(2.50);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(57);
+            berth.setLength(330);     //m
+            berth.setDepth(-17);      //m
+            berth.setName("招商国际1#泊位");
+            berth.setShipEnum(ShipEnum.Container_Ship);
+            berth.setTonner(100000);   //吨
+            berth.setToAnchorageTime(2.50);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(58);
+            berth.setLength(360);     //m
+            berth.setDepth(-17);      //m
+            berth.setName("招商国际2#泊位");
+            berth.setShipEnum(ShipEnum.Container_Ship);
+            berth.setTonner(150000);   //吨
+            berth.setToAnchorageTime(2.50);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(59);
+            berth.setLength(450);     //m
+            berth.setDepth(-17);      //m
+            berth.setName("招商国际3#泊位");
+            berth.setShipEnum(ShipEnum.Container_Ship);
+            berth.setTonner(150000);   //吨
+            berth.setToAnchorageTime(2.50);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(60);
+            berth.setLength(360);     //m
+            berth.setDepth(-17);      //m
+            berth.setName("招商国际4#泊位");
+            berth.setShipEnum(ShipEnum.Container_Ship);
+            berth.setTonner(70000);   //吨
+            berth.setToAnchorageTime(2.50);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(61);
+            berth.setLength(340);     //m
+            berth.setDepth(-17);      //m
+            berth.setName("烟台万华煤盐#泊位");
+            berth.setShipEnum(ShipEnum.Container_Ship);
+            berth.setTonner(50000);   //吨
+            berth.setToAnchorageTime(2.42);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(62);
+            berth.setLength(330);     //m
+            berth.setDepth(-17);      //m
+            berth.setName("烟台万华化工5万吨#泊位");
+            berth.setShipEnum(ShipEnum.Chemical_Oil);
+            berth.setTonner(50000);   //吨
+            berth.setToAnchorageTime(2.33);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(63);
+            berth.setLength(263);     //m
+            berth.setDepth(-15);      //m
+            berth.setName("烟台万华化工2万吨#泊位");
+            berth.setShipEnum(ShipEnum.Chemical_Oil);
+            berth.setTonner(20000);   //吨
+            berth.setToAnchorageTime(2.33);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(64);
+            berth.setLength(515);     //m
+            berth.setDepth(-25);      //m
+            berth.setName("大榭中油燃料油#泊位");
+            berth.setShipEnum(ShipEnum.Crude_Oil);
+            berth.setTonner(300000);   //吨
+            berth.setToAnchorageTime(4.0);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(65);
+            berth.setLength(330);     //m
+            berth.setDepth(-15);      //m
+            berth.setName("大榭百地年#泊位");
+            berth.setShipEnum(ShipEnum.Chemical_Oil);
+            berth.setTonner(50000);   //吨
+            berth.setToAnchorageTime(4.0);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(66);
+            berth.setLength(360);     //m
+            berth.setDepth(-16);      //m
+            berth.setName("大榭关外#泊位");
+            berth.setShipEnum(ShipEnum.Chemical_Oil);
+            berth.setTonner(50000);   //吨
+            berth.setToAnchorageTime(2.17);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(67);
+            berth.setLength(480);     //m
+            berth.setDepth(-16);      //m
+            berth.setName("大榭利万1-3码头#泊位");
+            berth.setShipEnum(ShipEnum.Crude_Oil);
+            berth.setTonner(50000);   //吨
+            berth.setToAnchorageTime(2.5);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(68);
+            berth.setLength(330);     //m
+            berth.setDepth(-12);      //m
+            berth.setName("大榭利万5-7码头#泊位");
+            berth.setShipEnum(ShipEnum.Chemical_Oil);
+            berth.setTonner(30000);   //吨
+            berth.setToAnchorageTime(2.47);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(69);
+            berth.setLength(490);     //m
+            berth.setDepth(-27.5);      //m
+            berth.setName("大榭实华3#泊位");
+            berth.setShipEnum(ShipEnum.Chemical_Oil);
+            berth.setTonner(450000);   //吨
+            berth.setToAnchorageTime(3.0);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(70);
+            berth.setLength(0);     //m
+            berth.setDepth(0);      //m
+            berth.setName("港发码头#泊位");
+            berth.setShipEnum(ShipEnum.Chemical_Oil);
+            berth.setTonner(0);   //吨
+            berth.setToAnchorageTime(3.0);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(71);
+            berth.setLength(485);     //m
+            berth.setDepth(-24.5);    //m
+            berth.setName("大榭实华1#泊位");
+            berth.setShipEnum(ShipEnum.Chemical_Oil);
+            berth.setTonner(300000);   //吨
+            berth.setToAnchorageTime(3.0);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(72);
+            berth.setLength(269.5);     //m
+            berth.setDepth(-16.9);      //m
+            berth.setName("大榭实华2#泊位");
+            berth.setShipEnum(ShipEnum.Chemical_Oil);
+            berth.setTonner(69793);   //吨
+            berth.setToAnchorageTime(3.0);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(73);
+            berth.setLength(300);     //m
+            berth.setDepth(-17);      //m
+            berth.setName("港吉2#泊位");
+            berth.setShipEnum(ShipEnum.Container_Ship);
+            berth.setTonner(100000);   //吨
+            berth.setToAnchorageTime(2.0);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(74);
+            berth.setLength(400);     //m
+            berth.setDepth(-17);      //m
+            berth.setName("港吉3#泊位");
+            berth.setShipEnum(ShipEnum.Container_Ship);
+            berth.setTonner(150000);   //吨
+            berth.setToAnchorageTime(2.0);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(75);
+            berth.setLength(325);     //m
+            berth.setDepth(-17);      //m
+            berth.setName("港吉4泊位");
+            berth.setShipEnum(ShipEnum.Container_Ship);
+            berth.setTonner(150000);   //吨
+            berth.setToAnchorageTime(2.0);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(76);
+            berth.setLength(325);     //m
+            berth.setDepth(-17);      //m
+            berth.setName("港吉5#泊位");
+            berth.setShipEnum(ShipEnum.Container_Ship);
+            berth.setTonner(150000);   //吨
+            berth.setToAnchorageTime(2.0);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(77);
+            berth.setLength(350);     //m
+            berth.setDepth(-17);      //m
+            berth.setName("港吉6#泊位");
+            berth.setShipEnum(ShipEnum.Container_Ship);
+            berth.setTonner(150000);   //吨
+            berth.setToAnchorageTime(2.0);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(78);
+            berth.setLength(385);     //m
+            berth.setDepth(-17);      //m
+            berth.setName("远东7#泊位");
+            berth.setShipEnum(ShipEnum.Container_Ship);
+            berth.setTonner(150000);   //吨
+            berth.setToAnchorageTime(1.92);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(79);
+            berth.setLength(340);     //m
+            berth.setDepth(-17);      //m
+            berth.setName("远东8#泊位");
+            berth.setShipEnum(ShipEnum.Container_Ship);
+            berth.setTonner(150000);   //吨
+            berth.setToAnchorageTime(1.92);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(80);
+            berth.setLength(285);     //m
+            berth.setDepth(-17);      //m
+            berth.setName("远东9#泊位");
+            berth.setShipEnum(ShipEnum.Container_Ship);
+            berth.setTonner(100000);   //吨
+            berth.setToAnchorageTime(1.92);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(81);
+            berth.setLength(350);     //m
+            berth.setDepth(-17);      //m
+            berth.setName("远东10#泊位");
+            berth.setShipEnum(ShipEnum.Container_Ship);
+            berth.setTonner(150000);   //吨
+            berth.setToAnchorageTime(1.92);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(82);
+            berth.setLength(350);     //m
+            berth.setDepth(-17);      //m
+            berth.setName("远东11#泊位");
+            berth.setShipEnum(ShipEnum.Container_Ship);
+            berth.setTonner(150000);   //吨
+            berth.setToAnchorageTime(1.92);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(83);
+            berth.setLength(520);     //m
+            berth.setDepth(-21.5);      //m
+            berth.setName("中宅码头1#泊位");
+            berth.setShipEnum(ShipEnum.Iron_Ore);
+            berth.setTonner(250000);   //吨
+            berth.setToAnchorageTime(1.83);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(84);
+            berth.setLength(352);     //m
+            berth.setDepth(-13.8);      //m
+            berth.setName("中宅码头2#泊位");
+            berth.setShipEnum(ShipEnum.Iron_Ore);
+            berth.setTonner(50000);   //吨
+            berth.setToAnchorageTime(1.83);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(85);
+            berth.setLength(440);     //m
+            berth.setDepth(-16);      //m
+            berth.setName("LNG码头卸船#泊位");
+            berth.setShipEnum(ShipEnum.Chemical_Oil);
+            berth.setTonner(266000);   //吨
+            berth.setToAnchorageTime(2.5);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(86);
+            berth.setLength(240);     //m
+            berth.setDepth(-13.7);      //m
+            berth.setName("光明码头1#泊位");
+            berth.setShipEnum(ShipEnum.Coal);
+            berth.setTonner(35000);   //吨
+            berth.setToAnchorageTime(2.0);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(87);
+            berth.setLength(189);     //m
+            berth.setDepth(-16.9);      //m
+            berth.setName("光明码头2#泊位");
+            berth.setShipEnum(ShipEnum.Coal);
+            berth.setTonner(20000);   //吨
+            berth.setToAnchorageTime(2.0);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(88);
+            berth.setLength(310);     //m
+            berth.setDepth(-17.3);      //m
+            berth.setName("光明码头3#泊位");
+            berth.setShipEnum(ShipEnum.Coal);
+            berth.setTonner(10000);   //吨
+            berth.setToAnchorageTime(2.0);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(89);
+            berth.setLength(225);     //m
+            berth.setDepth(-16);      //m
+            berth.setName("港鑫东方#泊位");
+            berth.setShipEnum(ShipEnum.Chemical_Oil);
+            berth.setTonner(50000);   //吨
+            berth.setToAnchorageTime(1.75);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(90);
+            berth.setLength(366);     //m
+            berth.setDepth(-17);      //m
+            berth.setName("梅山国际1#泊位");
+            berth.setShipEnum(ShipEnum.Container_Ship);
+            berth.setTonner(70000);   //吨
+            berth.setToAnchorageTime(2.0);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(91);
+            berth.setLength(439);     //m
+            berth.setDepth(-17);      //m
+            berth.setName("梅山国际2#泊位");
+            berth.setShipEnum(ShipEnum.Container_Ship);
+            berth.setTonner(70000);   //吨
+            berth.setToAnchorageTime(2.0);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(92);
+            berth.setLength(303);     //m
+            berth.setDepth(-17.5);      //m
+            berth.setName("梅山国际3#泊位");
+            berth.setShipEnum(ShipEnum.Container_Ship);
+            berth.setTonner(150000);   //吨
+            berth.setToAnchorageTime(2.0);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(93);
+            berth.setLength(301);     //m
+            berth.setDepth(-19.5);      //m
+            berth.setName("梅山国际4#泊位");
+            berth.setShipEnum(ShipEnum.Container_Ship);
+            berth.setTonner(150000);   //吨
+            berth.setToAnchorageTime(2.0);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(94);
+            berth.setLength(379);     //m
+            berth.setDepth(-19.5);      //m
+            berth.setName("梅山国际5#泊位");
+            berth.setShipEnum(ShipEnum.Container_Ship);
+            berth.setTonner(150000);   //吨
+            berth.setToAnchorageTime(2.0);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(95);
+            berth.setLength(450);     //m
+            berth.setDepth(-15.7);      //m
+            berth.setName("梅西滚装船#泊位");
+            berth.setShipEnum(ShipEnum.Break_Bulk_Ship);
+            berth.setTonner(70000);   //吨
+            berth.setToAnchorageTime(2.25);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(96);
+            berth.setLength(335);     //m
+            berth.setDepth(-18);      //m
+            berth.setName("甬舟码头1#泊位");
+            berth.setShipEnum(ShipEnum.Container_Ship);
+            berth.setTonner(100000);   //吨
+            berth.setToAnchorageTime(3.25);
+            berthList.add(berth);
+        }
+        {
+            berth = new Berth();
+            berth.setId(97);
+            berth.setLength(350);     //m
+            berth.setDepth(-18);      //m
+            berth.setName("甬舟码头2#泊位");
+            berth.setShipEnum(ShipEnum.Container_Ship);
+            berth.setTonner(100000);   //吨
+            berth.setToAnchorageTime(3.25);
             berthList.add(berth);
         }
         return berthList;
@@ -386,9 +1204,9 @@ public class InitialServiceImpl implements InitialService {
             traffic.setId(0);
             traffic.setStatus(0);
             traffic.setTrafficEnum(TrafficEnum.CS_PROHIBIT_ANCHOR);
-            traffic.setTrafficDuration(1);
             traffic.setTrafficTimes(1);
-            traffic.setTimeEnum(TimeEnum.DAY);
+            traffic.setTrafficDuration(63.3);
+            traffic.setTimeEnum(TimeEnum.HOR);
             trafficList.add(traffic);
         }
         {
@@ -396,9 +1214,9 @@ public class InitialServiceImpl implements InitialService {
             traffic.setId(1);
             traffic.setStatus(0);
             traffic.setTrafficEnum(TrafficEnum.BBS_PROHIBIT_ANCHOR);
-            traffic.setTrafficDuration(1);
             traffic.setTrafficTimes(1);
-            traffic.setTimeEnum(TimeEnum.DAY);
+            traffic.setTrafficDuration(163.8);
+            traffic.setTimeEnum(TimeEnum.HOR);
             trafficList.add(traffic);
         }
         {
@@ -406,9 +1224,9 @@ public class InitialServiceImpl implements InitialService {
             traffic.setId(2);
             traffic.setStatus(0);
             traffic.setTrafficEnum(TrafficEnum.DANGER_PROHIBIT_ANCHOR);
-            traffic.setTrafficDuration(1);
             traffic.setTrafficTimes(1);
-            traffic.setTimeEnum(TimeEnum.DAY);
+            traffic.setTrafficDuration(429.3);
+            traffic.setTimeEnum(TimeEnum.HOR);
             trafficList.add(traffic);
         }
         {
@@ -416,9 +1234,9 @@ public class InitialServiceImpl implements InitialService {
             traffic.setId(3);
             traffic.setStatus(0);
             traffic.setTrafficEnum(TrafficEnum.PROHIBIT_BOTH_TRAVEL);
-            traffic.setTrafficDuration(1);
             traffic.setTrafficTimes(1);
-            traffic.setTimeEnum(TimeEnum.DAY);
+            traffic.setTrafficDuration(431.2 + 13.5 + 3);
+            traffic.setTimeEnum(TimeEnum.HOR);
             trafficList.add(traffic);
         }
         {
@@ -426,9 +1244,9 @@ public class InitialServiceImpl implements InitialService {
             traffic.setId(4);
             traffic.setStatus(0);
             traffic.setTrafficEnum(TrafficEnum.PROHIBIT_CONTRARY_TRAVEL);
-            traffic.setTrafficDuration(1);
             traffic.setTrafficTimes(1);
-            traffic.setTimeEnum(TimeEnum.DAY);
+            traffic.setTrafficDuration(13.5);
+            traffic.setTimeEnum(TimeEnum.HOR);
             trafficList.add(traffic);
         }
         return trafficList;

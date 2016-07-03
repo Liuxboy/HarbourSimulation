@@ -4,6 +4,7 @@ import com.github.liuxboy.harbour.simulation.common.constant.PassDirectEnum;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -18,8 +19,6 @@ import java.util.List;
  */
 @Component
 public class Channel {
-    //錨地船舶列表
-    private List<Ship> shipList = new ArrayList<Ship>();
     //编号
     private int id = 1;
     //航道名
@@ -34,6 +33,10 @@ public class Channel {
     private double limitedSpeed;
     //通航模式
     private PassDirectEnum passEnum;
+    //进入航道船舶列表
+    private LinkedList<Ship> inShipList = new LinkedList<Ship>();
+    //驶离航道船舶列表
+    private LinkedList<Ship> outShipList = new LinkedList<Ship>();
 
     public int getId() {
         return id;
@@ -91,6 +94,22 @@ public class Channel {
         this.passEnum = passEnum;
     }
 
+    public LinkedList<Ship> getInShipList() {
+        return inShipList;
+    }
+
+    public void setInShipList(LinkedList<Ship> inShipList) {
+        this.inShipList = inShipList;
+    }
+
+    public LinkedList<Ship> getOutShipList() {
+        return outShipList;
+    }
+
+    public void setOutShipList(LinkedList<Ship> outShipList) {
+        this.outShipList = outShipList;
+    }
+
     @Override
     public String toString() {
         final StringBuilder stbd = new StringBuilder("Channel{");
@@ -101,6 +120,8 @@ public class Channel {
         stbd.append(",\"depth\":").append(depth);
         stbd.append(",\"limitedSpeed\":").append(limitedSpeed);
         stbd.append(",\"passEnum\":").append(passEnum);
+        stbd.append(",\"inShipList\":").append(inShipList);
+        stbd.append(",\"outShipList\":").append(outShipList);
         stbd.append('}');
         stbd.append(super.toString());
         return stbd.toString();

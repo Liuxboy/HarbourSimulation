@@ -15,6 +15,7 @@ public class BigDecimalUtil {
 
     /**
      * 两个BigDecimal相除，四舍五入保留两位小数
+     *
      * @param dividend
      * @param divisor
      * @return
@@ -25,8 +26,10 @@ public class BigDecimalUtil {
         }
         return dividend.divide(divisor, 2, BigDecimal.ROUND_HALF_DOWN);
     }
+
     /**
      * 两个BigDecimal相除，四舍五入保留4位小数
+     *
      * @param dividend
      * @param divisor
      * @return
@@ -37,11 +40,11 @@ public class BigDecimalUtil {
         }
         return dividend.divide(divisor, 4, BigDecimal.ROUND_HALF_DOWN);
     }
+
     /**
      * 将一个BigDecimal数以四舍五入的方式保留2位，然后转换成String
      *
      * @param bigDecimal
-     *
      * @return
      */
     public static String decimal2String(BigDecimal bigDecimal) {
@@ -52,7 +55,6 @@ public class BigDecimalUtil {
      * 将一个double数以四舍五入的方式保留2位，然后转换成String
      *
      * @param var
-     *
      * @return
      */
     public static String decimal2String(Double var) {
@@ -63,11 +65,26 @@ public class BigDecimalUtil {
         }
         return "0.00";
     }
+
+    /**
+     * 将一个double数乘上100，以四舍五入的方式保留2位，然后转换成百分数String
+     *
+     * @param var
+     * @return
+     */
+    public static String decimal2PercentString(Double var) {
+        if (var != null) {
+            BigDecimal bigDecimal = new BigDecimal(var * 100).setScale(2, BigDecimal.ROUND_HALF_UP);
+            DecimalFormat df = new DecimalFormat("0.00");
+            return df.format(bigDecimal) + "%";
+        }
+        return "0.00";
+    }
+
     /**
      * 将一个double取掉小数位，然后转换成String
      *
      * @param var
-     *
      * @return
      */
     public static String decimalNoPoint(Double var) {
@@ -82,7 +99,6 @@ public class BigDecimalUtil {
      * 将一个double数以四舍五入的方式保留2位
      *
      * @param var
-     *
      * @return
      */
     public static double decimal2Double(Double var) {
@@ -96,7 +112,6 @@ public class BigDecimalUtil {
      * 将一个float数以四舍五入的方式保留2位
      *
      * @param var
-     *
      * @return
      */
     public static float decimal2Float(Float var) {

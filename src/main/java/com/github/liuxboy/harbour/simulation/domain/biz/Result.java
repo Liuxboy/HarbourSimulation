@@ -21,13 +21,21 @@ public class Result implements Serializable {
     //船舶类型
     private ShipEnum shipEnum;
     //船舶平均在港时间，单位：小时
-    private String avgInHarbourTime;
+    private double avgInHarbourTime;
+    //船舶总在港时间，单位：小时
+    private double totalInHarboursTime;
     //船舶平均等待航道时间，单位：小时
-    private String avgWaitChannelTime;
-    //船舶平均等泊时间，单位：小时
-    private String avgWaitBerthTime;
+    private double avgWaitChannelTime;
+    //船舶总等待航道时间，单位：小时
+    private double totalWaitChannelTime;
+    //船舶平均等待泊位时间，单位：小时
+    private double avgWaitBerthTime;
+    //船舶总等待泊位时间，单位：小时
+    private double totalWaitBerthTime;
     //船舶平均在泊时间，单位：小时
-    private String avgOnBerthTime;
+    private double avgOnBerthTime;
+    //船舶总在泊时间，单位：小时
+    private double totalOnBerthTime;
     //AWT/AST指标
     //AWT表示平均等待时间：平均等待航道时间+平均等待泊位时间
     //AST表示平均在泊时间
@@ -51,35 +59,35 @@ public class Result implements Serializable {
         this.shipEnum = shipEnum;
     }
 
-    public String getAvgInHarbourTime() {
+    public double getAvgInHarbourTime() {
         return avgInHarbourTime;
     }
 
-    public void setAvgInHarbourTime(String avgInHarbourTime) {
+    public void setAvgInHarbourTime(double avgInHarbourTime) {
         this.avgInHarbourTime = avgInHarbourTime;
     }
 
-    public String getAvgWaitChannelTime() {
+    public double getAvgWaitChannelTime() {
         return avgWaitChannelTime;
     }
 
-    public void setAvgWaitChannelTime(String avgWaitChannelTime) {
+    public void setAvgWaitChannelTime(double avgWaitChannelTime) {
         this.avgWaitChannelTime = avgWaitChannelTime;
     }
 
-    public String getAvgWaitBerthTime() {
+    public double getAvgWaitBerthTime() {
         return avgWaitBerthTime;
     }
 
-    public void setAvgWaitBerthTime(String avgWaitBerthTime) {
+    public void setAvgWaitBerthTime(double avgWaitBerthTime) {
         this.avgWaitBerthTime = avgWaitBerthTime;
     }
 
-    public String getAvgOnBerthTime() {
+    public double getAvgOnBerthTime() {
         return avgOnBerthTime;
     }
 
-    public void setAvgOnBerthTime(String avgOnBerthTime) {
+    public void setAvgOnBerthTime(double avgOnBerthTime) {
         this.avgOnBerthTime = avgOnBerthTime;
     }
 
@@ -99,19 +107,53 @@ public class Result implements Serializable {
         this.berthUtilizationRatio = berthUtilizationRatio;
     }
 
+    public double getTotalInHarboursTime() {
+        return totalInHarboursTime;
+    }
+
+    public void setTotalInHarboursTime(double totalInHarboursTime) {
+        this.totalInHarboursTime = totalInHarboursTime;
+    }
+
+    public double getTotalWaitChannelTime() {
+        return totalWaitChannelTime;
+    }
+
+    public void setTotalWaitChannelTime(double totalWaitChannelTime) {
+        this.totalWaitChannelTime = totalWaitChannelTime;
+    }
+
+    public double getTotalWaitBerthTime() {
+        return totalWaitBerthTime;
+    }
+
+    public void setTotalWaitBerthTime(double totalWaitBerthTime) {
+        this.totalWaitBerthTime = totalWaitBerthTime;
+    }
+
+    public double getTotalOnBerthTime() {
+        return totalOnBerthTime;
+    }
+
+    public void setTotalOnBerthTime(double totalOnBerthTime) {
+        this.totalOnBerthTime = totalOnBerthTime;
+    }
+
     @Override
     public String toString() {
-        final StringBuilder stbd = new StringBuilder("Result{");
-        stbd.append("\"shipEnum\":").append(shipEnum);
-        stbd.append(",\"number\":\"").append(number).append('\"');
-        stbd.append(",\"avgInHarbourTime\":\"").append(avgInHarbourTime).append('\"');
-        stbd.append(",\"avgWaitChannelTime\":\"").append(avgWaitChannelTime).append('\"');
-        stbd.append(",\"avgWaitBerthTime\":\"").append(avgWaitBerthTime).append('\"');
-        stbd.append(",\"avgOnBerthTime\":\"").append(avgOnBerthTime).append('\"');
-        stbd.append(",\"awtAstIndex\":\"").append(awtAstIndex).append('\"');
-        stbd.append(",\"berthUtilizationRatio\":\"").append(berthUtilizationRatio).append('\"');
-        stbd.append('}');
-        stbd.append(super.toString());
-        return stbd.toString();
+        return "Result{" +
+                "number=" + number +
+                ", shipEnum=" + shipEnum +
+                ", avgInHarbourTime=" + avgInHarbourTime +
+                ", totalInHarboursTime=" + totalInHarboursTime +
+                ", avgWaitChannelTime=" + avgWaitChannelTime +
+                ", totalWaitChannelTime=" + totalWaitChannelTime +
+                ", avgWaitBerthTime=" + avgWaitBerthTime +
+                ", totalWaitBerthTime=" + totalWaitBerthTime +
+                ", avgOnBerthTime=" + avgOnBerthTime +
+                ", totalOnBerthTime=" + totalOnBerthTime +
+                ", awtAstIndex='" + awtAstIndex + '\'' +
+                ", berthUtilizationRatio='" + berthUtilizationRatio + '\'' +
+                '}';
     }
 }

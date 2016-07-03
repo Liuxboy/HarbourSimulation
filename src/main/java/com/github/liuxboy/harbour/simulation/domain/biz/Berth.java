@@ -13,10 +13,10 @@ import com.github.liuxboy.harbour.simulation.common.constant.ShipEnum;
  * @version 1.0
  */
 public class Berth {
-    //在泊船只
-    private Ship ship;
     //编号
     private int id = 1;
+    //在泊船只
+    private Ship ship;
     //泊位名称
     private String name;
     //泊位类型，对应的船泊类型
@@ -27,6 +27,8 @@ public class Berth {
     private double depth;
     //泊位长度
     private double length;
+    //从虾峙门航道进入泊位时间
+    private double toAnchorageTime;
 
     public Ship getShip() {
         return ship;
@@ -84,6 +86,14 @@ public class Berth {
         this.length = length;
     }
 
+    public double getToAnchorageTime() {
+        return toAnchorageTime;
+    }
+
+    public void setToAnchorageTime(double toAnchorageTime) {
+        this.toAnchorageTime = toAnchorageTime;
+    }
+
     @Override
     public String toString() {
         final StringBuilder stbd = new StringBuilder("Berth{");
@@ -93,6 +103,7 @@ public class Berth {
         stbd.append(",\"tonner\":").append(tonner);
         stbd.append(",\"depth\":").append(depth);
         stbd.append(",\"length\":").append(length);
+        stbd.append(",\"toAnchorageTime\":").append(toAnchorageTime);
         stbd.append('}');
         stbd.append(super.toString());
         return stbd.toString();
