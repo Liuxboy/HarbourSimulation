@@ -43,6 +43,24 @@ public class Result implements Serializable {
     //泊位利用率，百分数%
     private String berthUtilizationRatio;
 
+    public Result() {
+    }
+
+    public Result(int number, ShipEnum shipEnum, double avgInHarbourTime, double totalInHarboursTime, double avgWaitChannelTime, double totalWaitChannelTime, double avgWaitBerthTime, double totalWaitBerthTime, double avgOnBerthTime, double totalOnBerthTime, String awtAstIndex, String berthUtilizationRatio) {
+        this.number = number;
+        this.shipEnum = shipEnum;
+        this.avgInHarbourTime = avgInHarbourTime;
+        this.totalInHarboursTime = totalInHarboursTime;
+        this.avgWaitChannelTime = avgWaitChannelTime;
+        this.totalWaitChannelTime = totalWaitChannelTime;
+        this.avgWaitBerthTime = avgWaitBerthTime;
+        this.totalWaitBerthTime = totalWaitBerthTime;
+        this.avgOnBerthTime = avgOnBerthTime;
+        this.totalOnBerthTime = totalOnBerthTime;
+        this.awtAstIndex = awtAstIndex;
+        this.berthUtilizationRatio = berthUtilizationRatio;
+    }
+
     public int getNumber() {
         return number;
     }

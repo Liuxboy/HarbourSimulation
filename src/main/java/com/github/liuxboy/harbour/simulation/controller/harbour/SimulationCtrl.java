@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -32,32 +33,10 @@ public class SimulationCtrl {
     HttpServletRequest httpServletRequest;
     @Resource
     HttpSession httpSession;
-    @Resource
-    private HarbourSimulationService harbourSimulationService;
 
     @RequestMapping(value = "/toList")
     public String toList() {
         httpServletRequest.setAttribute("resultList", httpSession.getAttribute("resultList"));
-        return "/harbour/simulation";
-    }
-
-    @RequestMapping(value = "/start")
-    @ResponseBody
-    public String start() {
-        List<Anchorage> anchorageList =(List) httpSession.getAttribute("anchorageList");
-        List<Channel> channelList =(List) httpSession.getAttribute("channelList");
-        List<Berth> berthList =(List) httpSession.getAttribute("berthList");
-        List<Ship> shipList =(List) httpSession.getAttribute("shipList");
-        List<Traffic> trafficList =(List) httpSession.getAttribute("trafficList");
-        List<SimulationTime> timeList =(List) httpSession.getAttribute("timeList");
-        try {
-            List<Result> resultList = harbourSimulationService.simulation(anchorageList, channelList, berthList, shipList, trafficList, timeList);
-            httpServletRequest.setAttribute("resultList", resultList);
-            httpServletRequest.setAttribute("flag", 1);
-            logger.info("resultList:", resultList);
-        } catch (ServiceException e) {
-            e.printStackTrace();
-        }
         return "/harbour/simulation";
     }
 }
