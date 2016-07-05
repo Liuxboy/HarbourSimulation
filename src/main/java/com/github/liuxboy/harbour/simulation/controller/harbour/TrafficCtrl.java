@@ -1,16 +1,12 @@
 package com.github.liuxboy.harbour.simulation.controller.harbour;
 
-import com.github.liuxboy.harbour.simulation.common.constant.TrafficEnum;
 import com.github.liuxboy.harbour.simulation.common.util.AjaxResultUtil;
-import com.github.liuxboy.harbour.simulation.domain.biz.Channel;
-import com.github.liuxboy.harbour.simulation.domain.biz.Ship;
 import com.github.liuxboy.harbour.simulation.domain.biz.Traffic;
 import com.github.liuxboy.harbour.simulation.service.InitialService;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

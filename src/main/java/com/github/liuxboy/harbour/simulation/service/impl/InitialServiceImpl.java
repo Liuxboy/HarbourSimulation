@@ -37,6 +37,7 @@ public class InitialServiceImpl implements InitialService {
             anchorage.setPoint3Y(29.7417);      //29°44′30″N
             anchorage.setPoint4X(122.3417);     //122°20′30″E
             anchorage.setPoint4Y(29.7417);      //29°44′30″N
+            anchorage.setSize(19);              //锚位数
             anchorageList.add(anchorage);
         }
         {
@@ -51,6 +52,7 @@ public class InitialServiceImpl implements InitialService {
             anchorage.setPoint3Y(29.6933);      //29°41′36″N
             anchorage.setPoint4X(122.3333);     //122°20′00″E
             anchorage.setPoint4Y(29.6933);      //29°41′36″N
+            anchorage.setSize(15);              //锚位数
             anchorageList.add(anchorage);
         }
         {
@@ -65,6 +67,7 @@ public class InitialServiceImpl implements InitialService {
             anchorage.setPoint3Y(29.7533);      //29°45′12″N
             anchorage.setPoint4X(122.5600);     //122°33′36″E
             anchorage.setPoint4Y(29.7533);      //29°45′12″N
+            anchorage.setSize(5);              //锚位数
             anchorageList.add(anchorage);
         }
         {
@@ -79,6 +82,7 @@ public class InitialServiceImpl implements InitialService {
             anchorage.setPoint3Y(29.6958);      //29°41′45″N
             anchorage.setPoint4X(122.5600);     //122°33′36″E
             anchorage.setPoint4Y(29.6958);      //29°41′45″N
+            anchorage.setSize(14);              //锚位数
             anchorageList.add(anchorage);
         }
         return anchorageList;
@@ -94,8 +98,9 @@ public class InitialServiceImpl implements InitialService {
             channel.setDepth(25.7);     //m
             channel.setLength(14.85);   //km
             channel.setWidth(0.39);     //km
-            channel.setPassEnum(PassDirectEnum.OneWay);
+            channel.setPassEnum(PassDirectEnum.BothWay);
             channel.setLimitedSpeed(19.65); //km/h
+            channel.setDynamicPassRatio(4.8);   //艘/h
             channelList.add(channel);
         }
         {
@@ -107,6 +112,7 @@ public class InitialServiceImpl implements InitialService {
             channel.setWidth(0.70); //km
             channel.setPassEnum(PassDirectEnum.BothWay);
             channel.setLimitedSpeed(22.11); //km/h
+            channel.setDynamicPassRatio(9.5);   //艘/h
             channelList.add(channel);
         }
         return channelList;
@@ -1204,7 +1210,6 @@ public class InitialServiceImpl implements InitialService {
             traffic.setId(0);
             traffic.setStatus(0);
             traffic.setTrafficEnum(TrafficEnum.CS_PROHIBIT_ANCHOR);
-            traffic.setTrafficTimes(1);
             traffic.setTrafficDuration(63.3);
             traffic.setTimeEnum(TimeEnum.HOR);
             trafficList.add(traffic);
@@ -1214,7 +1219,6 @@ public class InitialServiceImpl implements InitialService {
             traffic.setId(1);
             traffic.setStatus(0);
             traffic.setTrafficEnum(TrafficEnum.BBS_PROHIBIT_ANCHOR);
-            traffic.setTrafficTimes(1);
             traffic.setTrafficDuration(163.8);
             traffic.setTimeEnum(TimeEnum.HOR);
             trafficList.add(traffic);
@@ -1224,7 +1228,6 @@ public class InitialServiceImpl implements InitialService {
             traffic.setId(2);
             traffic.setStatus(0);
             traffic.setTrafficEnum(TrafficEnum.DANGER_PROHIBIT_ANCHOR);
-            traffic.setTrafficTimes(1);
             traffic.setTrafficDuration(429.3);
             traffic.setTimeEnum(TimeEnum.HOR);
             trafficList.add(traffic);
@@ -1234,7 +1237,6 @@ public class InitialServiceImpl implements InitialService {
             traffic.setId(3);
             traffic.setStatus(0);
             traffic.setTrafficEnum(TrafficEnum.PROHIBIT_BOTH_TRAVEL);
-            traffic.setTrafficTimes(1);
             traffic.setTrafficDuration(431.2 + 13.5 + 3);
             traffic.setTimeEnum(TimeEnum.HOR);
             trafficList.add(traffic);
@@ -1244,7 +1246,6 @@ public class InitialServiceImpl implements InitialService {
             traffic.setId(4);
             traffic.setStatus(0);
             traffic.setTrafficEnum(TrafficEnum.PROHIBIT_CONTRARY_TRAVEL);
-            traffic.setTrafficTimes(1);
             traffic.setTrafficDuration(13.5);
             traffic.setTimeEnum(TimeEnum.HOR);
             trafficList.add(traffic);

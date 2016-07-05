@@ -31,6 +31,8 @@ public class Channel {
     private double depth;
     //限速
     private double limitedSpeed;
+    //动态通航能力：艘/h
+    private double dynamicPassRatio;
     //通航模式
     private PassDirectEnum passEnum;
     //进入航道船舶列表
@@ -110,6 +112,14 @@ public class Channel {
         this.outShipList = outShipList;
     }
 
+    public double getDynamicPassRatio() {
+        return dynamicPassRatio;
+    }
+
+    public void setDynamicPassRatio(double dynamicPassRatio) {
+        this.dynamicPassRatio = dynamicPassRatio;
+    }
+
     @Override
     public String toString() {
         final StringBuilder stbd = new StringBuilder("Channel{");
@@ -122,6 +132,7 @@ public class Channel {
         stbd.append(",\"passEnum\":").append(passEnum);
         stbd.append(",\"inShipList\":").append(inShipList);
         stbd.append(",\"outShipList\":").append(outShipList);
+        stbd.append(",\"dynamicPassRatio\":").append(dynamicPassRatio);
         stbd.append('}');
         stbd.append(super.toString());
         return stbd.toString();

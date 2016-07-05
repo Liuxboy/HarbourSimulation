@@ -17,6 +17,8 @@ import java.util.LinkedList;
 public class Anchorage {
     //錨地船舶列表
     private LinkedList<Ship> shipList = new LinkedList<Ship>();
+    //锚位数量
+    private int size;
     //编号
     private int id = 1;
     //类型
@@ -126,6 +128,14 @@ public class Anchorage {
         this.point4Y = point4Y;
     }
 
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
     @Override
     public String toString() {
         final StringBuilder stbd = new StringBuilder("Anchorage{");
@@ -139,6 +149,7 @@ public class Anchorage {
         stbd.append(",\"point3Y\":").append(point3Y);
         stbd.append(",\"point4X\":").append(point4X);
         stbd.append(",\"point4Y\":").append(point4Y);
+        stbd.append(",\"size\":").append(size);
         stbd.append('}');
         stbd.append(super.toString());
         return stbd.toString();

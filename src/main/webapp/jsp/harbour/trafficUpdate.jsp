@@ -34,9 +34,29 @@
             </p>
             <div class="divider"/>
             <p>
-                <label>管制次数</label>
-                <input name="trafficTimes" type="text" class="required" maxlength="10"
-                       value="${traffic.trafficTimes}"/>
+                <label>管制开始时刻</label>
+                <input name="startMon" type="text" class="required digits" maxlength="3"
+                       value="${traffic.startMon}"/>月
+            </p>
+            <p>
+                <label style="font-color:#FFF;">&nbsp;</label>
+                <input name="startDay" type="text" class="required digits" maxlength="3"
+                       value="${traffic.startDay}"/>日
+            </p>
+            <p>
+                <label style="font-color:#FFF;">&nbsp;</label>
+                <input name="startHor" type="text" class="required digits" maxlength="3"
+                       value="${traffic.startHor}"/>时
+            </p>
+            <p>
+                <label style="font-color:#FFF;">&nbsp;</label>
+                <input name="startMin" type="text" class="required digits" maxlength="3"
+                       value="${traffic.startMin}"/>分
+            </p>
+            <p>
+                <label style="font-color:#FFF;">&nbsp;</label>
+                <input name="startSec" type="text" class="required digits" maxlength="3"
+                       value="${traffic.startSec}"/>秒
             </p>
             <div class="divider"/>
             <p>

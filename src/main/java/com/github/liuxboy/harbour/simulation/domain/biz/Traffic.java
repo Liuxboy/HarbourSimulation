@@ -18,10 +18,16 @@ public class Traffic {
     private int id;
     //管制类型
     private TrafficEnum trafficEnum;
-    //管制次数
-    private long trafficTimes;
-    //管制开始时间
-
+    //管制开始时刻
+    private int startMon;
+    //管制开始时刻
+    private int startDay;
+    //管制开始时刻
+    private int startHor;
+    //管制开始时刻
+    private int startMin;
+    //管制开始时刻
+    private int startSec;
     //管制时长
     private double trafficDuration;
     //管制时长--单位s
@@ -57,16 +63,48 @@ public class Traffic {
         return timeEnum;
     }
 
+    public int getStartMon() {
+        return startMon;
+    }
+
+    public void setStartMon(int startMon) {
+        this.startMon = startMon;
+    }
+
+    public int getStartDay() {
+        return startDay;
+    }
+
+    public void setStartDay(int startDay) {
+        this.startDay = startDay;
+    }
+
+    public int getStartHor() {
+        return startHor;
+    }
+
+    public void setStartHor(int startHor) {
+        this.startHor = startHor;
+    }
+
+    public int getStartMin() {
+        return startMin;
+    }
+
+    public void setStartMin(int startMin) {
+        this.startMin = startMin;
+    }
+
+    public int getStartSec() {
+        return startSec;
+    }
+
+    public void setStartSec(int startSec) {
+        this.startSec = startSec;
+    }
+
     public void setTimeEnum(TimeEnum timeEnum) {
         this.timeEnum = timeEnum;
-    }
-
-    public long getTrafficTimes() {
-        return trafficTimes;
-    }
-
-    public void setTrafficTimes(long trafficTimes) {
-        this.trafficTimes = trafficTimes;
     }
 
     public int getStatus() {
@@ -79,15 +117,17 @@ public class Traffic {
 
     @Override
     public String toString() {
-        final StringBuilder stbd = new StringBuilder("Traffic{");
-        stbd.append("\"id\":").append(id);
-        stbd.append(",\"trafficEnum\":").append(trafficEnum);
-        stbd.append(",\"trafficTimes\":").append(trafficTimes);
-        stbd.append(",\"trafficDuration\":").append(trafficDuration);
-        stbd.append(",\"timeEnum\":").append(timeEnum);
-        stbd.append(",\"status\":").append(status);
-        stbd.append('}');
-        stbd.append(super.toString());
-        return stbd.toString();
+        return "Traffic{" +
+                "id=" + id +
+                ", trafficEnum=" + trafficEnum +
+                ", startMon=" + startMon +
+                ", startDay=" + startDay +
+                ", startHor=" + startHor +
+                ", startMin=" + startMin +
+                ", startSec=" + startSec +
+                ", trafficDuration=" + trafficDuration +
+                ", timeEnum=" + timeEnum +
+                ", status=" + status +
+                '}';
     }
 }

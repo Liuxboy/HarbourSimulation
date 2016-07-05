@@ -24,7 +24,7 @@
         <tr>
             <th>序号</th>
             <th>管制类型</th>
-            <th>管制次数</th>
+            <th>管制开始时刻</th>
             <th>管制时长</th>
             <th>是否生效</th>
             <th>操作</th>
@@ -35,7 +35,7 @@
             <tr>
                 <td>${status.index + 1}</td>
                 <td>${item.trafficEnum.desc}</td>
-                <td>${item.trafficTimes}</td>
+                <td>${item.startMon}月${item.startDay}天${item.startHor}时${item.startMin}分${item.startSec}秒</td>
                 <td>${item.trafficDuration}${item.timeEnum.unit}</td>
                 <td>
                     <c:if test="${item.status == 0}">无效</c:if>

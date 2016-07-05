@@ -27,6 +27,7 @@
             <th>航道宽度(km)</th>
             <th>航道水深(m)</th>
             <th>航道限速(km/h)</th>
+            <th>动态通航能力(艘/h)</th>
             <th>通航模式</th>
             <th>操作</th>
         </tr>
@@ -40,6 +41,7 @@
                 <td>${item.width}</td>
                 <td>${item.depth}</td>
                 <td>${item.limitedSpeed}</td>
+                <td>${item.dynamicPassRatio}</td>
                 <td>${item.passEnum.pattern}</td>
                 <td>
                     <a href="<%=root %>/harbour/channel/showDetail/${item.id}"

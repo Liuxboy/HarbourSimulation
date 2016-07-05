@@ -53,12 +53,10 @@ public class DataBaseDataSource extends DataBaseConfigImpl implements DataSource
 //    }
 
     public <T> T unwrap(Class<T> iface) throws SQLException {
-        // TODO Auto-generated method stub
         return null;
     }
 
     public boolean isWrapperFor(Class<?> iface) throws SQLException {
-        // TODO Auto-generated method stub
         return false;
     }
 
@@ -70,7 +68,6 @@ public class DataBaseDataSource extends DataBaseConfigImpl implements DataSource
         while (addrs.hasMoreElements()) {
             RefAddr addr = addrs.nextElement();
             if (addr.getType().equals("driverClassName") || addr.getType().equals("driver")) {
-                //TODO test the logical is correct?
                 Class.forName((String) addr.getContent());
             } else {
                 props.put(addr.getType(), addr.getContent());
