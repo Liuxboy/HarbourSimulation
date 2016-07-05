@@ -26,7 +26,7 @@
                 </ul>
             </div>
             <h2 class="login_title">
-                <img src="../css/themes/default/images/login_title.png"/>
+                <img src="../css/themes/default/images/login_title1.png"/>
             </h2>
         </div>
     </div>
@@ -49,7 +49,7 @@
                 </div>
             </form>
         </div>
-        <div class="login_banner"><img src="../css/themes/default/images/login2.png"/></div>
+        <div class="login_banner"><img src="../css/themes/default/images/login_banner2.png"/></div>
         <div class="login_main">
             <ul class="helpList">
                 <li><a href="#">忘记密码怎么办？</a></li>
