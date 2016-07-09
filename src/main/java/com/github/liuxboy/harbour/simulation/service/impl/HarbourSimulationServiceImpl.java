@@ -96,7 +96,7 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
             logger.error(e);
         }
         //仿真结束---------------------------------------------------------
-        /*//总的
+        //总的
         resultList.add(compResult(resultMap.get("totalResult"), simulationTime));
         //集装箱
         resultList.add(compResult(resultMap.get("containerShipResult"), simulationTime));
@@ -109,7 +109,7 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
         //煤炭
         resultList.add(compResult(resultMap.get("coalResult"), simulationTime));
         //散杂船
-        resultList.add(compResult(resultMap.get("breakBulkShipResult"), simulationTime));*/
+        resultList.add(compResult(resultMap.get("breakBulkShipResult"), simulationTime));
 
 
         return resultList;
