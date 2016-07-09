@@ -18,19 +18,19 @@ public enum TimeEnum {
     HOR(3600, "时"),
     MIN(60, "分"),
     SEC(1, "秒");
-    private long time;
+    private int time;
     private String unit;
 
-    TimeEnum(long time, String unit) {
+    TimeEnum(int time, String unit) {
         this.time = time;
         this.unit = unit;
     }
 
-    public void setTime(long time) {
+    public void setTime(int time) {
         this.time = time;
     }
 
-    public long getTime() {
+    public int getTime() {
         return time;
     }
 

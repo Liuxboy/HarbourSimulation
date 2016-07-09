@@ -23,6 +23,7 @@
         <thead>
         <tr>
             <th>序号</th>
+            <th>管制理由</th>
             <th>管制类型</th>
             <th>管制开始时刻</th>
             <th>管制时长</th>
@@ -34,7 +35,8 @@
         <c:forEach items="${trafficList}" var="item" varStatus="status">
             <tr>
                 <td>${status.index + 1}</td>
-                <td>${item.trafficEnum.desc}</td>
+                <td>${item.trafficEnum.reason}</td>
+                <td>${item.trafficEnum.type}</td>
                 <td>${item.startMon}月${item.startDay}天${item.startHor}时${item.startMin}分${item.startSec}秒</td>
                 <td>${item.trafficDuration}${item.timeEnum.unit}</td>
                 <td>

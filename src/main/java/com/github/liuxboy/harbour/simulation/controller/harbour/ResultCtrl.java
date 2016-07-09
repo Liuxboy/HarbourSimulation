@@ -99,12 +99,12 @@ public class ResultCtrl {
             httpServletRequest.setAttribute("resultList", resultList);
             httpServletRequest.setAttribute("flag", 1);
             logger.info("resultList:", resultList);
-            Thread.sleep(5000 + RandomUtils.nextInt(10000));
+            //Thread.sleep(5000 + RandomUtils.nextInt(10000));
         } catch (ServiceException e) {
             e.printStackTrace();
-        } catch (InterruptedException e) {
+        } /*catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
         return "/harbour/result";
     }
 }

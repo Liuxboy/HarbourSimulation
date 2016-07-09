@@ -3,11 +3,13 @@ package com.github.liuxboy.harbour.simulation.service.impl;
 import com.github.liuxboy.harbour.simulation.common.constant.BigDecimalUtil;
 import com.github.liuxboy.harbour.simulation.common.constant.PriorityEnum;
 import com.github.liuxboy.harbour.simulation.common.constant.ShipEnum;
+import com.github.liuxboy.harbour.simulation.common.constant.TimeEnum;
 import com.github.liuxboy.harbour.simulation.common.util.AlgorithmUtil;
 import com.github.liuxboy.harbour.simulation.common.util.Logger;
 import com.github.liuxboy.harbour.simulation.common.util.LoggerFactory;
 import com.github.liuxboy.harbour.simulation.domain.biz.*;
 import com.github.liuxboy.harbour.simulation.service.HarbourSimulationService;
+import com.sun.jndi.ldap.Ber;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.commons.lang.math.RandomUtils;
 import org.springframework.stereotype.Service;
@@ -30,19 +32,24 @@ import java.util.*;
 @Service
 public class HarbourSimulationServiceImpl implements HarbourSimulationService {
     private Logger logger = LoggerFactory.getLogger(getClass());
+
     @Override
     public List<Result> simulation(List<Anchorage> anchorageList, List<Channel> channelList, List<Berth> berthList,
-                                   List<Ship> shipList, List<Traffic> trafficList, List<SimulationTime> timeList) throws ServiceException {
+                                   List<Ship> shipTypeList, List<Traffic> trafficList, List<SimulationTime> timeList) throws ServiceException {
         List<Result> resultList = new ArrayList<Result>();
+        Map<Integer, Ship> inShipMap = new HashMap<Integer, Ship>(); //进泊船舶，就是正式进入航道与到达泊位之间，所有的船舶
+        Map<Integer, Ship> outShipMap = new HashMap<Integer, Ship>();//出泊船舶，就是正式驶离泊位与驶出航道之间，所有的船舶
         SimulationTime simulationTime = new SimulationTime();
         if (!CollectionUtils.isEmpty(timeList))
             simulationTime = timeList.get(0);
-        long simulationSteps = (simulationTime.getTimeOut() * simulationTime.getTimeOutUnit().getTime())
+        int simulationSteps = (simulationTime.getTimeOut() * simulationTime.getTimeOutUnit().getTime())
                 / (simulationTime.getTimeStep() * simulationTime.getTimeStepUnit().getTime());
+        int simulationDays = simulationTime.getTimeOut() * simulationTime.getTimeOutUnit().getTime()
+                / TimeEnum.DAY.getTime();
         //存放当前仿真过程中的船只
         Map<String, Result> resultMap = new HashMap<String, Result>();
         //存放结果
-        Result totalResult = new Result(),         //总的结果
+        Result totalResult = new Result(),          //总的结果
                 ironOreResult = new Result(),       //铁矿石结果
                 chemicalOilResult = new Result(),   //化学油品结果
                 crudeOilResult = new Result(),      //原油结果
@@ -58,9 +65,32 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
         resultMap.put("containerShipResult", containerShipResult);
         //仿真开始---------------------------------------------------------
         try {
-            for (int step = 0; step < simulationSteps; step++) {
-                Ship ship = genShip(step);
-                advanceStep(resultMap, channelList, berthList, anchorageList, trafficList, step, ship);
+            HashMap<Integer, Ship> simulationShipMap = genShips(simulationDays);
+            for (int step = 1; step < simulationSteps + 1; step++) {
+                Ship ship = simulationShipMap.get(step);
+                // NO.1进港过程
+                // 运行到有新产生的船
+                if (null != ship) {
+                    //如果有空闲锚位
+                    if (hasIdleAnchorage(anchorageList, ship.getShipEnum().getTypeCode())) {
+                        addShipInAnchorage(anchorageList, ship);
+                        addResult(resultMap, ship.getShipEnum().getTypeCode());
+                    }
+                    //如果没有空闲锚位,将该船移动下一步中
+                    else {
+                        simulationShipMap.remove(ship.getId());
+                        simulationShipMap.put(step + 1, ship);
+                    }
+                }
+
+                //锚地前进一步
+                advanceAnchorage(resultMap, anchorageList, trafficList, simulationShipMap);
+                //泊位前进一步
+                advanceBerth(resultMap, berthList, trafficList, simulationShipMap);
+                //航道前进一步
+                advanceChannel(resultMap, channelList, trafficList, simulationShipMap);
+                //累计结果
+                accumulateResult(resultMap, ship);
             }
         } catch (Exception e) {
             logger.error(e);
@@ -82,51 +112,36 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
         resultList.add(compResult(resultMap.get("breakBulkShipResult"), simulationTime));*/
 
 
-        //总的
-        resultList.add(new Result(0, null, 23.5 + Math.random()*2, 0, 0.78 + Math.random() * 0.2, 0, 0.35 + Math.random(), 0, 16 + Math.random(), 0, "", ""));
-        //集装箱
-        resultList.add(new Result(0, ShipEnum.Container_Ship, 20.0 + Math.random()*2, 0, 0.5 + Math.random() * 0.2, 0, 0.3 + Math.random(), 0, 14.32 + Math.random(), 0, "", ""));
-        //铁矿石
-        resultList.add(new Result(0, ShipEnum.Iron_Ore, 30.8 + Math.random()*5, 0, 0.5 + Math.random() * 0.3, 0, 0.45 + Math.random(), 0, 45.66 + Math.random(), 0, "", ""));
-        //化工油品
-        resultList.add(new Result(0, ShipEnum.Chemical_Oil, 40.45 + Math.random()*2, 0, 0.7 + Math.random() * 0.2, 0, 0.5 + Math.random(), 0, 38.49 + Math.random(), 0, "", ""));
-        //原油
-        resultList.add(new Result(0, ShipEnum.Crude_Oil, 55 + Math.random()*2, 0, 4 + Math.random() * 2, 0, 0.5 + Math.random(), 0, 76.21 + Math.random(), 0, "", ""));
-        //煤炭
-        resultList.add(new Result(0, ShipEnum.Coal, 37 + Math.random()*2, 0, 0.2 + Math.random() * 0.1, 0, 0.3 + Math.random(), 0, 58.57 + Math.random(), 0, "", ""));
-        //散杂船
-        resultList.add(new Result(0, ShipEnum.Break_Bulk_Ship, 26 + Math.random()*2, 0, 0.2 + Math.random() * 5, 0, 0.1 + Math.random(), 0, 50.98 + Math.random(), 0, "", ""));
         return resultList;
     }
 
-    //仿真单步推进
-    private void advanceStep(Map<String, Result> resultMap, List<Channel> channelList, List<Berth> berthList,
-                             List<Anchorage> anchorageList, List<Traffic> trafficList, int currentStep, Ship ship) {
-        //如果船不为空
-        if (null != ship) {
-            //第1步：更新结果中该类型船只的数量，以及总的数量
-            addResult(resultMap, ship);
-            //第2步：添加到锚地
-            addShipInAnchorage(anchorageList, ship);
-            //第3步：判断是否有空余泊位，且航道允许进入
-            if (hasIdleBerth(ship, berthList) && canIntoChannel(ship, channelList, currentStep)) {
+    //锚地单步推进
+    private void advanceAnchorage(Map<String, Result> resultMap, List<Anchorage> anchorageList, List<Traffic> trafficList,
+                                  HashMap<Integer, Ship> simulationShipMap) {
+        //判断是否有空余泊位，且航道允许进入
+        /*if (hasIdleBerth(ship, berthList) && canIntoChannel(ship, channelList, step)) {
 
-            }
-            //是否有交通管制
-            if (hasTrafficCtrl(trafficList)) {
-
-            }
         }
-        //锚地状态改变
+        //是否有交通管制
+        if (hasTrafficCtrl(trafficList), s){
 
-        //航道状态改变
+        }*/
+    }
 
-        //泊位状态改变
+    //泊位单步推进
+    private void advanceBerth(Map<String, Result> resultMap, List<Berth> berthList, List<Traffic> trafficList,
+                              HashMap<Integer, Ship> simulationShipMap) {
+
+    }
+
+    //航道单步推进
+    private void advanceChannel(Map<String, Result> resultMap, List<Channel> channelList, List<Traffic> trafficList,
+                                HashMap<Integer, Ship> simulationShipMap) {
+
     }
 
     //船进港，新增结果计数
-    private void addResult(Map<String, Result> resultMap, Ship ship) {
-        int shipType = ship.getShipEnum().getTypeCode();
+    private void addResult(Map<String, Result> resultMap, int shipType) {
         Result totalResult = resultMap.get("totalResult");
         totalResult.setNumber(totalResult.getNumber() + 1);
         resultMap.put("totalResult", totalResult);
@@ -208,7 +223,7 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
         }
     }
 
-    private void calculateResult(Result result, Ship ship){
+    private void calculateResult(Result result, Ship ship) {
         BigDecimal hour2second = new BigDecimal(3600);
         int shipInHarbourTime = ship.getTimeNode().getLeaveTime() - ship.getTimeNode().getArriveTime();
         double totalInHarbourTime = result.getTotalInHarboursTime();
@@ -225,6 +240,31 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
         int shipOnBerthTime = ship.getTimeNode().getWorkTime();
         double totalOnBerthTime = result.getTotalOnBerthTime();
         result.setTotalWaitBerthTime(totalOnBerthTime + BigDecimalUtil.divide(new BigDecimal(shipOnBerthTime), hour2second).doubleValue());
+    }
+
+    //判断是否有空闲锚位
+    private boolean hasIdleAnchorage(List<Anchorage> anchorageList, int shipType) {
+        switch (shipType) {
+            //铁矿石锚地锚位是否已满
+            case 1:
+                Anchorage oreAnchorage = anchorageList.get(2);
+                return oreAnchorage.getShipList().size() < oreAnchorage.getSize();
+            //原油锚地锚位时候已满
+            case 3:
+                Anchorage oilAnchorage = anchorageList.get(3);
+                return oilAnchorage.getShipList().size() < oilAnchorage.getSize();
+            //如果是其他类型的船，看是南北锚是否都满了
+            case 0:
+            case 2:
+            case 4:
+            case 5:
+                Anchorage northAnchorage = anchorageList.get(0);
+                Anchorage southAnchorage = anchorageList.get(1);
+                return northAnchorage.getShipList().size() < northAnchorage.getSize()
+                        || southAnchorage.getShipList().size() >= southAnchorage.getSize();
+            default:
+                return false;
+        }
     }
 
     //判断是否有空闲泊位
@@ -268,8 +308,40 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
     }
 
     //判断是否采取了交通管制
-    private boolean hasTrafficCtrl(List<Traffic> trafficList) {
-        return false;   //TODO 交通管制，需要提供一个分布或者算法
+    private boolean hasTrafficCtrl(List<Traffic> trafficList, int step) {
+        int startStep = 0;
+        double duration = 0;
+        for (Traffic traffic : trafficList) {
+            startStep = (traffic.getStartMon() - 1) * getMonthDays(traffic.getStartMon()) + traffic.getStartDay() * 24 * 60
+                    + traffic.getStartHor() * 60 + traffic.getStartMin();
+            duration = traffic.getTrafficDuration() * traffic.getTimeEnum().getTime() * 60;
+            if (startStep < step && step < startStep + duration) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //获取月天数
+    private int getMonthDays(int month) {
+        switch (month) {
+            case 2:
+                return 29;
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:
+                return 31;
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                return 30;
+        }
+        return 30;
     }
 
     //组装结果
@@ -288,33 +360,42 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
     }
 
     //将船添加到锚地
-    private void addShipInAnchorage(List<Anchorage> list, Ship ship) {
+    private void addShipInAnchorage(List<Anchorage> anchorageList, Ship ship) {
         int shipType = ship.getShipEnum().getTypeCode();
         switch (shipType) {
             //铁矿石船，放到矿石锚地
             case 1:
-                Anchorage oreAnchorage = list.get(2);
+                Anchorage oreAnchorage = anchorageList.get(2);
                 LinkedList<Ship> oreShipLinkedList = oreAnchorage.getShipList();
                 oreShipLinkedList.addLast(ship);
                 break;
-            //原油船，放到油路锚地
+            //原油船，放到油轮锚地
             case 3:
-                Anchorage oilAnchorage = list.get(3);
+                Anchorage oilAnchorage = anchorageList.get(3);
                 LinkedList<Ship> oilShipLinkedList = oilAnchorage.getShipList();
                 oilShipLinkedList.addLast(ship);
                 break;
-            //如果是其他类型的船，随机放到南、北锚地
+            //如果是其他类型的船，先放北锚地，再放南锚地
             case 0:
             case 2:
             case 4:
             case 5:
-                int i = RandomUtils.nextInt(2);
-                Anchorage anchorage = list.get(i);
-                LinkedList<Ship> shipLinkedList = anchorage.getShipList();
-                if (4 == shipType) {    //如果是碰到煤炭、天然气船，是优先进入，排到头结点
-                    shipLinkedList.addFirst(ship);
-                } else {
-                    shipLinkedList.addLast(ship);
+                Anchorage northAnchorage = anchorageList.get(0);
+                LinkedList<Ship> northShipLinkedList = northAnchorage.getShipList();
+                Anchorage southAnchorage = anchorageList.get(1);
+                LinkedList<Ship> southShipLinkedList = southAnchorage.getShipList();
+                if (northShipLinkedList.size() < northAnchorage.getSize()) {
+                    if (4 == shipType) {//如果是碰到煤炭、天然气船，是优先进入，排到头结点
+                        northShipLinkedList.addFirst(ship);
+                    } else {
+                        northShipLinkedList.addLast(ship);
+                    }
+                } else if (southShipLinkedList.size() < southAnchorage.getSize()) {
+                    if (4 == shipType) {//如果是碰到煤炭、天然气船，是优先进入，排到头结点
+                        southShipLinkedList.addFirst(ship);
+                    } else {
+                        southShipLinkedList.addLast(ship);
+                    }
                 }
                 break;
             default:
@@ -322,40 +403,36 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
         }
     }
 
-    //根据单步产生一条船
-    private Ship genShip(int id) {
-        //每40分钟产生一条船，根本比例，确定其船舶类型
-        if (id % 40 == 0) {
-            double proportion = 0.0001 + Math.random(); //产生一个随机数[0, 1)
-            if (proportion <= ShipEnum.Container_Ship.getSection()) {
-                return getShip(id, ShipEnum.Container_Ship.getTypeCode());
-            } else if (ShipEnum.Container_Ship.getSection() < proportion && proportion <= ShipEnum.Iron_Ore.getSection()) {
-                return getShip(id, ShipEnum.Iron_Ore.getTypeCode());
-            } else if (ShipEnum.Iron_Ore.getSection() < proportion && proportion <= ShipEnum.Chemical_Oil.getProportion()) {
-                return getShip(id, ShipEnum.Chemical_Oil.getTypeCode());
-            } else if (ShipEnum.Chemical_Oil.getSection() < proportion && proportion <= ShipEnum.Crude_Oil.getSection()) {
-                return getShip(id, ShipEnum.Crude_Oil.getTypeCode());
-            } else if (ShipEnum.Crude_Oil.getSection() < proportion && proportion <= ShipEnum.Coal.getProportion()) {
-                return getShip(id, ShipEnum.Coal.getTypeCode());
-            } else {
-                return getShip(id, ShipEnum.Break_Bulk_Ship.getTypeCode());
+    //船泊总数量
+    private HashMap<Integer, Ship> genShips(int simulationDays) {
+        int[] simulationShipArray = AlgorithmUtil.poissonSamples(36.0193 / (24.0 * 60.0), 24 * 60 * simulationDays);
+        HashMap<Integer, Ship> shipHashMap = new HashMap<Integer, Ship>(simulationShipArray.length);
+        for (int i = 0; i < simulationShipArray.length; i++) {
+            //产生一条船
+            if (simulationShipArray[i] == 1) {
+                shipHashMap.put(i, getShip(i));
+            }
+            //产生两条船，
+            else if (simulationShipArray[i] == 2) {
+                shipHashMap.put(i, getShip(i));
+                shipHashMap.put(i + 1, getShip(i + 1));
             }
         }
-        return null;
+        return shipHashMap;
     }
 
-    //船只
-    private Ship getShip(int id, int typeCode) {
+    //获取单个船只属性
+    private Ship getShip(int id) {
+        int typeCode = getShipType();                   //先根据概论产生船的类型
         Ship ship = new Ship();
         ship.setId(id);
-        //ship.setTonner();
         ship.setShipEnum(ShipEnum.values()[typeCode]);
-        ship.setDepth(AlgorithmUtil.normalSample(10, 2));   //TODO 正态分布
-        //ship.setLambda();
-        double length = genLength(ship.getShipEnum().getTypeCode());
+        double length = genLength(typeCode);
         ship.setLength(length);
+        double tonner = getTonner(length, typeCode);    //根据船长算载重吨位
+        ship.setTonner(tonner);
         ship.setSafeDistance(6 * length);
-        //ship.setNumbers();
+        ship.setDepth(getDepth(tonner));                //根据载重吨位算吃水深度
         if (ship.getShipEnum().getTypeCode() == 2) {
             ship.setPriorityEnum(PriorityEnum.HIGH);
         } else if (ship.getShipEnum().getTypeCode() == 0 || ship.getShipEnum().getTypeCode() == 1) {
@@ -370,23 +447,78 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
         return ship;
     }
 
+    //根据概论产生船的类型
+    private int getShipType() {
+        double random = 0.0001 + RandomUtils.nextDouble();
+        if (random <= ShipEnum.Container_Ship.getSection()) {
+            return 0;
+        } else if (random <= ShipEnum.Iron_Ore.getSection()) {
+            return 1;
+        } else if (random <= ShipEnum.Chemical_Oil.getSection()) {
+            return 2;
+        } else if (random <= ShipEnum.Crude_Oil.getSection()) {
+            return 3;
+        } else if (random <= ShipEnum.Coal.getSection()) {
+            return 4;
+        } else if (random <= ShipEnum.Break_Bulk_Ship.getSection()) {
+            return 5;
+        }
+        return 0;
+    }
+
     //动态产生船长
     private double genLength(int typeCode) {
         switch (typeCode) {
             case 0:
-                return AlgorithmUtil.normalSample(311.8, 5);    //TODO 方差需要严格计算
+                return AlgorithmUtil.normalSample(259.4, 100.0);    //TODO 方差需要严格计算
             case 1:
-                return AlgorithmUtil.normalSample(279.4, 5);
+                return AlgorithmUtil.normalSample(279.4, 70.0);
             case 2:
-                return AlgorithmUtil.normalSample(216.3, 5);
+                return AlgorithmUtil.normalSample(176.2, 30.0);
             case 3:
-                return AlgorithmUtil.normalSample(259.4, 5);
+                return AlgorithmUtil.normalSample(311.8, 60.0);
             case 4:
-                return AlgorithmUtil.normalSample(176.2, 5);
+                return AlgorithmUtil.normalSample(216.3, 50.0);
             case 5:
-                return AlgorithmUtil.normalSample(208.1, 5);
+                return AlgorithmUtil.normalSample(208.1, 40.0);
             default:
                 return 0;
+        }
+    }
+
+    //动态产生船吨位
+    private double getTonner(double length, int typeCode) {
+        switch (typeCode) {
+            case 0:
+                return AlgorithmUtil.power(length / 3.6221, 1.0 / 0.3898);
+            case 1:
+                return AlgorithmUtil.power(length / 5.5706, 1.0 / 0.327);
+            case 2:
+                return AlgorithmUtil.power(length / 4.8624, 1.0 / 0.3441);
+            case 3:
+                return AlgorithmUtil.power(length / 8.7269, 1.0 / 0.2879);
+            case 4:
+                return AlgorithmUtil.power(length / 8.1572, 1.0 / 0.2960);
+            case 5:
+                return AlgorithmUtil.power(length / 8.3339, 1.0 / 0.2928);
+            default:
+                return 0.0;
+        }
+    }
+
+    //动态产生船吃水深度
+    private double getDepth(double tonner) {
+        //非货运船，小于万吨
+        if (tonner < 10000) {
+            return AlgorithmUtil.normalSample(9.0, 2);
+        } else if (tonner < 50000) {
+            return AlgorithmUtil.normalSample(11.0, 1);
+        } else if (tonner < 100000) {
+            return AlgorithmUtil.normalSample(14.0, 2);
+        } else if (tonner < 150000) {
+            return AlgorithmUtil.normalSample(17, 1);
+        } else {
+            return AlgorithmUtil.normalSample(20, 2);
         }
     }
 }

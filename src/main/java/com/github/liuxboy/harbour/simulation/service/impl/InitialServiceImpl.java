@@ -1208,45 +1208,98 @@ public class InitialServiceImpl implements InitialService {
         Traffic traffic = new Traffic();
         {
             traffic.setId(0);
-            traffic.setStatus(0);
-            traffic.setTrafficEnum(TrafficEnum.CS_PROHIBIT_ANCHOR);
-            traffic.setTrafficDuration(63.3);
+            traffic.setStatus(1);
+            traffic.setStartMon(1);
+            traffic.setStartDay(1);
+            traffic.setStartHor(1);
+            traffic.setStartSec(1);
+            traffic.setStartMin(1);
+            traffic.setTrafficEnum(TrafficEnum.DANGER_PROHIBIT_ANCHOR);
+            traffic.setTrafficDuration(42.93);
             traffic.setTimeEnum(TimeEnum.HOR);
             trafficList.add(traffic);
         }
         {
             traffic = new Traffic();
             traffic.setId(1);
-            traffic.setStatus(0);
-            traffic.setTrafficEnum(TrafficEnum.BBS_PROHIBIT_ANCHOR);
-            traffic.setTrafficDuration(163.8);
+            traffic.setStatus(1);
+            traffic.setStartMon(2);
+            traffic.setStartDay(2);
+            traffic.setStartHor(2);
+            traffic.setStartSec(2);
+            traffic.setStartMin(2);
+            traffic.setTrafficEnum(TrafficEnum.CS_PROHIBIT_ANCHOR);
+            traffic.setTrafficDuration(6.33);
             traffic.setTimeEnum(TimeEnum.HOR);
             trafficList.add(traffic);
         }
         {
             traffic = new Traffic();
             traffic.setId(2);
-            traffic.setStatus(0);
-            traffic.setTrafficEnum(TrafficEnum.DANGER_PROHIBIT_ANCHOR);
-            traffic.setTrafficDuration(429.3);
+            traffic.setStatus(1);
+            traffic.setStartMon(3);
+            traffic.setStartDay(3);
+            traffic.setStartHor(3);
+            traffic.setStartSec(3);
+            traffic.setStartMin(3);
+            traffic.setTrafficEnum(TrafficEnum.BBS_PROHIBIT_ANCHOR);
+            traffic.setTrafficDuration(16.38);
             traffic.setTimeEnum(TimeEnum.HOR);
             trafficList.add(traffic);
         }
         {
             traffic = new Traffic();
             traffic.setId(3);
-            traffic.setStatus(0);
-            traffic.setTrafficEnum(TrafficEnum.PROHIBIT_BOTH_TRAVEL);
-            traffic.setTrafficDuration(431.2 + 13.5 + 3);
+            traffic.setStatus(1);
+            traffic.setStartMon(4);
+            traffic.setStartDay(4);
+            traffic.setStartHor(4);
+            traffic.setStartSec(4);
+            traffic.setStartMin(4);
+            traffic.setTrafficEnum(TrafficEnum.PROHIBIT_BOTH_TRAVEL_BAD_VISIBILITY);
+            traffic.setTrafficDuration(43.12);
             traffic.setTimeEnum(TimeEnum.HOR);
             trafficList.add(traffic);
         }
         {
             traffic = new Traffic();
             traffic.setId(4);
-            traffic.setStatus(0);
+            traffic.setStatus(1);
+            traffic.setStartMon(5);
+            traffic.setStartDay(5);
+            traffic.setStartHor(5);
+            traffic.setStartSec(5);
+            traffic.setStartMin(5);
             traffic.setTrafficEnum(TrafficEnum.PROHIBIT_CONTRARY_TRAVEL);
-            traffic.setTrafficDuration(13.5);
+            traffic.setTrafficDuration(5.35);
+            traffic.setTimeEnum(TimeEnum.HOR);
+            trafficList.add(traffic);
+        }
+        {
+            traffic = new Traffic();
+            traffic.setId(5);
+            traffic.setStatus(1);
+            traffic.setStartMon(6);
+            traffic.setStartDay(6);
+            traffic.setStartHor(6);
+            traffic.setStartSec(6);
+            traffic.setStartMin(6);
+            traffic.setTrafficEnum(TrafficEnum.PROHIBIT_BOTH_TRAVEL_FISH_BOAT_BLOCK);
+            traffic.setTrafficDuration(1.35);
+            traffic.setTimeEnum(TimeEnum.HOR);
+            trafficList.add(traffic);
+        }
+        {
+            traffic = new Traffic();
+            traffic.setId(6);
+            traffic.setStatus(1);
+            traffic.setStartMon(7);
+            traffic.setStartDay(7);
+            traffic.setStartHor(7);
+            traffic.setStartSec(7);
+            traffic.setStartMin(7);
+            traffic.setTrafficEnum(TrafficEnum.PROHIBIT_BOTH_TRAVEL_ACCIDENT);
+            traffic.setTrafficDuration(0.3);
             traffic.setTimeEnum(TimeEnum.HOR);
             trafficList.add(traffic);
         }
@@ -1273,6 +1326,57 @@ public class InitialServiceImpl implements InitialService {
         {
             ship = new Ship();
             ship.setId(0);
+            ship.setShipEnum(ShipEnum.Container_Ship);  //集装箱
+            ship.setDepth(10);
+            ship.setLength(259.4);
+            ship.setNumbers(9840);
+            //默认仿真是长是1年，仿真步骤是1秒
+            ship.setLambda(27.09);
+            ship.setMu(2.45);
+            ship.setSigma(0.49);
+            ship.setPriorityEnum(PriorityEnum.NORMAL);
+            ship.setTonner(6.62);
+            ship.setSpeed(1.852);       //km/h
+            ship.setSafeDistance(BigDecimalUtil.decimal2Double(259.4 * 6)); //m
+            shipList.add(ship);
+        }
+        {
+            ship = new Ship();
+            ship.setId(1);
+            ship.setShipEnum(ShipEnum.Iron_Ore);  //铁矿石
+            ship.setDepth(10);
+            ship.setLength(279.4);
+            ship.setNumbers(1002);
+            //默认仿真是长是1年，仿真步骤是1秒
+            ship.setLambda(2.76);
+            ship.setMu(3.55);
+            ship.setSigma(0.82);
+            ship.setPriorityEnum(PriorityEnum.LOW);
+            ship.setTonner(1.67);
+            ship.setSpeed(1.852);       //km/h
+            ship.setSafeDistance(BigDecimalUtil.decimal2Double(279.4 * 6)); //m
+            shipList.add(ship);
+        }
+        {
+            ship = new Ship();
+            ship.setId(2);
+            ship.setShipEnum(ShipEnum.Chemical_Oil);  //化工油品
+            ship.setDepth(10);
+            ship.setLength(176.2);
+            ship.setNumbers(974);
+            //默认仿真是长是1年，仿真步骤是1秒
+            ship.setLambda(2.68);
+            ship.setMu(3.48);
+            ship.setSigma(0.57);
+            ship.setPriorityEnum(PriorityEnum.NORMAL);
+            ship.setTonner(3.74);
+            ship.setSpeed(1.852);       //km/h
+            ship.setSafeDistance(BigDecimalUtil.decimal2Double(176.2 * 6)); //m
+            shipList.add(ship);
+        }
+        {
+            ship = new Ship();
+            ship.setId(3);
             ship.setShipEnum(ShipEnum.Crude_Oil);  //原油
             ship.setDepth(10);
             ship.setLength(311.8);
@@ -1289,24 +1393,7 @@ public class InitialServiceImpl implements InitialService {
         }
         {
             ship = new Ship();
-            ship.setId(1);
-            ship.setShipEnum(ShipEnum.Iron_Ore);  //铁矿石
-            ship.setDepth(10);
-            ship.setLength(279.4);
-            ship.setNumbers(1002);
-            //默认仿真是长是1年，仿真步骤是1秒
-            ship.setLambda(2.76);
-            ship.setMu(3.55);
-            ship.setSigma(0.82);
-            ship.setPriorityEnum(PriorityEnum.NORMAL);
-            ship.setTonner(1.67);
-            ship.setSpeed(1.852);       //km/h
-            ship.setSafeDistance(BigDecimalUtil.decimal2Double(279.4 * 6)); //m
-            shipList.add(ship);
-        }
-        {
-            ship = new Ship();
-            ship.setId(2);
+            ship.setId(4);
             ship.setShipEnum(ShipEnum.Coal);  //煤炭
             ship.setDepth(10);
             ship.setLength(216.3);
@@ -1315,44 +1402,10 @@ public class InitialServiceImpl implements InitialService {
             ship.setLambda(1.05);
             ship.setMu(3.89);
             ship.setSigma(0.67);
-            ship.setPriorityEnum(PriorityEnum.NORMAL);
+            ship.setPriorityEnum(PriorityEnum.HIGH);
             ship.setTonner(6.78);
             ship.setSpeed(1.852);       //km/h
             ship.setSafeDistance(BigDecimalUtil.decimal2Double(216.3 * 5)); //m
-            shipList.add(ship);
-        }
-        {
-            ship = new Ship();
-            ship.setId(3);
-            ship.setShipEnum(ShipEnum.Container_Ship);  //集装箱
-            ship.setDepth(10);
-            ship.setLength(259.4);
-            ship.setNumbers(9840);
-            //默认仿真是长是1年，仿真步骤是1秒
-            ship.setLambda(27.09);
-            ship.setMu(2.45);
-            ship.setSigma(0.49);
-            ship.setPriorityEnum(PriorityEnum.LOW);
-            ship.setTonner(6.62);
-            ship.setSpeed(1.852);       //km/h
-            ship.setSafeDistance(BigDecimalUtil.decimal2Double(259.4 * 6)); //m
-            shipList.add(ship);
-        }
-        {
-            ship = new Ship();
-            ship.setId(0);
-            ship.setShipEnum(ShipEnum.Chemical_Oil);  //化工油品
-            ship.setDepth(10);
-            ship.setLength(176.2);
-            ship.setNumbers(974);
-            //默认仿真是长是1年，仿真步骤是1秒
-            ship.setLambda(2.68);
-            ship.setMu(3.48);
-            ship.setSigma(0.57);
-            ship.setPriorityEnum(PriorityEnum.LOW);
-            ship.setTonner(3.74);
-            ship.setSpeed(1.852);       //km/h
-            ship.setSafeDistance(BigDecimalUtil.decimal2Double(176.2 * 6)); //m
             shipList.add(ship);
         }
         {

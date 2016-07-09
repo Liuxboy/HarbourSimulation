@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
+<%String root = request.getContextPath();%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -32,7 +33,7 @@
     </div>
     <div id="login_content">
         <div class="loginForm">
-            <form action="/harbour/login/do" method="post">
+            <form action="<%=root %>/harbour/login/do" method="post">
                 <p align="center">
                    <font color="red"> ${message}</font>
                 </p>

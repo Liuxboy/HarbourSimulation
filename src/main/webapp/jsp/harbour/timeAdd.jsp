@@ -24,9 +24,8 @@
                 <input name="timeStep" type="text" class="required" maxlength="10"/>
                 <select id="timeStepUnit" name="timeStepUnit" type="text" readonly="readonly" class="required"
                         maxlength="20">
-                    <option value="SEC">秒</option>
-                    <option value="MIN">分</option>
                     <option value="HOR">时</option>
+                    <option value="MIN">分</option>
                 </select>
             </p>
         </div>

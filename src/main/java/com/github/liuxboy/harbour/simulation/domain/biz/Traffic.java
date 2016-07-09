@@ -18,15 +18,15 @@ public class Traffic {
     private int id;
     //管制类型
     private TrafficEnum trafficEnum;
-    //管制开始时刻
+    //管制开始时刻-月
     private int startMon;
-    //管制开始时刻
+    //管制开始时刻-天
     private int startDay;
-    //管制开始时刻
+    //管制开始时刻-时
     private int startHor;
-    //管制开始时刻
+    //管制开始时刻-分
     private int startMin;
-    //管制开始时刻
+    //管制开始时刻-秒
     private int startSec;
     //管制时长
     private double trafficDuration;

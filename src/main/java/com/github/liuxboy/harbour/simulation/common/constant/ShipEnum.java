@@ -26,6 +26,7 @@ public enum ShipEnum {
         this.typeCode = typeCode;
         this.nameCN = nameCN;
         this.proportion = proportion;
+        this.section = section;
     }
 
     public int getTypeCode() {

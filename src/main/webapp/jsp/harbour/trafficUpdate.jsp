@@ -16,19 +16,25 @@
                 <select id="trafficEnum" name="trafficEnum" type="text" readonly="readonly" class="required"
                         maxlength="20">
                     <option value="CS_PROHIBIT_ANCHOR"
-                            <c:if test="${traffic.trafficEnum.typeCode == 0}">selected</c:if> >集装箱船靠泊管制
+                            <c:if test="${traffic.trafficEnum.typeCode == 0}">selected</c:if> >集装箱船靠泊管制-大风
                     </option>
                     <option value="BBS_PROHIBIT_ANCHOR"
-                            <c:if test="${traffic.trafficEnum.typeCode == 1}">selected</c:if> >散杂货船靠泊管制
+                            <c:if test="${traffic.trafficEnum.typeCode == 1}">selected</c:if> >散杂货船靠泊管制-大风
                     </option>
                     <option value="DANGER_PROHIBIT_ANCHOR"
-                            <c:if test="${traffic.trafficEnum.typeCode == 2}">selected</c:if> >危险品船靠泊管制
+                            <c:if test="${traffic.trafficEnum.typeCode == 2}">selected</c:if> >危险品船靠泊管制-大风
                     </option>
-                    <option value="PROHIBIT_BOTH_TRAVEL"
-                            <c:if test="${traffic.trafficEnum.typeCode == 3}">selected</c:if> >航行管制
+                    <option value="PROHIBIT_BOTH_TRAVEL_BAD_VISIBILITY"
+                            <c:if test="${traffic.trafficEnum.typeCode == 3}">selected</c:if> >航行管制-能见度不良
                     </option>
                     <option value="PROHIBIT_CONTRARY_TRAVEL"
-                            <c:if test="${traffic.trafficEnum.typeCode == 4}">selected</c:if> >单向航行管制
+                            <c:if test="${traffic.trafficEnum.typeCode == 4}">selected</c:if> >单向航行管制-特殊船舶通航
+                    </option>
+                    <option value="PROHIBIT_BOTH_TRAVEL_FISH_BOAT_BLOCK"
+                            <c:if test="${traffic.trafficEnum.typeCode == 5}">selected</c:if> >航行管制-渔船阻碍
+                    </option>
+                    <option value="PROHIBIT_BOTH_TRAVEL_ACCIDENT"
+                            <c:if test="${traffic.trafficEnum.typeCode == 6}">selected</c:if> >航行管制-事故险情
                     </option>
                 </select>
             </p>

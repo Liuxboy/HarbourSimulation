@@ -11,11 +11,13 @@
                 <label>管制类型</label>
                 <select id="trafficEnum" name="trafficEnum" type="text" readonly="readonly" class="required"
                         maxlength="20">
-                    <option value="CS_PROHIBIT_ANCHOR">集装箱船靠泊管制</option>
-                    <option value="BBS_PROHIBIT_ANCHOR">散杂货船靠泊管制</option>
-                    <option value="DANGER_PROHIBIT_ANCHOR">危险品船靠泊管制</option>
-                    <option value="PROHIBIT_BOTH_TRAVEL">航行管制</option>
-                    <option value="PROHIBIT_CONTRARY_TRAVEL">单向航行管制</option>
+                    <option value="DANGER_PROHIBIT_ANCHOR">危险品船靠泊管制-大风</option>
+                    <option value="CS_PROHIBIT_ANCHOR">集装箱船靠泊管制-大风</option>
+                    <option value="BBS_PROHIBIT_ANCHOR">散杂货船靠泊管制-大风</option>
+                    <option value="PROHIBIT_BOTH_TRAVEL_BAD_VISIBILITY">航行管制-能见度不良</option>
+                    <option value="PROHIBIT_CONTRARY_TRAVEL">单向航行管制-特殊船舶通航</option>
+                    <option value="PROHIBIT_BOTH_TRAVEL_FISH_BOAT_BLOCK">航行管制-渔船阻碍</option>
+                    <option value="PROHIBIT_BOTH_TRAVEL_ACCIDENT">航行管制-事故险情</option>
                 </select>
             </p>
             <div class="divider"/>
