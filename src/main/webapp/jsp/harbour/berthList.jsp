@@ -26,6 +26,7 @@
             <th>泊位吨位</th>
             <th>泊位深度</th>
             <th>泊位长度</th>
+            <th>距虾峙门时间(小时)</th>
             <th>操作</th>
         </tr>
         </thead>
@@ -38,6 +39,7 @@
                 <td>${item.tonner}</td>
                 <td>${item.depth}</td>
                 <td>${item.length}</td>
+                <td  width="10%">${item.toAnchorageTime}</td>
                 <td>
                     <a href="<%=root %>/harbour/berth/showDetail/${item.id}"
                        target="dialog" mask="true" rel="showAnchorage"

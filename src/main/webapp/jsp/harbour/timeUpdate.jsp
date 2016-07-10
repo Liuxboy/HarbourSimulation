@@ -18,10 +18,10 @@
                     value="${simulationTime.timeOut}"/>
                 <select id="timeOutUnit" name="timeOutUnit" type="text" readonly="readonly" class="required"
                         maxlength="20">
-                    <option value="YER" <c:if test="${simulationTime.timeOutUnit.unit eq '年'}">selected</c:if> >年</option>
-                    <option value="MON" <c:if test="${simulationTime.timeOutUnit.unit eq '月'}">selected</c:if> >月</option>
-                    <option value="WEK" <c:if test="${simulationTime.timeOutUnit.unit eq '周'}">selected</c:if> >周</option>
-                    <option value="DAY" <c:if test="${simulationTime.timeOutUnit.unit eq '日'}">selected</c:if> >日</option>
+                    <option value="YER" <c:if test="${simulationTime.timeOutUnit.name() eq 'YER'}">selected</c:if> >年</option>
+                    <option value="MON" <c:if test="${simulationTime.timeOutUnit.name() eq 'MON'}">selected</c:if> >月</option>
+                    <option value="WEK" <c:if test="${simulationTime.timeOutUnit.name() eq 'WEK'}">selected</c:if> >周</option>
+                    <option value="DAY" <c:if test="${simulationTime.timeOutUnit.name() eq 'DAY'}">selected</c:if> >日</option>
                 </select>
             </p>
             <div class="divider"/>

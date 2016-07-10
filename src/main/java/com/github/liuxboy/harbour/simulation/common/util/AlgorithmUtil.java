@@ -1,13 +1,10 @@
 package com.github.liuxboy.harbour.simulation.common.util;
 
-import com.github.liuxboy.harbour.simulation.common.constant.ShipEnum;
 import org.apache.commons.math3.distribution.LogNormalDistribution;
 import org.apache.commons.math3.distribution.NormalDistribution;
 import org.apache.commons.math3.distribution.PoissonDistribution;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * <p>Title: AlgorithmUtil</p>
@@ -72,7 +69,12 @@ public class AlgorithmUtil {
     }
 
     //对数正态分布
-    //On a logarithmic scale, can be called the location parameter and the scale parameter,
+    /**
+     * On a logarithmic scale, can be called the location parameter and the scale parameter,
+     * μ----location
+     * σ----scale
+     */
+
     public static double logNormalSample(double scale, double shape) {
         LogNormalDistribution logNormalDistribution = new LogNormalDistribution(scale, shape);
         return logNormalDistribution.sample();
@@ -156,14 +158,17 @@ public class AlgorithmUtil {
             System.out.println("其他"+normalSample(20, 2));
         }
         System.out.println(COLOR.values()[0]);*/
-        Map<Integer, String> map = new HashMap<Integer, String>();
+        /*Map<Integer, String> map = new HashMap<Integer, String>();
         map.put(1, "aa");
         map.put(2, "bb");
         map.put(3, "cc");
         String str = map.get(1);
         map.remove(1);
         map.put(4,str);
-        System.out.println(map);
+        System.out.println(map);*/
+        System.out.println(AlgorithmUtil.logNormalSample(0.49, 2.54));
+        System.out.println(new BigDecimal((14.89 / 19.65) * 60.0).intValue());
+        System.out.println(new BigDecimal((53.00 / 22.11) * 60.0).intValue());
     }
 
     static enum COLOR {

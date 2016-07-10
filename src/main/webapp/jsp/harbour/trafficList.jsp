@@ -37,7 +37,7 @@
                 <td>${status.index + 1}</td>
                 <td>${item.trafficEnum.reason}</td>
                 <td>${item.trafficEnum.type}</td>
-                <td>${item.startMon}月${item.startDay}天${item.startHor}时${item.startMin}分${item.startSec}秒</td>
+                <td>${item.startMon}月${item.startDay}日${item.startHor}时${item.startMin}分${item.startSec}秒</td>
                 <td>${item.trafficDuration}${item.timeEnum.unit}</td>
                 <td>
                     <c:if test="${item.status == 0}">无效</c:if>

@@ -18,7 +18,7 @@ public class TimeNode {
     //靠泊时间
     private int onBerthTime;
     //在泊作业时间
-    private int workTime;
+    private double workTime;
     //离开港口时间
     private int leaveTime;
 
@@ -46,11 +46,11 @@ public class TimeNode {
         this.onBerthTime = onBerthTime;
     }
 
-    public int getWorkTime() {
+    public double getWorkTime() {
         return workTime;
     }
 
-    public void setWorkTime(int workTime) {
+    public void setWorkTime(double workTime) {
         this.workTime = workTime;
     }
 

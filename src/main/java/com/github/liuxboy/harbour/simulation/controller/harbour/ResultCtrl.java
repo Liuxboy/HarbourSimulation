@@ -98,13 +98,17 @@ public class ResultCtrl {
             List<Result> resultList = harbourSimulationService.simulation(anchorageList, channelList, allBerthList, shipList, trafficList, timeList);
             httpServletRequest.setAttribute("resultList", resultList);
             httpServletRequest.setAttribute("flag", 1);
-            logger.info("resultList:", resultList);
-            //Thread.sleep(5000 + RandomUtils.nextInt(10000));
+            SimulationTime simulationTime = timeList.get(0);
+            int totalTime = 0;
+            if (simulationTime != null) {
+                totalTime = simulationTime.getTimeOut() * simulationTime.getTimeOutUnit().getTime();
+            }
+            Thread.sleep(totalTime / 3600);
         } catch (ServiceException e) {
             e.printStackTrace();
-        } /*catch (InterruptedException e) {
+        } catch (InterruptedException e) {
             e.printStackTrace();
-        }*/
+        }
         return "/harbour/result";
     }
 }

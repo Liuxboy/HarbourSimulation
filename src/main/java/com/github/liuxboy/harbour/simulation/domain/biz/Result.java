@@ -1,5 +1,6 @@
 package com.github.liuxboy.harbour.simulation.domain.biz;
 
+import com.github.liuxboy.harbour.simulation.common.constant.BigDecimalUtil;
 import com.github.liuxboy.harbour.simulation.common.constant.ShipEnum;
 
 import java.io.Serializable;
@@ -43,19 +44,20 @@ public class Result implements Serializable {
     //泊位利用率，百分数%
     private String berthUtilizationRatio;
 
-    public Result() {
+    public Result(ShipEnum shipEnum) {
+        this.shipEnum = shipEnum;
     }
 
     public Result(int number, ShipEnum shipEnum, double avgInHarbourTime, double totalInHarboursTime, double avgWaitChannelTime, double totalWaitChannelTime, double avgWaitBerthTime, double totalWaitBerthTime, double avgOnBerthTime, double totalOnBerthTime, String awtAstIndex, String berthUtilizationRatio) {
         this.number = number;
         this.shipEnum = shipEnum;
-        this.avgInHarbourTime = avgInHarbourTime;
+        this.avgInHarbourTime = BigDecimalUtil.decimal2Double(avgInHarbourTime);
         this.totalInHarboursTime = totalInHarboursTime;
-        this.avgWaitChannelTime = avgWaitChannelTime;
+        this.avgWaitChannelTime = BigDecimalUtil.decimal2Double(avgWaitChannelTime);
         this.totalWaitChannelTime = totalWaitChannelTime;
-        this.avgWaitBerthTime = avgWaitBerthTime;
+        this.avgWaitBerthTime = BigDecimalUtil.decimal2Double(avgWaitBerthTime);
         this.totalWaitBerthTime = totalWaitBerthTime;
-        this.avgOnBerthTime = avgOnBerthTime;
+        this.avgOnBerthTime = BigDecimalUtil.decimal2Double(avgOnBerthTime);
         this.totalOnBerthTime = totalOnBerthTime;
         this.awtAstIndex = awtAstIndex;
         this.berthUtilizationRatio = berthUtilizationRatio;

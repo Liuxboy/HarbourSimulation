@@ -11,11 +11,11 @@ package com.github.liuxboy.harbour.simulation.common.constant;
  * @version 1.0
  */
 public enum TimeEnum {
-    YER(31536000, "年"),
-    MON(2592000, "月"),
-    WEK(604800, "周"),
-    DAY(86400, "天"),
-    HOR(3600, "时"),
+    YER(365*24*60*60, "年"),
+    MON(30*24*60*60, "月"),
+    WEK(7*24*60*60, "周"),
+    DAY(24*60*60, "天"),
+    HOR(60*60, "时"),
     MIN(60, "分"),
     SEC(1, "秒");
     private int time;
