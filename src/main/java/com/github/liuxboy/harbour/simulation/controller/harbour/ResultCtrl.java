@@ -46,7 +46,7 @@ public class ResultCtrl {
 
     @RequestMapping(value = "/toList")
     public String toList(@RequestParam(value = "flag", required = false) String flag) {
-        httpServletRequest.setAttribute("result", httpSession.getAttribute("channelList"));
+        httpServletRequest.setAttribute("resultList", httpSession.getAttribute("resultList"));
         if ("start".equals(flag)) {
             try {
                 Thread.sleep(5000L);
@@ -96,8 +96,8 @@ public class ResultCtrl {
 
         try {
             List<Result> resultList = harbourSimulationService.simulation(anchorageList, channelList, allBerthList, shipList, trafficList, timeList);
-            httpServletRequest.setAttribute("resultList", resultList);
-            httpServletRequest.setAttribute("flag", 1);
+            httpSession.setAttribute("resultList", resultList);
+            httpSession.setAttribute("flag", 1);
             SimulationTime simulationTime = timeList.get(0);
             int totalTime = 0;
             if (simulationTime != null) {
