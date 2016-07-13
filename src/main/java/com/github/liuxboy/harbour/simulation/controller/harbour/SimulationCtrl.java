@@ -37,6 +37,6 @@ public class SimulationCtrl {
     @RequestMapping(value = "/toList")
     public String toList() {
         httpServletRequest.setAttribute("resultList", httpSession.getAttribute("resultList"));
-        return "/harbour/simulation";
+        return "/simulation";
     }
 }

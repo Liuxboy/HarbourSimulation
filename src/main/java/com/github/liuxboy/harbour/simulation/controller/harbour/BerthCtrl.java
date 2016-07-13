@@ -51,7 +51,7 @@ public class BerthCtrl {
         endIndex = endIndex <= pageParam.getTotalCount() ? endIndex : pageParam.getTotalCount();
         httpSession.setAttribute("pageParam", pageParam);
         httpSession.setAttribute("berthList", allBerthList.subList(beginIndex, endIndex));
-        return "/harbour/berthList";
+        return "/berthList";
     }
 
     @RequestMapping(value = "/toAdd")
@@ -79,7 +79,7 @@ public class BerthCtrl {
             berth = allBerthList.get(id);
         }
         httpServletRequest.setAttribute("berth", berth);
-        return "/harbour/berthUpdate";
+        return "/berthUpdate";
     }
 
     @RequestMapping(value = "/doUpdate")

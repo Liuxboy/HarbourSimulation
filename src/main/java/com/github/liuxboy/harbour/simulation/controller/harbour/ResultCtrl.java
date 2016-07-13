@@ -54,7 +54,7 @@ public class ResultCtrl {
                 e.printStackTrace();
             }
         }
-        return "/harbour/result";
+        return "/result";
     }
 
 
@@ -109,6 +109,6 @@ public class ResultCtrl {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return "/harbour/result";
+        return "/result";
     }
 }

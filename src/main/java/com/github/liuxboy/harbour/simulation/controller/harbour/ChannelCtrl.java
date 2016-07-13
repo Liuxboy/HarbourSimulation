@@ -49,7 +49,7 @@ public class ChannelCtrl {
             channelList = initialService.getChannelList();
         }
         httpSession.setAttribute("channelList", channelList);
-        return "/harbour/channelList";
+        return "/channelList";
     }
 
     @RequestMapping(value = "/toAdd")
@@ -77,7 +77,7 @@ public class ChannelCtrl {
             channel = channelList.get(id);
         }
         httpServletRequest.setAttribute("channel", channel);
-        return "/harbour/channelDetail";
+        return "/channelDetail";
     }
 
     @RequestMapping(value = "/doUpdate")

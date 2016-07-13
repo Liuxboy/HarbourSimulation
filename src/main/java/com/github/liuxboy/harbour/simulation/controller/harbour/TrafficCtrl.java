@@ -41,7 +41,7 @@ public class TrafficCtrl {
             trafficList = initialService.getTrafficList();
         }
         httpSession.setAttribute("trafficList", trafficList);
-        return "/harbour/trafficList";
+        return "/trafficList";
     }
 
     @RequestMapping(value = "/toAdd")
@@ -69,7 +69,7 @@ public class TrafficCtrl {
             traffic = trafficList.get(id);
         }
         httpServletRequest.setAttribute("traffic", traffic);
-        return "/harbour/trafficUpdate";
+        return "/trafficUpdate";
     }
 
     @RequestMapping(value = "/doUpdate")

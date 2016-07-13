@@ -42,7 +42,7 @@ public class AnchorageCtrl {
             anchorageList = initialService.getAnchorageList();
         }
         httpSession.setAttribute("anchorageList", anchorageList);
-        return "/harbour/anchorageList";
+        return "/anchorageList";
     }
 
     @RequestMapping(value = "/toAdd")
@@ -70,7 +70,7 @@ public class AnchorageCtrl {
             anchorage = anchorageList.get(id);
         }
         httpServletRequest.setAttribute("anchorage", anchorage);
-        return "/harbour/anchorageDetail";
+        return "/anchorageDetail";
     }
 
     @RequestMapping(value = "/doUpdate")

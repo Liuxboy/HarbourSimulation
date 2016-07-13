@@ -44,7 +44,7 @@ public class ShipCtrl {
             shipList = initialService.getShipList();
         }
         httpSession.setAttribute("shipList", shipList);
-        return "/harbour/shipList";
+        return "/shipList";
     }
 
     @RequestMapping(value = "/toAdd")
@@ -72,7 +72,7 @@ public class ShipCtrl {
             ship = shipList.get(id);
         }
         httpServletRequest.setAttribute("ship", ship);
-        return "/harbour/shipUpdate";
+        return "/shipUpdate";
     }
 
     @RequestMapping(value = "/doUpdate")

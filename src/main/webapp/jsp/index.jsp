@@ -116,7 +116,7 @@
 
             </div>
             <!--引入menu-->
-            <c:import url="system/menu/menu.jsp"/>
+            <c:import url="menu.jsp"/>
         </div>
     </div>
 

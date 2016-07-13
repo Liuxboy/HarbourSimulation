@@ -43,7 +43,7 @@ public class TimeCtrl {
             timeList = initialService.getTimeList();
         }
         httpSession.setAttribute("timeList", timeList);
-        return "/harbour/timeList";
+        return "/timeList";
     }
 
     @RequestMapping(value = "/toAdd")

@@ -42,6 +42,6 @@ public class PassCtrl {
             passRuleList = initialService.passRuleList();
         }
         httpSession.setAttribute("passRuleList", passRuleList);
-        return "/harbour/passList";
+        return "/passList";
     }
 }
