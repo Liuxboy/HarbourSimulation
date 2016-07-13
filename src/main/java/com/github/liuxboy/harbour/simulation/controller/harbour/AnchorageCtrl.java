@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -47,7 +46,7 @@ public class AnchorageCtrl {
 
     @RequestMapping(value = "/toAdd")
     public String toAdd() {
-        return "/harbour/anchorageAdd";
+        return "anchorageAdd";
     }
 
     @RequestMapping(value = "/doAdd")

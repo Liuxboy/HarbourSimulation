@@ -48,7 +48,7 @@ public class TimeCtrl {
 
     @RequestMapping(value = "/toAdd")
     public String toAdd() {
-        return "/harbour/timeAdd";
+        return "/timeAdd";
     }
 
     @RequestMapping(value = "/doAdd")

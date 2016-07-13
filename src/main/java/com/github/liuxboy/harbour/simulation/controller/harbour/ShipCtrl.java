@@ -49,7 +49,7 @@ public class ShipCtrl {
 
     @RequestMapping(value = "/toAdd")
     public String toAdd() {
-        return "/harbour/shipAdd";
+        return "/shipAdd";
     }
 
     @RequestMapping(value = "/doAdd")

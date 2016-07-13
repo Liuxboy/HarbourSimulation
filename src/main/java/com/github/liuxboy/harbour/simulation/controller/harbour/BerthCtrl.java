@@ -56,7 +56,7 @@ public class BerthCtrl {
 
     @RequestMapping(value = "/toAdd")
     public String toAdd() {
-        return "/harbour/berthAdd";
+        return "/berthAdd";
     }
 
     @RequestMapping(value = "/doAdd")

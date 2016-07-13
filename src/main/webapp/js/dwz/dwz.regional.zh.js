@@ -1,7 +1,7 @@
-/**
- * @author ZhangHuihua@msn.com
- */
 (function($){
+	/**
+	 * @author ZhangHuihua@msn.com
+	 */
 	// jQuery validate
 	$.extend($.validator.messages, {
 		required: "必填字段",

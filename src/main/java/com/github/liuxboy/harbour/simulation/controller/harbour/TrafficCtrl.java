@@ -46,7 +46,7 @@ public class TrafficCtrl {
 
     @RequestMapping(value = "/toAdd")
     public String toAdd() {
-        return "/harbour/trafficAdd";
+        return "/trafficAdd";
     }
 
     @RequestMapping(value = "/doAdd")

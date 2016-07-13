@@ -34,15 +34,10 @@ public class IndexCtrl {
 
     @RequestMapping(value = {"/index", "/"})
     public String index() {
-        return "login";
+        return "/login";
     }
 
     @RequestMapping(value = "/login")
-    public String login() {
-        return "login";
-    }
-
-    @RequestMapping(value = "/login/do")
     public String loginDo(@Valid UserEntity user) {
         String message = checkLogin(user);
         request.setAttribute("user", user);
@@ -53,24 +48,22 @@ public class IndexCtrl {
                 logger.info(String.format("%s登录成功@" + request.getRemoteAddr(), user.getUserName()));
                 request.getSession().setAttribute(ManageConstant.LOGIN_USER_KEY, userEntity);
                 request.setAttribute("message", message);
-                return "index";
+                return "/index";
             } else {
                 request.setAttribute("message", "用户名或密码错误");
-                return "login";
+                return "/login";
             }
         } else {
             request.setAttribute("message", message);
-            return "login";
+            return "/login";
         }
     }
-
     @RequestMapping(value = "/exit")
     public String logout() {
         request.getSession().removeAttribute(ManageConstant.LOGIN_USER_KEY);
         // 跳转到SSO的退出页面
-        return "login";
+        return "/login";
     }
-
     private String checkLogin(UserEntity user) {
         String message = null;
         if (StringUtils.isBlank(user.getUserName()) || StringUtils.isBlank(user.getPassWord())) {
@@ -78,5 +71,4 @@ public class IndexCtrl {
         }
         return message;
     }
-
 }

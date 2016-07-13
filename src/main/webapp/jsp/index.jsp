@@ -1,31 +1,31 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="/common/taglibs.jsp" %>
-
+<%String root = request.getContextPath();%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>宁波-舟山核心港区仿真模拟系统</title>
-    <link href="../image/favicon.ico" rel="shortcut icon">
-    <link href="../css/themes/default/style.css" rel="stylesheet" type="text/css" media="screen"/>
-    <link href="../css/themes/css/core.css" rel="stylesheet" type="text/css" media="screen"/>
-    <link href="../css/themes/css/print.css" rel="stylesheet" type="text/css" media="print"/>
-    <link href="../js/uploadify/css/uploadify.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="<%=root %>/image/favicon.ico" rel="shortcut icon">
+    <link href="<%=root %>/css/themes/default/style.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="<%=root %>/css/themes/css/core.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="<%=root %>/css/themes/css/print.css" rel="stylesheet" type="text/css" media="print"/>
+    <link href="<%=root %>/js/uploadify/css/uploadify.css" rel="stylesheet" type="text/css" media="screen"/>
     <!--[if IE]>
-    <link href="../css/themes/css/ieHack.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="<%=root %>/css/themes/css/ieHack.css" rel="stylesheet" type="text/css" media="screen"/>
     <![endif]-->
 
     <!--[if lte IE 9]>
-    <script src="../js/dwz/speedup.js" type="text/javascript"></script>
+    <script src="<%=root %>/js/dwz/speedup.js" type="text/javascript"></script>
     <![endif]-->
 
-    <script src="../js/dwz/jquery-1.7.2.js" type="text/javascript"></script>
-    <script src="../js/dwz/jquery.cookie.js" type="text/javascript"></script>
-    <script src="../js/dwz/jquery.validate.js" type="text/javascript"></script>
-    <script src="../js/dwz/jquery.bgiframe.js" type="text/javascript"></script>
-    <script src="../js/xheditor/xheditor-1.2.1.min.js" type="text/javascript"></script>
-    <script src="../js/xheditor/xheditor_lang/zh-cn.js" type="text/javascript"></script>
-    <script src="../js/uploadify/scripts/jquery.uploadify.js" type="text/javascript"></script>
+    <script src="<%=root %>/js/dwz/jquery-1.7.2.js" type="text/javascript"></script>
+    <script src="<%=root %>/js/dwz/jquery.cookie.js" type="text/javascript"></script>
+    <script src="<%=root %>/js/dwz/jquery.validate.js" type="text/javascript"></script>
+    <script src="<%=root %>/js/dwz/jquery.bgiframe.js" type="text/javascript"></script>
+    <script src="<%=root %>/js/xheditor/xheditor-1.2.1.min.js" type="text/javascript"></script>
+    <script src="<%=root %>/js/xheditor/xheditor_lang/zh-cn.js" type="text/javascript"></script>
+    <script src="<%=root %>/js/uploadify/scripts/jquery.uploadify.js" type="text/javascript"></script>
 
     <!-- svg图表  supports Firefox 3.0+, Safari 3.0+, Chrome 5.0+, Opera 9.5+ and Internet Explorer 6.0+
     <script type="text/javascript" src="chart/raphael.js"></script>
@@ -37,12 +37,12 @@
     -->
 
     <!-- 可以用dwz.min.js替换前面全部dwz.*.js (注意：替换是下面dwz.regional.zh.js还需要引入)-->
-    <script src="../js/dwz.min.js" type="text/javascript"></script>
-    <script src="../js/dwz/dwz.regional.zh.js" type="text/javascript"></script>
+    <script src="<%=root %>/js/dwz.min.js" type="text/javascript"></script>
+    <script src="<%=root %>/js/dwz/dwz.regional.zh.js" type="text/javascript"></script>
 
     <script type="text/javascript">
         $(function () {
-            DWZ.init("/css/themes/dwz.frag.xml", {
+            DWZ.init("<%=root %>/css/themes/dwz.frag.xml", {
                 loginUrl: "/harbour/login",	// 跳到登录页面
                 statusCode: {ok: 200, error: 300, timeout: 301}, //【可选】
                 pageInfo: {
@@ -55,7 +55,7 @@
                 debug: false,	// 调试模式 【true|false】
                 callback: function () {
                     initEnv();
-                    $("#themeList").theme({themeBase: "/css/themes"}); // themeBase 相对于index页面的主题base路径
+                    $("#themeList").theme({themeBase: "<%=root %>/css/themes"}); // themeBase 相对于index页面的主题base路径
                 }
             });
         });

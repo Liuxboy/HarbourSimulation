@@ -54,7 +54,7 @@ public class ChannelCtrl {
 
     @RequestMapping(value = "/toAdd")
     public String toAdd() {
-        return "/harbour/channelAdd";
+        return "/channelAdd";
     }
 
     @RequestMapping(value = "/doAdd")
