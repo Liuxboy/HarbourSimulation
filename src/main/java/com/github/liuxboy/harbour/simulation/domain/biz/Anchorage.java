@@ -39,6 +39,14 @@ public class Anchorage {
     private double point4X;
     //坐标4经度
     private double point4Y;
+    //坐标5纬度
+    private double point5X;
+    //坐标5经度
+    private double point5Y;
+    //坐标6纬度
+    private double point6X;
+    //坐标6经度
+    private double point6Y;
 
     public LinkedList<Ship> getShipList() {
         return shipList;
@@ -128,6 +136,38 @@ public class Anchorage {
         this.point4Y = point4Y;
     }
 
+    public double getPoint5X() {
+        return point5X;
+    }
+
+    public void setPoint5X(double point5X) {
+        this.point5X = point5X;
+    }
+
+    public double getPoint5Y() {
+        return point5Y;
+    }
+
+    public void setPoint5Y(double point5Y) {
+        this.point5Y = point5Y;
+    }
+
+    public double getPoint6X() {
+        return point6X;
+    }
+
+    public void setPoint6X(double point6X) {
+        this.point6X = point6X;
+    }
+
+    public double getPoint6Y() {
+        return point6Y;
+    }
+
+    public void setPoint6Y(double point6Y) {
+        this.point6Y = point6Y;
+    }
+
     public int getSize() {
         return size;
     }
@@ -139,7 +179,8 @@ public class Anchorage {
     @Override
     public String toString() {
         final StringBuilder stbd = new StringBuilder("Anchorage{");
-        stbd.append("\"id\":").append(id);
+        stbd.append("\"size\":").append(size);
+        stbd.append(",\"id\":").append(id);
         stbd.append(",\"anchorageEnum\":").append(anchorageEnum);
         stbd.append(",\"point1X\":").append(point1X);
         stbd.append(",\"point1Y\":").append(point1Y);
@@ -149,7 +190,10 @@ public class Anchorage {
         stbd.append(",\"point3Y\":").append(point3Y);
         stbd.append(",\"point4X\":").append(point4X);
         stbd.append(",\"point4Y\":").append(point4Y);
-        stbd.append(",\"size\":").append(size);
+        stbd.append(",\"point5X\":").append(point5X);
+        stbd.append(",\"point5Y\":").append(point5Y);
+        stbd.append(",\"point6X\":").append(point6X);
+        stbd.append(",\"point6Y\":").append(point6Y);
         stbd.append('}');
         stbd.append(super.toString());
         return stbd.toString();

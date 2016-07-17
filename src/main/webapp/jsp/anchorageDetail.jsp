@@ -18,6 +18,8 @@
                     <option value="South" <c:if test="${anchorage.anchorageEnum.typeCode == 1}">selected</c:if> >南锚地</option>
                     <option value="Ore" <c:if test="${anchorage.anchorageEnum.typeCode == 2}">selected</c:if> >矿石锚地</option>
                     <option value="Oil" <c:if test="${anchorage.anchorageEnum.typeCode == 3}">selected</c:if> >油轮锚地</option>
+                    <option value="QiLi" <c:if test="${anchorage.anchorageEnum.typeCode == 4}">selected</c:if> >七里锚地</option>
+                    <option value="JinTang" <c:if test="${anchorage.anchorageEnum.typeCode == 5}">selected</c:if> >金塘锚地</option>
                 </select>
             </p>
             <div class="divider"/>
@@ -43,6 +45,18 @@
                 <label>坐标4经纬度</label>
                 <input name="point4X" type="text" maxlength="10" value="${anchorage.point4X}"/>
                 <input name="point4Y" type="text" maxlength="10" value="${anchorage.point4Y}"/>
+            </p>
+            <div class="divider"/>
+            <p class="nowrap">
+                <label>坐标5经纬度</label>
+                <input name="point5X" type="text" maxlength="10" value="${anchorage.point5X}"/>
+                <input name="point5Y" type="text" maxlength="10" value="${anchorage.point5Y}"/>
+            </p>
+            <div class="divider"/>
+            <p class="nowrap">
+                <label>坐标6经纬度</label>
+                <input name="point6X" type="text" maxlength="10" value="${anchorage.point6X}"/>
+                <input name="point6Y" type="text" maxlength="10" value="${anchorage.point6Y}"/>
             </p>
         </div>
         <div class="formBar">

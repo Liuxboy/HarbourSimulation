@@ -33,6 +33,8 @@ public class Channel {
     private double limitedSpeed;
     //动态通航能力：艘/h
     private double dynamicPassRatio;
+    //饱和度
+    private String saturation;
     //通航模式
     private PassDirectEnum passEnum;
     //进入航道船舶列表
@@ -88,6 +90,14 @@ public class Channel {
         this.limitedSpeed = limitedSpeed;
     }
 
+    public String getSaturation() {
+        return saturation;
+    }
+
+    public void setSaturation(String saturation) {
+        this.saturation = saturation;
+    }
+
     public PassDirectEnum getPassEnum() {
         return passEnum;
     }
@@ -129,6 +139,7 @@ public class Channel {
         stbd.append(",\"length\":").append(length);
         stbd.append(",\"depth\":").append(depth);
         stbd.append(",\"limitedSpeed\":").append(limitedSpeed);
+        stbd.append(",\"saturation\":").append(saturation);
         stbd.append(",\"passEnum\":").append(passEnum);
         stbd.append(",\"inShipList\":").append(inShipList);
         stbd.append(",\"outShipList\":").append(outShipList);

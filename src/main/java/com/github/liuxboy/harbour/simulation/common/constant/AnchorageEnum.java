@@ -14,7 +14,9 @@ public enum AnchorageEnum {
     North(0, "北锚地"),
     South(1, "南锚地"),
     Ore(2, "矿石锚地"),
-    Oil(3, "油轮锚地");
+    Oil(3, "油轮锚地"),
+    QiLi(4, "七里锚地"),
+    JinTang(5, "金塘锚地");
     private int typeCode;
     private String name;
 

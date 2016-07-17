@@ -41,6 +41,18 @@
                 <input name="point4X" type="text" class="required" maxlength="10"/>
                 <input name="point4Y" type="text" class="required" maxlength="10"/>
             </p>
+            <div class="divider"/>
+            <p class="nowrap">
+                <label>坐标5经纬度</label>
+                <input name="point5X" type="text" class="required" maxlength="10"/>
+                <input name="point5Y" type="text" class="required" maxlength="10"/>
+            </p>
+            <div class="divider"/>
+            <p class="nowrap">
+                <label>坐标6经纬度</label>
+                <input name="point6X" type="text" class="required" maxlength="10"/>
+                <input name="point6Y" type="text" class="required" maxlength="10"/>
+            </p>
         </div>
         <div class="formBar">
             <ul>

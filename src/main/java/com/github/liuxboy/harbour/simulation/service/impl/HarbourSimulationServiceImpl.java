@@ -66,12 +66,12 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
         //仿真开始---------------------------------------------------------
         try {
             HashMap<Integer, Ship> simulationShipMap = genShips(simulationDays);
-            comShip(berthList, simulationShipMap);
+            comShip(berthList, simulationShipMap, trafficList);
             comResult(resultMap, simulationShipMap, simulationSteps);
-            /*for (int step = 1; step < simulationSteps + 1; step++) {
+            for (int step = 1; step < simulationSteps + 1; step++) {
                 Ship ship = simulationShipMap.get(step);
                 // NO.1进港过程
-                // 运行到有新产生的船
+                // 是否有新船产生
                 if (null != ship) {
                     //如果有空闲锚位
                     if (hasIdleAnchorage(anchorageList, ship.getShipEnum().getTypeCode())) {
@@ -112,7 +112,7 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
 
                     }
                 }
-            }*/
+            }
         } catch (Exception e) {
             logger.error(e);
         }
@@ -152,6 +152,7 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
         */
         return resultList;
     }
+
     //船进港，新增结果计数
     private void addResult(Map<String, Result> resultMap, int typeCode) {
         Result totalResult = resultMap.get("totalResult");
@@ -276,7 +277,7 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
         result.setAvgInHarbourTime(BigDecimalUtil.divide(new BigDecimal(result.getTotalInHarboursMins()), new BigDecimal(number * 60 * 2)).doubleValue());
         result.setAvgWaitChannelTime(BigDecimalUtil.divide(new BigDecimal(result.getTotalWaitChannelMins()), new BigDecimal(number * 60 * 2)).doubleValue());
         result.setAvgOnBerthTime(BigDecimalUtil.divide(new BigDecimal(result.getTotalOnBerthMins()), new BigDecimal(number * 60 * 2)).doubleValue());
-        result.setAvgWaitBerthTime(BigDecimalUtil.divide(new BigDecimal(result.getTotalWaitBerthMins()), new BigDecimal(number * 60)).doubleValue());
+        result.setAvgWaitBerthTime(BigDecimalUtil.divide(new BigDecimal(result.getTotalWaitBerthMins()), new BigDecimal(number * 60 * 2)).doubleValue());
         BigDecimal onBerthTime = new BigDecimal(result.getAvgOnBerthTime());
         if (Math.abs(onBerthTime.doubleValue()) > 0.000001) {
             result.setAwtAstIndex(BigDecimalUtil.decimal2PercentString(BigDecimalUtil.divide4(new BigDecimal(result.getAvgWaitBerthTime()), onBerthTime).doubleValue()));
@@ -393,6 +394,7 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
                 }
             }
         }
+
         //如果是2，影响出港
         else {
             for (int i = 3; i < 7; i++) {
@@ -405,7 +407,8 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
         }
         return false;
     }
-    private boolean trafficCtrlResult(Traffic traffic, int step){
+
+    private boolean trafficCtrlResult(Traffic traffic, int step) {
         int startStep = (traffic.getStartMon() - 1) * getMonthDays(traffic.getStartMon()) + traffic.getStartDay() * 24 * 60
                 + traffic.getStartHor() * 60 + traffic.getStartMin();
         double duration = traffic.getTrafficDuration() * traffic.getTimeEnum().getTime() * 60;
@@ -414,6 +417,7 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
         }
         return false;
     }
+
     //获取月天数
     private int getMonthDays(int month) {
         switch (month) {
@@ -636,7 +640,7 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
     }
 
     //遍历船舶
-    private void comShip(List<Berth> berthList, HashMap<Integer, Ship> simulationShipMap) {
+    private void comShip(List<Berth> berthList, HashMap<Integer, Ship> simulationShipMap, List<Traffic> trafficList) {
         Ship ship;
         TimeNode timeNode;
         Double leaveTime;
@@ -644,11 +648,21 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
         for (Map.Entry<Integer, Ship> entry : simulationShipMap.entrySet()) {
             ship = entry.getValue();
             timeNode = ship.getTimeNode();
-            timeNode.setStartInChannelTime(timeNode.getArriveTime() + new BigDecimal(AlgorithmUtil.normalSample(60.0, 30.0)).intValue());
-            timeNode.setOnBerthTime(getPassChannelTime(ship.getTonner(), 0) + timeNode.getStartInChannelTime() + map.get(ship.getShipEnum().getTypeCode()).intValue());
-            leaveTime = timeNode.getOnBerthTime() + timeNode.getWorkTime() + AlgorithmUtil.normalSample(60 * map.get(ship.getShipEnum().getTypeCode()), 0.5);
+            timeNode.setStartInChannelTime(timeNode.getArriveTime() + new BigDecimal(AlgorithmUtil.normalSample(90.0, 30.0)).intValue());
+            timeNode.setOnBerthTime(timeNode.getStartInChannelTime() + 60 * map.get(ship.getShipEnum().getTypeCode()).intValue());
+            leaveTime = timeNode.getOnBerthTime() + timeNode.getWorkTime() + 60.0 * AlgorithmUtil.normalSample( map.get(ship.getShipEnum().getTypeCode()), 0.5);
             timeNode.setLeaveTime(leaveTime.intValue());
         }
+    }
+
+    //获取管制时长
+    private int getTrafficTime(Ship ship, List<Traffic> trafficList) {
+        int dangerAlongside = 0, containerAlongside = 0, bbsAlongside = 0, badVisibility = 0,
+            specialAlongside = 0, fishAlongside = 0, accidentAlongside = 0;
+        for (Traffic traffic : trafficList) {
+            dangerAlongside = traffic.getStartDay();
+        }
+        return dangerAlongside;
     }
 
     //各类船舶平均从虾峙门到泊位的时间，单位：小时
@@ -688,7 +702,7 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
         map.put(1, ironTime / ironCount);
         map.put(2, coTime / coCount);
         map.put(3, curOilTime / curOilCount);
-        map.put(4, coalTime  / coalCount);
+        map.put(4, coalTime / coalCount);
         map.put(5, bbsTime / bbsCount);
         return map;
     }

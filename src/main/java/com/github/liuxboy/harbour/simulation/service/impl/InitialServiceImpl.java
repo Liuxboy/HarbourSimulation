@@ -5,7 +5,6 @@ import com.github.liuxboy.harbour.simulation.domain.biz.*;
 import com.github.liuxboy.harbour.simulation.service.InitialService;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,6 +84,44 @@ public class InitialServiceImpl implements InitialService {
             anchorage.setSize(14);              //锚位数
             anchorageList.add(anchorage);
         }
+        {
+            anchorage = new Anchorage();
+            anchorage.setId(4);
+            anchorage.setAnchorageEnum(AnchorageEnum.QiLi);
+            anchorage.setPoint1X(121.7756);     //121°46′32″E
+            anchorage.setPoint1Y(29.9917);      //29°59′30″N
+            anchorage.setPoint2X(121.7908);     //121°47′27″E
+            anchorage.setPoint2Y(29.9917);      //29°59′30″N
+            anchorage.setPoint3X(121.7908);     //121°47′27″E
+            anchorage.setPoint3Y(30.0417);      //30°02′30″N
+            anchorage.setPoint4X(121.7600);     //121°45′36″E
+            anchorage.setPoint4Y(30.0417);      //30°02′30″N
+            anchorage.setPoint5X(121.7600);     //121°45′36″E
+            anchorage.setPoint5Y(30.0083);      //30°00′30″N
+            anchorage.setPoint6X(121.7756);     //121°46′32″E
+            anchorage.setPoint6Y(30.0083);      //30°00′30″N
+            anchorage.setSize(15);              //锚位数
+            anchorageList.add(anchorage);
+        }
+        {
+            anchorage = new Anchorage();
+            anchorage.setId(5);
+            anchorage.setAnchorageEnum(AnchorageEnum.JinTang);
+            anchorage.setPoint1X(122.5600);     //122°33′36″E
+            anchorage.setPoint1Y(29.7317);      //29°43′54″N
+            anchorage.setPoint2X(122.5808);     //122°34′51″E
+            anchorage.setPoint2Y(29.7317);      //29°43′54″N
+            anchorage.setPoint3X(122.5808);     //122°34′51″E
+            anchorage.setPoint3Y(29.6958);      //29°41′45″N
+            anchorage.setPoint4X(122.5600);     //122°33′36″E
+            anchorage.setPoint4Y(29.6958);      //29°41′45″N
+            anchorage.setPoint5X(121.7600);     //121°45′36″E
+            anchorage.setPoint5Y(30.0083);      //30°00′30″N
+            anchorage.setPoint6X(122.7756);     //121°46′32″E
+            anchorage.setPoint6Y(30.0083);      //30°00′30″N
+            anchorage.setSize(8);               //锚位数
+            anchorageList.add(anchorage);
+        }
         return anchorageList;
     }
 
@@ -99,8 +136,9 @@ public class InitialServiceImpl implements InitialService {
             channel.setLength(14.85);   //km
             channel.setWidth(0.39);     //km
             channel.setPassEnum(PassDirectEnum.BothWay);
-            channel.setLimitedSpeed(19.65); //km/h
+            channel.setLimitedSpeed(19.65);     //km/h
             channel.setDynamicPassRatio(4.8);   //艘/h
+            channel.setSaturation("--");
             channelList.add(channel);
         }
         {
@@ -113,6 +151,72 @@ public class InitialServiceImpl implements InitialService {
             channel.setPassEnum(PassDirectEnum.BothWay);
             channel.setLimitedSpeed(22.11); //km/h
             channel.setDynamicPassRatio(9.5);   //艘/h
+            channel.setSaturation("--");
+            channelList.add(channel);
+        }
+        {
+            channel = new Channel();
+            channel.setId(2);
+            channel.setName("双屿门水道");
+            channel.setDepth(0.0); //m
+            channel.setLength(0.0);  //km
+            channel.setWidth(0.35); //km
+            channel.setPassEnum(PassDirectEnum.BothWay);
+            channel.setLimitedSpeed(21.58); //km/h
+            channel.setDynamicPassRatio(16.48);   //艘/h
+            channel.setSaturation("--");
+            channelList.add(channel);
+        }
+        {
+            channel = new Channel();
+            channel.setId(3);
+            channel.setName("青龙门水道");
+            channel.setDepth(0.0); //m
+            channel.setLength(0.0);  //km
+            channel.setWidth(0.28); //km
+            channel.setPassEnum(PassDirectEnum.BothWay);
+            channel.setLimitedSpeed(22.02); //km/h
+            channel.setDynamicPassRatio(9.26);   //艘/h
+            channel.setSaturation("--");
+            channelList.add(channel);
+        }
+        {
+            channel = new Channel();
+            channel.setId(4);
+            channel.setName("金塘大桥水道");
+            channel.setDepth(0.0); //m
+            channel.setLength(0.0);  //km
+            channel.setWidth(0.28); //km
+            channel.setPassEnum(PassDirectEnum.BothWay);
+            channel.setLimitedSpeed(18.52); //km/h
+            channel.setDynamicPassRatio(7.10);   //艘/h
+            channel.setSaturation("--");
+            channelList.add(channel);
+        }
+        {
+            channel = new Channel();
+            channel.setId(5);
+            channel.setName("西侯门水道");
+            channel.setDepth(0.0); //m
+            channel.setLength(0.0);  //km
+            channel.setWidth(0.31); //km
+            channel.setPassEnum(PassDirectEnum.BothWay);
+            channel.setLimitedSpeed(18.52); //km/h
+            channel.setDynamicPassRatio(0.0);   //艘/h
+            channel.setSaturation("--");
+            channelList.add(channel);
+        }
+        {
+            channel = new Channel();
+            channel.setId(6);
+            channel.setName("条帚门水道");
+            channel.setDepth(0.0); //m
+            channel.setLength(0.0);  //km
+            channel.setWidth(1.0); //km
+            channel.setPassEnum(PassDirectEnum.BothWay);
+            channel.setLimitedSpeed(22.11); //km/h
+            channel.setDynamicPassRatio(6.36);   //艘/h
+            channel.setSaturation("--");
             channelList.add(channel);
         }
         return channelList;
@@ -1312,7 +1416,7 @@ public class InitialServiceImpl implements InitialService {
         SimulationTime simulationTime = new SimulationTime();
         simulationTime.setId(0);
         simulationTime.setTimeOut(1);
-        simulationTime.setTimeOutUnit(TimeEnum.DAY);
+        simulationTime.setTimeOutUnit(TimeEnum.YER);
         simulationTime.setTimeStep(1);
         simulationTime.setTimeStepUnit(TimeEnum.MIN);
         timeList.add(simulationTime);

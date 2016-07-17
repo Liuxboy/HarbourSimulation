@@ -28,6 +28,8 @@
             <th>坐标2经纬度</th>
             <th>坐标3经纬度</th>
             <th>坐标4经纬度</th>
+            <th>坐标5经纬度</th>
+            <th>坐标6经纬度</th>
             <th>锚位数</th>
             <th>操作</th>
         </tr>
@@ -41,6 +43,8 @@
                 <td>(${item.point2X},${item.point2Y})</td>
                 <td>(${item.point3X},${item.point3Y})</td>
                 <td>(${item.point4X},${item.point4Y})</td>
+                <td>(${item.point5X},${item.point5Y})</td>
+                <td>(${item.point6X},${item.point6Y})</td>
                 <td>${item.size}</td>
                 <td>
                     <a href="<%=root %>/harbour/anchorage/showDetail/${item.id}"
