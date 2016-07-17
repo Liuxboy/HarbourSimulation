@@ -1209,20 +1209,20 @@ public class InitialServiceImpl implements InitialService {
         {
             traffic.setId(0);
             traffic.setStatus(1);
-            traffic.setStartMon(1);
-            traffic.setStartDay(3);
+            traffic.setStartMon(0);
+            traffic.setStartDay(1);
             traffic.setStartHor(5);
             traffic.setStartMin(0);
             traffic.setStartSec(0);
             traffic.setTrafficEnum(TrafficEnum.DANGER_PROHIBIT_ANCHOR);
-            traffic.setTrafficDuration(42.93);
+            traffic.setTrafficDuration(1);
             traffic.setTimeEnum(TimeEnum.HOR);
             trafficList.add(traffic);
         }
         {
             traffic = new Traffic();
             traffic.setId(1);
-            traffic.setStatus(1);
+            traffic.setStatus(0);
             traffic.setStartMon(2);
             traffic.setStartDay(4);
             traffic.setStartHor(7);
@@ -1236,7 +1236,7 @@ public class InitialServiceImpl implements InitialService {
         {
             traffic = new Traffic();
             traffic.setId(2);
-            traffic.setStatus(1);
+            traffic.setStatus(0);
             traffic.setStartMon(3);
             traffic.setStartDay(4);
             traffic.setStartHor(12);
@@ -1250,7 +1250,7 @@ public class InitialServiceImpl implements InitialService {
         {
             traffic = new Traffic();
             traffic.setId(3);
-            traffic.setStatus(1);
+            traffic.setStatus(0);
             traffic.setStartMon(5);
             traffic.setStartDay(6);
             traffic.setStartHor(8);
@@ -1264,7 +1264,7 @@ public class InitialServiceImpl implements InitialService {
         {
             traffic = new Traffic();
             traffic.setId(4);
-            traffic.setStatus(1);
+            traffic.setStatus(0);
             traffic.setStartMon(5);
             traffic.setStartDay(30);
             traffic.setStartHor(16);
@@ -1278,7 +1278,7 @@ public class InitialServiceImpl implements InitialService {
         {
             traffic = new Traffic();
             traffic.setId(5);
-            traffic.setStatus(1);
+            traffic.setStatus(0);
             traffic.setStartMon(8);
             traffic.setStartDay(20);
             traffic.setStartHor(15);
@@ -1292,7 +1292,7 @@ public class InitialServiceImpl implements InitialService {
         {
             traffic = new Traffic();
             traffic.setId(6);
-            traffic.setStatus(1);
+            traffic.setStatus(0);
             traffic.setStartMon(11);
             traffic.setStartDay(6);
             traffic.setStartHor(18);
@@ -1312,7 +1312,7 @@ public class InitialServiceImpl implements InitialService {
         SimulationTime simulationTime = new SimulationTime();
         simulationTime.setId(0);
         simulationTime.setTimeOut(1);
-        simulationTime.setTimeOutUnit(TimeEnum.YER);
+        simulationTime.setTimeOutUnit(TimeEnum.DAY);
         simulationTime.setTimeStep(1);
         simulationTime.setTimeStepUnit(TimeEnum.MIN);
         timeList.add(simulationTime);

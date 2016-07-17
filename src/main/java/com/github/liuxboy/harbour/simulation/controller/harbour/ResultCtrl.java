@@ -103,12 +103,12 @@ public class ResultCtrl {
             if (simulationTime != null) {
                 totalTime = simulationTime.getTimeOut() * simulationTime.getTimeOutUnit().getTime();
             }
-            Thread.sleep(totalTime / 3600);
+            //Thread.sleep(totalTime / 3600);
         } catch (ServiceException e) {
             e.printStackTrace();
-        } catch (InterruptedException e) {
+        }/* catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
         return "/result";
     }
 }

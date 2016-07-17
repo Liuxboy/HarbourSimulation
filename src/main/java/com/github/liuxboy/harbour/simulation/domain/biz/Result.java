@@ -24,19 +24,19 @@ public class Result implements Serializable {
     //船舶平均在港时间，单位：小时
     private double avgInHarbourTime;
     //船舶总在港时间，单位：小时
-    private double totalInHarboursTime;
+    private int totalInHarboursMins;
     //船舶平均等待航道时间，单位：小时
     private double avgWaitChannelTime;
     //船舶总等待航道时间，单位：小时
-    private double totalWaitChannelTime;
+    private int totalWaitChannelMins;
     //船舶平均等待泊位时间，单位：小时
     private double avgWaitBerthTime;
     //船舶总等待泊位时间，单位：小时
-    private double totalWaitBerthTime;
+    private int totalWaitBerthMins;
     //船舶平均在泊时间，单位：小时
     private double avgOnBerthTime;
     //船舶总在泊时间，单位：小时
-    private double totalOnBerthTime;
+    private int totalOnBerthMins;
     //AWT/AST指标
     //AWT表示平均等待时间：平均等待航道时间+平均等待泊位时间
     //AST表示平均在泊时间
@@ -46,21 +46,6 @@ public class Result implements Serializable {
 
     public Result(ShipEnum shipEnum) {
         this.shipEnum = shipEnum;
-    }
-
-    public Result(int number, ShipEnum shipEnum, double avgInHarbourTime, double totalInHarboursTime, double avgWaitChannelTime, double totalWaitChannelTime, double avgWaitBerthTime, double totalWaitBerthTime, double avgOnBerthTime, double totalOnBerthTime, String awtAstIndex, String berthUtilizationRatio) {
-        this.number = number;
-        this.shipEnum = shipEnum;
-        this.avgInHarbourTime = BigDecimalUtil.decimal2Double(avgInHarbourTime);
-        this.totalInHarboursTime = totalInHarboursTime;
-        this.avgWaitChannelTime = BigDecimalUtil.decimal2Double(avgWaitChannelTime);
-        this.totalWaitChannelTime = totalWaitChannelTime;
-        this.avgWaitBerthTime = BigDecimalUtil.decimal2Double(avgWaitBerthTime);
-        this.totalWaitBerthTime = totalWaitBerthTime;
-        this.avgOnBerthTime = BigDecimalUtil.decimal2Double(avgOnBerthTime);
-        this.totalOnBerthTime = totalOnBerthTime;
-        this.awtAstIndex = awtAstIndex;
-        this.berthUtilizationRatio = berthUtilizationRatio;
     }
 
     public int getNumber() {
@@ -87,12 +72,28 @@ public class Result implements Serializable {
         this.avgInHarbourTime = avgInHarbourTime;
     }
 
+    public int getTotalInHarboursMins() {
+        return totalInHarboursMins;
+    }
+
+    public void setTotalInHarboursMins(int totalInHarboursMins) {
+        this.totalInHarboursMins = totalInHarboursMins;
+    }
+
     public double getAvgWaitChannelTime() {
         return avgWaitChannelTime;
     }
 
     public void setAvgWaitChannelTime(double avgWaitChannelTime) {
         this.avgWaitChannelTime = avgWaitChannelTime;
+    }
+
+    public int getTotalWaitChannelMins() {
+        return totalWaitChannelMins;
+    }
+
+    public void setTotalWaitChannelMins(int totalWaitChannelMins) {
+        this.totalWaitChannelMins = totalWaitChannelMins;
     }
 
     public double getAvgWaitBerthTime() {
@@ -103,12 +104,28 @@ public class Result implements Serializable {
         this.avgWaitBerthTime = avgWaitBerthTime;
     }
 
+    public int getTotalWaitBerthMins() {
+        return totalWaitBerthMins;
+    }
+
+    public void setTotalWaitBerthMins(int totalWaitBerthMins) {
+        this.totalWaitBerthMins = totalWaitBerthMins;
+    }
+
     public double getAvgOnBerthTime() {
         return avgOnBerthTime;
     }
 
     public void setAvgOnBerthTime(double avgOnBerthTime) {
         this.avgOnBerthTime = avgOnBerthTime;
+    }
+
+    public int getTotalOnBerthMins() {
+        return totalOnBerthMins;
+    }
+
+    public void setTotalOnBerthMins(int totalOnBerthMins) {
+        this.totalOnBerthMins = totalOnBerthMins;
     }
 
     public String getAwtAstIndex() {
@@ -125,55 +142,5 @@ public class Result implements Serializable {
 
     public void setBerthUtilizationRatio(String berthUtilizationRatio) {
         this.berthUtilizationRatio = berthUtilizationRatio;
-    }
-
-    public double getTotalInHarboursTime() {
-        return totalInHarboursTime;
-    }
-
-    public void setTotalInHarboursTime(double totalInHarboursTime) {
-        this.totalInHarboursTime = totalInHarboursTime;
-    }
-
-    public double getTotalWaitChannelTime() {
-        return totalWaitChannelTime;
-    }
-
-    public void setTotalWaitChannelTime(double totalWaitChannelTime) {
-        this.totalWaitChannelTime = totalWaitChannelTime;
-    }
-
-    public double getTotalWaitBerthTime() {
-        return totalWaitBerthTime;
-    }
-
-    public void setTotalWaitBerthTime(double totalWaitBerthTime) {
-        this.totalWaitBerthTime = totalWaitBerthTime;
-    }
-
-    public double getTotalOnBerthTime() {
-        return totalOnBerthTime;
-    }
-
-    public void setTotalOnBerthTime(double totalOnBerthTime) {
-        this.totalOnBerthTime = totalOnBerthTime;
-    }
-
-    @Override
-    public String toString() {
-        return "Result{" +
-                "number=" + number +
-                ", shipEnum=" + shipEnum +
-                ", avgInHarbourTime=" + avgInHarbourTime +
-                ", totalInHarboursTime=" + totalInHarboursTime +
-                ", avgWaitChannelTime=" + avgWaitChannelTime +
-                ", totalWaitChannelTime=" + totalWaitChannelTime +
-                ", avgWaitBerthTime=" + avgWaitBerthTime +
-                ", totalWaitBerthTime=" + totalWaitBerthTime +
-                ", avgOnBerthTime=" + avgOnBerthTime +
-                ", totalOnBerthTime=" + totalOnBerthTime +
-                ", awtAstIndex='" + awtAstIndex + '\'' +
-                ", berthUtilizationRatio='" + berthUtilizationRatio + '\'' +
-                '}';
     }
 }

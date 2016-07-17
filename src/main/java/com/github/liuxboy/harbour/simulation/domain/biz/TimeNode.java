@@ -5,7 +5,7 @@ package com.github.liuxboy.harbour.simulation.domain.biz;
  * <p>Copyright: Copyright(c)2016</p>
  * <p>Company: JD.JR </p>
  * <p>Time: 2016/7/2 23:17</p>
- * <p>Description: 时间节点 </p>
+ * <p>Description: 时间节点，单位：分 </p>
  *
  * @author wyliuchundong
  * @version 1.0
@@ -17,8 +17,8 @@ public class TimeNode {
     private int startInChannelTime;
     //靠泊时间
     private int onBerthTime;
-    //在泊作业时间
-    private double workTime;
+    //在泊作业时长
+    private int workTime;
     //离开港口时间
     private int leaveTime;
 
@@ -46,11 +46,11 @@ public class TimeNode {
         this.onBerthTime = onBerthTime;
     }
 
-    public double getWorkTime() {
+    public int getWorkTime() {
         return workTime;
     }
 
-    public void setWorkTime(double workTime) {
+    public void setWorkTime(int workTime) {
         this.workTime = workTime;
     }
 
@@ -61,7 +61,6 @@ public class TimeNode {
     public void setLeaveTime(int leaveTime) {
         this.leaveTime = leaveTime;
     }
-
 
     @Override
     public String toString() {

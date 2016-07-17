@@ -57,15 +57,15 @@ public class AlgorithmUtil {
         return poissonDistribution.sample(n);
     }
 
+    public static double[] normalSamples(double μ, double σ, int num) {
+        NormalDistribution normalDistribution = new NormalDistribution(μ, σ);
+        return normalDistribution.sample(num);
+    }
+
     //正态分布，μ为平均值(mean)，σ为标准差-sd(standard deviation)
     public static double normalSample(double μ, double σ) {
         NormalDistribution normalDistribution = new NormalDistribution(μ, σ);
         return normalDistribution.sample();
-    }
-
-    public static double[] normalSamples(double μ, double σ, int num) {
-        NormalDistribution normalDistribution = new NormalDistribution(μ, σ);
-        return normalDistribution.sample(num);
     }
 
     //对数正态分布

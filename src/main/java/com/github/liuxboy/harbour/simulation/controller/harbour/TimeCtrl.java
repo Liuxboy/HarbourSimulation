@@ -71,7 +71,7 @@ public class TimeCtrl {
             simulationTime = timeList.get(id);
         }
         httpServletRequest.setAttribute("simulationTime", simulationTime);
-        return "/harbour/timeUpdate";
+        return "/timeUpdate";
     }
 
     @RequestMapping(value = "/doUpdate")
