@@ -11,9 +11,9 @@ package com.github.liuxboy.harbour.simulation.common.constant;
  * @version 1.0
  */
 public enum PriorityEnum {
-    HIGH(0, "高优先级"),
+    HIGH(2, "高优先级"),
     NORMAL(1, "一般优先级"),
-    LOW(2, "低优先级");
+    LOW(0, "低优先级");
     private int priority;
     private String desc;
 

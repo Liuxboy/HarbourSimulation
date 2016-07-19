@@ -3,9 +3,11 @@ package com.github.liuxboy.harbour.simulation.service.impl;
 import com.github.liuxboy.harbour.simulation.common.constant.*;
 import com.github.liuxboy.harbour.simulation.domain.biz.*;
 import com.github.liuxboy.harbour.simulation.service.InitialService;
+import com.google.common.collect.Lists;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -1318,43 +1320,46 @@ public class InitialServiceImpl implements InitialService {
             traffic.setStartHor(5);
             traffic.setStartMin(0);
             traffic.setStartSec(0);
-            traffic.setTrafficEnum(TrafficEnum.DANGER_PROHIBIT_ANCHOR);
-            traffic.setTrafficDuration(1);
+            traffic.setTrafficEnum(TrafficEnum.CS_PROHIBIT_ANCHOR);
+            traffic.setTrafficDuration(1.0);
+            traffic.setEffectSet(new HashSet<Integer>(Lists.newArrayList(0)));
             traffic.setTimeEnum(TimeEnum.HOR);
             trafficList.add(traffic);
         }
         {
             traffic = new Traffic();
             traffic.setId(1);
-            traffic.setStatus(0);
+            traffic.setStatus(1);
             traffic.setStartMon(2);
             traffic.setStartDay(4);
             traffic.setStartHor(7);
             traffic.setStartMin(0);
             traffic.setStartSec(0);
-            traffic.setTrafficEnum(TrafficEnum.CS_PROHIBIT_ANCHOR);
+            traffic.setTrafficEnum(TrafficEnum.BBS_PROHIBIT_ANCHOR);
             traffic.setTrafficDuration(6.33);
+            traffic.setEffectSet(new HashSet<Integer>(Lists.newArrayList(5)));
             traffic.setTimeEnum(TimeEnum.HOR);
             trafficList.add(traffic);
         }
         {
             traffic = new Traffic();
             traffic.setId(2);
-            traffic.setStatus(0);
+            traffic.setStatus(1);
             traffic.setStartMon(3);
             traffic.setStartDay(4);
             traffic.setStartHor(12);
             traffic.setStartMin(0);
             traffic.setStartSec(0);
-            traffic.setTrafficEnum(TrafficEnum.BBS_PROHIBIT_ANCHOR);
+            traffic.setTrafficEnum(TrafficEnum.DANGER_PROHIBIT_ANCHOR);
             traffic.setTrafficDuration(16.38);
+            traffic.setEffectSet(new HashSet<Integer>(Lists.newArrayList(2)));
             traffic.setTimeEnum(TimeEnum.HOR);
             trafficList.add(traffic);
         }
         {
             traffic = new Traffic();
             traffic.setId(3);
-            traffic.setStatus(0);
+            traffic.setStatus(1);
             traffic.setStartMon(5);
             traffic.setStartDay(6);
             traffic.setStartHor(8);
@@ -1362,13 +1367,14 @@ public class InitialServiceImpl implements InitialService {
             traffic.setStartSec(0);
             traffic.setTrafficEnum(TrafficEnum.PROHIBIT_BOTH_TRAVEL_BAD_VISIBILITY);
             traffic.setTrafficDuration(43.12);
+            traffic.setEffectSet(new HashSet<Integer>(Lists.newArrayList(0,2,1,3,4,5)));
             traffic.setTimeEnum(TimeEnum.HOR);
             trafficList.add(traffic);
         }
         {
             traffic = new Traffic();
             traffic.setId(4);
-            traffic.setStatus(0);
+            traffic.setStatus(1);
             traffic.setStartMon(5);
             traffic.setStartDay(30);
             traffic.setStartHor(16);
@@ -1376,13 +1382,14 @@ public class InitialServiceImpl implements InitialService {
             traffic.setStartSec(0);
             traffic.setTrafficEnum(TrafficEnum.PROHIBIT_CONTRARY_TRAVEL);
             traffic.setTrafficDuration(5.35);
+            traffic.setEffectSet(new HashSet<Integer>(Lists.newArrayList(3)));
             traffic.setTimeEnum(TimeEnum.HOR);
             trafficList.add(traffic);
         }
         {
             traffic = new Traffic();
             traffic.setId(5);
-            traffic.setStatus(0);
+            traffic.setStatus(1);
             traffic.setStartMon(8);
             traffic.setStartDay(20);
             traffic.setStartHor(15);
@@ -1390,13 +1397,14 @@ public class InitialServiceImpl implements InitialService {
             traffic.setStartSec(0);
             traffic.setTrafficEnum(TrafficEnum.PROHIBIT_BOTH_TRAVEL_FISH_BOAT_BLOCK);
             traffic.setTrafficDuration(1.35);
+            traffic.setEffectSet(new HashSet<Integer>(Lists.newArrayList(0,1,2,3,4,5)));
             traffic.setTimeEnum(TimeEnum.HOR);
             trafficList.add(traffic);
         }
         {
             traffic = new Traffic();
             traffic.setId(6);
-            traffic.setStatus(0);
+            traffic.setStatus(1);
             traffic.setStartMon(11);
             traffic.setStartDay(6);
             traffic.setStartHor(18);
@@ -1404,6 +1412,7 @@ public class InitialServiceImpl implements InitialService {
             traffic.setStartMin(0);
             traffic.setTrafficEnum(TrafficEnum.PROHIBIT_BOTH_TRAVEL_ACCIDENT);
             traffic.setTrafficDuration(0.3);
+            traffic.setEffectSet(new HashSet<Integer>(Lists.newArrayList(0,1,2,3,4,5)));
             traffic.setTimeEnum(TimeEnum.HOR);
             trafficList.add(traffic);
         }

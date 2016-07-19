@@ -65,56 +65,63 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
         resultMap.put("containerShipResult", containerShipResult);
         //仿真开始---------------------------------------------------------
         try {
-            HashMap<Integer, Ship> simulationShipMap = genShips(simulationDays);
-            comShip(berthList, simulationShipMap, trafficList);
-            comResult(resultMap, simulationShipMap, simulationSteps);
+            HashMap<Integer, Ship> simulationShipMap = new HashMap<Integer, Ship>();//genShips(simulationDays);
+            HashMap<Integer, Ship> underwayShipMap = new HashMap<Integer, Ship>();  //未停泊下来的船
             for (int step = 1; step < simulationSteps + 1; step++) {
-                Ship ship = simulationShipMap.get(step);
-                // NO.1进港过程
-                // 是否有新船产生
-                if (null != ship) {
-                    //如果有空闲锚位
-                    if (hasIdleAnchorage(anchorageList, ship.getShipEnum().getTypeCode())) {
-                        addShipInAnchorage(anchorageList, ship);
-                        addResult(resultMap, ship.getShipEnum().getTypeCode());
+                Ship intiShip = simulationShipMap.get(step);
+                // 1、是否有新船产生
+                if (null != intiShip) {
+                    //2、如果有空闲锚位
+                    if (hasIdleAnchorage(anchorageList, intiShip.getShipEnum().getTypeCode())) {
+                        addShipInAnchorage(anchorageList, intiShip);
+                        addShipToResult(resultMap, intiShip.getShipEnum().getTypeCode());
                     }
                     //如果没有空闲锚位,将该船移动下一步中
                     else {
-                        TimeNode timeNode = ship.getTimeNode();
+                        TimeNode timeNode = intiShip.getTimeNode();
                         timeNode.setArriveTime(timeNode.getArriveTime() + 1);
-                        ship.setTimeNode(timeNode);
-                        simulationShipMap.remove(ship.getId());
-                        simulationShipMap.put(step + 1, ship);
+                        intiShip.setTimeNode(timeNode);
+                        simulationShipMap.remove(intiShip.getId());
+                        simulationShipMap.put(step + 1, intiShip);
                     }
                 }
-                for (Anchorage anchorage : anchorageList) {
-                    if (CollectionUtils.isEmpty(anchorage.getShipList()))
-                        continue;
-                    Ship anchorageFirstShip = anchorage.getShipList().getFirst();
-                    //是否有空余泊位 && 航道是否允许进入
-                    if (hasIdleBerth(anchorageFirstShip, berthList)
-                            && canIntoChannel(anchorageFirstShip, channelList, step)) {
-                        anchorageFirstShip.getTimeNode().setStartInChannelTime(step);
-                        //如果大于16米吃水深度，走深水航道
-                        if (anchorageFirstShip.getDepth() >= 16.0) {
-                            channelList.get(0).getInShipList().addLast(anchorageFirstShip);
-                        } else {
-                            channelList.get(1).getInShipList().addLast(anchorageFirstShip);
+                //3、取出各锚位要进入的第一艘船
+                Ship anchorageFirstShip = getFirstInChannelShip(anchorageList);
+                //4、是否有空余泊位 && 5、航道是否允许进入 && 6、没有交通管制
+                if (hasIdleBerth(anchorageFirstShip, berthList)
+                        && canIntoChannel(anchorageFirstShip, channelList, step)
+                        && hasTrafficCtrl(trafficList, anchorageFirstShip, step, 1)) {
+                    //如果大于16米吃水深度，走深水航道
+                    if (anchorageFirstShip.getDepth() >= 16.0) {
+                        channelList.get(0).getInShipList().addLast(anchorageFirstShip);
+                    } else {
+                        channelList.get(1).getInShipList().addLast(anchorageFirstShip);
+                    }
+                    simulationShipMap.put(anchorageFirstShip.getId(), anchorageFirstShip);
+                    underwayShipMap.put(anchorageFirstShip.getId(), anchorageFirstShip);    //添加到航行中
+                    anchorageFirstShip.getTimeNode().setStartInChannelTime(step);
+                    removeFromAnchorage(anchorageList, anchorageFirstShip); //船舶进入航道，就在锚地删除
+                }
+                //7、遍历泊位，看泊位已经分配的船是否满足到达泊位的时长
+                for (Berth berth : berthList) {
+                    Ship ship = berth.getShip();
+                    TimeNode timeNode = ship != null ? ship.getTimeNode() : new TimeNode();
+                    //8、是否满足到达泊位时长
+                    if (step - timeNode.getStartInChannelTime() > berth.getToAnchorageTime() * 60) {
+                        //9、如果没有靠泊管制
+                        if (!hasTrafficCtrl(trafficList, ship, step, 0)) {
+                            timeNode.setOnBerthTime(step);
                         }
-                        simulationShipMap.put(anchorageFirstShip.getId(), anchorageFirstShip);
-                        anchorage.getShipList().removeFirst();
                     }
-                }
-                //
-                for (Channel channel : channelList) {
-                    //进港船队列不为空，看对首的船是否该驶完航道
-                    if (!CollectionUtils.isEmpty(channelList)) {
+                    //10、遍历各泊位，查看泊位上的船舶属性
 
-                    }
                 }
+
             }
+            //comShip(berthList, simulationShipMap, trafficList);
+            comResult(resultMap, simulationShipMap, simulationSteps);
         } catch (Exception e) {
-            logger.error(e);
+            e.printStackTrace();
         }
         //accumulateResult(resultMap, ship, 0);
         //累计结果
@@ -153,8 +160,43 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
         return resultList;
     }
 
+    //从各锚地中选出，第一艘要进入航道的船舶
+    private Ship getFirstInChannelShip(List<Anchorage> anchorageList) {
+        Ship[] anchorageFirstShips = new Ship[4];   //目前4块锚地
+        int i = 0;
+        for (Anchorage anchorage : anchorageList) {
+            if (CollectionUtils.isEmpty(anchorage.getShipList()))
+                continue;
+            anchorageFirstShips[i] = anchorage.getShipList().getFirst();    //排在第一的船舶，添加锚地队列的时候，已经判断过优先级
+            i++;
+        }
+        Ship ship = anchorageFirstShips[0];
+        for (int j = 1; j < anchorageFirstShips.length; j++) {
+            //如果优先级高，则优先让其进入
+            if (anchorageFirstShips[j].getPriorityEnum().getPriority() > ship.getPriorityEnum().getPriority()) {
+                ship = anchorageFirstShips[i];
+            }
+            //如果优先级相同，则比较谁先到达锚地，谁先进入
+            else if (anchorageFirstShips[j].getPriorityEnum().getPriority() == ship.getPriorityEnum().getPriority()) {
+                if (anchorageFirstShips[j].getTimeNode().getArriveTime() < ship.getTimeNode().getArriveTime())
+                    ship = anchorageFirstShips[j];
+            }
+        }
+        return ship;
+    }
+
+    //从锚地等待队列删除改船舶
+    private void removeFromAnchorage(List<Anchorage> anchorageList, Ship ship) {
+        for (Anchorage anchorage : anchorageList) {
+            if (CollectionUtils.isEmpty(anchorage.getShipList()))
+                continue;
+            if (ship.getId() == anchorage.getShipList().getFirst().getId())
+                anchorage.getShipList().removeFirst();
+        }
+    }
+
     //船进港，新增结果计数
-    private void addResult(Map<String, Result> resultMap, int typeCode) {
+    private void addShipToResult(Map<String, Result> resultMap, int typeCode) {
         Result totalResult = resultMap.get("totalResult");
         totalResult.setNumber(totalResult.getNumber() + 1);
         resultMap.put("totalResult", totalResult);
@@ -328,49 +370,37 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
     private boolean canIntoChannel(Ship ship, List<Channel> channelList, int step) {
         //吃水深度超过16m，需要从深水航槽进入
         if (ship.getDepth() > 16.0)
-            return hasMeetSafeDistance(ship, channelList.get(0), step) && hasNotOverflow(channelList.get(0), step);
+            return hasMeetSafeDistance(ship, channelList.get(0), step) && !hasOverflow(channelList.get(0));
         else
-            return hasMeetSafeDistance(ship, channelList.get(1), step) && hasNotOverflow(channelList.get(1), step);
+            return hasMeetSafeDistance(ship, channelList.get(1), step) && !hasOverflow(channelList.get(1));
     }
 
     //判断是否符合安全距离
     private boolean hasMeetSafeDistance(Ship ship, Channel channel, int step) {
-        LinkedList<Ship> inLinkedList = channel.getInShipList();    //进入航道中航行的船舶
+        LinkedList<Ship> inLinkedList = channel.getInShipList();
         if (CollectionUtils.isEmpty(inLinkedList)) {
             return true;
         }
         //取最后进入航道的那一条船
         Ship lastInChannelShip = inLinkedList.getLast();
-        //如果深水航槽里面没有船，则返回可以进入深水槽
-        if (lastInChannelShip == null) {
-            return true;
-        }
         //最后进入深水航槽的船行驶时间,当前时间-进入航道时间，单位：分
         int driveTime = step - lastInChannelShip.getTimeNode().getStartInChannelTime();
         return (driveTime / 60.0) * channel.getLimitedSpeed() * 1000.0 > ship.getSafeDistance();
     }
 
-    //是否符合超过饱和度
-    private boolean hasNotOverflow(Channel channel, int step) {
-        if (CollectionUtils.isEmpty(channel.getInShipList()))
-            return true;
-        Ship channelFirstShip = channel.getInShipList().getFirst();
-        Ship channelLastShip = channel.getInShipList().getLast();
-        if (channelFirstShip != null && channelLastShip != null) {
-            int time = channelFirstShip.getTimeNode().getStartInChannelTime();
-            int size = channel.getInShipList().size();
-            if (channel.getId() == 0 && ((size + 1) / (step - time / 60.0)) > 4.8) {
-                return false;
-            }
-            if (channel.getId() == 1 && ((size + 1 / (step - time / 60.0)) > 9.5)) {
-                return false;
-            }
+    //是否超过饱和度
+    private boolean hasOverflow(Channel channel) {
+        LinkedList<Ship> inShipList = channel.getInShipList();
+        LinkedList<Ship> outShipList = channel.getOutShipList();
+        int size = inShipList.size() + outShipList.size();
+        if (channel.getId() == 0 && (inShipList.size() > 4.8)) {
+            return false;
         }
-        return true;
+        return channel.getId() == 1 && (size <= 10);
     }
 
     //判断是否采取了交通管制，ctrlType=0靠泊管制，ctrlType=1航行管制，ctrlType=2航行管制
-    private boolean hasTrafficCtrl(List<Traffic> trafficList, int step, int ctrlType) {
+    private boolean hasTrafficCtrl(List<Traffic> trafficList, Ship ship, int step, int ctrlType) {
         Traffic traffic;
         //如果是0，影响靠泊
         if (ctrlType == 0) {
@@ -378,7 +408,7 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
                 traffic = trafficList.get(i);
                 if (0 == traffic.getStatus())
                     continue;
-                if (trafficCtrlResult(traffic, step))
+                if (trafficCtrlResult(traffic, ship, step))
                     return true;
             }
         }
@@ -389,30 +419,30 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
                     traffic = trafficList.get(i);
                     if (0 == traffic.getStatus())
                         continue;
-                    if (trafficCtrlResult(traffic, step))
+                    if (trafficCtrlResult(traffic, ship, step))
                         return true;
                 }
             }
         }
-
         //如果是2，影响出港
         else {
             for (int i = 3; i < 7; i++) {
                 traffic = trafficList.get(i);
                 if (0 == traffic.getStatus())
                     continue;
-                if (trafficCtrlResult(traffic, step))
+                if (trafficCtrlResult(traffic, ship, step))
                     return true;
             }
         }
         return false;
     }
 
-    private boolean trafficCtrlResult(Traffic traffic, int step) {
+    private boolean trafficCtrlResult(Traffic traffic, Ship ship, int step) {
         int startStep = (traffic.getStartMon() - 1) * getMonthDays(traffic.getStartMon()) + traffic.getStartDay() * 24 * 60
                 + traffic.getStartHor() * 60 + traffic.getStartMin();
         double duration = traffic.getTrafficDuration() * traffic.getTimeEnum().getTime() * 60;
-        if (startStep < step && step < startStep + duration) {
+        if ((traffic.getEffectSet().contains(ship.getId()))
+                && startStep < step && step < startStep + duration) {
             return true;
         }
         return false;
@@ -650,7 +680,7 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
             timeNode = ship.getTimeNode();
             timeNode.setStartInChannelTime(timeNode.getArriveTime() + new BigDecimal(AlgorithmUtil.normalSample(90.0, 30.0)).intValue());
             timeNode.setOnBerthTime(timeNode.getStartInChannelTime() + 60 * map.get(ship.getShipEnum().getTypeCode()).intValue());
-            leaveTime = timeNode.getOnBerthTime() + timeNode.getWorkTime() + 60.0 * AlgorithmUtil.normalSample( map.get(ship.getShipEnum().getTypeCode()), 0.5);
+            leaveTime = timeNode.getOnBerthTime() + timeNode.getWorkTime() + 60.0 * AlgorithmUtil.normalSample(map.get(ship.getShipEnum().getTypeCode()), 0.5);
             timeNode.setLeaveTime(leaveTime.intValue());
         }
     }
@@ -658,7 +688,7 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
     //获取管制时长
     private int getTrafficTime(Ship ship, List<Traffic> trafficList) {
         int dangerAlongside = 0, containerAlongside = 0, bbsAlongside = 0, badVisibility = 0,
-            specialAlongside = 0, fishAlongside = 0, accidentAlongside = 0;
+                specialAlongside = 0, fishAlongside = 0, accidentAlongside = 0;
         for (Traffic traffic : trafficList) {
             dangerAlongside = traffic.getStartDay();
         }

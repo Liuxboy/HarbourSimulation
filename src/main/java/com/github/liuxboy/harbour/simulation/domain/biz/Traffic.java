@@ -3,6 +3,8 @@ package com.github.liuxboy.harbour.simulation.domain.biz;
 import com.github.liuxboy.harbour.simulation.common.constant.TimeEnum;
 import com.github.liuxboy.harbour.simulation.common.constant.TrafficEnum;
 
+import java.util.Set;
+
 /**
  * <p>Title: Traffic</p>
  * <p>Copyright: Copyright(c)2016</p>
@@ -18,6 +20,8 @@ public class Traffic {
     private int id;
     //管制类型
     private TrafficEnum trafficEnum;
+    //影响船舶类型，船舶类型编号
+    private Set<Integer> effectSet;
     //管制开始时刻-月
     private int startMon;
     //管制开始时刻-天
@@ -115,11 +119,20 @@ public class Traffic {
         this.status = status;
     }
 
+    public Set<Integer> getEffectSet() {
+        return effectSet;
+    }
+
+    public void setEffectSet(Set<Integer> effectSet) {
+        this.effectSet = effectSet;
+    }
+
     @Override
     public String toString() {
         return "Traffic{" +
                 "id=" + id +
                 ", trafficEnum=" + trafficEnum +
+                ", effectSet=" + effectSet.toString() +
                 ", startMon=" + startMon +
                 ", startDay=" + startDay +
                 ", startHor=" + startHor +
