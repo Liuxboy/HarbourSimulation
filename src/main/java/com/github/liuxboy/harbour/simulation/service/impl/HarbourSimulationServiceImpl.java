@@ -105,18 +105,26 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
                 //7、遍历泊位，看泊位已经分配的船是否满足到达泊位的时长
                 for (Berth berth : berthList) {
                     Ship ship = berth.getShip();
-                    TimeNode timeNode = ship != null ? ship.getTimeNode() : new TimeNode();
+                    TimeNode timeNode = ship != null ? ship.getTimeNode() : null;
                     //8、是否满足到达泊位时长
-                    if (step - timeNode.getStartInChannelTime() > berth.getToAnchorageTime() * 60) {
-                        //9、如果没有靠泊管制
+                    if (null != timeNode && step - timeNode.getStartInChannelTime() > berth.getToAnchorageTime() * 60) {
+                        //9、如果没有靠泊管制，
                         if (!hasTrafficCtrl(trafficList, ship, step, 0)) {
                             timeNode.setOnBerthTime(step);
                         }
+                        //进入航道队列删除该船舶
+                        channelList.get(1).getInShipList().remove(ship);
                     }
-                    //10、遍历各泊位，查看泊位上的船舶属性
-
+                    //10、遍历各泊位，查看泊位上的船舶属性，是否有船舶已经满足作业时长
+                    if (null != timeNode && step - timeNode.getOnBerthTime() > timeNode.getWorkTime()) {
+                        //11、如果没有双向管制 && 安全距离
+                        if (!hasTrafficCtrl(trafficList, ship, step, 2)
+                                && hasMeetSafeDistance(ship, channelList.get(1), step)
+                                && !hasOverflow(channelList.get(1))) {
+                            timeNode.setOffBerthTime(step);
+                        }
+                    }
                 }
-
             }
             //comShip(berthList, simulationShipMap, trafficList);
             comResult(resultMap, simulationShipMap, simulationSteps);
@@ -173,11 +181,11 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
         Ship ship = anchorageFirstShips[0];
         for (int j = 1; j < anchorageFirstShips.length; j++) {
             //如果优先级高，则优先让其进入
-            if (anchorageFirstShips[j].getPriorityEnum().getPriority() > ship.getPriorityEnum().getPriority()) {
+            if (ship != null && anchorageFirstShips[j].getPriorityEnum().getPriority() > ship.getPriorityEnum().getPriority()) {
                 ship = anchorageFirstShips[i];
             }
             //如果优先级相同，则比较谁先到达锚地，谁先进入
-            else if (anchorageFirstShips[j].getPriorityEnum().getPriority() == ship.getPriorityEnum().getPriority()) {
+            else if (ship != null && anchorageFirstShips[j].getPriorityEnum().getPriority() == ship.getPriorityEnum().getPriority()) {
                 if (anchorageFirstShips[j].getTimeNode().getArriveTime() < ship.getTimeNode().getArriveTime())
                     ship = anchorageFirstShips[j];
             }
@@ -358,7 +366,7 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
     private boolean hasIdleBerth(Ship ship, List<Berth> berthList) {
         for (Berth berth : berthList) {
             //如果码头类型与船类型相同，且该码头没有被占用，将该码头分配给该船舶
-            if (ship.getShipEnum().getTypeCode() == berth.getShipEnum().getTypeCode() && null == berth.getShip()) {
+            if (null != ship && ship.getShipEnum().getTypeCode() == berth.getShipEnum().getTypeCode() && null == berth.getShip()) {
                 berth.setShip(ship);
                 return true;
             }

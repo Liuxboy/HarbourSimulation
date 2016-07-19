@@ -11,14 +11,16 @@ package com.github.liuxboy.harbour.simulation.domain.biz;
  * @version 1.0
  */
 public class TimeNode {
-    //到达港口时间
+    //到达港口时刻
     private int arriveTime;
-    //进入航道时间
+    //进入航道时刻
     private int startInChannelTime;
-    //靠泊时间
+    //靠泊时刻
     private int onBerthTime;
-    //在泊作业时长
+    //在泊作业时长，单位：分
     private int workTime;
+    //离泊时刻
+    private int offBerthTime;
     //离开港口时间
     private int leaveTime;
 
@@ -62,6 +64,14 @@ public class TimeNode {
         this.leaveTime = leaveTime;
     }
 
+    public int getOffBerthTime() {
+        return offBerthTime;
+    }
+
+    public void setOffBerthTime(int offBerthTime) {
+        this.offBerthTime = offBerthTime;
+    }
+
     @Override
     public String toString() {
         return "TimeNode{" +
@@ -69,6 +79,7 @@ public class TimeNode {
                 ", startInChannelTime=" + startInChannelTime +
                 ", onBerthTime=" + onBerthTime +
                 ", workTime=" + workTime +
+                ", offBerthTime=" + offBerthTime +
                 ", leaveTime=" + leaveTime +
                 '}';
     }
