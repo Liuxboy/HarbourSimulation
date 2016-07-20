@@ -9,8 +9,10 @@ import com.github.liuxboy.harbour.simulation.common.util.Logger;
 import com.github.liuxboy.harbour.simulation.common.util.LoggerFactory;
 import com.github.liuxboy.harbour.simulation.domain.biz.*;
 import com.github.liuxboy.harbour.simulation.service.HarbourSimulationService;
+import com.google.common.collect.Collections2;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.commons.lang.math.RandomUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -65,7 +67,7 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
         resultMap.put("containerShipResult", containerShipResult);
         //仿真开始---------------------------------------------------------
         try {
-            HashMap<Integer, Ship> simulationShipMap = new HashMap<Integer, Ship>();//genShips(simulationDays);
+            HashMap<Integer, Ship> simulationShipMap = genShips(simulationDays);
             HashMap<Integer, Ship> underwayShipMap = new HashMap<Integer, Ship>();  //未停泊下来的船
             for (int step = 1; step < simulationSteps + 1; step++) {
                 Ship intiShip = simulationShipMap.get(step);
@@ -90,7 +92,7 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
                 //4、是否有空余泊位 && 5、航道是否允许进入 && 6、没有交通管制
                 if (hasIdleBerth(anchorageFirstShip, berthList)
                         && canIntoChannel(anchorageFirstShip, channelList, step)
-                        && hasTrafficCtrl(trafficList, anchorageFirstShip, step, 1)) {
+                        && !hasTrafficCtrl(trafficList, anchorageFirstShip, step, 1)) {
                     //如果大于16米吃水深度，走深水航道
                     if (anchorageFirstShip.getDepth() >= 16.0) {
                         channelList.get(0).getInShipList().addLast(anchorageFirstShip);
@@ -102,6 +104,8 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
                     anchorageFirstShip.getTimeNode().setStartInChannelTime(step);
                     removeFromAnchorage(anchorageList, anchorageFirstShip); //船舶进入航道，就在锚地删除
                 }
+                //将深水航道的船舶驶入虾峙门航道
+                deepWaterChannel2XiaZhiMen(channelList, trafficList, step);
                 //7、遍历泊位，看泊位已经分配的船是否满足到达泊位的时长
                 for (Berth berth : berthList) {
                     Ship ship = berth.getShip();
@@ -112,18 +116,31 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
                         if (!hasTrafficCtrl(trafficList, ship, step, 0)) {
                             timeNode.setOnBerthTime(step);
                         }
-                        //进入航道队列删除该船舶
+                        //在航道队列中删除该船舶
                         channelList.get(1).getInShipList().remove(ship);
+
                     }
+                }
+                for (Berth berth : berthList) {
+                    Ship ship = berth.getShip();
+                    TimeNode timeNode = ship != null ? ship.getTimeNode() : null;
                     //10、遍历各泊位，查看泊位上的船舶属性，是否有船舶已经满足作业时长
                     if (null != timeNode && step - timeNode.getOnBerthTime() > timeNode.getWorkTime()) {
-                        //11、如果没有双向管制 && 安全距离
+                        //11、如果没有双向管制 && 满足安全距离
                         if (!hasTrafficCtrl(trafficList, ship, step, 2)
                                 && hasMeetSafeDistance(ship, channelList.get(1), step)
                                 && !hasOverflow(channelList.get(1))) {
                             timeNode.setOffBerthTime(step);
+                            timeNode.setLeaveTime(step + new Double(berth.getToAnchorageTime() * 60.0).intValue()); //离港时间
+                            channelList.get(1).getOutShipList().addLast(ship);
                         }
                     }
+                }
+                //查看出港队列，看出港队列第一艘是否满足出港时长
+                Ship firstOutShip = CollectionUtils.isEmpty(channelList.get(1).getOutShipList()) ? null : channelList.get(1).getOutShipList().getFirst();
+                if (null != firstOutShip && step - firstOutShip.getTimeNode().getOffBerthTime() >= firstOutShip.getTimeNode().getLeaveTime()) {
+                    simulationShipMap.put(firstOutShip.getId(), firstOutShip);  //至此，船舶属性全部修改完成
+                    channelList.get(1).getOutShipList().removeFirst();
                 }
             }
             //comShip(berthList, simulationShipMap, trafficList);
@@ -168,9 +185,24 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
         return resultList;
     }
 
+    //深水航道中的船舶驶入虾峙门航道
+    private void deepWaterChannel2XiaZhiMen(List<Channel> channelList, List<Traffic> trafficList, int step) {
+        if (CollectionUtils.isEmpty(channelList.get(0).getInShipList()))
+            return;
+        int passDeepWaterChannelTime = getPassChannelTime(17.0, 0);
+        Ship deepWaterChannelFirstShip = channelList.get(0).getInShipList().getFirst();
+        if (null != deepWaterChannelFirstShip
+                && step - deepWaterChannelFirstShip.getTimeNode().getStartInChannelTime() > passDeepWaterChannelTime
+                && canIntoChannel(deepWaterChannelFirstShip, channelList, step)
+                && hasTrafficCtrl(trafficList, deepWaterChannelFirstShip, step, 1)) {
+            channelList.get(1).getInShipList().addLast(deepWaterChannelFirstShip);
+            channelList.get(0).getInShipList().removeFirst();
+        }
+    }
+
     //从各锚地中选出，第一艘要进入航道的船舶
     private Ship getFirstInChannelShip(List<Anchorage> anchorageList) {
-        Ship[] anchorageFirstShips = new Ship[4];   //目前4块锚地
+        Ship[] anchorageFirstShips = new Ship[6];   //目前4块锚地
         int i = 0;
         for (Anchorage anchorage : anchorageList) {
             if (CollectionUtils.isEmpty(anchorage.getShipList()))
@@ -179,15 +211,15 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
             i++;
         }
         Ship ship = anchorageFirstShips[0];
-        for (int j = 1; j < anchorageFirstShips.length; j++) {
+        for (Ship aShip : anchorageFirstShips) {
             //如果优先级高，则优先让其进入
-            if (ship != null && anchorageFirstShips[j].getPriorityEnum().getPriority() > ship.getPriorityEnum().getPriority()) {
+            if (ship != null && aShip != null && aShip.getPriorityEnum().getPriority() > ship.getPriorityEnum().getPriority()) {
                 ship = anchorageFirstShips[i];
             }
             //如果优先级相同，则比较谁先到达锚地，谁先进入
-            else if (ship != null && anchorageFirstShips[j].getPriorityEnum().getPriority() == ship.getPriorityEnum().getPriority()) {
-                if (anchorageFirstShips[j].getTimeNode().getArriveTime() < ship.getTimeNode().getArriveTime())
-                    ship = anchorageFirstShips[j];
+            else if (ship != null && aShip != null && aShip.getPriorityEnum().getPriority() == ship.getPriorityEnum().getPriority()) {
+                if (aShip.getTimeNode().getArriveTime() < ship.getTimeNode().getArriveTime())
+                    ship = aShip;
             }
         }
         return ship;
@@ -404,10 +436,10 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
         if (channel.getId() == 0 && (inShipList.size() > 4.8)) {
             return false;
         }
-        return channel.getId() == 1 && (size <= 10);
+        return channel.getId() == 1 && (size > 10);
     }
 
-    //判断是否采取了交通管制，ctrlType=0靠泊管制，ctrlType=1航行管制，ctrlType=2航行管制
+    //判断是否采取了交通管制，ctrlType=0靠泊管制，ctrlType=1进港航行管制，ctrlType=2出港航行管制
     private boolean hasTrafficCtrl(List<Traffic> trafficList, Ship ship, int step, int ctrlType) {
         Traffic traffic;
         //如果是0，影响靠泊
@@ -520,6 +552,7 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
             default:
                 break;
         }
+
     }
 
     //船泊总数量
@@ -671,10 +704,10 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
     //获取通过航道的时间（单位分钟）,type=0，表示进港，type=1，表示出港
     private int getPassChannelTime(double tonner, int type) {
         //吃水深度超过16m，且进港，需要从深水航道进入
-        if (type == 0 && tonner > 16.0)
-            return 45 + 143;  //new BigDecimal((14.89 / 19.65) * 60.0).intValue();
+        if (tonner > 16.0 && type == 0)
+            return 45;          //new BigDecimal((14.89 / 19.65) * 60.0).intValue();
         else
-            return 143;       //new BigDecimal((53.00 / 22.11) * 60.0).intValue();
+            return 143;         //new BigDecimal((53.00 / 22.11) * 60.0).intValue();
     }
 
     //遍历船舶
