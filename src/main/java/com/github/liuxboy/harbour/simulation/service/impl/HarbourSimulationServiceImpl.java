@@ -451,7 +451,7 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
         }
         //取最后进入航道的那一条船
         Ship lastInChannelShip = outShipList.getLast();
-        int driveTime = step - lastInChannelShip.getTimeNode().getStartInChannelTime();
+        int driveTime = step - lastInChannelShip.getTimeNode().getOffBerthTime();
         return (driveTime / 60.0) * channel.getLimitedSpeed() * 1000.0 > ship.getSafeDistance();
     }
 
