@@ -74,7 +74,6 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
                     //2、如果有空闲锚位
                     if (hasIdleAnchorage(anchorageList, intiShip.getShipEnum().getTypeCode())) {
                         addShipInAnchorage(anchorageList, intiShip);
-                        //addShipToResult(resultMap, intiShip.getShipEnum().getTypeCode());
                     }
                     //如果没有空闲锚位,将该船移动下一步中
                     else {
