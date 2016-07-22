@@ -132,7 +132,7 @@ public class Traffic {
         return "Traffic{" +
                 "id=" + id +
                 ", trafficEnum=" + trafficEnum +
-                ", effectSet=" + effectSet.toString() +
+                ", effectSet=" + effectSet +
                 ", startMon=" + startMon +
                 ", startDay=" + startDay +
                 ", startHor=" + startHor +
