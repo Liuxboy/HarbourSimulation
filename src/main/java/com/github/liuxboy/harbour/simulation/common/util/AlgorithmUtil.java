@@ -69,6 +69,7 @@ public class AlgorithmUtil {
     }
 
     //对数正态分布
+
     /**
      * On a logarithmic scale, can be called the location parameter and the scale parameter,
      * μ----location
@@ -157,22 +158,35 @@ public class AlgorithmUtil {
         } else {
             System.out.println("其他"+normalSample(20, 2));
         }
-        System.out.println(COLOR.values()[0]);*/
-        /*Map<Integer, String> map = new HashMap<Integer, String>();
+        System.out.println(COLOR.values()[0]);
+        Map<Integer, String> map = new HashMap<Integer, String>();
         map.put(1, "aa");
         map.put(2, "bb");
         map.put(3, "cc");
         String str = map.get(1);
         map.remove(1);
         map.put(4,str);
-        System.out.println(map);*/
-        System.out.println(AlgorithmUtil.logNormalSample(0.49, 2.54));
+        System.out.println(map);
+        */
+        int n = 800;
+        double[] logNormalSamples = new double[n];
+        //double[] logNormalSamples = logNormalSamples(0.49, 2.54, n);
+        for (int j = 0; j < n; j++) {
+            logNormalSamples[j] = logNormalSample(0.49, 2.54);
+        }
+        double total = 0.0;
+        for (int i = 0; i < n; i++) {
+            total += logNormalSamples[i];
+        }
+        System.out.println(total / n);
+        /*System.out.println(AlgorithmUtil.logNormalSample(0.49, 2.54));
         System.out.println(new BigDecimal((14.89 / 19.65) * 60.0).intValue());
-        System.out.println(new BigDecimal((53.00 / 22.11) * 60.0).intValue());
+        System.out.println(new BigDecimal((53.00 / 22.11) * 60.0).intValue());*/
+        //DateUtil.parseDate2Long(2016-)
     }
 
     static enum COLOR {
-        RED(0,"红色"),
+        RED(0, "红色"),
         GREEN(1, "绿色");
         private int code;
         private String desc;

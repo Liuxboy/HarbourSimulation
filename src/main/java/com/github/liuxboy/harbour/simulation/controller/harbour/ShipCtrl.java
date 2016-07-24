@@ -1,15 +1,17 @@
 package com.github.liuxboy.harbour.simulation.controller.harbour;
 
+import com.github.liuxboy.harbour.simulation.common.constant.BigDecimalUtil;
+import com.github.liuxboy.harbour.simulation.common.constant.ShipEnum;
 import com.github.liuxboy.harbour.simulation.common.util.AjaxResultUtil;
-import com.github.liuxboy.harbour.simulation.domain.biz.Berth;
-import com.github.liuxboy.harbour.simulation.domain.biz.Channel;
 import com.github.liuxboy.harbour.simulation.domain.biz.Ship;
 import com.github.liuxboy.harbour.simulation.service.InitialService;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -80,6 +82,7 @@ public class ShipCtrl {
     public String doUpdate(@ModelAttribute("ship") Ship ship) {
         Object obj = httpSession.getAttribute("shipList");
         List<Ship> shipList = obj != null ? (List) obj : new ArrayList<Ship>();
+        updateShipEnum(ship);
         shipList.set(ship.getId(), ship);
         httpSession.setAttribute("shipList", shipList);
         return AjaxResultUtil.success();
@@ -95,5 +98,25 @@ public class ShipCtrl {
         }
         httpSession.setAttribute("shipList", shipList);
         return AjaxResultUtil.success();
+    }
+
+    private void updateShipEnum(Ship ship) {
+        Object obj = httpSession.getAttribute("shipList");
+        List<Ship> shipList = obj != null ? (List) obj : new ArrayList<Ship>();
+        double totalLambda = 0.0;
+        for (Ship tepShip : shipList) {
+            if (tepShip.getId() == ship.getId())
+                tepShip.setLambda(ship.getLambda());    //设置成新的lambda
+            totalLambda += tepShip.getLambda();         //累加起来
+        }
+        for (Ship tempShip : shipList) {
+            ShipEnum.valueOf(tempShip.getShipEnum().name()).setProportion(BigDecimalUtil.decimal4Double(tempShip.getLambda() / totalLambda));
+        }
+        ShipEnum.Container_Ship.setSection(ShipEnum.Container_Ship.getProportion());
+        ShipEnum.Iron_Ore.setSection(BigDecimalUtil.decimal4Double(ShipEnum.Iron_Ore.getProportion() + ShipEnum.Container_Ship.getSection()));
+        ShipEnum.Chemical_Oil.setSection(BigDecimalUtil.decimal4Double(ShipEnum.Chemical_Oil.getProportion() + ShipEnum.Iron_Ore.getSection()));
+        ShipEnum.Crude_Oil.setSection(BigDecimalUtil.decimal4Double(ShipEnum.Crude_Oil.getProportion() + ShipEnum.Chemical_Oil.getSection()));
+        ShipEnum.Coal.setSection(BigDecimalUtil.decimal4Double(ShipEnum.Coal.getProportion() + ShipEnum.Crude_Oil.getSection()));
+        ShipEnum.Break_Bulk_Ship.setSection(1.0);
     }
 }

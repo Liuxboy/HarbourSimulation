@@ -32,9 +32,9 @@ public class Traffic {
     private int startMin;
     //管制开始时刻-秒
     private int startSec;
-    //管制时长
+    //管制时长--单位小时
     private double trafficDuration;
-    //管制时长--单位s
+    //管制时长--单位小时
     private TimeEnum timeEnum;
     //1-有效，0-无效
     private int status;

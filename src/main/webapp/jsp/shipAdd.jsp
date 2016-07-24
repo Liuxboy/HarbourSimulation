@@ -11,11 +11,11 @@
                 <label>船舶类型</label>
                 <select id="shipEnum" name="shipEnum" type="text" readonly="readonly" class="required"
                         maxlength="20">
-                    <option value="Crude_Oil">原油</option>
-                    <option value="Iron_Ore">铁矿石</option>
-                    <option value="Coal">煤炭</option>
                     <option value="Container_Ship">集装箱船</option>
+                    <option value="Iron_Ore">铁矿石</option>
                     <option value="Chemical_Oil">化工油品</option>
+                    <option value="Crude_Oil">原油</option>
+                    <option value="Coal">煤炭</option>
                     <option value="Break_Bulk_Ship">散杂船</option>
                 </select>
             </p>
@@ -67,15 +67,20 @@
             </p>
             <div class="divider"/>
             <p>
+                <label>安全间距</label>
+                <input name="safeDistance" type="text" class="required" maxlength="10"/>
+            </p>
+            <div class="divider"/>
+            <p>
                 <label>到达分布(lambda)</label>
-                <input name="lambda" style="width: 30px" type="text" class="required" maxlength="10"/>
+                <input name="lambda" style="width: 35px" type="text" class="required" maxlength="10"/>
                 (泊松分布)
             </p>
             <div class="divider"/>
             <p>
                 <label>靠泊分布(mu, sigma)</label>
-                <input name="mu" style="width: 30px" type="text" class="required" maxlength="10"/>
-                <input name="sigma" style="width: 30px" type="text" class="required" maxlength="10"/>
+                <input name="mu" style="width: 35px" type="text" class="required" maxlength="10"/>
+                <input name="sigma" style="width: 35px" type="text" class="required" maxlength="10"/>
                 (对数正态分布)
             </p>
         </div>

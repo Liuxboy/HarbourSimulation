@@ -1315,13 +1315,13 @@ public class InitialServiceImpl implements InitialService {
         {
             traffic.setId(0);
             traffic.setStatus(1);
-            traffic.setStartMon(0);
+            traffic.setStartMon(1);
             traffic.setStartDay(1);
             traffic.setStartHor(5);
             traffic.setStartMin(0);
             traffic.setStartSec(0);
             traffic.setTrafficEnum(TrafficEnum.CS_PROHIBIT_ANCHOR);
-            traffic.setTrafficDuration(1.0);
+            traffic.setTrafficDuration(2.0);
             traffic.setEffectSet(new HashSet<Integer>(Lists.newArrayList(0)));
             traffic.setTimeEnum(TimeEnum.HOR);
             trafficList.add(traffic);

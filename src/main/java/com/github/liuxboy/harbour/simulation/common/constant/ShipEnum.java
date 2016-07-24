@@ -1,5 +1,7 @@
 package com.github.liuxboy.harbour.simulation.common.constant;
 
+import org.springframework.stereotype.Component;
+
 /**
  * <p>Title: ShipEnum</p>
  * <p>Copyright: Copyright(c)2016</p>
@@ -10,6 +12,7 @@ package com.github.liuxboy.harbour.simulation.common.constant;
  * @author wyliuchundong
  * @version 1.0
  */
+@Component
 public enum ShipEnum {
     Container_Ship(0, "集装箱船", 0.7525, 0.7525),
     Iron_Ore(1, "铁矿石", 0.0766, 0.8291),

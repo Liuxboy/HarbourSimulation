@@ -14,12 +14,12 @@
                 <label>船舶类型</label>
                 <select id="shipEnum" name="shipEnum" type="text" readonly="readonly" class="required"
                         maxlength="20">
-                    <option value="Crude_Oil" <c:if test="${ship.shipEnum.typeCode == 0}">selected</c:if> >原油</option>
-                    <option value="Coal" <c:if test="${ship.shipEnum.typeCode == 1}">selected</c:if> >煤炭</option>
-                    <option value="Iron_Ore" <c:if test="${ship.shipEnum.typeCode == 2}">selected</c:if> >铁矿石</option>
-                    <option value="Container_Ship" <c:if test="${ship.shipEnum.typeCode == 3}">selected</c:if> >集装箱船</option>
-                    <option value="Chemical_Oil" <c:if test="${ship.shipEnum.typeCode == 4}">selected</c:if> >化工油品</option>
-                    <option value="Break_Bulk_Ship" <c:if test="${ship.shipEnum.typeCode == 50}">selected</c:if> >散杂船</option>
+                    <option value="Container_Ship" <c:if test="${ship.shipEnum.typeCode == 0}">selected</c:if> >集装箱船</option>
+                    <option value="Iron_Ore" <c:if test="${ship.shipEnum.typeCode == 1}">selected</c:if> >铁矿石</option>
+                    <option value="Chemical_Oil" <c:if test="${ship.shipEnum.typeCode == 2}">selected</c:if> >化工油品</option>
+                    <option value="Crude_Oil" <c:if test="${ship.shipEnum.typeCode == 3}">selected</c:if> >原油</option>
+                    <option value="Chemical_Oil" <c:if test="${ship.shipEnum.typeCode == 4}">selected</c:if> >煤炭</option>
+                    <option value="Break_Bulk_Ship" <c:if test="${ship.shipEnum.typeCode == 5}">selected</c:if> >散杂船</option>
                 </select>
             </p>
             <div class="divider"/>
@@ -68,19 +68,25 @@
                 <input name="number" value="${ship.speed}"
                        type="text" class="required" maxlength="10"/>
             </p>
+           <div class="divider"/>
+           <p>
+               <label>安全间距</label>
+               <input name="safeDistance" type="text" class="required" maxlength="10"
+                      value="${ship.safeDistance}"/>
+           </p>
             <div class="divider"/>
             <p>
                 <label>到达时间分布</label>
-                <input name="lambda" style="width: 30px" type="text" class="required" maxlength="10"
+                <input name="lambda" style="width: 35px" type="text" class="required" maxlength="10"
                        value="${ship.lambda}"/>
                 (泊松分布)
             </p>
            <div class="divider"/>
            <p>
                <label>靠泊分布(mu, sigma)</label>
-               <input name="mu" style="width: 30px" type="text" class="required" maxlength="10"
+               <input name="mu" style="width: 35px" type="text" class="required" maxlength="10"
                       value="${ship.mu}"/>
-               <input name="sigma" style="width: 30px" type="text" class="required" maxlength="10"
+               <input name="sigma" style="width: 35px" type="text" class="required" maxlength="10"
                       value="${ship.sigma}"/>
                (对数正态分布)
            </p>

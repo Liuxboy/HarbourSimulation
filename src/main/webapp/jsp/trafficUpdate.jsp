@@ -69,7 +69,7 @@
                 <label>管制时长</label>
                 <input name="trafficDuration" type="text" class="required" maxlength="10"
                        value="${traffic.trafficDuration}"/>
-                <select id="timeStepUnit" name="timeStepUnit" type="text" readonly="readonly" class="required"
+                <select id="timeEnum" name="timeEnum" type="text" readonly="readonly" class="required"
                         maxlength="20">
                     <option value="SEC"
                             <c:if test="${traffic.timeEnum.unit eq '秒'}">selected</c:if> >秒

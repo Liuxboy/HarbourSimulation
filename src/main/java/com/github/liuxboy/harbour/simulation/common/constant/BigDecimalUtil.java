@@ -107,7 +107,18 @@ public class BigDecimalUtil {
         }
         return 0.0D;
     }
-
+    /**
+     * 将一个double数以四舍五入的方式保留2位
+     *
+     * @param var
+     * @return
+     */
+    public static double decimal4Double(Double var) {
+        if (var != null) {
+            return new BigDecimal(var).setScale(4, BigDecimal.ROUND_HALF_UP).doubleValue();
+        }
+        return 0.0D;
+    }
     /**
      * 将一个float数以四舍五入的方式保留2位
      *

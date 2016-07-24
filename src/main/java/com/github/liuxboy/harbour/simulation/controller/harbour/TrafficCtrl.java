@@ -3,6 +3,7 @@ package com.github.liuxboy.harbour.simulation.controller.harbour;
 import com.github.liuxboy.harbour.simulation.common.util.AjaxResultUtil;
 import com.github.liuxboy.harbour.simulation.domain.biz.Traffic;
 import com.github.liuxboy.harbour.simulation.service.InitialService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -77,6 +79,8 @@ public class TrafficCtrl {
     public String doUpdate(@ModelAttribute("traffic") Traffic traffic) {
         Object obj = httpSession.getAttribute("trafficList");
         List<Traffic> trafficList = obj != null ? (List) obj : new ArrayList<Traffic>();
+        Traffic iniTraffic = trafficList.get(traffic.getId());  //原始交通管制规则
+        traffic.setEffectSet(iniTraffic.getEffectSet());
         trafficList.set(traffic.getId(), traffic);
         httpSession.setAttribute("trafficList", trafficList);
         return AjaxResultUtil.success();
