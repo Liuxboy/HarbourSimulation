@@ -591,28 +591,6 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
         return false;
     }
 
-    //获取月天数
-    private int getMonthDays(int month) {
-        switch (month) {
-            case 2:
-                return 29;
-            case 1:
-            case 3:
-            case 5:
-            case 7:
-            case 8:
-            case 10:
-            case 12:
-                return 31;
-            case 4:
-            case 6:
-            case 9:
-            case 11:
-                return 30;
-        }
-        return 30;
-    }
-
     //将船添加到锚地
     private void addShipInAnchorage(List<Anchorage> anchorageList, Ship ship) {
         int shipType = ship.getShipEnum().getTypeCode();
@@ -697,7 +675,7 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
         if (ship.getShipEnum().getTypeCode() == 4) {
             ship.setPriorityEnum(PriorityEnum.HIGH);
         } else if (ship.getShipEnum().getTypeCode() == 1 || ship.getShipEnum().getTypeCode() == 3) {
-            ship.setPriorityEnum(PriorityEnum.LOW);
+            ship.setPriorityEnum(PriorityEnum.NORMAL);
         } else {
             ship.setPriorityEnum(PriorityEnum.NORMAL);
         }
@@ -791,6 +769,7 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
         switch (typeCode) {
             case 0: //集装箱
                 workTime *= AlgorithmUtil.logNormalSample(0.49, 2.54);
+                workTime += RandomUtils.nextInt(180);
                 if (workTime > 42.0 * 60.0) {    //不合理的在泊时间
                     workTime = 42.0 * 60.0;
                 } else if (workTime < 4.0 * 60.0) {
