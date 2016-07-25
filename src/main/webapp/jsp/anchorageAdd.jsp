@@ -53,6 +53,11 @@
                 <input name="point6X" type="text" class="required" maxlength="10"/>
                 <input name="point6Y" type="text" class="required" maxlength="10"/>
             </p>
+            <div class="divider"/>
+            <p class="nowrap">
+                <label>锚位数量</label>
+                <input name="size" type="text" class="required" maxlength="10"/>
+            </p>
         </div>
         <div class="formBar">
             <ul>

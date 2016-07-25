@@ -58,6 +58,11 @@
                 <input name="point6X" type="text" maxlength="10" value="${anchorage.point6X}"/>
                 <input name="point6Y" type="text" maxlength="10" value="${anchorage.point6Y}"/>
             </p>
+            <div class="divider"/>
+            <p class="nowrap">
+                <label>锚位数量</label>
+                <input name="size" type="text" class="required" value="${anchorage.size}"/>
+            </p>
         </div>
         <div class="formBar">
             <ul>
