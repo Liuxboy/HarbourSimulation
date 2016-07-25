@@ -64,7 +64,7 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
         //仿真开始---------------------------------------------------------
         try {
             //按泊松分布产生，产生仿真时期所有的船舶
-            Map<Integer, Ship> simulationShipMap = genShips(simulationDays, shipTypeList, shipIdSet);
+            Map<Integer, Ship> simulationShipMap = genShips(simulationDays, simulationSteps, shipTypeList, shipIdSet);
             //时间不限制，把产生的船舶设置完成
             for (int step = 1; step < Integer.MAX_VALUE && !shipIdSet.isEmpty(); step++) {
                 Ship intiShip = simulationShipMap.get(step - 1);
@@ -79,7 +79,7 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
                         int id = intiShip.getId();
                         simulationShipMap.remove(id);
                         shipIdSet.remove(id);
-                        int j = step;   //往后移动
+                        /*int j = step;   //往后移动
                         while (simulationShipMap.get(j) != null) {
                             j++;
                         }
@@ -87,11 +87,11 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
                         timeNode.setArriveTime(timeNode.getArriveTime() + 1);
                         intiShip.setId(j);
                         simulationShipMap.put(j, intiShip);
-                        shipIdSet.add(j);
+                        shipIdSet.add(j);*/
                     }
                 }
                 //3、取出各锚位要进入的第一艘船
-                Ship anchorageFirstShip = getFirstInChannelShip(anchorageList);
+                Ship anchorageFirstShip = getFirstInChannelShip(anchorageList, berthList);
                 //4、是否有空余泊位 && 5、航道是否允许进入 && 6、没有交通管制
                 if (null != anchorageFirstShip
                         && hasIdleBerth(anchorageFirstShip, berthList)
@@ -246,7 +246,21 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
     }
 
     //从各锚地中选出，第一艘要进入航道的船舶
-    private Ship getFirstInChannelShip(List<Anchorage> anchorageList) {
+    private Ship getFirstInChannelShip(List<Anchorage> anchorageList, List<Berth> berthList) {
+        //如果所有锚位都满了，看泊位是否还有空余
+        if (!hasIdleAnchorage(anchorageList)) {
+            LinkedList<Ship> shipList;
+            for (Anchorage anchorage : anchorageList) {
+                shipList = anchorage.getShipList();
+                //遍历锚地船舶，看是否有泊位有空余
+                for (Ship ship : shipList) {
+                    if (hasIdleBerth(ship, berthList)) {
+                        return ship;
+                    }
+                }
+            }
+        }
+
         Ship[] anchorageFirstShips = new Ship[6];   //目前4块锚地
         int i = 0;
         for (Anchorage anchorage : anchorageList) {
@@ -277,9 +291,11 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
         for (Anchorage anchorage : anchorageList) {
             if (CollectionUtils.isEmpty(anchorage.getShipList()))
                 continue;
-            if (ship.getId() == anchorage.getShipList().getFirst().getId()) {
-                anchorage.getShipList().removeFirst();
-                break;
+            for (Ship aShip : anchorage.getShipList()) {
+                if (ship.getId() == aShip.getId()) {
+                    anchorage.getShipList().remove(ship);
+                    break;
+                }
             }
         }
     }
@@ -418,6 +434,19 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
             result.setAwtAstIndex("--");
         }
         return result;
+    }
+
+    //判断是否所有锚位都没有了
+    private boolean hasIdleAnchorage(List<Anchorage> anchorageList) {
+        boolean hasIdleAnchorage = false;
+        Anchorage anchorage;
+        //遍历所有锚位，如果一个锚位都没有，直接返回false
+        for (int i = 0; i < 4; i++) {   //只适用了前4个锚地
+            anchorage = anchorageList.get(i);
+            if (anchorage.getShipList().size() < anchorage.getSize())
+                hasIdleAnchorage = true;
+        }
+        return hasIdleAnchorage;
     }
 
     //判断是否有空闲锚位
@@ -629,7 +658,7 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
     }
 
     //船泊总数量
-    private Map<Integer, Ship> genShips(int simulationDays, List<Ship> shipTypeList, Set<Integer> shipIdSet) {
+    private Map<Integer, Ship> genShips(int simulationDays, int simulationSteps, List<Ship> shipTypeList, Set<Integer> shipIdSet) {
         double totalLambda = 0.0;
         for (Ship aShip : shipTypeList) {
             totalLambda += aShip.getLambda();
@@ -639,13 +668,13 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
         for (int i = 0; i < simulationShipArray.length; i++) {
             //产生一条船
             if (simulationShipArray[i] == 1) {
-                shipHashMap.put(i, getShip(i));
+                shipHashMap.put(i, getShip(i, simulationSteps));
                 shipIdSet.add(i);
             }
             //产生两条船，
             else if (simulationShipArray[i] == 2) {
-                shipHashMap.put(i, getShip(i));
-                shipHashMap.put(i + 1, getShip(i + 1));
+                shipHashMap.put(i, getShip(i, simulationSteps));
+                shipHashMap.put(i + 1, getShip(i + 1, simulationSteps));
                 shipIdSet.add(i);
                 shipIdSet.add(i + 1);
             }
@@ -654,7 +683,7 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
     }
 
     //获取单个船只属性
-    private Ship getShip(int id) {
+    private Ship getShip(int id, int simulationSteps) {
         int typeCode = getShipType();                   //先根据概论产生船的类型
         Ship ship = new Ship();
         ship.setId(id);
@@ -676,6 +705,7 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
         TimeNode timeNode = new TimeNode();
         timeNode.setArriveTime(id);
         timeNode.setWorkTime(getWorkTime(typeCode));//按对数正态分布，得出其靠泊时长
+        timeNode.setLeaveTime(simulationSteps + 240);//初始化船舶离港时间为仿真结束时间，避免出现离开港时间为负数的情况
         ship.setTimeNode(timeNode);
         return ship;
     }
