@@ -1498,7 +1498,7 @@ public class InitialServiceImpl implements InitialService {
             ship.setLambda(1.69);
             ship.setMu(4.18);
             ship.setSigma(0.58);
-            ship.setPriorityEnum(PriorityEnum.LOW);
+            ship.setPriorityEnum(PriorityEnum.NORMAL);
             ship.setTonner(26.6);
             ship.setSpeed(1.852);       //km/h
             ship.setSafeDistance(BigDecimalUtil.decimal2Double(311.8 * 6)); //m
@@ -1532,7 +1532,7 @@ public class InitialServiceImpl implements InitialService {
             ship.setLambda(0.73);
             ship.setMu(3.65);
             ship.setSigma(0.76);
-            ship.setPriorityEnum(PriorityEnum.LOW);
+            ship.setPriorityEnum(PriorityEnum.NORMAL);
             ship.setTonner(6.71);
             ship.setSpeed(1.852);       //km/h
             ship.setSafeDistance(BigDecimalUtil.decimal2Double(208.1 * 6)); //m
