@@ -110,7 +110,6 @@ public class DataBasePoolConfigImpl implements IDataBasePoolConfig {
         initPool();
     }
 
-    // by wuhongqiang 2014.2.25
     // change the method name from startMonitor to initPool
     private void initPool() throws SQLException {
         if (this.config == null || this.config.getConnUrl() == null) {
