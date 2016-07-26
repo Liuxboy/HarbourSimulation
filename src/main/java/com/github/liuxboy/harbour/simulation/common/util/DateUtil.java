@@ -9,9 +9,10 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- *
- * @author：lijunfu
- *
+ * @author wyliuchundong
+ * @version 1.0.0
+ * @date 2015/3/18 13:43
+ * @comment DateUtil
  */
 public class DateUtil {
 
