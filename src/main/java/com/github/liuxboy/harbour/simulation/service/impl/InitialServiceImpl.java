@@ -38,7 +38,7 @@ public class InitialServiceImpl implements InitialService {
             anchorage.setPoint3Y(29.7417);      //29°44′30″N
             anchorage.setPoint4X(122.3417);     //122°20′30″E
             anchorage.setPoint4Y(29.7417);      //29°44′30″N
-            anchorage.setSize(19);              //锚位数
+            anchorage.setSize(1000);              //锚位数
             anchorageList.add(anchorage);
         }
         {
@@ -53,7 +53,7 @@ public class InitialServiceImpl implements InitialService {
             anchorage.setPoint3Y(29.6933);      //29°41′36″N
             anchorage.setPoint4X(122.3333);     //122°20′00″E
             anchorage.setPoint4Y(29.6933);      //29°41′36″N
-            anchorage.setSize(15);              //锚位数
+            anchorage.setSize(1000);              //锚位数
             anchorageList.add(anchorage);
         }
         {
@@ -68,7 +68,7 @@ public class InitialServiceImpl implements InitialService {
             anchorage.setPoint3Y(29.7533);      //29°45′12″N
             anchorage.setPoint4X(122.5600);     //122°33′36″E
             anchorage.setPoint4Y(29.7533);      //29°45′12″N
-            anchorage.setSize(5);              //锚位数
+            anchorage.setSize(1000);              //锚位数
             anchorageList.add(anchorage);
         }
         {
@@ -83,7 +83,7 @@ public class InitialServiceImpl implements InitialService {
             anchorage.setPoint3Y(29.6958);      //29°41′45″N
             anchorage.setPoint4X(122.5600);     //122°33′36″E
             anchorage.setPoint4Y(29.6958);      //29°41′45″N
-            anchorage.setSize(14);              //锚位数
+            anchorage.setSize(1000);              //锚位数
             anchorageList.add(anchorage);
         }
         {
@@ -102,7 +102,7 @@ public class InitialServiceImpl implements InitialService {
             anchorage.setPoint5Y(30.0083);      //30°00′30″N
             anchorage.setPoint6X(121.7756);     //121°46′32″E
             anchorage.setPoint6Y(30.0083);      //30°00′30″N
-            anchorage.setSize(15);              //锚位数
+            anchorage.setSize(1000);              //锚位数
             anchorageList.add(anchorage);
         }
         {
