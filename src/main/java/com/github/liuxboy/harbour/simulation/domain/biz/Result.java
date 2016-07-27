@@ -41,6 +41,8 @@ public class Result implements Serializable {
     //AWT表示平均等待时间：平均等待航道时间+平均等待泊位时间
     //AST表示平均在泊时间
     private String awtAstIndex;
+    //泊位利用率，原始小数
+    private double berthUtilization;
     //泊位利用率，百分数%
     private String berthUtilizationRatio;
 
@@ -142,5 +144,13 @@ public class Result implements Serializable {
 
     public void setBerthUtilizationRatio(String berthUtilizationRatio) {
         this.berthUtilizationRatio = berthUtilizationRatio;
+    }
+
+    public double getBerthUtilization() {
+        return berthUtilization;
+    }
+
+    public void setBerthUtilization(double berthUtilization) {
+        this.berthUtilization = berthUtilization;
     }
 }

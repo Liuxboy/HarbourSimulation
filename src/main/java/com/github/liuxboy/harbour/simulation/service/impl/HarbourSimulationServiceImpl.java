@@ -167,21 +167,23 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
         //accumulateResult(resultMap, ship, 0);
         //累计结果
         //仿真结束---------------------------------------------------------
+        int[] berthNums = getBerthNums(berthList);
         //总的
-        resultList.add(compResult(resultMap.get("totalResult"), getBerthNumByType(berthList, -1), simulationTime));
+        resultList.add(compResult(resultMap.get("totalResult"), berthNums[0], simulationTime));
         //集装箱
-        resultList.add(compResult(resultMap.get("containerShipResult"), getBerthNumByType(berthList, ShipEnum.Container_Ship.getTypeCode()), simulationTime));
+        resultList.add(compResult(resultMap.get("containerShipResult"), berthNums[1], simulationTime));
         //铁矿石
-        resultList.add(compResult(resultMap.get("ironOreResult"), getBerthNumByType(berthList, ShipEnum.Iron_Ore.getTypeCode()), simulationTime));
+        resultList.add(compResult(resultMap.get("ironOreResult"), berthNums[2], simulationTime));
         //化工油品
-        resultList.add(compResult(resultMap.get("chemicalOilResult"), getBerthNumByType(berthList, ShipEnum.Chemical_Oil.getTypeCode()), simulationTime));
+        resultList.add(compResult(resultMap.get("chemicalOilResult"), berthNums[3], simulationTime));
         //原油
-        resultList.add(compResult(resultMap.get("crudeOilResult"), getBerthNumByType(berthList, ShipEnum.Crude_Oil.getTypeCode()), simulationTime));
+        resultList.add(compResult(resultMap.get("crudeOilResult"), berthNums[4], simulationTime));
         //煤炭
-        resultList.add(compResult(resultMap.get("coalResult"), getBerthNumByType(berthList, ShipEnum.Coal.getTypeCode()), simulationTime));
+        resultList.add(compResult(resultMap.get("coalResult"), berthNums[5], simulationTime));
         //散杂船
-        resultList.add(compResult(resultMap.get("breakBulkShipResult"), getBerthNumByType(berthList, ShipEnum.Break_Bulk_Ship.getTypeCode()), simulationTime));
-
+        resultList.add(compResult(resultMap.get("breakBulkShipResult"), berthNums[6], simulationTime));
+        //总的泊位利用率重新计算
+        resultList.set(0, totalBerthUtilization(resultMap, berthNums));
         /*
         //总的
         resultList.add(new Result(0, null, 23.5 + Math.random() * 2, 0, 0.78 + Math.random() * 0.2, 0, 0.35 + Math.random(), 0, 16 + Math.random(), 0, "", ""));
@@ -201,15 +203,20 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
         return resultList;
     }
 
-    //判断锚地是否还有船舶
-    private boolean hasMoreShipOnAnchorage(List<Anchorage> anchorageList) {
-        List<Ship> shipList;
-        for (Anchorage anchorage : anchorageList) {
-            shipList = anchorage.getShipList();
-            if (!CollectionUtils.isEmpty(shipList))
-                return true;
-        }
-        return false;
+    //计算总的泊位利用率
+    private Result totalBerthUtilization(Map<String, Result> resultMap, int[] berthNums) {
+        Result totalResult = resultMap.get("totalResult");
+        double totalBerthUtilization = 0.0;
+        totalBerthUtilization += resultMap.get("containerShipResult").getBerthUtilization() * berthNums[1];
+        totalBerthUtilization += resultMap.get("ironOreResult").getBerthUtilization() * berthNums[2];
+        totalBerthUtilization += resultMap.get("chemicalOilResult").getBerthUtilization() * berthNums[3];
+        totalBerthUtilization += resultMap.get("crudeOilResult").getBerthUtilization() * berthNums[4];
+        totalBerthUtilization += resultMap.get("coalResult").getBerthUtilization() * berthNums[5];
+        totalBerthUtilization += resultMap.get("breakBulkShipResult").getBerthUtilization() * berthNums[6];
+        totalBerthUtilization = BigDecimalUtil.divide4(new BigDecimal(totalBerthUtilization), new BigDecimal(berthNums[0])).doubleValue();
+        totalResult.setBerthUtilization(totalBerthUtilization);
+        totalResult.setBerthUtilizationRatio(BigDecimalUtil.decimal2PercentString(totalBerthUtilization));
+        return totalResult;
     }
 
     //清除掉集合中的数据
@@ -397,16 +404,25 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
     }
 
     //各类型泊位数量
-    private int getBerthNumByType(List<Berth> berthList, int shipType) {
-        if (shipType == -1)
-            return 98;  //总体
-        int totalShips = 0;
+    private int[] getBerthNums(List<Berth> berthList) {
+        int[] berthNums = new int[7];
+        berthNums[0] = berthList.size();
         for (Berth berth : berthList) {
-            if (berth.getShipEnum().getTypeCode() == shipType) {
-                totalShips ++;
+            if (ShipEnum.Container_Ship.getTypeCode() == berth.getShipEnum().getTypeCode()) {
+                berthNums[1]++;
+            } else if (ShipEnum.Iron_Ore.getTypeCode() == berth.getShipEnum().getTypeCode()) {
+                berthNums[2]++;
+            } else if (ShipEnum.Chemical_Oil.getTypeCode() == berth.getShipEnum().getTypeCode()) {
+                berthNums[3]++;
+            } else if (ShipEnum.Crude_Oil.getTypeCode() == berth.getShipEnum().getTypeCode()) {
+                berthNums[4]++;
+            } else if (ShipEnum.Coal.getTypeCode() == berth.getShipEnum().getTypeCode()) {
+                berthNums[5]++;
+            } else if (ShipEnum.Break_Bulk_Ship.getTypeCode() == berth.getShipEnum().getTypeCode()) {
+                berthNums[6]++;
             }
         }
-        return totalShips;
+        return berthNums;
     }
 
     //计算结果
@@ -435,6 +451,7 @@ public class HarbourSimulationServiceImpl implements HarbourSimulationService {
         BigDecimal simulationHours = BigDecimalUtil.divide(new BigDecimal(simulationTime.getTimeOut() * simulationTime.getTimeOutUnit().getTime()), new BigDecimal(3600));
         double berthUtilization = BigDecimalUtil.divide4(new BigDecimal(result.getTotalOnBerthMins()), simulationHours.multiply(new BigDecimal(berthNum * 60))).doubleValue();
         berthUtilization = berthUtilization < 1.00 ? berthUtilization : 1.00;
+        result.setBerthUtilization(berthUtilization);
         result.setBerthUtilizationRatio(BigDecimalUtil.decimal2PercentString(berthUtilization));
         result.setAvgInHarbourTime(BigDecimalUtil.divide(new BigDecimal(result.getTotalInHarboursMins()), new BigDecimal(number * 60)).doubleValue());
         result.setAvgWaitChannelTime(BigDecimalUtil.divide(new BigDecimal(result.getTotalWaitChannelMins()), new BigDecimal(number * 60)).doubleValue());
