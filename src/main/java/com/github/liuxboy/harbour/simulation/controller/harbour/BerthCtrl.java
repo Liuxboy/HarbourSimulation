@@ -1,5 +1,6 @@
 package com.github.liuxboy.harbour.simulation.controller.harbour;
 
+import com.github.liuxboy.harbour.simulation.aspect.LogMonitor;
 import com.github.liuxboy.harbour.simulation.common.util.AjaxResultUtil;
 import com.github.liuxboy.harbour.simulation.domain.PageParam;
 import com.github.liuxboy.harbour.simulation.domain.biz.Berth;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -38,12 +38,18 @@ public class BerthCtrl {
     @Resource
     InitialService initialService;
 
+    @LogMonitor
     @RequestMapping(value = "/toList")
     public String toList(@ModelAttribute("pageParam") PageParam pageParam) {
         List<Berth> allBerthList = getAllBerthList();
         if (CollectionUtils.isEmpty(allBerthList)) {
             allBerthList = initialService.getBerthList();
             initialList(allBerthList);
+        }
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
         pageParam.setTotalCount(allBerthList.size());
         int beginIndex = (pageParam.getPageNum() - 1) * pageParam.getPageSize();

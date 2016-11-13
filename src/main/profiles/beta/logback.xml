@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <configuration scan="true">
-    <property name="APP" value="securities_manage_server"/>
+    <property name="APP" value="harbour"/>
     <property name="LOG_HOME" value="/export/log/${APP}"/>
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>

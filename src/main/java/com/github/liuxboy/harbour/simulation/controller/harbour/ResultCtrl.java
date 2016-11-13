@@ -1,25 +1,22 @@
 package com.github.liuxboy.harbour.simulation.controller.harbour;
 
+import com.github.liuxboy.harbour.simulation.aspect.LogMonitor;
 import com.github.liuxboy.harbour.simulation.common.util.Logger;
 import com.github.liuxboy.harbour.simulation.common.util.LoggerFactory;
 import com.github.liuxboy.harbour.simulation.domain.biz.*;
 import com.github.liuxboy.harbour.simulation.service.HarbourSimulationService;
 import com.github.liuxboy.harbour.simulation.service.InitialService;
 import org.apache.avalon.framework.service.ServiceException;
-import org.apache.commons.lang.math.RandomUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 /**
  * <p>Title: ResultCtrl</p>
@@ -44,6 +41,7 @@ public class ResultCtrl {
     @Resource
     InitialService initialService;
 
+    @LogMonitor
     @RequestMapping(value = "/toList")
     public String toList(@RequestParam(value = "flag", required = false) String flag) {
         httpServletRequest.setAttribute("resultList", httpSession.getAttribute("resultList"));
@@ -53,6 +51,11 @@ public class ResultCtrl {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+        }
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
         return "/result";
     }

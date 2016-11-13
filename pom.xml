@@ -51,10 +51,22 @@
         <fastjson-version>1.1.39</fastjson-version>
         <!-- guava -->
         <fastjson-version>1.1.39</fastjson-version>
+        <aspectj.version>1.6.11</aspectj.version>
+        <aspectjweaver.version>1.6.9</aspectjweaver.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aspectjweaver.version}</version>
+            </dependency>
             <!--Junit-->
             <dependency>
                 <groupId>junit</groupId>
@@ -137,6 +149,11 @@
                 <version>${commons-maths3.version}</version>
             </dependency>
             <!-- Spring -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aspects</artifactId>
+                <version>${springframework.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.springframework.data</groupId>
                 <artifactId>spring-data-redis</artifactId>
@@ -268,6 +285,14 @@
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+        </dependency>
         <!--Junit-->
         <dependency>
             <groupId>junit</groupId>
@@ -335,6 +360,10 @@
             <artifactId>commons-math3</artifactId>
         </dependency>
         <!-- Spring -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-redis</artifactId>

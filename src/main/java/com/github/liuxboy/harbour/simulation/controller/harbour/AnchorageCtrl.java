@@ -1,5 +1,6 @@
 package com.github.liuxboy.harbour.simulation.controller.harbour;
 
+import com.github.liuxboy.harbour.simulation.aspect.LogMonitor;
 import com.github.liuxboy.harbour.simulation.common.util.AjaxResultUtil;
 import com.github.liuxboy.harbour.simulation.domain.biz.*;
 import com.github.liuxboy.harbour.simulation.service.InitialService;
@@ -24,6 +25,7 @@ import java.util.List;
  * @version 1.0
  */
 @Controller
+@LogMonitor
 @RequestMapping(value = "/anchorage")
 public class AnchorageCtrl {
     @Resource
@@ -33,12 +35,18 @@ public class AnchorageCtrl {
     @Resource
     InitialService initialService;
 
+
     @RequestMapping(value = "/toList")
     public String toList() {
         Object obj = httpSession.getAttribute("anchorageList");
         List<Anchorage> anchorageList = obj != null ? (List) obj : new ArrayList<Anchorage>();
         if(CollectionUtils.isEmpty(anchorageList)) {
             anchorageList = initialService.getAnchorageList();
+        }
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
         httpSession.setAttribute("anchorageList", anchorageList);
         return "/anchorageList";
@@ -92,5 +100,8 @@ public class AnchorageCtrl {
         }
         httpSession.setAttribute("anchorageList", anchorageList);
         return AjaxResultUtil.success();
+    }
+    private void test(){
+        System.out.println("kkk");
     }
 }
