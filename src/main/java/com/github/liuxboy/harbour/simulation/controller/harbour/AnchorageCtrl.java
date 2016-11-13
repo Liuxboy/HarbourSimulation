@@ -25,7 +25,6 @@ import java.util.List;
  * @version 1.0
  */
 @Controller
-@LogMonitor
 @RequestMapping(value = "/anchorage")
 public class AnchorageCtrl {
     @Resource
@@ -36,6 +35,7 @@ public class AnchorageCtrl {
     InitialService initialService;
 
 
+    @LogMonitor
     @RequestMapping(value = "/toList")
     public String toList() {
         Object obj = httpSession.getAttribute("anchorageList");
